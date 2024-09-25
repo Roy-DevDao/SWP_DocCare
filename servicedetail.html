@@ -1,0 +1,436 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>DocCare - Tìm bác sĩ chính xác - Đặt lịch khám dễ dàng</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="doctris, khám bệnh, đặt lịch, bác sĩ, lịch khám" />
+        <meta name="description" content="Hệ thống y tế, lịch khám" />
+        <meta property="og:title" content="Doctriscare.ml - Tìm bác sĩ chính xác - Đặt lịch khám dễ dàng" />
+        <meta property="og:description" content="Hệ thống y tế, lịch khám" />
+        <meta property="og:site_name" content="doctriscare.ml" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="vi_VN" />
+        <link rel="shortcut icon" href="https://shreethemes.in/doctris/layouts/assets/images/favicon.ico">
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+        <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link href="assets/css/select2.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="assets/css/flatpickr.min.css">
+        <link href="assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+        
+        <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    
+        <style>
+            @media not all and (min-resolution:.001dpcm) {
+                @supports (-webkit-appearance:none) {
+                    .safari_only { 
+                        color:#0000FF; 
+                        background-color:#CCCCCC; 
+                    }
+                }
+            }
+        </style>
+    
+        <script type="text/javascript">
+            $(document).ready(function () {
+                // Replace with your dynamic alert handling logic
+                const alert = null; // Placeholder for alert variable
+                const message = ""; // Placeholder for message variable
+                if (alert) {
+                    toastr[alert](`${message}.`, 'Thông báo', {timeOut: 5000});
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .rate {
+                float: left;
+                height: 46px;
+                padding: 0 10px;
+            }
+            .rate:not(:checked) > input {
+                clip: rect(0 0 0 0);
+                clip-path: inset(50%);
+                height: 1px;
+                overflow: hidden;
+                position: absolute;
+                width: 1px;
+            }
+            .rate:not(:checked) > label {
+                float:right;
+                width:1em;
+                overflow:hidden;
+                white-space:nowrap;
+                cursor:pointer;
+                font-size:30px;
+                color:#ccc;
+            }
+            .rate:not(:checked) > label:before {
+                content: '★ ';
+            }
+            .rate > input:checked ~ label {
+                color: #ffc700;    
+            }
+            .rate:not(:checked) > label:hover,
+            .rate:not(:checked) > label:hover ~ label {
+                color: #deb217;  
+            }
+            .rate > input:checked + label:hover,
+            .rate > input:checked + label:hover ~ label,
+            .rate > input:checked ~ label:hover,
+            .rate > input:checked ~ label:hover ~ label,
+            .rate > label:hover ~ input:checked ~ label {
+                color: #c59b08;
+            }
+        </style>
+        
+        <header id="topnav" class="navigation sticky">
+            <div class="container">
+                <div>
+                    <a class="logo" href="home">
+                        <img src="assets/images/logo.png" height="24" class="logo--mode" alt="">
+                    </a>
+                </div>
+                <div class="menu-extras">
+                    <div class="menu-item">
+                        <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                            <div class="lines">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <ul class="dropdowns list-inline mb-0">
+                    <li class="list-inline-item mb-0 ms-1">
+                        <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                            <i class="uil uil-search"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item mb-0 ms-1">
+                        <div class="dropdown dropdown-primary">
+                            <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="assets/images/default-user.png" class="avatar avatar-ex-small rounded-circle" alt="">
+                            </button>
+                            <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <img src="assets/images/default-user.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                    <div class="flex-1 ms-2">
+                                        <span class="d-block mb-1">Nguyễn Văn A</span>
+                                    </div>                     
+                                </a>
+                                <div class="dropdown-divider border-top"></div>
+                                <a class="dropdown-item" href="user?action=profile">Tài khoản của tôi</a>
+                                <a class="dropdown-item" href="user?action=logout">Đăng xuất</a>
+                                <a class="dropdown-item" href="user?action=login">Đăng Nhập</a>
+                                <a class="dropdown-item" href="dashboard?action=default">Quản lý</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div id="navigation">
+                    <ul class="navigation-menu nav-left">
+                        <li><a href="home" class="sub-menu-item">Trang chủ</a></li>
+                        <li><a href="doctor?action=all" class="sub-menu-item">Bác sĩ</a></li>
+                        <li><a href="service?action=all" class="sub-menu-item">Dịch vụ</a></li>
+                        <li><a href="contact" class="sub-menu-item">Liên hệ</a></li>
+                        <li><a href="blogs" class="sub-menu-item">Tin tức & chủ đề</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <section class="bg-half-170 d-table w-100 bg-light">
+            <div class="container">
+                <div class="row mt-5 justify-content-center">
+                    <div class="col-12">
+                        <div class="section-title text-center">
+                            <h3 class="sub-title mb-4">Dịch vụ</h3>
+                            <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                                <ul class="breadcrumb bg-transparent mb-0">
+                                    <p class="para-desc mx-auto text-muted">Nếu bạn,người nhà của mình cần nhận được sự trợ giúp ngay lập tức, điều trị khẩn cấp hãy đặt lịch hẹn.</p>
+                                    <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                                        <li class="breadcrumb-item"><a href="home">Trang chủ</a></li>
+                                        <li class="breadcrumb-item"><a href="service?action=all">Danh sách dịch vụ</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Chi tiết</a></li>
+                                    </nav>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="position-relative">
+            <div class="shape overflow-hidden text-white">
+                <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <div class="slider slider-for">
+                            <div><img src="http://phunuvietnam.mediacdn.vn/media/news/3a09a524440d44d7f19870070a5ad42f/Dich-vu-7.jpg" class="img-fluid rounded" alt=""></div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                        <div class="section-title ms-md-4">
+                            <h4 class="title">${service.title}</h4>
+                            <p class="text-muted">${service.setting.setting_name}</p>
+                            <h5 class="text-muted"><fmt:formatNumber pattern="#,###,###,###" value="${service.fee}"/> đ</h5>
+                            <ul class="list-unstyled text-warning h5 mb-0">
+                                <c:if test="${service.ratestar.star != 0}">
+                                    <c:forEach var = "i" begin = "1" end = "${service.ratestar.star}">
+                                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                        </c:forEach>
+                                    </c:if>
+                                <li class="list-inline-item me-2 h6 text-muted">(${service.ratestar.countfeedback} Đánh giá)</li>
+                            </ul>
+
+                            <h5 class="mt-4 py-2">Mô tả :</h5>
+                            <p class="text-muted">${service.description}</p>
+                            <div class="mt-4 pt-2">
+                                <c:if test="${user.getRole().getRole_id() == 2}">
+                                    <a href="book?type=reservation&id=${service.service_id}" class="btn btn-primary">Đặt lịch</a>
+                                </c:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-100 mt-60">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="mb-0">Đánh giá từ người dùng :</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <c:if test="${allow == 'true'}">
+                        <h5 class="card-title mt-4 mb-0">Đánh giá :</h5>
+                        <form action="rate?service=${service.service_id}" method="POST" class="mt-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <div class="rate">
+                                            <input type="radio" id="star5" name="rate" value="5" />
+                                            <label for="star5" title="text">5 stars</label>
+                                            <input type="radio" id="star4" name="rate" value="4" />
+                                            <label for="star4" title="text">4 stars</label>
+                                            <input type="radio" id="star3" name="rate" value="3" />
+                                            <label for="star3" title="text">3 stars</label>
+                                            <input type="radio" id="star2" name="rate" value="2" />
+                                            <label for="star2" title="text">2 stars</label>
+                                            <input type="radio" id="star1" name="rate" value="1" />
+                                            <label for="star1" title="text">1 star</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Phản hồi của bạn</label>
+                                        <textarea id="message" rows="3" name="comment" class="form-control" required=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="send d-grid">
+                                        <button type="submit" class="btn btn-primary">Gửi phản hồi</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </c:if>
+                    <ul class="media-list list-unstyled mb-0">
+                        <c:forEach items="${rate}" var="r">
+                            <li class="mt-4">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <a class="pe-3" href="#">
+                                            <c:if test="${r.user.img != 'default'}">
+                                                <img src="data:image/png;base64,${r.user.img}" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
+                                            </c:if>
+                                            <c:if test="${r.user.img == 'default'}">
+                                                <img src="assets/images/avata.png" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
+                                            </c:if>
+
+                                        </a>
+                                        <div class="commentor-detail">
+                                            <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">${r.user.username}</a></h6>
+                                            <small class="text-muted"><fmt:formatDate pattern="dd/MM/yyyy hh:mm" value="${r.date}"/></small>
+                                        </div>
+                                    </div>
+                                    <ul class="list-unstyled text-warning h5 mb-0">
+                                        <c:if test="${r.star != 0}">
+                                            <c:forEach var = "i" begin = "1" end = "${r.star}">
+                                                <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                                </c:forEach>
+                                            </c:if>
+                                    </ul>
+                                </div>
+                                <div class="mt-3">
+                                    <p class="text-muted font-italic p-3 bg-light rounded">${r.feedback}</p>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <    <footer class="bg-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
+                        <a href="#" class="logo-footer">
+                            <img src="assets/images/logo-light.png" height="22" alt="">
+                        </a>
+                        <p class="mt-4 me-xl-5">Mang những dịch vụ tốt nhất cho sức khỏe của bạn chỉ với 1 click</p>
+                    </div>
+    
+                    <div class="col-xl-7 col-lg-8 col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                <h5 class="text-light footer-head">Doctris</h5>
+                                <ul class="list-unstyled footer-list mt-4">
+                                    <li><a href="contact" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Liên hệ</a></li>
+                                    <li><a href="service?action=all" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Dịch vụ</a></li>
+                                    <li><a href="doctor?action=all" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Bác sĩ</a></li>
+                                    <li><a href="blogs" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Blog</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                                <h5 class="text-light footer-head">Contact us</h5>
+                                <ul class="list-unstyled footer-list mt-4">
+                                    <li class="d-flex align-items-center">
+                                        <i data-feather="mail" class="fea icon-sm text-foot align-middle"></i>
+                                        <a href="mailto:support@doctriscare.ml" class="text-foot ms-2">support@doctriscare.ml</a>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i data-feather="phone" class="fea icon-sm text-foot align-middle"></i>
+                                        <a href="tel:+152534-468-854" class="text-foot ms-2">+84 888195313</a>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <i data-feather="map-pin" class="fea icon-sm text-foot align-middle"></i>
+                                        <a target="_blank" href="https://goo.gl/maps/G8Dyw5XUAiFcHrss5" class="video-play-icon text-foot ms-2">Tìm địa chỉ chúng tôi tại đây</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="container mt-5">
+                <div class="pt-4 footer-bar">
+                    <div class="align-items-center">
+                        <div class="text-sm-start text-center">
+                            <p class="mb-0">
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script> © Doctris.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+    
+        <!-- Search Modal -->
+        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+            <div class="offcanvas-body d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h4>Tìm kiếm ngay ..</h4>
+                                <div class="subcribe-form mt-4">
+                                    <form id="searchForm" action="search" method="get">
+                                        <input type="text" id="keywords" name="keywords" class="rounded" placeholder="Tìm kiếm...">
+                                        <button type="submit" class="btn btn-pills btn-primary">Tìm kiếm</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Search Modal -->
+    
+        <!-- Back to Top -->
+        <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top rounded-pill">
+            <i class="mdi mdi-chevron-up icons"></i>
+        </a>
+    
+        <div id="fb-root"></div>
+    
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat"></div>
+    
+        <script>
+            var chatbox = document.getElementById('fb-customer-chat');
+            chatbox.setAttribute("page_id", "109477894974639");
+            chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+    
+        <!-- Your SDK code -->
+        <script>
+            window.fbAsyncInit = function() {
+                FB.init({
+                    xfbml: true,
+                    version: 'v12.0'
+                });
+            };
+    
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+    
+    <div class="modal fade" id="watchvideomodal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content video-modal rounded overflow-hidden">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/QIvIN8M91x4" title="YouTube video" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/tiny-slider.js "></script>
+        <script src="assets/js/tiny-slider-init.js "></script>
+        <script src="assets/js/slick.min.js"></script>
+        <script src="assets/js/slick.init.js"></script>
+        <script src="assets/js/feather.min.js"></script>
+        <script src="assets/js/app.js"></script>
+    </body>
+
+</html>
