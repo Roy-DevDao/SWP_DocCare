@@ -1,0 +1,50 @@
+﻿@model dynamic
+
+@{
+    var appointment = new
+    {
+        patientName = "John Doe",
+        phone = "0905XXXXXX",
+        email = "john.doe@example.com",
+        date = DateTime.Parse("2024-09-30T14:00:00Z"),
+        time = DateTime.Parse("2024-09-30T14:00:00Z"),
+        location = "123 Main St, City",
+        notes = "A heart attack, also known as a myocardial infarction, happens when the flow of blood that brings oxygen to a part of your heart muscle suddenly becomes blocked. Your heart can't get enough oxygen. If blood flow is not restored quickly, the heart muscle will begin to die. Heart attacks are very common."
+    };
+}
+
+<div class="container mx-auto mt-10 p-5 bg-white rounded-lg shadow-lg">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Appointment Details</h2>
+
+    <img src="https://i.pinimg.com/564x/25/ae/e9/25aee98c000020ab1bf4b35c80290d19.jpg"
+         alt="@appointment.patientName's profile"
+         class="w-24 h-24 rounded-full border-2 border-blue-500 mr-4 mb-4" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Patient Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+            <h3 class="font-semibold text-gray-700">Patient Information</h3>
+            <p><strong>Name:</strong> @appointment.patientName</p>
+            <p><strong>Phone:</strong> @appointment.phone</p>
+            <p><strong>Email:</strong> @appointment.email</p>
+        </div>
+
+        <!-- Appointment Information -->
+        <div class="bg-gray-100 p-4 rounded-lg">
+            <h3 class="font-semibold text-gray-700">Appointment Information</h3>
+            <p><strong>Date:</strong> @appointment.date.ToString("MM/dd/yyyy")</p>
+            <p><strong>Time:</strong> @appointment.time.ToString("hh:mm tt")</p>
+            <p><strong>Location:</strong> @appointment.location</p>
+        </div>
+
+        <!-- Notes -->
+        <div class="bg-gray-100 p-4 rounded-lg col-span-1 md:col-span-2">
+            <h3 class="font-semibold text-gray-700">Notes</h3>
+            <p>@(string.IsNullOrEmpty(appointment.notes) ? "No additional notes." : appointment.notes)</p>
+        </div>
+    </div>
+
+    <div class="mt-6">
+        <a asp-area="" asp-controller="Home" asp-action="ViewAppointment" class="text-blue-600 hover:underline">Back to Appointments</a>
+    </div>
+</div>

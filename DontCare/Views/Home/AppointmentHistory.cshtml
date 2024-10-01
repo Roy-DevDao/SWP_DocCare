@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Appointment History";
+
+    // Sample appointments data
+    var appointments = new List<dynamic> {
+        new { id = 1, name = "Trung Phan", doctor_id = "123", dateBooking = "23/12/04", time = "10am", status = "Upcoming" },
+        new { id = 2, name = "Nguyen Van A", doctor_id = "123", dateBooking = "23/12/04", time = "10am", status = "Finished" },
+        new { id = 3, name = "Le Thi B", doctor_id = "123", dateBooking = "23/12/04", time = "10am", status = "Finished" }
+    };
+}
+
+<div class="container mx-auto mt-5">
+    <h2 class="text-2xl font-bold mb-4">Appointment History</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead>
+                <tr class="bg-blue-600 text-white text-left">
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">ID</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Name</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Doctor ID</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Date Booking</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Time</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in appointments)
+                {
+                    <tr class="hover:bg-gray-100 transition duration-300 @(appointments.IndexOf(appointment) % 2 == 0 ? "bg-white" : "bg-gray-50")">
+                        <td class="py-3 px-4 border-b border-gray-300">@appointment.id</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@appointment.name</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@appointment.doctor_id</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@appointment.dateBooking</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@appointment.time</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@appointment.status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

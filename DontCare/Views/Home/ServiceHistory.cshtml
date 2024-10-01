@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Appointment History";
+
+    // Sample appointments data
+    var services = new List<dynamic> {
+        new { id = 1, name = "Khám tổng quát", dateBooking = "23/12/04", time = "10am",price="500.000", status = "Upcoming" },
+        new { id = 2, name = "Nha khoa", dateBooking = "23/12/04", time = "10am",price="500.000", status = "Finished" },
+        new { id = 3, name = "Sức khỏe tinh thần", dateBooking = "23/12/04", time = "10am",price="500.000", status = "Finished" }
+    };
+}
+
+<div class="container mx-auto mt-5">
+    <h2 class="text-2xl font-bold mb-4">Appointment History</h2>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+            <thead>
+                <tr class="bg-blue-600 text-white text-left">
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">ID</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Name Service</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Date Booking</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Time</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Price</th>
+                    <th class="py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var service in services)
+                {
+                    <tr class="hover:bg-gray-100 transition duration-300 @(services.IndexOf(service) % 2 == 0 ? "bg-white" : "bg-gray-50")">
+                        <td class="py-3 px-4 border-b border-gray-300">@service.id</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@service.name</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@service.dateBooking</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@service.time</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@service.price</td>
+                        <td class="py-3 px-4 border-b border-gray-300">@service.status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
