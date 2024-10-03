@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="doccare, medical, appointment, doctor, booking" />
+    <meta name="description" content="Healthcare system, appointment scheduling" />
+    <meta property="og:title" content="Doccare.ml - Find Doctors Easily - Schedule Appointments Conveniently" />
+    <meta property="og:description" content="Healthcare system, appointment scheduling" />
+    <meta property="og:site_name" content="doccare.ml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="shortcut icon" href="https://shreethemes.in/Doccare/layouts/assets/images/favicon.ico">
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/assets/css/tiny-slider.css" />
+    <link href="~/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="~/assets/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/flatpickr.min.css">
+    <link href="~/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Replace this section with a logic that triggers alerts dynamically using JavaScript
+            var alertType = 'success';  // Example: 'success', 'error', etc.
+            var message = 'Đăng nhập thành công!'; // Example message
+            if (alertType) {
+                toastr[alertType](message, 'Thông báo', { timeOut: 5000 });
+            }
+        });
+    </script>
+</head>
+
+
+
+<body>
+
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div>
+
+    <header id="topnav" class="navigation sticky">
+        <div class="container">
+            <div>
+                <a class="logo" href="home">
+                    <img src="~/assets/images/medical.png" height="57" width="107" class="logo--mode" alt="">
+                </a>
+            </div>
+            <div class="menu-extras">
+                <div class="menu-item">
+                    <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                        <div class="lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <ul class="dropdowns list-inline mb-0">
+                <li class="list-inline-item mb-0 ms-1">
+                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item mb-0 ms-1">
+                    <div class="dropdown dropdown-primary">
+                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/assets/images/avata.png" class="avatar avatar-ex-small rounded-circle" alt="">
+                        </button>
+                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <img src="~/assets/images/avata.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                <div class="flex-1 ms-2">
+                                    <span class="d-block mb-1">ABC</span>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider border-top"></div>
+                            <a class="dropdown-item" href="user?action=profile">My Profile</a>
+                            <a class="dropdown-item" href="user?action=logout">Log out</a>
+                            <a class="dropdown-item" href="user?action=login">Login</a>
+                            <a class="dropdown-item" href="dashboard?action=default">Manage</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div id="navigation">
+                <ul class="navigation-menu nav-left">
+                    <li><a asp-area ="" asp-controller="Home" asp-action="Index" class="sub-menu-item">Trang chủ</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="DoctorList" class="sub-menu-item">Bác sĩ</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="ServiceList" class="sub-menu-item">Dịch vụ</a></li>
+                    <li><a href="contact" class="sub-menu-item">Liên hệ</a></li>
+                    <li><a href="blogs" class="sub-menu-item">Tin tức & chủ đề</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-4 mb-0 mb-md-4 pb-0 pb-md-2">
+                    <a href="#" class="logo-footer">
+                        <img src="~/assets/images/icon-logo.png" height="60" width="80" alt="">
+                    </a>
+                    <p class="mt-4 me-xl-5">Providing the best healthcare services for you with just one click</p>
+                </div>
+
+                <div class="col-xl-7 col-lg-8 col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light footer-head">DocCare</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li><a href="contact" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Contact</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="ServiceList" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="DoctorList" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Doctors</a></li>
+                                <li><a href="blogs" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> News</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                            <h5 class="text-light footer-head">Contact Us</h5>
+                            <ul class="list-unstyled footer-list mt-4">
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="mail" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="mailto:baook01234@gmail.com" class="text-foot ms-2">baook01234@gmail.com</a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="phone" class="fea icon-sm text-foot align-middle"></i>
+                                    <a href="tel:+152534-468-854" class="text-foot ms-2">+84 987367341</a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i data-feather="map-pin" class="fea icon-sm text-foot align-middle"></i>
+                                    <a target="_blank" href="https://maps.app.goo.gl/WgP9jNevAG1NsmzFA" class="video-play-icon text-foot ms-2">Find our address here</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="pt-4 footer-bar">
+                <div class="align-items-center">
+                    <div class="text-sm-start text-center">
+                        <p class="mb-0">
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> © Doccare.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Modal -->
+    <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+        <div class="offcanvas-body d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <h4>Tìm kiếm ngay ..</h4>
+                            <div class="subcribe-form mt-4">
+                                <form id="searchForm" action="search" method="get">
+                                    <input type="text" id="keywords" name="keywords" class="rounded" placeholder="Search ...">
+                                    <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Search Modal -->
+    <!-- Back to Top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="back-to-top rounded-pill">
+        <i class="mdi mdi-chevron-up icons"></i>
+    </a>
+
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat"></div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "109477894974639");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v12.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+    </script>
+
+
+
+    <div class="modal fade" id="watchvideomodal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content video-modal rounded overflow-hidden">
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/QIvIN8M91x4" title="YouTube video" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/tiny-slider.js "></script>
+    <script src="~/assets/js/feather.min.js"></script>
+    <script src="~/assets/js/app.js"></script>
+    <script src="~/assets/js/select2.min.js"></script>
+    <script src="~/assets/js/flatpickr.js"></script>
+    <script src="~/assets/js/jquery.timepicker.min.js"></script>
+</body>
+</html>

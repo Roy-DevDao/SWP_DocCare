@@ -1,0 +1,109 @@
+﻿
+@{
+    Layout = "Layout_staff";
+    ViewData["Title"] = "Appointment List from Staff";
+}
+
+<div class="container-fluid">
+    <div class="layout-specing">
+        <div class="row">
+            <div class="col-md-5 row">
+                <div class="col-md-4">
+                    <h5 class="mb-0">Appointments</h5>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <form action="appointmentmanage" method="POST">
+                    <div class="justify-content-md-end row">
+                        <div class="col-md-5 row align-items-center">
+                            <div class="col-md-3">
+                                <label class="form-label">Doctor</label>
+                            </div>
+                            <div class="col-md-9">
+                                <select name="doctor_id" class="form-select" aria-label="Default select example">
+                                    <option value="all">All</option>
+                                    <option value="1">Doctor A</option>
+                                    <option value="2">Doctor B</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-5 row align-items-center">
+                            <div class="col-md-4">
+                                <label class="form-label">Status</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select name="status" class="form-select" aria-label="Default select example">
+                                    <option value="all">All</option>
+                                    <option value="Complete">Complete</option>
+                                    <option value="Assigned">Assigned</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1 md-0">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mt-4">
+                <div class="table-responsive bg-white shadow rounded">
+                    <table class="table mb-0 table-center">
+                        <thead>
+                            <tr>
+                                <th class="border-bottom p-3">ID</th>
+                                <th class="border-bottom p-3">Patient</th>
+                                <th class="border-bottom p-3">Doctor</th>
+                                <th class="border-bottom p-3">Date</th>
+                                <th class="border-bottom p-3">Time</th>
+                                <th class="border-bottom p-3">Status</th>
+                                <th class="border-bottom p-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sample data for appointment list -->
+                            <tr>
+                                <th class="p-3">1</th>
+                                <td class="p-3">Nguyễn Văn A</td>
+                                <td class="p-3">Doctor A</td>
+                                <td class="p-3">01/10/2024</td>
+                                <td class="p-3">08:00</td>
+                                <td class="p-3">Complete</td>
+                                <td class="text-end p-3">
+                                    <a href="appointmentmanage?action=detail&id=1" type="button" class="btn btn-info">Details</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="p-3">2</th>
+                                <td class="p-3">Trần Thị B</td>
+                                <td class="p-3">Doctor B</td>
+                                <td class="p-3">02/10/2024</td>
+                                <td class="p-3">09:00</td>
+                                <td class="p-3">Pending</td>
+                                <td class="text-end p-3">
+                                    <a href="appointmentmanage?action=detail&id=2" type="button" class="btn btn-info">Details</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-12 mt-4">
+                <div class="d-md-flex align-items-center text-center justify-content-between">
+                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
