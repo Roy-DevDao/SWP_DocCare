@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = test2
 build_property.RootNamespace = test2
@@ -72,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/BAO/MAJOR/SE5/.NET/Web/test2/test2/Views/Staff/AppoitmentList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcQXBwb2l0bWVudExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BAO/MAJOR/SE5/.NET/Web/test2/test2/Views/Staff/ContactList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhZmZcQ29udGFjdExpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BAO/MAJOR/SE5/.NET/Web/test2/test2/Views/Staff/Schedule.cshtml]

@@ -38,6 +38,11 @@ namespace test2.Controllers
             return View();  // This will render /Views/Staff/ServiceAppointDetail.cshtml
         }
 
+        public IActionResult ContactList()
+        {
+            return View();  // This will render /Views/Staff/ServiceAppointDetail.cshtml
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

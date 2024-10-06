@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\contactlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\contactlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\serviceappointlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\serviceappointlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\shared\\layout_staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_staff.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\appoitmentlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\appoitmentlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\shared\\layout_login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -18,24 +42,101 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "Layout_staff.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout_staff.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_staff.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout_staff.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\Layout_staff.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAEsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-04T15:30:14.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AppoitmentList.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\AppoitmentList.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Staff\\AppoitmentList.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\AppoitmentList.cshtml",
+              "RelativeToolTip": "test2\\Views\\Staff\\AppoitmentList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-04T15:30:09.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAAAFYAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-04T05:44:08.825Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Layout_login.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout_login.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_login.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout_login.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\Layout_login.cshtml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAGgAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-04T05:43:00.486Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "StaffController.cs",
               "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Controllers\\StaffController.cs",
               "RelativeDocumentMoniker": "test2\\Controllers\\StaffController.cs",
               "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Controllers\\StaffController.cs",
               "RelativeToolTip": "test2\\Controllers\\StaffController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBsAAABWAAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBYAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T18:30:44.485Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "ContactList.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\ContactList.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Staff\\ContactList.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\ContactList.cshtml",
+              "RelativeToolTip": "test2\\Views\\Staff\\ContactList.cshtml",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAGgAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-04T15:35:56.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ServiceAppointList.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\ServiceAppointList.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Staff\\ServiceAppointList.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\ServiceAppointList.cshtml",
+              "RelativeToolTip": "test2\\Views\\Staff\\ServiceAppointList.cshtml",
+              "ViewState": "AgIAAFIAAAAAAAAAAAAwwHwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-04T15:34:54.244Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Schedule.cshtml",
               "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\Schedule.cshtml",
               "RelativeDocumentMoniker": "test2\\Views\\Staff\\Schedule.cshtml",
@@ -43,8 +144,7 @@
               "RelativeToolTip": "test2\\Views\\Staff\\Schedule.cshtml",
               "ViewState": "AgIAACUAAAAAAAAAAAAYwEsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-02T18:08:51.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-02T18:08:51.999Z"
             }
           ]
         }

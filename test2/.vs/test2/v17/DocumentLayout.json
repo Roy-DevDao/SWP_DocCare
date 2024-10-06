@@ -3,12 +3,48 @@
   "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\context\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\context\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\schedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\staffdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\staffdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\servicedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\servicedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\roledao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\roledao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\reservationdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\reservationdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\ratedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\ratedao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\patientdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\patientdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\doctordao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\doctordao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\dao\\appointmentdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\appointmentdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,27 +59,144 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "StaffController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Controllers\\StaffController.cs",
-              "RelativeDocumentMoniker": "test2\\Controllers\\StaffController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Controllers\\StaffController.cs",
-              "RelativeToolTip": "test2\\Controllers\\StaffController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAQwBsAAABWAAAAAAAAAA==",
+              "Title": "DBContext.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Context\\DBContext.cs",
+              "RelativeDocumentMoniker": "test2\\Context\\DBContext.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Context\\DBContext.cs",
+              "RelativeToolTip": "test2\\Context\\DBContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-02T18:30:44.485Z",
+              "WhenOpened": "2024-10-05T16:13:06.213Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Schedule.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\Schedule.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Staff\\Schedule.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\Schedule.cshtml",
-              "RelativeToolTip": "test2\\Views\\Staff\\Schedule.cshtml",
-              "ViewState": "AgIAACUAAAAAAAAAAAAYwEsAAAAFAAAAAAAAAA==",
+              "Title": "UserDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\UserDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\UserDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\UserDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\UserDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:12:17.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StaffDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\StaffDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\StaffDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\StaffDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\StaffDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:12:05.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ServiceDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\ServiceDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\ServiceDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\ServiceDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\ServiceDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:11:56.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RoleDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\RoleDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\RoleDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\RoleDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\RoleDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:11:44.83Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ReservationDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\ReservationDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\ReservationDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\ReservationDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\ReservationDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:11:30.14Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RateDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\RateDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\RateDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\RateDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\RateDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:11:17.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PatientDao.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\PatientDao.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\PatientDao.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\PatientDao.cs",
+              "RelativeToolTip": "test2\\DAO\\PatientDao.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:11:05.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DoctorDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\DoctorDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\DoctorDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\DoctorDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\DoctorDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:10:52.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AppointmentDAO.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\AppointmentDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\AppointmentDAO.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\DAO\\AppointmentDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\AppointmentDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-05T16:10:35.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\Login.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\Login.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-02T18:08:51.999Z",
+              "WhenOpened": "2024-10-05T15:31:12.699Z",
               "EditorCaption": ""
             }
           ]

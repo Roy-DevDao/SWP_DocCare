@@ -28,3 +28,4 @@ D:\BAO\MAJOR\SE5\.NET\Web\test2\test2\obj\Debug\net8.0\refint\test2.dll
 D:\BAO\MAJOR\SE5\.NET\Web\test2\test2\obj\Debug\net8.0\test2.pdb
 D:\BAO\MAJOR\SE5\.NET\Web\test2\test2\obj\Debug\net8.0\test2.genruntimeconfig.cache
 D:\BAO\MAJOR\SE5\.NET\Web\test2\test2\obj\Debug\net8.0\ref\test2.dll
+D:\BAO\MAJOR\SE5\.NET\Web\test2\test2\obj\Debug\net8.0\test2.sourcelink.json
