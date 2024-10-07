@@ -27,28 +27,28 @@
                         <!-- Kiểm tra vai trò người dùng và hiển thị các mục tương ứng -->
                         <!-- Nếu người dùng là bác sĩ -->
                         <li class="navbar-item">
-                            <a href="doctor?action=myfeedback" class="navbar-link">
+                            <a asp-area="" asp-controller="Doctor" asp-action="Feedback" class="navbar-link">
                                 <i class="ri-chat-1-line align-middle navbar-icon"></i> FeedBack
                             </a>
                         </li>
                         <li class="navbar-item">
-                            <a href="doctor?action=mypatient" class="navbar-link">
+                            <a asp-area="" asp-controller="Doctor" asp-action="ViewPatient" class="navbar-link">
                                 <i class="ri-empathize-line align-middle navbar-icon"></i> My Patient
                             </a>
                         </li>
                         <li class="navbar-item">
-                            <a href="doctor?action=myappointment" class="navbar-link">
+                            <a asp-area="" asp-controller="Doctor" asp-action="ViewAppointment" class="navbar-link">
                                 <i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment
                             </a>
                         </li>
                         <!-- Nếu người dùng là bệnh nhân -->
                         <li class="navbar-item">
-                            <a href="user?action=history&type=appointment" class="navbar-link">
+                            <a asp-area="" asp-controller="Patient" asp-action="AppointmentHistory" class="navbar-link">
                                 <i class="ri-calendar-check-line align-middle navbar-icon"></i> Appointment History
                             </a>
                         </li>
                         <li class="navbar-item">
-                            <a href="user?action=history&type=reservation" class="navbar-link">
+                            <a asp-area="" asp-controller="Patient" asp-action="ServiceHistory" class="navbar-link">
                                 <i class="ri-calendar-check-line align-middle navbar-icon"></i> Service History
                             </a>
                         </li>

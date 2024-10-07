@@ -321,6 +321,22 @@
       "PackagePath": "staticwebassets\\assets\\scss\\materialdesignicons.scss"
     },
     {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\wwwroot\\css\\NewFolder\\StyleSheet.css",
+      "PackagePath": "staticwebassets\\css\\NewFolder\\StyleSheet.css"
+    },
+    {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\wwwroot\\css\\PatientList.css",
+      "PackagePath": "staticwebassets\\css\\PatientList.css"
+    },
+    {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\wwwroot\\css\\StyleSheet.css",
+      "PackagePath": "staticwebassets\\css\\StyleSheet.css"
+    },
+    {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\wwwroot\\css\\StyleSheet1.css",
+      "PackagePath": "staticwebassets\\css\\StyleSheet1.css"
+    },
+    {
       "Id": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

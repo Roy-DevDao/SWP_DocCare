@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="back-to-home rounded d-none d-sm-block">
-        <a href="home" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
     </div>
 
     <section class="bg-half-150 d-table w-100 bg-light">
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="mx-auto">
-                                    <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account?</small> <a href="user?action=login" class="text-dark fw-bold">Login</a></p>
+                                    <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account?</small> <a asp-area="" asp-controller="Home" asp-action="Login" class="text-dark fw-bold">Login</a></p>
                                 </div>
                             </form>
                         </div>

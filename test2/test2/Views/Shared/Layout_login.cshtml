@@ -54,7 +54,7 @@
     <header id="topnav" class="navigation sticky">
         <div class="container">
             <div>
-                <a class="logo" href="home">
+                <a class="logo" asp-area="" asp-controller="Home" asp-action="Index">
                     <img src="~/assets/images/medical.png" height="57" width="107" class="logo--mode" alt="">
                 </a>
             </div>
@@ -88,9 +88,9 @@
                                 </div>
                             </a>
                             <div class="dropdown-divider border-top"></div>
-                            <a class="dropdown-item" href="user?action=profile">My Profile</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Profile">My Profile</a>
                             <a class="dropdown-item" href="user?action=logout">Log out</a>
-                            <a class="dropdown-item" href="user?action=login">Login</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                             <a class="dropdown-item" href="dashboard?action=default">Manage</a>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                     <li><a asp-area ="" asp-controller="Home" asp-action="Index" class="sub-menu-item">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="DoctorList" class="sub-menu-item">Doctor</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="ServiceList" class="sub-menu-item">Service</a></li>
-                    <li><a href="contact" class="sub-menu-item">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Contact" class="sub-menu-item">Contact</a></li>
                     <li><a href="blogs" class="sub-menu-item">Tittle</a></li>
                 </ul>
             </div>
@@ -130,7 +130,7 @@
                         <div class="col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                             <h5 class="text-light footer-head">DocCare</h5>
                             <ul class="list-unstyled footer-list mt-4">
-                                <li><a href="contact" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Contact</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Contact" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Contact</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="ServiceList" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Services</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="DoctorList" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> Doctors</a></li>
                                 <li><a href="blogs" class="text-foot"><i class="mdi mdi-chevron-right me-1"></i> News</a></li>

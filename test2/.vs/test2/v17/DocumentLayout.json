@@ -3,76 +3,28 @@
   "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\patient\\bookingservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\bookingservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\data\\bookingcarecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\bookingcarecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\patient\\bookingappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\bookingappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\patient\\bookingservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\bookingservice.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\patient\\appointmenthistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\appointmenthistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\patient\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\doctor\\viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\doctor\\feedback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\feedback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\patient\\servicehistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\servicehistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\appointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\appointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\doctor\\viewpatientdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewpatientdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\doctor\\viewpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\doctor\\viewappointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewappointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\staff\\appoitmentlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\appoitmentlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\shared\\layout_login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\home\\servicedetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\servicedetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\shared\\layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\.net\\web\\test2\\test2\\views\\home\\forgotpass.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\forgotpass.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,240 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AppointmentHistory.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAAAkAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:30:17.361Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Feedback.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\Feedback.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\Feedback.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\Feedback.cshtml",
-              "RelativeToolTip": "test2\\Views\\Doctor\\Feedback.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:36:36.404Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ViewPatient.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewPatient.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewPatient.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewPatient.cshtml",
-              "RelativeToolTip": "test2\\Views\\Doctor\\ViewPatient.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:37:03.14Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ViewAppointment.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewAppointment.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewAppointment.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewAppointment.cshtml",
-              "RelativeToolTip": "test2\\Views\\Doctor\\ViewAppointment.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:36:52.732Z",
+              "DocumentIndex": 0,
+              "Title": "BookingCareContext.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Data\\BookingCareContext.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\BookingCareContext.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Data\\BookingCareContext.cs",
+              "RelativeToolTip": "test2\\Data\\BookingCareContext.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAQwJsAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-07T16:46:26.701Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BookingAppointment.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:42:28.305Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\appsettings.json",
+              "RelativeDocumentMoniker": "test2\\appsettings.json",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\appsettings.json",
+              "RelativeToolTip": "test2\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-07T16:35:38.81Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "BookingService.cshtml",
               "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\BookingService.cshtml",
               "RelativeDocumentMoniker": "test2\\Views\\Patient\\BookingService.cshtml",
               "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\BookingService.cshtml",
               "RelativeToolTip": "test2\\Views\\Patient\\BookingService.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAALcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:30:24.678Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ViewPatientDetail.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
-              "RelativeToolTip": "test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:37:06.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AppointmentDetail.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\AppointmentDetail.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Staff\\AppointmentDetail.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\AppointmentDetail.cshtml",
-              "RelativeToolTip": "test2\\Views\\Staff\\AppointmentDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:37:13.198Z",
+              "WhenOpened": "2024-10-07T16:15:08.615Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Payment.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\Payment.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\Payment.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\Payment.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\Payment.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAAAAA==",
+              "Title": "AppointmentHistory.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\AppointmentHistory.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Patient\\AppointmentHistory.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\AppointmentHistory.cshtml",
+              "RelativeToolTip": "test2\\Views\\Patient\\AppointmentHistory.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:37:32.243Z",
+              "WhenOpened": "2024-10-07T16:14:58.117Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ServiceHistory.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\ServiceHistory.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\ServiceHistory.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Patient\\ServiceHistory.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\ServiceHistory.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:37:45.378Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ViewAppointmentDetail.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
-              "RelativeToolTip": "test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:36:57.139Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AppoitmentList.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\AppoitmentList.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Staff\\AppoitmentList.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Staff\\AppoitmentList.cshtml",
-              "RelativeToolTip": "test2\\Views\\Staff\\AppoitmentList.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:31:56.907Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Layout_login.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout_login.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_login.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout_login.cshtml",
-              "RelativeToolTip": "test2\\Views\\Shared\\Layout_login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:31:45.084Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ServiceDetail.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Home\\ServiceDetail.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Home\\ServiceDetail.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Home\\ServiceDetail.cshtml",
-              "RelativeToolTip": "test2\\Views\\Home\\ServiceDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:30:28.452Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Layout.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\Layout.cshtml",
-              "RelativeToolTip": "test2\\Views\\Shared\\Layout.cshtml",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAAAOIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:26:44.794Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "PatientController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Controllers\\PatientController.cs",
-              "RelativeDocumentMoniker": "test2\\Controllers\\PatientController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Controllers\\PatientController.cs",
-              "RelativeToolTip": "test2\\Controllers\\PatientController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T07:16:49.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Program.cs",
-              "RelativeDocumentMoniker": "test2\\Program.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Program.cs",
-              "RelativeToolTip": "test2\\Program.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwC4AAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-07T07:16:34.638Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 4,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "test2\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "test2\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAALAAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAAAJUAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-07T07:13:58.743Z",
+              "WhenOpened": "2024-10-07T16:03:06.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ForgotPass.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Home\\ForgotPass.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\ForgotPass.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\.NET\\Web\\test2\\test2\\Views\\Home\\ForgotPass.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\ForgotPass.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAHYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-07T16:01:13.438Z",
               "EditorCaption": ""
             }
           ]

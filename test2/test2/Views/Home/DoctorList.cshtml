@@ -11,8 +11,8 @@
                     <p class="para-desc mx-auto text-muted">If you or your loved ones need immediate assistance or emergency treatment, please book an appointment.</p>
                     <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                         <ul class="breadcrumb bg-transparent mb-0">
-                            <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Doctors</a></li>
+                            <li class="breadcrumb-item"><a asp-area ="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="DoctorList">Doctors</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -48,8 +48,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")'">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -77,8 +77,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -106,8 +106,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -135,8 +135,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -164,8 +164,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -193,8 +193,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -222,8 +222,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -251,8 +251,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>
@@ -280,8 +280,8 @@
                             </div>
                             <small class="text-muted speciality">Price: 1,000,000 đ</small>
                             <div class="pt-2">
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'book?type=appointment&id=1'">Book</button>
-                                <button class="btn btn-soft-primary" onclick="window.location.href = 'doctor?action=detail&id=1'">Detail</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")''">Book</button>
+                                <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
                             </div>
                         </div>
                     </div>

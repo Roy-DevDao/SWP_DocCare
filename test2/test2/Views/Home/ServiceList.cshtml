@@ -13,8 +13,8 @@
                     <p class="para-desc mx-auto text-muted">If you or your family members need medical assistance, book an appointment now.</p>
                     <nav aria-label="breadcrumb" class="d-inline-block mt-3">
                         <ul class="breadcrumb bg-transparent mb-0">
-                            <li class="breadcrumb-item"><a href="home">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Service List</a></li>
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="ServiceList">Service List</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -86,7 +86,7 @@
                         <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
                         <div class="overlay-work bg-dark"></div>
                         <div class="card-body">
-                            <h5 class="text-light">General Health Check</h5>
+                            <h4 class="text-light">General Health Check</h4>
                             <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
                             <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
                         </div>
