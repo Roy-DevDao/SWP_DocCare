@@ -58,7 +58,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\PatientDetails.cshtml" />
-    <_ContentIncludedByDefault Remove="wwwroot\css\StyleSheet2.css" />
   </ItemGroup>
 
   <ItemGroup>

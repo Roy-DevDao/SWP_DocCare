@@ -36,19 +36,16 @@ function renderDoctors() {
         <td>${doctor.speciality}</td>
         <td>${doctor.status}</td>
         <td>
-          <a asp-controller="Home" asp-action="DoctorDetails">
-          <form  ">
-                <input type="hidden" name="id" value="${doctor.id}">
-                <button type="submit" class="edit-btn btn btn-primary">More details</button>
-            </form></a>
-            <form asp-controller="Doctors" asp-action="Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this doctor?');">
+            <button onclick="location.href='/Home/DoctorDetails?id=${doctor.id}'" class="edit-btn btn btn-primary">More details</button>
+            <form action="/Doctors/Delete" method="post" onsubmit="return confirm('Are you sure you want to delete this doctor?');">
                 <input type="hidden" name="id" value="${doctor.id}">
                 <button type="submit" class="delete-btn btn btn-danger">Delete</button>
             </form>
         </td>
-      `;
+    `;
         doctorListEl.appendChild(row);
     });
+
 
     currentPageEl.textContent = currentPage;
 }
