@@ -38,6 +38,14 @@ namespace test2
                name: "staff",
                pattern: "{controller=Staff}/{action=AppoitmentList}/{id?}");
 
+            app.MapControllerRoute(
+               name: "doctor",
+               pattern: "{controller=Doctor}/{action=VIewAppointment}/{id?}");
+
+            app.MapControllerRoute(
+               name: "patient",
+               pattern: "{controller=Patient}/{action=AppointmentHistory}/{id?}");
+
             app.Run();
         }
     }

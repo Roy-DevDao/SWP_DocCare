@@ -1,0 +1,143 @@
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Title = "Booking Appointment";
+    var dayNames = new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+    // Sample data for appointments
+    var data = new List<List<string>> {
+        new List<string> { "8am-9:30am", "8am-9:30am", "10am-12am", "8am-9:30am", "8am-9:30am" },
+        new List<string> { "8am-9:30am", "8am-9:30am", "8am-9:30am", "8am-9:30am" },
+        new List<string> { "8am-9:30am", "8am-9:30am", "8am-9:30am" },
+        new List<string> { "8am-9:30am", "8am-9:30am", "8am-9:30am", "8am-9:30am", "8am-9:30am" }
+    };
+
+    var currentDay = (int)DateTime.Now.DayOfWeek;
+    var days = dayNames.Skip(currentDay).Concat(dayNames.Take(currentDay)).ToList();
+    var activeTab = days[0];
+    var count = 0;
+    var description = "";
+}
+
+<div class="pt-20">
+    <div class="border-b border-gray-200 dark:border-gray-700">
+       
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center justify-center text-gray-500 dark:text-gray-400">
+            @for (int i = 0; i < days.Count; i++)
+            {
+                <li class="me-2">
+                    <a href="#"
+                       class="inline-flex items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == days[i] ? "border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group")"
+                       onclick="setActiveTab('@days[i]', @i)">
+                        @days[i]
+                    </a>
+                </li>
+            }
+        </ul>
+        
+
+        <div class="container mx-auto p-4 flex flex-col items-center">
+            <div class="flex w-4/5 items-center justify-center">
+                <div class="overflow-x-auto mt-5">
+                    <img src="https://i.pinimg.com/564x/6c/6e/d7/6c6ed7f4011b7f926b3f1505475aba16.jpg" width="200px" class="rounded-lg shadow-md" alt="Doctor Poster" />
+                
+                </div>
+                <div class="ml-4 overflow-y-auto mt-5 w-96">
+                    <h3 class="font-bold mb-2">
+                        Dr. Le Quoc Viet, Specialist Level II
+                    </h3>
+                    <p>
+                        Over 30 years of experience in examining and treating musculoskeletal diseases, and 40 years of experience in general internal medicine.
+                        Former Deputy Director of E Hospital.
+                        Doctor accepts patients from 4 years old and up.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex flex-row mt-4">
+
+                <div class="basis-1/2">
+                    <li class="font-medium list-none">
+                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                                <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                                <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                            </svg>
+                            <span class="ms-3">Time Booking</span>
+                        </a>
+                    </li>
+                    <div class="mt-2 grid grid-cols-3 gap-1 content-center">
+                        @if (count < data.Count)
+                        {
+                            foreach (var item in data[count])
+                            {
+                                <button type="button"
+                                        class="py-2 px-2 me-1 mb-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    @item
+                                </button>
+                            }
+                        }
+                        else
+                        {
+                            <p class="text-red-500">Doctor too busy</p>
+                        }
+                    </div>
+                </div>
+                <div class="basis-1/2 border-l-4 border-gray pl-2">
+                    <li class="font-medium list-none">
+                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                                <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
+                                <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
+                            </svg>
+                            <span class="ms-3">Address hospital</span>
+                        </a>
+                    </li>
+                    <p>2nd Floor, Mandarin Garden 2 Shopping Center, 99 Tan Mai Street, Tan Mai, Hoang Mai, Hanoi</p>
+
+                    <div class="mt-6 w-full max-w-md flex items-center">
+                        <label htmlFor="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Billing</label>
+                        <button type="button" class=" mx-4 text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">500.000 VND</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input field for description -->
+            <div class="mt-6 w-full max-w-md">
+                <label htmlFor="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Appointment Description</label>
+                <input type="text"
+                       id="description"
+                       class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       value="@description"
+                       oninput="this.value = this.value" />
+            </div>
+            
+
+            <!-- Confirm button -->
+            <button type="button"
+                    class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                    onclick="confirmAppointment()">
+                Confirm Appointment
+            </button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function setActiveTab(tab, index) {
+            document.querySelectorAll('.border-b-2').forEach(item => {
+                item.classList.remove('border-blue-600', 'text-blue-600', 'dark:text-blue-500', 'dark:border-blue-500');
+                item.classList.add('border-transparent');
+            });
+            const activeItem = document.querySelector(a[href*='${tab}']);
+            activeItem.classList.add('border-blue-600', 'text-blue-600', 'dark:text-blue-500', 'dark:border-blue-500');
+            document.getElementById("description").value = tab; // For demonstration; you can set your own logic here.
+        }
+
+        function confirmAppointment() {
+            const description = document.getElementById("description").value;
+            alert(Appointment confirmed with description: ${description});
+        }
+    </script>
+}
