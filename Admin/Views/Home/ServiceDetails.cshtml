@@ -1,0 +1,216 @@
+﻿@section Styles {
+    <style>
+
+        .layout-default_body_main {
+            width: 100%;
+        }
+
+        .whole-main {
+            border: 2px solid #F1F1F1;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+            .profile-header h3, .profile-header h2 {
+                font-weight: 600;
+            }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-status {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-left: 20px;
+            color: #e05d3b;
+        }
+
+        .divider {
+            height: 60px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 20px;
+        }
+
+        .profile-main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .box-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .box-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .basic-info, .feedback, .intro {
+            border: 2px solid #F1F1F1;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .basic-info-header {
+            background-color: #0D6EFD;
+            padding: 15px 20px;
+            font-size: larger;
+            font-weight: 600;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            color: white;
+        }
+
+        .basic-info-main, .intro-main, .feedback-stats {
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .value {
+            color: #333;
+        }
+
+        .feedback-stats h3 {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .feedback-stats ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+            .feedback-stats ul li {
+                margin-bottom: 10px;
+                font-size: 16px;
+                color: #555;
+            }
+
+        .star-rating {
+            display: inline-block;
+            color: #FFD700; /* Gold color for stars */
+            font-size: 18px;
+        }
+    </style>
+}
+
+<main class="layout-default_body_main">
+    <div class="whole-main">
+        <div class="profile-header">
+            <div class="profile-info">
+                <h4>Id: 456</h4>
+                <h4>Service: General Checkup</h4>
+            </div>
+            <div class="divider"></div>
+            <div class="profile-status">
+                <p>Status:</p>
+                <p>Active</p>
+            </div>
+        </div>
+
+        <div class="profile-main">
+            <div class="box-left">
+                <div class="basic-info">
+                    <div class="basic-info-header">
+                        <h5>Basic Information</h5>
+                    </div>
+                    <div class="basic-info-main">
+                        <div class="info-row">
+                            <div class="label">Category:</div>
+                            <div class="value">Health</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Price:</div>
+                            <div class="value">$100</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Description:</div>
+                            <div class="value">A comprehensive health checkup.</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Duration:</div>
+                            <div class="value">1 hour</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Rating:</div>
+                            <div class="value">4.5 stars</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro">
+                    <div class="basic-info-header">
+                        <h5>Introduction</h5>
+                    </div>
+                    <div class="intro-main">
+                        Our general checkup service is designed to ensure your overall health and well-being.
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-right">
+                <div class="feedback">
+                    <div class="basic-info-header">
+                        <h5>Feedback</h5>
+                    </div>
+                    <div class="feedback-stats">
+                        <h3>Star Ratings</h3>
+                        <ul>
+                            <li><span class="star-rating">★★★★★</span> 150 reviews</li>
+                            <li><span class="star-rating">★★★★</span> 50 reviews</li>
+                            <li><span class="star-rating">★★★</span> 20 reviews</li>
+                            <li><span class="star-rating">★★</span> 10 reviews</li>
+                            <li><span class="star-rating">★</span> 5 reviews</li>
+                        </ul>
+
+                        <h3>Pros</h3>
+                        <ul>
+                            <li>Thorough examination</li>
+                            <li>Friendly staff</li>
+                            <li>Quick results</li>
+                        </ul>
+
+                        <h3>Cons</h3>
+                        <ul>
+                            <li>Higher cost</li>
+                            <li>Limited availability</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

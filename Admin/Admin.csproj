@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Home - Copy %282%29\**" />
+    <Compile Remove="Views\Home - Copy\**" />
+    <Compile Remove="Views\Home\NewFolder\**" />
+    <Compile Remove="Views\NewFolder\**" />
+    <Compile Remove="wwwroot\css\NewFolder1\**" />
+    <Compile Remove="wwwroot\css\NewFolder\**" />
+    <Content Remove="Views\Home - Copy %282%29\**" />
+    <Content Remove="Views\Home - Copy\**" />
+    <Content Remove="Views\Home\NewFolder\**" />
+    <Content Remove="Views\NewFolder\**" />
+    <Content Remove="wwwroot\css\NewFolder1\**" />
+    <Content Remove="wwwroot\css\NewFolder\**" />
+    <EmbeddedResource Remove="Views\Home - Copy %282%29\**" />
+    <EmbeddedResource Remove="Views\Home - Copy\**" />
+    <EmbeddedResource Remove="Views\Home\NewFolder\**" />
+    <EmbeddedResource Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\css\NewFolder1\**" />
+    <EmbeddedResource Remove="wwwroot\css\NewFolder\**" />
+    <None Remove="Views\Home - Copy %282%29\**" />
+    <None Remove="Views\Home - Copy\**" />
+    <None Remove="Views\Home\NewFolder\**" />
+    <None Remove="Views\NewFolder\**" />
+    <None Remove="wwwroot\css\NewFolder1\**" />
+    <None Remove="wwwroot\css\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Home\ManagementDoctor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Home\Index1.cshtml" />
+    <Content Remove="Views\Home\Index2.cshtml" />
+    <Content Remove="Views\Home\Index3.cshtml" />
+    <Content Remove="Views\Home\Index4.cshtml" />
+    <Content Remove="Views\Home\Index5.cshtml" />
+    <Content Remove="Views\Home\Index6.cshtml" />
+    <Content Remove="Views\Home\PatientDetails.cshtml" />
+    <Content Remove="Views\Home\PatientList.cshtml" />
+    <Content Remove="wwwroot\css\PatientList.css" />
+    <Content Remove="wwwroot\css\StyleSheet.css" />
+    <Content Remove="wwwroot\css\StyleSheet1.css" />
+    <Content Remove="wwwroot\js\JavaScript.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Home\PatientDetails.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Home\PatientDetails.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\StyleSheet2.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\PatientDetails.cshtml" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,173 @@
+﻿
+/* Đặt nền chính với màu #F3F4F6 */
+.layout-default_body_main {
+    width: 100%;
+    background-color: #F3F4F6; /* Màu nền contrast mới */
+    padding: 30px;
+}
+
+/* Form với bóng mềm và biên ngoài rõ ràng */
+form {
+    margin: 0 auto;
+    background-color: white;
+    /* padding: 30px; */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+    max-width: 900px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Tiêu đề lớn hơn, dễ đọc */
+.first-text {
+    color: #2d3748;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Lưới với khoảng cách rộng rãi */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Căn chỉnh cột và phần tử form */
+.col, .col-full {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cải thiện input, select và textarea */
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+    /* Hiệu ứng khi focus vào input */
+    input:focus, textarea:focus, select:focus {
+        border-color: #0D6EFD;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); /* Hiệu ứng khi focus */
+    }
+
+/* Tạo độ rộng cho textarea */
+textarea {
+    resize: vertical;
+}
+
+/* Button styles */
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+}
+
+/* Nút lưu với màu chủ đạo */
+.save-btn {
+    background-color: #0D6EFD;
+    color: white;
+    font-weight: 600;
+    padding: 15px 15px;
+}
+
+    /* Hiệu ứng hover cho nút lưu */
+    .save-btn:hover {
+        background-color: #0D6EFD;
+        transform: translateY(-2px); /* Hiệu ứng nhấn nút */
+    }
+
+/* Nút hủy với padding 15px và màu trung tính */
+.cancel-btn {
+    padding: 15px 15px; /* Padding mới cho nút cancel */
+    background-color: #E5E7EB;
+    color: #111827;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+}
+
+    /* Hiệu ứng hover cho nút hủy */
+    .cancel-btn:hover {
+        background-color: #D1D5DB;
+        transform: translateY(-2px);
+    }
+
+/* Biểu tượng người dùng */
+.user-icon {
+    height: 50px;
+    width: 50px;
+    background-color: #E5E7EB;
+    border-radius: 50%;
+}
+
+/* Nút thay đổi ảnh */
+.change-btn {
+    background-color: white;
+    color: #4A5568;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+    padding: 8px 15px;
+    border-radius: 6px;
+}
+
+    /* Hiệu ứng hover cho nút thay đổi */
+    .change-btn:hover {
+        background-color: #f1f5f9;
+    }
+
+/* Phân vùng với padding và biên nhẹ */
+.section {
+    background-color: #f9fafb;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Khoảng cách giữa các phần */
+.space-y-6 {
+    margin-bottom: 24px;
+}
+
+/* Lưới với 2 cột */
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.gap-6 {
+    gap: 1.5rem;
+}
+
+.p-8 {
+    padding: 2rem;
+}
+
+/* Hiệu ứng bóng mềm */
+.shadow {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .col-full {
+        grid-column: span 1;
+    }
+
+    form {
+        padding: 20px;
+    }
+}
