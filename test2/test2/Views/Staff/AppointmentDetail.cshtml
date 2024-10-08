@@ -1,0 +1,158 @@
+﻿
+@{
+    Layout = "Layout_staff";
+    ViewData["Title"] = "Appointment Detail from Staff";
+}
+
+<div class="container-fluid">
+    <div class="layout-specing">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="bg-white rounded shadow overflow-hidden">
+                    <div class="p-4 border-bottom">
+                        <h5 class="mb-0">Patient Information</h5>
+                    </div>
+                    <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                        <img src="~/assets/images/doctors/bs-an.png" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                        <h5 class="mt-3 mb-1">Trần Thị B</h5>
+                    </div>
+
+                    <div class="list-unstyled p-4">
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                            <h6 class="mb-0">Gender</h6>
+                            <p class="text-muted mb-0 ms-2">Female</p>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                            <h6 class="mb-0">Phone Number</h6>
+                            <p class="text-muted mb-0 ms-2">0123456789</p>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="uil uil-medical-drip align-text-bottom text-primary h5 mb-0 me-2"></i>
+                            <h6 class="mb-0">Date of Birth</h6>
+                            <p class="text-muted mb-0 ms-2">01/01/1990</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 ">
+                <div class="bg-white rounded shadow overflow-hidden">
+                    <div class="p-4 border-bottom">
+                        <h5 class="mb-0">Doctor Information</h5>
+                    </div>
+                    <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                        <img src="~/assets/images/doctors/bs-doan.png" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
+                        <h5 class="mt-3 mb-1">Doctor C</h5>
+                    </div>
+
+                    <div class="list-unstyled p-4">
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                            <h6 class="mb-0">Gender</h6>
+                            <p class="text-muted mb-0 ms-2">Male</p>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                            <h6 class="mb-0">Phone Number</h6>
+                            <p class="text-muted mb-0 ms-2">0987654321</p>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                            <h6 class="mb-0">Specialization</h6>
+                            <p class="text-muted mb-0 ms-2">Internal Medicine Specialist</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-0 shadow overflow-hidden mt-4">
+            <div class="p-4 border-bottom">
+                <h5 class="mb-0">Appointment Information</h5>
+            </div>
+            <div class="tab-content p-4" id="pills-tabContent">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Appointment Date</label>
+                            <p>01/10/2024</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Time</label>
+                            <p>10:00 AM</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <p>Completed</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Supporting Staff</label>
+                            <p>Nguyễn Văn C</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Consultation Fee</label>
+                            <p>200,000 VND</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="form-label">Information</label>
+                            <p>General Examination</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow overflow-hidden mt-4">
+            <div class="p-4 border-bottom">
+                <h5 class="mb-0">Update Information</h5>
+            </div>
+            <form action="appointmentmanage?action=update&id=1&staff=nguyenvanc" method="POST">
+                <div class="tab-content p-4" id="pills-tabContent">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label">Consultation Fee</label>
+                            <input name="fee" id="number" type="number" class="form-control" value="200000">
+                        </div>
+                    </div>
+                    <div class="tab-content p-4" id="pills-tabContent">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select name="status" class="form-select" aria-label="Default select example">
+                                    <option value="Complete" selected>Complete</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Notes</label>
+                                <textarea class="form-control" name="note" rows="3">Notes here...</textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <button type="submit" name="action" value="confirm" class="btn btn-primary">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

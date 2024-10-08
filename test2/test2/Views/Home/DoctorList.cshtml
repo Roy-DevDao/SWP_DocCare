@@ -1,0 +1,145 @@
+﻿@model IEnumerable<test2.Data.Doctor>
+@{
+    Layout = "Layout";
+    ViewData["Title"] = "Doctor List";
+}
+<section class="bg-half-150 bg-light d-table w-100">
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h3 class="sub-title mb-4">Doctor List</h3>
+                    <p class="para-desc mx-auto text-muted">If you or your loved ones need immediate assistance or emergency treatment, please book an appointment.</p>
+                    <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                        <ul class="breadcrumb bg-transparent mb-0">
+                            <li class="breadcrumb-item"><a asp-area ="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="DoctorList">Doctors</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 row align-items-center">
+                @foreach (var item in Model)
+                {
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 mt-2 pt-2">
+                        <div class="card team border-0 rounded shadow overflow-hidden" style="height: 400px;">
+                            <div class="team-person position-relative overflow-hidden">
+                                <img src="@item.DoctorImg" style="width: 100%; height: 200px; object-fit: cover; display: block; margin-left: auto; margin-right: auto;" class="img-fluid" alt="">
+                            </div>
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div>
+                                    <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text-dark h5 d-block mb-0">@item.Name</a>
+                                    <small class="text-muted speciality">Speciality Name</small>
+                                    <br>
+                                    <small class="text-muted speciality position-text" style="max-height: 40px; overflow: hidden; text-overflow: ellipsis; display: block;">Position: @item.Position</small> <!-- Giới hạn chiều cao -->
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                                    </ul>
+                                    <p class="text-muted mb-0">0 feedbacks</p>
+                                </div>
+                                <small class="text-muted speciality">Price: @item.Price đ</small>
+                                <div class="pt-2">
+                                    <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient")'">Book</button>
+                                    <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home")'">Detail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                }
+
+              
+
+
+                <!-- Repeat above block for each doctor -->
+            </div>
+            <div class="col-lg-3 mt-3 pt-2">
+                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                    <div class="card-body">
+                        <form action="doctor?action=filter" method="POST">
+                            <div class="widget mb-4 pb-2">
+                                <h5 class="widget-title">Filter</h5>
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Gender</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <select name="gender" class="form-select">
+                                            <option value="all">All</option>
+                                            <option value="true">Male</option>
+                                            <option value="false">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Speciality</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <select name="speciality" class="form-select">
+                                            <option value="all">All</option>
+                                            <option value="1">Speciality 1</option>
+                                            <option value="2">Speciality 2</option>
+                                            <!-- Repeat for other specialities -->
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+                        </form>
+                        <div class="widget mb-4 pb-2">
+                            <h5 class="widget-title">Sort</h5>
+                            <div class="row align-items-center">
+                                <div class="col-md-12">
+                                    <select name="sort" onchange="Sort(this.value)" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="star">Star</option>
+                                        <option value="latest">Lastest</option>
+                                        <option value="popular">Popular</option>
+                                        <option value="fee-">Decending Price</option>
+                                        <option value="fee">Acesnding Price</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-12 mt-4">
+                <div class="d-md-flex align-items-center text-center justify-content-between">
+                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <!-- Repeat for additional pages -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

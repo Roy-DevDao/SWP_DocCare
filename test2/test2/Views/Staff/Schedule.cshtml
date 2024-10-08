@@ -1,0 +1,76 @@
+﻿
+@{
+    Layout = "Layout_staff";
+    ViewData["Title"] = "Schedule from Staff";
+}
+
+<div class="container-fluid">
+    <div class="manage-schedule-container">
+        <div class="m-s-title">
+            <h3 class="mngSc">Manage Doctor's Schedule</h3>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 form-group">
+                    <label for="doctor-select">Choose Doctor</label>
+                    <select id="doctor-select" class="form-select">
+                        <option value="1">Dr. John Doe</option>
+                        <option value="2">Dr. Jane Smith</option>
+                        <!-- Add more options dynamically based on doctors available -->
+                    </select>
+                </div>
+
+                <div class="col-6 form-group">
+                    <label for="date-picker">Choose Date</label>
+                    <input type="date" id="date-picker" class="form-control" />
+                </div>
+
+                <div class="col-12 pick-hour-container">
+                    <button class="btn btn-schedule">07:00 - 09:00</button>
+                    <button class="btn btn-schedule">09:00 - 11:00</button>
+                    <button class="btn btn-schedule">11:00 - 13:00</button>
+                    <button class="btn btn-schedule">13:00 - 15:00</button>
+                    <button class="btn btn-schedule">15:00 - 17:00</button>
+                    <!-- Add more time slots dynamically based on available slots -->
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-primary btn-save-schedule">Save Schedule</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+          .mngSc {
+              padding-bottom: 30px;
+          }
+      .manage-schedule-container {
+      text-transform: uppercase;
+      margin-top: 100px;
+      margin-bottom: 25px;
+      font-weight: 600;
+      text-align: center;
+      padding-bottom: 150px;
+      font-size: 18px;
+    }
+
+    .pick-hour-container {
+      padding-top: 50px;
+      padding-bottom: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+
+      button {
+        padding: 5px 15px;
+        border: 1px solid gray;
+        padding-bottom: 20px;
+      }
+    }
+    .btn-save-schedule {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
