@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Admin.Models.Feedback>
+
+@foreach (var feedback in Model)
+{
+    <li class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h6>@feedback.Name</h6>
+            <p class="text-muted">"@feedback.Description"</p>
+            <small class="text-muted">@feedback.DateCmt?.ToString("g")</small>
+        </div>
+        <span>@feedback.Star <i class="fas fa-star"></i></span>
+    </li>
+}

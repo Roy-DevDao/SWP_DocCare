@@ -1,8 +1,11 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿
+
 @section Styles {
     <style>
+        .sort-options {
+            width: 40%;
+        }
+
         .doctor-dashboard {
             display: flex;
             flex-direction: column;
@@ -56,9 +59,45 @@
             right: 8px;
         }
 
+        .table th {
+            text-align: justify;
+            vertical-align: middle;
+            padding: 10px;
+        }
 
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .icon-text i {
+                font-size: 16px;
+                margin-right: 5px;
+            }
+
+        .table td img {
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+        }
+
+        .table td, .table th {
+            padding: 10px;
+        }
+
+        button.btn {
+            margin-right: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
     </style>
 }
+
+@model IEnumerable<Admin.Models.Doctor>
+
 <div class="doctor-dashboard">
     <div class="header1 d-flex justify-content-between align-items-center mb-4">
         <div class="search-container d-flex">
@@ -68,12 +107,10 @@
             </button>
         </div>
         <a asp-controller="Home" asp-action="AddDoctor">
-            <button class="btn btn-primary" >
+            <button class="btn btn-primary">
                 <i class="fas fa-plus"></i> Add Doctor
             </button>
         </a>
-        
-
     </div>
 
     <div class="sort-options d-flex mb-4">
@@ -83,45 +120,103 @@
             <option value="Female">Female</option>
         </select>
         <select class="form-select me-2" id="sortStatus">
-            <option value="">All Status</option>
-            <option value="Full-time">Full-time</option>
-            <option value="Part-time">Part-time</option>
+            <option value="">All Price</option>
+            <option value="Full-time">?-?</option>
+            <option value="Part-time">?-?</option>
         </select>
-        <select class="form-select" id="sortSpeciality">
-            <option value="">All Specialities</option>
-            <option value="Cardiologist">Cardiologist</option>
-            <option value="Neurologist">Neurologist</option>
-            <option value="Dermatologist">Dermatologist</option>
-            <option value="Orthopedic">Orthopedic</option>
-            <option value="Pediatrician">Pediatrician</option>
-            <option value="Oncologist">Oncologist</option>
-            <option value="Ophthalmologist">Ophthalmologist</option>
-            <option value="ENT Specialist">ENT Specialist</option>
-            <option value="Psychiatrist">Psychiatrist</option>
-            <option value="General Practitioner">General Practitioner</option>
+        <select class="form-select me-2" id="sortStatus">
+            <option value="">Sort ID</option>
+            <option value="Full-time">Cao- thap</option>
+            <option value="Part-time">Thap-cao</option>
         </select>
     </div>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th><i class="fas fa-image"></i> Image</th>
-                <th><i class="fas fa-user"></i> Name</th>
-                <th><i class="fas fa-venus-mars"></i> Gender</th>
-                <th><i class="fas fa-briefcase"></i> Position</th>
-                <th><i class="fas fa-stethoscope"></i> Speciality</th>
-                <th><i class="fas fa-info-circle"></i> Status</th>
-                <th><i class="fas fa-cogs"></i> Options</th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-hashtag"></i>
+                        ID
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-image"></i>
+                        Image
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-user"></i>
+                        Name
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-venus-mars"></i>
+                        Gender
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-briefcase"></i>
+                        Position
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-tag"></i>
+                        Price
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-cogs"></i>
+                        Options
+                    </div>
+                </th>
             </tr>
         </thead>
         <tbody id="doctor-list">
-            <!-- Doctor rows will be inserted here -->
+            @foreach (var doctor in Model)
+            {
+                <tr>
+                    <td>@doctor.Did</td>
+                    <td>
+                        <img src="@doctor.DoctorImg" alt="Doctor Image" class="doctor-img" />
+                    </td>
+                    <td>@doctor.Name</td>
+                    <td>@doctor.Gender</td>
+                    <td>@doctor.Position</td>
+                    <td>@doctor.Price</td>
+                    <td>
+                        <a asp-controller="Home" asp-action="DoctorDetails" asp-route-id="@doctor.Did">
+                            <button class="btn btn-info">Details</button>
+                        </a>
+                        <a asp-controller="Home" asp-action="DeleteDoctor" asp-route-id="@doctor.Did">
+                            <button class="btn btn-danger">Delete</button>
+                        </a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 
-    <div class="pagination d-flex justify-content-center align-items-center">
-        <button class="btn btn-primary" id="prev-page">Previous</button>
-        <span id="current-page" class="mx-3">1</span> / <span id="total-pages"></span>
-        <button class="btn btn-primary" id="next-page">Next</button>
-    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" asp-action="Doctor" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
+            </li>
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                    <a class="page-link" asp-action="Doctor" asp-route-page="@i">@i</a>
+                </li>
+            }
+            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                <a class="page-link" asp-action="Doctor" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>

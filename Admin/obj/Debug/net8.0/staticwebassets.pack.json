@@ -5,46 +5,6 @@
       "PackagePath": "staticwebassets\\Admin.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\AddDoctor.css",
-      "PackagePath": "staticwebassets\\css\\AddDoctor.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\AddPatient.css",
-      "PackagePath": "staticwebassets\\css\\AddPatient.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\AddService.css",
-      "PackagePath": "staticwebassets\\css\\AddService.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\DoctorDetails.css",
-      "PackagePath": "staticwebassets\\css\\DoctorDetails.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\EditService.css",
-      "PackagePath": "staticwebassets\\css\\EditService.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\ManageDoctor.css",
-      "PackagePath": "staticwebassets\\css\\ManageDoctor.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\ManagePatient.css",
-      "PackagePath": "staticwebassets\\css\\ManagePatient.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\ManageService.css",
-      "PackagePath": "staticwebassets\\css\\ManageService.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\ServiceDetails.css",
-      "PackagePath": "staticwebassets\\css\\ServiceDetails.css"
-    },
-    {
-      "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\StyleSheet2.css",
-      "PackagePath": "staticwebassets\\css\\StyleSheet2.css"
-    },
-    {
       "Id": "C:\\Users\\aser\\source\\repos\\Admin\\Admin\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
