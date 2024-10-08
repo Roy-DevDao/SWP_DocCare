@@ -24,6 +24,9 @@ namespace test2.Controllers
         public IActionResult DoctorList()
         {
             var doctor = dc.Doctors.ToList();
+            var specialities = dc.Specialties.ToList();
+
+            ViewBag.Specialities = specialities;
             return View(doctor);
         }
 
@@ -54,7 +57,9 @@ namespace test2.Controllers
 
         public IActionResult ServiceList()
         {
-            return View();
+            var service = dc.Specialties.ToList();
+
+            return View(service);
         }
 
         public IActionResult ServiceDetail()

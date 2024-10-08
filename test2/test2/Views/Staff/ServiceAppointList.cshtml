@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<ServiceAppointmentModel>
+
+@{
     Layout = "Layout_staff";
     ViewData["Title"] = "Service Appointment List from Staff";
 }
@@ -60,45 +62,28 @@
                                 <th class="border-bottom p-3">Patient</th>
                                 <th class="border-bottom p-3">Service</th>
                                 <th class="border-bottom p-3">Date</th>
-                                <th class="border-bottom p-3">Time</th>
+                                <th class="border-bottom p-3">Doctor</th>
                                 <th class="border-bottom p-3">Status</th>
                                 <th class="border-bottom p-3"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th class="p-3">1</th>
-                                <td class="p-3">Nguyen Van A</td>
-                                <td class="p-3">Service A</td>
-                                <td class="p-3">01/10/2024</td>
-                                <td class="p-3">10:00</td>
-                                <td class="p-3">Complete</td>
-                                <td class="text-end p-3">
-                                    <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointmentDetail" type="button" class="btn btn-info">Details</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="p-3">2</th>
-                                <td class="p-3">Tran Van B</td>
-                                <td class="p-3">Service B</td>
-                                <td class="p-3">02/10/2024</td>
-                                <td class="p-3">11:00</td>
-                                <td class="p-3">Pending</td>
-                                <td class="text-end p-3">
-                                    <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointmentDetail" type="button" class="btn btn-info">Details</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th class="p-3">3</th>
-                                <td class="p-3">Le Thi C</td>
-                                <td class="p-3">Service C</td>
-                                <td class="p-3">03/10/2024</td>
-                                <td class="p-3">09:00</td>
-                                <td class="p-3">Assigned</td>
-                                <td class="text-end p-3">
-                                    <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointmentDetail" type="button" class="btn btn-info">Details</a>
-                                </td>
-                            </tr>
+                            @foreach (var appointment in Model)
+
+                            {
+                                <tr>
+                                    <th class="p-3">@appointment.AppointmentId</th>
+                                    <td class="p-3">@appointment.PatientName</td>
+                                    <td class="p-3">@appointment.SpecialtyName</td>
+                                    <td class="p-3">@appointment.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                                    <td class="p-3">@appointment.DoctorName</td>
+                                    <td class="p-3">@appointment.Status</td>
+                                    <td class="text-end p-3">
+                                        <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointmentDetail" asp-route-id="@appointment.AppointmentId" type="button" class="btn btn-info">Details</a>
+                                    </td>
+                                </tr>
+                            }
+                           
                         </tbody>
                     </table>
                 </div>

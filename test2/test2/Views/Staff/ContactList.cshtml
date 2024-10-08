@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<ContactViewModel>
+
+@{
     Layout = "Layout_staff";
     ViewData["Title"] = "Contact List from Staff";
 }
@@ -45,46 +47,26 @@
                                     <th class="border-bottom p-3">ID</th>
                                     <th class="border-bottom p-3">Full Name</th>
                                     <th class="border-bottom p-3">Email</th>
-                                    <th class="border-bottom p-3">Phone</th>
                                     <th class="border-bottom p-3">Medical Description</th>
                                     <th class="border-bottom p-3">Status</th>
                                     <th class="border-bottom p-3"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th class="p-3">1</th>
-                                    <td class="p-3">Nguyen Van A</td>
-                                    <td class="p-3">nguyenvana@example.com</td>
-                                    <td class="p-3">0123456789</td>
-                                    <td class="p-3">Headache, dizziness</td>
-                                    <td class="p-3">Pending</td>
-                                    <td class="text-end p-3">
-                                        <a href="contactlist?action=detail&id=1" type="button" class="btn btn-info">Resolve</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="p-3">2</th>
-                                    <td class="p-3">Tran Van B</td>
-                                    <td class="p-3">tranvanb@example.com</td>
-                                    <td class="p-3">0987654321</td>
-                                    <td class="p-3">Fever, cough</td>
-                                    <td class="p-3">Assigned</td>
-                                    <td class="text-end p-3">
-                                        <a href="contactlist?action=detail&id=2" type="button" class="btn btn-info">Resolve</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="p-3">3</th>
-                                    <td class="p-3">Le Thi C</td>
-                                    <td class="p-3">lethic@example.com</td>
-                                    <td class="p-3">0112233445</td>
-                                    <td class="p-3">Back pain, fatigue</td>
-                                    <td class="p-3">Complete</td>
-                                    <td class="text-end p-3">
-                                        <a href="contactlist?action=detail&id=3" type="button" class="btn btn-info">Resolve</a>
-                                    </td>
-                                </tr>
+                                @foreach (var contact in Model)
+
+                                {
+                                    <tr>
+                                        <th class="p-3">@contact.ContactId</th>
+                                        <td class="p-3">@contact.FullName</td>
+                                        <td class="p-3">@contact.Email</td>
+                                        <td class="p-3">@contact.Description</td>
+                                        <td class="p-3">@contact.Status</td>
+                                        <td class="text-end p-3">
+                                            <a href="/Staff/ContactDetail?id=@contact.ContactId" type="button" class="btn btn-info">Resolve</a>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

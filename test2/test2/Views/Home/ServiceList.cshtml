@@ -1,6 +1,8 @@
-﻿
+﻿@model IEnumerable<test2.Data.Specialty>
+
 @{
     Layout = "Layout";
+
     ViewData["Title"] = "Service List";
 }
 
@@ -23,43 +25,23 @@
     </div>
 </section>
 
-<div class="row" style="margin-top: 50px;margin-left: 50px  ">
-    <div class="col-md-4 row">
-        <div class="col-md-3">
-        </div>
-        <div class="col-md-9">
-            <div class="search-bar p-0 d-lg-block ms-2">
-                <div id="search" class="menu-search mb-0">
-                    <form action="#" method="POST" id="searchform" class="searchform">
-                        <div>
-                            <input type="text" class="form-control border rounded-pill" name="search" id="s" placeholder="Search service name...">
-                            <input type="submit" id="searchsubmit" value="Search">
-                        </div>
-                    </form>
+<div class="row" style="margin-top: 50px;margin-left: 50px;">
+    <div class="col-md-4">
+        <div class="search-bar p-0 d-lg-block">
+            <form action="#" method="POST" id="searchform" class="searchform">
+                <div class="input-group">
+                    <input type="text" class="form-control border rounded-pill" name="search" id="s" placeholder="Search service name...">
+                    <button class="btn btn-primary" type="submit" id="searchsubmit">Search</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
+
     <div class="col-md-6">
         <form action="#" method="POST">
-            <div class="justify-content-md-end row">
-                <div class="col-md-6 row align-items-center">
-                    <div class="col-md-2">
-                        <label class="form-label">Sort</label>
-                    </div>
-                    <div class="col-md-10">
-                        <select name="sort" class="form-select">
-                            <option value="1">Name: Ascending</option>
-                            <option value="2">Name: Descending</option>
-                            <option value="3">Price: Low to High</option>
-                            <option value="4">Price: High to Low</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="row justify-content-end">
                 <div class="col-md-5 row align-items-center">
-                    <div class="col-md-4">
-                        <label class="form-label">Speciality</label>
-                    </div>
+                    <label class="col-md-4 form-label">Sort</label>
                     <div class="col-md-8">
                         <select name="Speciality" class="form-select">
                             <option value="1">All Specialities</option>
@@ -69,7 +51,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-1 md-0">
+                <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>
@@ -80,103 +62,42 @@
 <section class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mt-4 pt-2">
-                <div class="card services-desc overflow-hidden rounded shadow">
-                    <div class="position-relative">
-                        <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                        <div class="overlay-work bg-dark"></div>
-                        <div class="card-body">
-                            <h4 class="text-light">General Health Check</h4>
-                            <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
-                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mt-4 pt-2">
+                    <div class="card services-desc overflow-hidden rounded shadow">
+                        <div class="position-relative">
+                            <img src="@item.SpecialtyImg" class="img-fluid" alt="">
+                            <div class="overlay-work bg-dark"></div>
+                            <div class="card-body">
+                                <h4 class="text-light">@item.SpecialtyName</h4>
+                                <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
+                                <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-md-4 mt-4 pt-2">
-                <div class="card services-desc overflow-hidden rounded shadow">
-                    <div class="position-relative">
-                        <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                        <div class="overlay-work bg-dark"></div>
-                        <div class="card-body">
-                            <h5 class="text-light">General Health Check</h5>
-                            <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
-                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-4 pt-2">
-                <div class="card services-desc overflow-hidden rounded shadow">
-                    <div class="position-relative">
-                        <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                        <div class="overlay-work bg-dark"></div>
-                        <div class="card-body">
-                            <h5 class="text-light">General Health Check</h5>
-                            <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
-                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
 
-        <div class="row">
-            <div class="col-md-4 mt-4 pt-2">
-                <div class="card services-desc overflow-hidden rounded shadow">
-                    <div class="position-relative">
-                        <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                        <div class="overlay-work bg-dark"></div>
-                        <div class="card-body">
-                            <h5 class="text-light">General Health Check</h5>
-                            <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
-                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
-                        </div>
-                    </div>
+        <div class="row text-center">
+            <div class="col-12 mt-4">
+                <div class="d-md-flex align-items-center text-center justify-content-between">
+                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <!-- Add more pagination links as needed -->
+                    </ul>
                 </div>
-            </div>
-
-            <div class="col-md-4 mt-4 pt-2">
-                <div class="card services-desc overflow-hidden rounded shadow">
-                    <div class="position-relative">
-                        <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                        <div class="overlay-work bg-dark"></div>
-                        <div class="card-body">
-                            <h5 class="text-light">General Health Check</h5>
-                            <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
-                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-4 pt-2">
-                <div class="card services-desc overflow-hidden rounded shadow">
-                    <div class="position-relative">
-                        <img src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                        <div class="overlay-work bg-dark"></div>
-                        <div class="card-body">
-                            <h5 class="text-light">General Health Check</h5>
-                            <p class="text-light mb-0">Comprehensive body check-up to detect and treat early illnesses.</p>
-                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" class="text-light small">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-    <div class="row text-center">
-        <div class="col-12 mt-4">
-            <div class="d-md-flex align-items-center text-center justify-content-between">
-                <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <!-- Repeat for additional pages -->
-                </ul>
             </div>
         </div>
     </div>
-        </div>
 </section>
+
+<style>
+    .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+        margin-left: -95px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+</style>

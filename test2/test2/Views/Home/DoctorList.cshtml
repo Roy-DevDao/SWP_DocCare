@@ -96,9 +96,11 @@
                                     <div class="col-md-12">
                                         <select name="speciality" class="form-select">
                                             <option value="all">All</option>
-                                            <option value="1">Speciality 1</option>
-                                            <option value="2">Speciality 2</option>
-                                            <!-- Repeat for other specialities -->
+                                            @foreach (var specialty in ViewBag.Specialities)
+
+                                            {
+                                                <option value="@specialty.SpecialtyId">@specialty.SpecialtyName</option>
+                                            }
                                         </select>
                                     </div>
                                 </div>
@@ -106,6 +108,7 @@
                                 <button type="submit" class="btn btn-primary">Filter</button>
                             </div>
                         </form>
+
                         <div class="widget mb-4 pb-2">
                             <h5 class="widget-title">Sort</h5>
                             <div class="row align-items-center">
@@ -139,6 +142,34 @@
         </div>
     </div>
 </section>
+
+
+    <style >
+    .widget-title {
+        font-weight: bold; 
+        color: #007bff; 
+        font-size: 1.1em; 
+        margin-bottom: 5px; 
+        display: inline-block; 
+    }
+
+    .filter-label {
+        font-weight: bold;
+        color: #007bff; 
+        font-size: 1.1em; 
+        margin-bottom: 5px; 
+        display: inline-block; 
+        background-color: #e7f0ff;
+        padding: 5px; 
+        border-radius: 4px; 
+    }
+
+        .filter-label:hover {
+            color: #0056b3; 
+            background-color: #d1e7fd;
+        }
+
+</style>
 
 
 
