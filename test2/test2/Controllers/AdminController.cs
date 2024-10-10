@@ -4,9 +4,11 @@ using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.IO.Pipelines;
 using test2.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace test2.Controllers
 {
+    
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;

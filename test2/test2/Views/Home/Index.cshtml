@@ -1,7 +1,9 @@
 ﻿@{
     Layout = "Layout";
     ViewData["Title"] = "Home Page";
+    var isAuthenticated = User.Identity.IsAuthenticated;
 }
+
 
 
   <section class="bg-half-260 d-table w-100" style="background: url('@Url.Content("~/assets/images/bg/banner.jpg")') center;">

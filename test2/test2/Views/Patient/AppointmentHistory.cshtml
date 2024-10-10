@@ -9,20 +9,37 @@
         new { id = 3, name = "Le Thi B", specialty = "Nephrologists", dateBooking = "23/12/04", time = "10am", status = "Finished" }
     };
 }
+@model IEnumerable<test2.Data.Order>
 
 <div class="container mx-auto mt-10 p-5">
     <h2 class="text-2xl text-blue-500 font-bold mb-4">Appointment History</h2>
 
 
     <form class="flex items-center justify-center max-w-sm mx-auto mb-5">
-        <button type="button" class="text-white px-4 py-2 flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  text-center me-2 mb-2">
+        <button type="button" id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-white px-4 py-2 flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  text-center me-2 mb-2">
             <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
             </svg>
-            <h1 class="px-1">3</h1>
+            <h1 class="px-1">@Model.Count()</h1>
             <h1> total</h1>
 
         </button>
+        <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                <li>
+                    <a asp-area="" asp-controller="Patient" asp-action="AppointmentHistory" asp-route-status="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Patient" asp-action="AppointmentHistory" asp-route-status="Pending" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Pending</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Patient" asp-action="AppointmentHistory" asp-route-status="Completed" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Completed</a>
+                </li>
+                <li>
+                    <a asp-area="" asp-controller="Patient" asp-action="AppointmentHistory" asp-route-status="Canceled" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Canceled</a>
+                </li>
+            </ul>
+        </div>
         <label for="simple-search" class="sr-only">Search</label>
         <div class="relative w-full">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -60,36 +77,41 @@
                         Date Booking
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Status
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                    
                 </tr>
             </thead>
             <tbody>
-                @foreach (var appointment in appointments)
+                @foreach (var appointment in Model)
                 {
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            @appointment.name
+                            @appointment.Option.DidNavigation.Name
                         </th>
                         <td class="px-6 py-4">
-                            <img class="w-20 h-20 rounded" src="https://i.pinimg.com/736x/d5/f4/33/d5f43357182516866f71425e530e6322.jpg" alt="Default avatar">
+                            <img class="w-20 h-20 rounded" src="@appointment.Option.DidNavigation.DoctorImg" alt="Default avatar">
                         </td>
                         <td class="px-6 py-4">
-                            @appointment.specialty
+                            @appointment.Option.DidNavigation.Specialty.SpecialtyName
                         </td>
                         <td class="px-6 py-4">
-                            @appointment.dateBooking
+                            @appointment.DateOrder
                         </td>
                         <td class="px-6 py-4">
-                            @appointment.time
+                            <span class="text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded
+                                @(appointment.Status == "Pending" ? "bg-yellow-300 dark:bg-yellow-900 dark:text-yellow-300" : (appointment.Status == "Canceled" ? "bg-red-300 dark:bg-red-900 dark:text-red-300" : "bg-blue-300 dark:bg-blue-900 dark:text-blue-300" ) )">
+                                @appointment.Status
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a asp-controller="Patient" asp-action="AppointmentDetail" asp-route-oid="@appointment.Oid" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Detail</a>
                         </td>
 
-                        <td class="px-6 py-4">
-                            <span class="bg-blue-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">@appointment.status</span>
-                        </td>
+                        
                     </tr>
                 }
 

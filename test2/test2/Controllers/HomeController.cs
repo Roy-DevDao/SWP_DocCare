@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 using System.Diagnostics;
 using test2.Data;
 using test2.Models;
@@ -129,9 +132,47 @@ namespace test2.Controllers
         //--------------------------------------------------------------------------------------------
 
         public IActionResult Login()
+        {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            // Validate user credentials (replace this with your actual logic)
+
+            var user = dc.Accounts.Where(dc => dc.Email == email).FirstOrDefault();
+            if (user != null)
+            {
+                if(user.Password == password)
+                {
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email, email),
+                        new Claim(ClaimTypes.Role, (user.Role == 1 ? "Patient" : "Doctor"))
+                     };
+                    var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
+                    var authProperties = new AuthenticationProperties
+                    {
+                        // Keep the user logged in for 30 minutes (adjust this as needed)
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30),
+                        IsPersistent = true
+                    };
+                    await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                    return RedirectToAction("Index", "Home");
+                }                
+            }
+            TempData["ErrorMessage"] = "Invalid login attempt.";
+            return RedirectToAction("Login");
+          
+        }
+
         //--------------------------------------------------------------------------------------------
 
         public IActionResult SignUp()

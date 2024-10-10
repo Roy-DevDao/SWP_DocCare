@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isAuthenticated = User.Identity.IsAuthenticated;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -76,10 +80,13 @@
                         <i class="fas fa-search"></i>
                     </a>
                 </li>
-
-                <li class="list-inline-item mb-0 ms-1">
-                    <button class="btn btn-primary p-1" onclick="window.location.href = '@Url.Action("Login", "Home")'">Login</button>
-                </li>
+                @if (!isAuthenticated)
+                {
+                    <li class="list-inline-item mb-0 ms-1">
+                        <button class="btn btn-primary p-1" onclick="window.location.href = '@Url.Action("Login", "Home")'">Login</button>
+                    </li>
+                }
+                
             </ul>
             <div id="navigation">
                 <ul class="navigation-menu nav-left nav-light">

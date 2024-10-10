@@ -15,6 +15,14 @@ namespace test2
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DocCare"));
             });
 
+            builder.Services.AddAuthentication("MyCookieAuth")
+           .AddCookie("MyCookieAuth", options =>
+           {
+               options.Cookie.Name = "MyAuthCookie";
+               options.LoginPath = "/Home/Login";
+               options.AccessDeniedPath = "/Account/AccessDenied";
+           });
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -31,8 +39,9 @@ namespace test2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             // Default route for Home controller
             app.MapControllerRoute(
