@@ -92,7 +92,7 @@
         <div class="card text-center shadow-sm">
             <div class="card-body">
                 <i class="fas fa-bed fa-2x mb-2 text-primary"></i>
-                <h5 class="card-title">558</h5>
+                <h5 class="card-title">@ViewBag.TotalPatients</h5>
                 <p class="card-text">Patients</p>
             </div>
         </div>
@@ -100,9 +100,9 @@
     <div class="col-md-2">
         <div class="card text-center shadow-sm">
             <div class="card-body">
-                <i class="fas fa-dollar-sign fa-2x mb-2 text-primary"></i>
-                <h5 class="card-title">$2164</h5>
-                <p class="card-text">Avg. costs</p>
+                <i class="fas fa-money-bill-wave fa-2x mb-2 text-primary"></i>
+                <h5 class="card-title">@ViewBag.AvgCost.ToString("F1") </h5>
+                <p class="card-text">Avg.costs</p>
             </div>
         </div>
     </div>
@@ -110,36 +110,38 @@
         <div class="card text-center shadow-sm">
             <div class="card-body">
                 <i class="fas fa-users fa-2x mb-2 text-primary"></i>
-                <h5 class="card-title">112</h5>
-                <p class="card-text">Staff </p>
+                <h5 class="card-title">@ViewBag.TotalDoctors</h5>
+                <p class="card-text">Doctor </p>
             </div>
         </div>
     </div>
     <div class="col-md-2">
         <div class="card text-center shadow-sm">
             <div class="card-body">
-                <i class="fas fa-ambulance fa-2x mb-2 text-primary"></i>
-                <h5 class="card-title">16</h5>
-                <p class="card-text">Vehicles</p>
+                <i class="fas fa-comment fa-2x mb-2 text-primary"></i> 
+                <h5 class="card-title">@ViewBag.TotalFeedback</h5>
+                <p class="card-text">Feedback</p>
             </div>
         </div>
     </div>
     <div class="col-md-2">
         <div class="card text-center shadow-sm">
             <div class="card-body">
-                <i class="fas fa-calendar-check fa-2x mb-2 text-primary"></i>
-                <h5 class="card-title">220</h5>
+                <i class="fas fa-calendar-alt fa-2x mb-2 text-primary"></i> 
+                <h5 class="card-title">@ViewBag.TotalAppointments</h5>
                 <p class="card-text">Appointment</p>
             </div>
         </div>
     </div>
+
     <div class="col-md-2">
         <div class="card text-center shadow-sm">
             <div class="card-body">
-                <i class="fas fa-syringe fa-2x mb-2 text-primary"></i>
-                <h5 class="card-title">10</h5>
-                <p class="card-text">Operations</p>
+                <i class="fas fa-briefcase-medical fa-2x mb-2 text-primary"></i> 
+                <h5 class="card-title">@ViewBag.TotalService</h5>
+                <p class="card-text">Service</p>
             </div>
+
         </div>
     </div>
 </div>
@@ -283,11 +285,7 @@
                         data: [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, null, null],
                         backgroundColor: 'rgba(75, 192, 192, 0.6)',
                     },
-                    {
-                        label: 'Children',
-                        data: [200, 100, 300, 400, 500, 600, 700, 800, 900, 1000, null, null],
-                        backgroundColor: 'rgba(255, 206, 86, 0.6)',
-                    },
+                    
                 ],
             },
             options: {

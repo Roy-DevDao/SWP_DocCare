@@ -31,7 +31,7 @@
             border-radius: 50%;
         }
 
-        .edit-btn {
+        .btn-info {
             background-color: #0D6EFD;
             color: white;
             padding: 5px 10px;
@@ -93,11 +93,14 @@
         a {
             text-decoration: none;
         }
+
+        .tailwindTotal{
+            background-color: #F8F9FA;
+        }
     </style>
 }
 
 @model IEnumerable<Admin.Models.Doctor>
-
 <div class="doctor-dashboard">
     <div class="header1 d-flex justify-content-between align-items-center mb-4">
         <div class="search-container d-flex">
@@ -112,8 +115,29 @@
             </button>
         </a>
     </div>
+    <form method="get" asp-action="ManageDoctor">
+        <div class="sort-options d-flex mb-4">
+            <select class="form-select me-2" name="gender" id="sortGender">
+                <option value="">All Genders</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <select class="form-select me-2" name="price" id="sortStatus">
+                <option value="">All Price</option>
+                <option value="100-200">100-200</option>
+                <option value="200-400">200-400</option>
+                <option value="400+">400+</option>
+            </select>
+            <select class="form-select me-2" name="sortID" id="sortID">
+                <option value="">Sort ID</option>
+                <option value="Increase">Increase</option>
+                <option value="Decrease">Decrease</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
 
-    <div class="sort-options d-flex mb-4">
+    @* <div class="sort-options d-flex mb-4">
         <select class="form-select me-2" id="sortGender">
             <option value="">All Genders</option>
             <option value="Male">Male</option>
@@ -121,15 +145,20 @@
         </select>
         <select class="form-select me-2" id="sortStatus">
             <option value="">All Price</option>
-            <option value="Full-time">?-?</option>
-            <option value="Part-time">?-?</option>
+            <option value="Full-time">100-200</option>
+            <option value="Part-time">200-400</option>
+            <option value="Part-time">400+</option>
+
         </select>
         <select class="form-select me-2" id="sortStatus">
             <option value="">Sort ID</option>
-            <option value="Full-time">Cao- thap</option>
-            <option value="Part-time">Thap-cao</option>
+            <option value="Full-time">Increase</option>
+            <option value="Part-time">Decrease</option>
         </select>
-    </div>
+    </div> *@
+
+</div>
+
 
     <table class="table table-striped">
         <thead>
@@ -178,45 +207,71 @@
                 </th>
             </tr>
         </thead>
-        <tbody id="doctor-list">
-            @foreach (var doctor in Model)
-            {
-                <tr>
-                    <td>@doctor.Did</td>
-                    <td>
-                        <img src="@doctor.DoctorImg" alt="Doctor Image" class="doctor-img" />
-                    </td>
-                    <td>@doctor.Name</td>
-                    <td>@doctor.Gender</td>
-                    <td>@doctor.Position</td>
-                    <td>@doctor.Price</td>
-                    <td>
-                        <a asp-controller="Home" asp-action="DoctorDetails" asp-route-id="@doctor.Did">
-                            <button class="btn btn-info">Details</button>
-                        </a>
-                        <a asp-controller="Home" asp-action="DeleteDoctor" asp-route-id="@doctor.Did">
-                            <button class="btn btn-danger">Delete</button>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <tbody>
+        @foreach (var doctor in Model)
+        {
+            <tr>
+                <td>@doctor.Did</td>
+                <td><img src="@doctor.DoctorImg" alt="Doctor Image" class="doctor-img" /></td>
+                <td>@doctor.Name</td>
+                <td>@doctor.Gender</td>
+                <td>@doctor.Position</td>
+                <td>@doctor.Price</td>
+                <td>
+                    <a asp-controller="Home" asp-action="DoctorDetails" asp-route-id="@doctor.Did">
+                        <button class="btn btn-info">Details</button>
+                    </a>
+                    <a asp-controller="Home" asp-action="DeleteDoctor" asp-route-id="@doctor.Did">
+                        <button class="btn btn-danger">Delete</button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                <a class="page-link" asp-action="Doctor" asp-route-page="@(ViewBag.CurrentPage - 1)">Previous</a>
-            </li>
-            @for (int i = 1; i <= ViewBag.TotalPages; i++)
-            {
-                <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
-                    <a class="page-link" asp-action="Doctor" asp-route-page="@i">@i</a>
-                </li>
-            }
-            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                <a class="page-link" asp-action="Doctor" asp-route-page="@(ViewBag.CurrentPage + 1)">Next</a>
-            </li>
-        </ul>
-    </nav>
+    </table>
+<!-- Tailwind CSS Pagination -->
+<div class="tailwindTotal flex items-center justify-between border-t border-gray-200 bg-[#F8F9FA] px-4 py-3 sm:px-6">
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+            <p class="text-sm text-gray-700">
+                Showing
+                <span class="font-medium">@((ViewBag.CurrentPage - 1) * 10 + 1)</span>
+                to
+                <span class="font-medium">@((ViewBag.CurrentPage) * 10)</span>
+                of
+                <span class="font-medium">@ViewBag.TotalDoctors</span>
+                results
+            </p>
+        </div>
+        <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                <!-- Previous Button -->
+                <a asp-action="Managedoctor" asp-route-page="@(ViewBag.CurrentPage - 1)" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <span class="sr-only">Previous</span>
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+
+                @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                {
+                    <a asp-action="Managedoctor" asp-route-page="@i"
+                       class="relative inline-flex items-center px-3 py-1 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == i ? "z-10 text-white" : "")"
+                       style="@(ViewBag.CurrentPage == i ? "background-color:#0D6EFD;" : "")">
+                        @i
+                    </a>
+                }
+
+
+                <!-- Next Button -->
+                <a asp-action="ManageDoctor" asp-route-page="@(ViewBag.CurrentPage + 1)" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                    <span class="sr-only">Next</span>
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </div>
 </div>

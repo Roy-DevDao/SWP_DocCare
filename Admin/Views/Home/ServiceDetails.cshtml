@@ -126,13 +126,13 @@
         }
     </style>
 }
-
+@model Admin.Models.Specialty
 <main class="layout-default_body_main">
     <div class="whole-main">
         <div class="profile-header">
             <div class="profile-info">
-                <h4>Id: 456</h4>
-                <h4>Service: General Checkup</h4>
+                <h4>Id: @Model.SpecialtyId</h4>
+                <h4>Service: @Model.SpecialtyName</h4>
             </div>
             <div class="divider"></div>
             <div class="profile-status">
