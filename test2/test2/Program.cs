@@ -51,6 +51,9 @@ namespace test2
             app.MapControllerRoute(
                name: "patient",
                pattern: "{controller=Patient}/{action=AppointmentHistory}/{id?}");
+            app.MapControllerRoute(
+              name: "admin",
+              pattern: "{controller=Admin}/{action=Index}/{id?}");
 
             app.Run();
         }

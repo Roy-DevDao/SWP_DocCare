@@ -15,18 +15,26 @@
             <div class="col-md-7">
                 <form action="appointmentmanage" method="POST">
                     <div class="justify-content-md-end row">
+                        <!-- Tìm kiếm bác sĩ -->
                         <div class="col-md-5 row align-items-center">
                             <div class="col-md-3">
-                                <label class="form-label">Doctor</label>
+                                <label class="form-label">Search Doctor</label>
                             </div>
                             <div class="col-md-9">
-                                <select name="doctor_id" class="form-select" aria-label="Default select example">
-                                    <option value="all">All</option>
-                                    <option value="1">Doctor A</option>
-                                    <option value="2">Doctor B</option>
-                                </select>
+                                <input type="text" name="search_doctor" class="form-control" placeholder="Enter doctor name" />
                             </div>
                         </div>
+                        <!-- Nút submit tìm kiếm -->
+                        <div class="col-md-1 md-0">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Form Lọc -->
+                <form action="appointmentmanage" method="POST" class="mt-4">
+                    <div class="justify-content-md-end row">
+                        <!-- Lọc theo trạng thái -->
                         <div class="col-md-5 row align-items-center">
                             <div class="col-md-4">
                                 <label class="form-label">Status</label>
@@ -41,11 +49,13 @@
                                 </select>
                             </div>
                         </div>
+                        <!-- Nút submit lọc -->
                         <div class="col-md-1 md-0">
                             <button type="submit" class="btn btn-primary">Filter</button>
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
 

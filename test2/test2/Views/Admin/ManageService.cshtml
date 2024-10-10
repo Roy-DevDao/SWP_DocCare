@@ -1,0 +1,269 @@
+﻿@{
+    Layout = "Layout_Admin";
+}
+@section Styles {
+    <style>
+        .sort-options {
+            width: 40%;
+        }
+
+        .doctor-dashboard {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .header1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .header1 .search-container {
+                display: flex;
+            }
+
+            .header1 input {
+                width: 200px;
+            }
+
+        .doctor-table img {
+            border-radius: 50%;
+        }
+
+        .edit-btn, .btn-info{
+            background-color: #0D6EFD;
+            color: white;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            position: relative;
+            right: 8px;
+        }
+
+        .table th {
+            text-align: justify; /* Center the text and icons */
+            vertical-align: middle;
+            padding: 10px;
+        }
+
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .icon-text i {
+                font-size: 16px;
+                margin-right: 5px;
+            }
+
+        .table td img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+        }
+
+        .table td, .table th {
+            padding: 10px;
+        }
+
+        button.btn {
+            margin-right: 5px; /* Khoảng cách giữa các nút */
+        }
+
+        a {
+            text-decoration: none; 
+        }
+
+        </style>
+}
+
+@model IEnumerable<test2.Data.Specialty>
+
+
+<div class="doctor-dashboard">
+    <div class="header1 d-flex justify-content-between align-items-center mb-4">
+        <div class="search-container d-flex">
+            <input type="text" placeholder="Search here..." class="form-control me-2">
+            <button class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <a asp-controller="Admin" asp-action="AddService">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Service
+            </button>
+        </a>
+    </div>
+
+    <div class="sort-options d-flex mb-4">
+        <select class="form-select me-2" id="sortType">
+            <option value="">All Types</option>
+            <option value="Type1">Type1</option>
+            <option value="Type2">Type2</option>
+        </select>
+        <select class="form-select me-2" id="sortPrice" onchange="sortByPrice()">
+            <option value="">All Prices</option>
+            <option value="Low">1-200</option>
+            <option value="Medium">200-400</option>
+            <option value="High">400-500</option>
+        </select>
+        @* <select class="form-select me-2" id="sortPrice">
+            <option value="">All Prices</option>
+            <option value="Low">1-200</option>
+            <option value="Medium">200-400</option>
+            <option value="High">400-500</option>
+
+        </select> *@
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-hashtag"></i> ID
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-image"></i> Image
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-user"></i> Name
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-tag"></i> Price
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-cogs"></i> Options
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="service-list">
+            @foreach (var service in Model)
+            {
+                <tr>
+                    <td>@service.SpecialtyId</td>
+                    <td>
+                        <img src="@service.SpecialtyImg" alt="Service Image" class="service-img" style="width: 60px; height: 60px;" />
+                    </td>
+                    <td>@service.SpecialtyName</td>
+                   
+                    <td>
+                        @{
+                            // Lấy giá của bác sĩ đầu tiên có liên kết với Specialty (nếu có)
+                            var doctor = service.Doctors.FirstOrDefault();
+                            var price = doctor?.Price ?? 0;  // Nếu doctor hoặc Price bị null, trả về 0
+                        }
+                        @price
+                    </td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="ServiceDetails" asp-route-id="@service.SpecialtyId">
+                            <button class="btn btn-info">Details</button>
+                        </a>
+                        <a asp-controller="Admin" asp-action="DeleteService" asp-route-id="@service.SpecialtyId">
+                            <button class="btn btn-danger">Delete</button>
+                        </a>
+                        <a asp-controller="Admin" asp-action="UpdateService" asp-route-id="@service.SpecialtyId">
+                            <button class="btn edit-btn">Edit</button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+    <!-- Tailwind CSS Pagination -->
+    <div class="tailwindTotal flex items-center justify-between border-t border-gray-200 bg-[#F8F9FA] px-4 py-3 sm:px-6">
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+            <div>
+                <p class="text-sm text-gray-700">
+                    Showing
+                    <span class="font-medium">@((ViewBag.CurrentPage - 1) * 10 + 1)</span>
+                    to
+                    <span class="font-medium">@((ViewBag.CurrentPage) * 10)</span>
+                    of
+                    <span class="font-medium">@ViewBag.totalService</span>
+                    results
+                </p>
+            </div>
+            <div>
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                    <!-- Previous Button -->
+                    <a asp-action="ManageService" asp-route-page="@(ViewBag.CurrentPage - 1)" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                        <span class="sr-only">Previous</span>
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </a>
+
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        <a asp-action="ManageService" asp-route-page="@i"
+                           class="relative inline-flex items-center px-3 py-1 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == i ? "z-10 text-white" : "")"
+                           style="@(ViewBag.CurrentPage == i ? "background-color:#0D6EFD;" : "")">
+                            @i
+                        </a>
+                    }
+
+
+                    <!-- Next Button -->
+                    <a asp-action="ManageService" asp-route-page="@(ViewBag.CurrentPage + 1)" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                        <span class="sr-only">Next</span>
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    </div>
+    @section Scripts {
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sortPriceSelect = document.getElementById('sortPrice');
+
+                sortPriceSelect.addEventListener('change', function () {
+                    const selectedValue = this.value;
+
+                    let url = '@Url.Action("ManageService", "Home")';
+
+                    if (selectedValue) {
+                        url += '?sortPrice=' + selectedValue; // Add sort option to URL
+                    }
+
+                    // Reload the page with the new URL
+                    window.location.href = url;
+                });
+            });
+        </script>
+    }

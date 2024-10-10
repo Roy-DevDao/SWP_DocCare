@@ -1,0 +1,340 @@
+﻿@{
+    Layout = "Layout_Admin";
+    ViewData["Title"] = "Home Page";
+}
+@section Styles {
+<style>
+
+
+    .card {
+        border-radius: 12px;
+        padding: 20px;
+    }
+
+    .card-body i {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .header-fixed {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .chart-container {
+        margin-top: 20px;
+    }
+
+    .chartTotal {
+        margin: 30px 0px;
+    }
+
+    .latest-appointment .badge,
+    .patient-reviews .badge {
+        border-radius: 50%;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .latest-appointment h6,
+    .patient-reviews h6 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .latest-appointment p,
+    .patient-reviews p {
+        font-size: 14px;
+        color: #6c757d;
+    }
+
+    .latest-appointment .badge.bg-success {
+        background-color: #28a745;
+    }
+
+    .latest-appointment .badge.bg-danger {
+        background-color: #dc3545;
+    }
+
+    .patient-reviews small {
+        display: block;
+        font-size: 12px;
+        color: #6c757d;
+    }
+
+    ul li {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+</style>
+}
+@model IEnumerable<test2.Data.Feedback>
+
+
+<!-- Stat Cards -->
+<div class="row mb-4">
+    <div class="col-md-2">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="fas fa-bed fa-2x mb-2 text-primary"></i>
+                <h5 class="card-title">@ViewBag.TotalPatients</h5>
+                <p class="card-text">Patients</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="fas fa-money-bill-wave fa-2x mb-2 text-primary"></i>
+                <h5 class="card-title">@ViewBag.AvgCost.ToString("F1") </h5>
+                <p class="card-text">Avg.costs</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="fas fa-users fa-2x mb-2 text-primary"></i>
+                <h5 class="card-title">@ViewBag.TotalDoctors</h5>
+                <p class="card-text">Doctor </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="fas fa-comment fa-2x mb-2 text-primary"></i> 
+                <h5 class="card-title">@ViewBag.TotalFeedback</h5>
+                <p class="card-text">Feedback</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="fas fa-calendar-alt fa-2x mb-2 text-primary"></i> 
+                <h5 class="card-title">@ViewBag.TotalAppointments</h5>
+                <p class="card-text">Appointment</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <i class="fas fa-briefcase-medical fa-2x mb-2 text-primary"></i> 
+                <h5 class="card-title">@ViewBag.TotalService</h5>
+                <p class="card-text">Service</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="row chartTotal ">
+    <!-- Bar Chart -->
+    <div class="col-md-8">
+        <canvas id="genderChart"></canvas>
+    </div>
+
+    <!-- Doughnut Chart -->
+    <div class="col-md-4">
+        <canvas id="departmentChart"></canvas>
+    </div>
+</div>
+<!-- Latest Appointment and Patient Reviews -->
+<div class="row">
+    <!-- Latest Appointment -->
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4 mb-4 latest-appointment">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6><i class="fas fa-calendar-alt mr-2"></i>Latest Appointments</h6>
+                <span>3 Patients</span>
+            </div>
+            <ul class="list-unstyled">
+                <li class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6>Calvin Carlo</h6>
+                        <p class="text-muted">Booking on 27th Nov, 2020</p>
+                    </div>
+                    <div>
+                        <span class="badge bg-success p-2"><i class="fas fa-check"></i></span>
+                    </div>
+                </li>
+                <li class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6>Joya Khan</h6>
+                        <p class="text-muted">Booking on 27th Nov, 2020</p>
+                    </div>
+                    <div>
+                        <span class="badge bg-danger p-2"><i class="fas fa-times"></i></span>
+                    </div>
+                </li>
+                <li class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6>Amelia Muli</h6>
+                        <p class="text-muted">Booking on 27th Nov, 2020</p>
+                    </div>
+                    <div>
+                        <span class="badge bg-success p-2"><i class="fas fa-check"></i></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Patient Reviews -->
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4 mb-4 patient-reviews">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6><i class="fas fa-user-md mr-2"></i>Patient Reviews</h6>
+                <span>Latest Feedback</span>
+            </div>
+
+            <!-- Feedback List -->
+            <ul id="feedbackList" class="list-unstyled">
+                @foreach (var feedback in Model)
+                {
+                    <li class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h6>@feedback.Name</h6>
+                            <p class="text-muted">"@feedback.Description"</p>
+                            <small class="text-muted">@feedback.DateCmt?.ToString("g")</small>
+                        </div>
+                        <span>@feedback.Star <i class="fas fa-star"></i></span>
+                    </li>
+                }
+            </ul>
+
+            <!-- See More Button -->
+            <div class="d-flex justify-content-center">
+                <button id="loadMoreBtn" class="btn btn-primary">See More</button>
+            </div>
+        </div>
+    </div>
+   @*  <div class="col-md-6">
+        <div class="card shadow-sm p-4 mb-4 patient-reviews">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h6><i class="fas fa-user-md mr-2"></i>Patient Reviews</h6>
+                <span>Latest Feedback</span>
+            </div>
+            <ul class="list-unstyled">
+                <li class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6>Sarah Lee</h6>
+                        <p class="text-muted">"Great service!"</p>
+                        <small class="text-muted">2 hours ago</small>
+                    </div>
+                    <span>Orthopedic</span>
+                </li>
+                <li class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6>John Doe</h6>
+                        <p class="text-muted">"Very professional."</p>
+                        <small class="text-muted">5 hours ago</small>
+                    </div>
+                    <span>Gynecology</span>
+                </li>
+                <li class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                        <h6>Emily Clark</h6>
+                        <p class="text-muted">"Satisfied with the service."</p>
+                        <small class="text-muted">1 day ago</small>
+                    </div>
+                    <span>Physiotherapy</span>
+                </li>
+            </ul>
+        </div>
+    </div> *@
+</div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Gender Bar Chart
+        const genderCtx = document.getElementById('genderChart').getContext('2d');
+        const genderChart = new Chart(genderCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [
+                    {
+                        label: 'Male',
+                        data: [400, 300, 600, 700, 800, 600, 700, 800, 900, 1000, null, null],
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    },
+                    {
+                        label: 'Female',
+                        data: [300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, null, null],
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    },
+                    
+                ],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    },
+                },
+            },
+        });
+
+        // Department Doughnut Chart
+        const departmentCtx = document.getElementById('departmentChart').getContext('2d');
+        const departmentChart = new Chart(departmentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['General', 'Pediatrics', 'Orthopedics', 'Cardiology', 'Dermatology'],
+                datasets: [{
+                    data: [50, 40, 30, 60, 69],
+                    backgroundColor: ['#36A2EB', '#FFCE56', '#FF6384', '#4BC0C0', '#9966FF'],
+                }],
+            },
+            options: {
+                responsive: true,
+            },
+        });
+    </script>
+
+    <script>
+        var skip = 3;  // Số lượng feedback đã tải ban đầu là 3
+        $('#loadMoreBtn').on('click', function () {
+            console.log('Button clicked!');  // Thêm dòng này để kiểm tra sự kiện clic
+
+            $.ajax({
+                url: '@Url.Action("LoadMoreFeedbacks", "Feedback")',  // Gọi hàm LoadMoreFeedbacks từ FeedbackController
+                type: 'POST',
+                data: { skip: skip },
+                success: function (result) {
+                    if (result.trim() != "") {
+                        $('#feedbackList').append(result); // Thêm feedback mới vào danh sách
+                        skip += 3;  // Tăng skip để lấy tiếp batch kế tiếp
+                    } else {
+                        $('#loadMoreBtn').hide();  // Ẩn nút khi không còn feedback nào
+                    }
+                }
+            });
+        });
+    </script>
+
+}
