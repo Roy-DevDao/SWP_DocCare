@@ -16,43 +16,81 @@ namespace test2.Controllers
             _logger = logger;
             dc = db;
         }
-
+//--------------------------------------------------------------------------------------------
         public IActionResult Index()
         {
             return View();
         }
+        //--------------------------------------------------------------------------------------------
 
-        public IActionResult DoctorList(int pageNumber = 1)
+        public IActionResult DoctorList(string gender = "all", string speciality = "all", string sort = "all", int pageNumber = 1)
         {
             int pageSize = 9;
 
             var specialties = dc.Specialties.ToList();
             ViewBag.Specialties = specialties;
 
-            var doctors = dc.Doctors
-                .Include(d => d.Specialty)
-                .Include(d => d.Feedbacks)
-                .Select(d => new DoctorViewModel
-                {
-                    DoctorId = d.Did,
-                    Name = d.Name,
-                    DoctorImg = d.DoctorImg,
-                    Specialty = d.Specialty.SpecialtyName,
-                    Price = d.Price ?? 0,
-                    Position = d.Position,
-                    NumberOfFeedbacks = d.Feedbacks.Count(),
-                    Rating = d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0
-                })
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            var doctors = dc.Doctors.Include(d => d.Specialty).Include(d => d.Feedbacks).AsQueryable();
 
-            var totalDoctors = dc.Doctors.Count();
+            // Lọc theo giới tính
+            if (gender != "all")
+            {
+                bool isMale = gender == "true";
+                doctors = doctors.Where(d => d.Gender == (isMale ? "Male" : "Female"));
+            }
+
+            // Lọc theo chuyên khoa
+            if (speciality != "all")
+            {
+                doctors = doctors.Where(d => d.SpecialtyId == speciality);
+            }
+
+            // Sắp xếp bác sĩ
+            switch (sort)
+            {
+                case "star":
+                    doctors = doctors.OrderByDescending(d => d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0);
+                    break;
+                case "fee":
+                    doctors = doctors.OrderBy(d => d.Price);
+                    break;
+                case "fee-":
+                    doctors = doctors.OrderByDescending(d => d.Price);
+                    break;
+                default:
+                    break;
+            }
+
+            // Phân trang và lấy danh sách bác sĩ
+            var doctorList = doctors.Select(d => new DoctorViewModel
+            {
+                DoctorId = d.Did,
+                Name = d.Name,
+                DoctorImg = d.DoctorImg,
+                Specialty = d.Specialty.SpecialtyName,
+                Price = d.Price ?? 0,
+                Position = d.Position,
+                NumberOfFeedbacks = d.Feedbacks.Count(),
+                Rating = d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0
+            })
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+            // Tính tổng số bác sĩ
+            var totalDoctors = doctors.Count();
             ViewBag.TotalPages = (int)Math.Ceiling(totalDoctors / (double)pageSize);
             ViewBag.PageNumber = pageNumber;
 
-            return View(doctors);
+            // Giữ lại các tham số lọc để truyền vào view
+            ViewBag.Gender = gender;
+            ViewBag.Speciality = speciality;
+            ViewBag.Sort = sort;
+
+            return View(doctorList);
         }
+
+        //--------------------------------------------------------------------------------------------
 
         public IActionResult DoctorDetail(string id)
         {
@@ -88,64 +126,140 @@ namespace test2.Controllers
             return View(viewModel);
         }
 
+        //--------------------------------------------------------------------------------------------
 
         public IActionResult Login()
             {
                 return View();
             }
+        //--------------------------------------------------------------------------------------------
 
-            public IActionResult SignUp()
+        public IActionResult SignUp()
             {
                 return View();
             }
+        //--------------------------------------------------------------------------------------------
 
-            public IActionResult Profile()
+        public IActionResult Profile()
             {
                 return View();
             }
+//--------------------------------------------------------------------------------------------
 
             public IActionResult ForgotPass()
             {
                 return View();
             }
+        //--------------------------------------------------------------------------------------------
 
-        public IActionResult ServiceList(int pageNumber = 1)
+        public IActionResult ServiceList(int pageNumber = 1, string search = "", string sort = "")
         {
-            int pageSize = 6; // Số lượng dịch vụ trên mỗi trang
+            int pageSize = 6;
 
-            // Lấy danh sách dịch vụ và tổng số dịch vụ
-            var services = dc.Specialties.ToList();
+            // Lấy danh sách dịch vụ
+            var services = dc.Specialties.AsQueryable();
+
+            // Thực hiện tìm kiếm nếu có
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                services = services.Where(s => s.SpecialtyName.Contains(search));
+            }
+
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                switch (sort)
+                {
+                    case "1":
+                        services = services.OrderBy(s => s.SpecialtyName); 
+                        break;
+                    case "2":
+                        services = services.OrderByDescending(s => s.SpecialtyName); 
+                        break;
+                }
+            }
+
             var totalServices = services.Count();
 
-            // Lấy dịch vụ theo phân trang
             var pagedServices = services
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
-            // Thiết lập ViewBag cho tổng số trang và trang hiện tại
             ViewBag.TotalPages = (int)Math.Ceiling(totalServices / (double)pageSize);
             ViewBag.PageNumber = pageNumber;
+            ViewBag.Search = search; 
+            ViewBag.Sort = sort; 
 
-            return View(pagedServices); // Trả về View với danh sách dịch vụ đã phân trang
+            return View(pagedServices);
         }
 
 
-        public IActionResult ServiceDetail()
+
+        //--------------------------------------------------------------------------------------------
+
+        public IActionResult ServiceDetail(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("ServiceList");
+            }
+
+            var service = dc.Specialties
+                .Include(s => s.Doctors) 
+                .FirstOrDefault(s => s.SpecialtyId == id);
+
+            if (service == null)
+            {
+                return NotFound();
+            }
+
+            var feedbacks = dc.Feedbacks
+            .AsEnumerable() 
+        .Where(f => service.Doctors.Any(d => d.Did == f.Did))
+        .ToList();
+
+
+            double averageRating = feedbacks.Any() ? feedbacks.Average(f => f.Star ?? 0) : 0;
+            int totalReviews = feedbacks.Count();
+
+            var viewModel = new ServiceViewModel
+            {
+                SpecialtyId = service.SpecialtyId,
+                SpecialtyName = service.SpecialtyName,
+                SpecialtyImg = service.SpecialtyImg,
+                ShortDescription = service.ShortDescription,
+                LongDescription = service.LongDescription,
+                Price = 500000, 
+                Doctors = service.Doctors.ToList(), 
+                Feedbacks = feedbacks,
+                AverageRating = averageRating,
+                TotalReviews = totalReviews
+            };
+
+            return View(viewModel);
+        }
+
+        //--------------------------------------------------------------------------------------------
+
+
+
+        public IActionResult Contact()
             {
                 return View();
             }
-
-            public IActionResult Contact()
-            {
-                return View();
-            }
+        //--------------------------------------------------------------------------------------------
 
 
-            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
             public IActionResult Error()
             {
                 return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
+
+        public string GetSelected(string currentValue, string compareValue)
+        {
+            return currentValue == compareValue ? "selected" : "";
         }
+
     }
+}

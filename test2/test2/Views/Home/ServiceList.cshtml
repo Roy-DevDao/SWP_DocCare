@@ -27,9 +27,10 @@
 <div class="row" style="margin-top: 50px;margin-left: 50px;">
     <div class="col-md-4">
         <div class="search-bar p-0 d-lg-block">
-            <form action="#" method="POST" id="searchform" class="searchform">
+            <form action="@Url.Action("ServiceList")" method="GET" id="searchform" class="searchform">
                 <div class="input-group">
-                    <input type="text" class="form-control border rounded-pill" name="search" id="s" placeholder="Search service name...">
+                    <input type="text" class="form-control border rounded-pill" name="search" id="s" placeholder="Search service name..." value="@Context.Request.Query["search"]">
+                    <input type="hidden" name="sort" value="@Context.Request.Query["sort"]" /> <!-- Giữ giá trị sort -->
                     <button class="btn btn-primary" type="submit" id="searchsubmit">Search</button>
                 </div>
             </form>
@@ -37,16 +38,15 @@
     </div>
 
     <div class="col-md-6">
-        <form action="#" method="POST">
+        <form action="@Url.Action("ServiceList")" method="GET"> <!-- Chuyển sang phương thức GET -->
             <div class="row justify-content-end">
                 <div class="col-md-5 row align-items-center">
                     <label class="col-md-4 form-label">Sort</label>
                     <div class="col-md-8">
-                        <select name="Speciality" class="form-select">
-                            <option value="1">All Specialities</option>
-                            <option value="2">Cardiology</option>
-                            <option value="3">Dermatology</option>
-                            <option value="4">Neurology</option>
+                        <select name="sort" class="form-select" onchange="this.form.submit()"> <!-- Tự động gửi form khi chọn -->
+                            <option value="">Select Sort</option>
+                            <option value="1" >A - Z</option>
+                            <option value="2">Z - A</option>
                         </select>
                     </div>
                 </div>
@@ -57,6 +57,7 @@
         </form>
     </div>
 </div>
+
 
 <section class="section">
     <div class="container">
@@ -198,5 +199,10 @@
         margin-left: -95px;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+
+    .text-light {
+        --bs-text-opacity: 1;
+        color: rgb(28 29 30) !important;
     }
 </style>

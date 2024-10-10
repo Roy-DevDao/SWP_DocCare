@@ -64,7 +64,7 @@
             <div class="col-lg-3 mt-3 pt-2">
                 <div class="card border-0 sidebar sticky-bar rounded shadow">
                     <div class="card-body">
-                        <form action="doctor?action=filter" method="POST">
+                        <form action="@Url.Action("DoctorList")" method="GET">
                             <div class="widget mb-4 pb-2">
                                 <h5 class="widget-title">Filter</h5>
                                 <div class="row align-items-center">
@@ -73,6 +73,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <select name="gender" class="form-select">
+                                            <option value="all">--------------</option>
                                             <option value="all">All</option>
                                             <option value="true">Male</option>
                                             <option value="false">Female</option>
@@ -86,6 +87,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <select name="speciality" class="form-select">
+                                            <option value="all">--------------</option>
                                             <option value="all">All</option>
                                             @foreach (var specialty in ViewBag.Specialties)
                                             {
@@ -97,23 +99,25 @@
                                 <br>
                                 <button type="submit" class="btn btn-primary">Filter</button>
                             </div>
-                        </form>
 
-                        <div class="widget mb-4 pb-2">
-                            <h5 class="widget-title">Sort</h5>
-                            <div class="row align-items-center">
-                                <div class="col-md-12">
-                                    <select name="sort" onchange="Sort(this.value)" class="form-select">
-                                        <option value="all">All</option>
-                                        <option value="star">Star</option>
-                                        <option value="latest">Latest</option>
-                                        <option value="popular">Popular</option>
-                                        <option value="fee-">Descending Price</option>
-                                        <option value="fee">Ascending Price</option>
-                                    </select>
+                            <div class="widget mb-4 pb-2">
+                                <h5 class="widget-title">Sort</h5>
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <select name="sort" onchange="this.form.submit()" class="form-select">
+                                            <option value="all">--------------</option>
+                                            <option value="all">All</option>
+                                            <option value="star">Star</option>
+                                            <option value="fee-">Descending Price</option>
+                                            <option value="fee">Ascending Price</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                        </form>
+
+                        
                     </div>
                 </div>
             </div>
@@ -122,49 +126,54 @@
             <div class="col-12 mt-4">
                 <div class="d-md-flex align-items-center text-center justify-content-between">
                     <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                        <!-- Mũi tên trang trước -->
-                        @if (ViewBag.PageNumber > 1)
+    @if (ViewBag.PageNumber > 1)
+    {
+        <li class="page-item">
+            <a class="page-link" asp-action="DoctorList"
+               asp-route-gender="@ViewBag.Gender"
+               asp-route-speciality="@ViewBag.Speciality"
+               asp-route-sort="@ViewBag.Sort"
+               asp-route-pageNumber="@(ViewBag.PageNumber - 1)"
+               aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+    }
 
-                        {
-                            <li class="page-item">
-                                <a class="page-link" asp-action="DoctorList" asp-route-pageNumber="@(ViewBag.PageNumber - 1)" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span> <!-- Mũi tên trái -->
-                                </a>
-                            </li>
-                        }
+    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+    {
+        if (i <= 4 || i == ViewBag.TotalPages || (i == ViewBag.PageNumber - 1) || (i == ViewBag.PageNumber + 1))
+        {
+            <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                <a class="page-link" asp-action="DoctorList"
+                   asp-route-gender="@ViewBag.Gender"
+                   asp-route-speciality="@ViewBag.Speciality"
+                   asp-route-sort="@ViewBag.Sort"
+                   asp-route-pageNumber="@i">
+                    @i
+                </a>
+            </li>
+        }
+        else if (i == 5 && ViewBag.PageNumber > 5)
+        {
+            <li class="page-item disabled"><span class="page-link">...</span></li>
+        }
+    }
 
-                        <!-- Các trang số -->
-                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-
-                        {
-
-                            if (i <= 4 || i == ViewBag.TotalPages || (i == ViewBag.PageNumber - 1) || (i == ViewBag.PageNumber + 1))
-
-                            {
-                                <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
-                                    <a class="page-link @(ViewBag.PageNumber == i ? "current-page" : "")" asp-action="DoctorList" asp-route-pageNumber="@i">@i</a>
-                                </li>
-                            }
-
-                            else if (i == 5 && ViewBag.PageNumber > 5)
-
-                            {
-                                <li class="page-item disabled"><span class="page-link">...</span></li>
-                            }
-
-                        }
-
-                        <!-- Mũi tên trang sau -->
-                        @if (ViewBag.PageNumber < ViewBag.TotalPages)
-
-                        {
-                            <li class="page-item">
-                                <a class="page-link" asp-action="DoctorList" asp-route-pageNumber="@(ViewBag.PageNumber + 1)" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span> <!-- Mũi tên phải -->
-                                </a>
-                            </li>
-                        }
-                    </ul>
+    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+    {
+        <li class="page-item">
+            <a class="page-link" asp-action="DoctorList"
+               asp-route-gender="@ViewBag.Gender"
+               asp-route-speciality="@ViewBag.Speciality"
+               asp-route-sort="@ViewBag.Sort"
+               asp-route-pageNumber="@(ViewBag.PageNumber + 1)"
+               aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    }
+</ul>
                 </div>
             </div>
         </div>
