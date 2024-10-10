@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\staff\\contactlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\contactlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\home\\servicelist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\servicelist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\home\\servicedetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\servicedetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\home\\doctorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\doctorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ContactList.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Staff\\ContactList.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Staff\\ContactList.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Staff\\ContactList.cshtml",
-              "RelativeToolTip": "test2\\Views\\Staff\\ContactList.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAD4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "DoctorList.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Home\\DoctorList.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\DoctorList.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Home\\DoctorList.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\DoctorList.cshtml",
+              "ViewState": "AgIAAKkAAAAAAAAAAAAqwLQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-08T17:24:30.051Z",
+              "WhenOpened": "2024-10-10T10:44:20.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ServiceDetail.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Home\\ServiceDetail.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\ServiceDetail.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Home\\ServiceDetail.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\ServiceDetail.cshtml",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-10T10:41:32.877Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ServiceList.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Home\\ServiceList.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\ServiceList.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Home\\ServiceList.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\ServiceList.cshtml",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAcwJMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-10T10:41:32.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "test2\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAG0AAAAAAAAAAAAUwIMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-10T09:12:50.211Z",
               "EditorCaption": ""
             }
           ]

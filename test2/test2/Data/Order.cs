@@ -17,6 +17,8 @@ public partial class Order
 
     public string? Symptom { get; set; }
 
+    public virtual ICollection<HealthRecord> HealthRecords { get; set; } = new List<HealthRecord>();
+
     public virtual Option? Option { get; set; }
 
     public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();

@@ -5,7 +5,7 @@ namespace test2.Data;
 
 public partial class Doctor
 {
-    public string Did { get; set; } = null!;
+    public string Did { get; set; } = null!;        
 
     public string? Name { get; set; }
 

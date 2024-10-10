@@ -11,7 +11,9 @@ public partial class Schedule
 
     public DateOnly? DateWork { get; set; }
 
-    public TimeOnly? TimeWork { get; set; }
+    public TimeOnly? TimeStart { get; set; }
+
+    public TimeOnly? TimeEnd { get; set; }
 
     public string? Status { get; set; }
 

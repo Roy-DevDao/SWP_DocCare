@@ -6,7 +6,7 @@ USE DocCare;
 GO
 
 CREATE TABLE Contact (
-    ContactId NVARCHAR(50) PRIMARY KEY,
+    ContactId NVARCHAR(50) PRIMARY KEY,    -- checked
     Name NVARCHAR(255),
     Email NVARCHAR(255),
     Title NVARCHAR(255),
@@ -14,7 +14,7 @@ CREATE TABLE Contact (
     Status NVARCHAR(50)
 );
 -- Account table
-CREATE TABLE Account (
+CREATE TABLE Account (                  -- checked
     Id NVARCHAR(255) PRIMARY KEY,
     Username NVARCHAR(255),
     Password NVARCHAR(255),
@@ -24,7 +24,7 @@ CREATE TABLE Account (
 );
 
 -- Patient table - Using Id from Account
-CREATE TABLE Patient (
+CREATE TABLE Patient (   -- checked
     PId NVARCHAR(255) PRIMARY KEY,
     Name NVARCHAR(255),
 	PatientImg NVARCHAR(255),
@@ -35,10 +35,12 @@ CREATE TABLE Patient (
 );
 
 -- Specialty table
-CREATE TABLE Specialty (
+CREATE TABLE Specialty (   
     SpecialtyId NVARCHAR(255) PRIMARY KEY,
     SpecialtyName NVARCHAR(255),
     SpecialtyImg NVARCHAR(255),
+	ShortDescription Nvarchar(255),
+	LongDescription Nvarchar(1000)
 );
 
 -- Doctor table - Using Id from Account
@@ -84,12 +86,14 @@ CREATE TABLE HealthRecord (
     RecordId NVARCHAR(255) PRIMARY KEY,
     PId NVARCHAR(255),
     DId NVARCHAR(255),
+	OId NVARCHAR(255),
     Diagnosis NVARCHAR(MAX),
     Description NVARCHAR(MAX),
     Note NVARCHAR(MAX),
     DateExam DATETIME,
     FOREIGN KEY (PId) REFERENCES Patient(PId),
-    FOREIGN KEY (DId) REFERENCES Doctor(DId)
+    FOREIGN KEY (DId) REFERENCES Doctor(DId),
+	FOREIGN KEY (OId) REFERENCES [Order](OId)
 );
 
 -- Schedule table
@@ -97,7 +101,8 @@ CREATE TABLE Schedule (
     ScheduleId NVARCHAR(255) PRIMARY KEY,
     DId NVARCHAR(255),
     DateWork DATE,
-    TimeWork TIME,
+    TimeStart TIME,
+	TimeEnd Time,
     Status NVARCHAR(255),
     FOREIGN KEY (DId) REFERENCES Doctor(DId)
 );
@@ -124,11 +129,11 @@ CREATE TABLE [Order] (
 
 -- Payment table (updated)
 CREATE TABLE Payment (
-    PayId NVARCHAR(255) PRIMARY KEY,     -- Mã định danh của thanh toán
-    OId NVARCHAR(255),                   -- Mã định danh của đơn hàng (khóa ngoại)
-    Method NVARCHAR(255),                -- Phương thức thanh toán
-    PayImg NVARCHAR(255),                -- Hình ảnh chứng minh thanh toán
-    DatePay DATETIME,                    -- Ngày thanh toán
-    FOREIGN KEY (OId) REFERENCES [Order](OId)  -- Khóa ngoại tham chiếu tới bảng Order
+    PayId NVARCHAR(255) PRIMARY KEY,    
+    OId NVARCHAR(255),                  
+    Method NVARCHAR(255),               
+    PayImg NVARCHAR(255),              
+    DatePay DATETIME,                 
+    FOREIGN KEY (OId) REFERENCES [Order](OId)
 );
 

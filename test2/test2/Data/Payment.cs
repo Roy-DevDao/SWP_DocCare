@@ -5,7 +5,7 @@ namespace test2.Data;
 
 public partial class Payment
 {
-    public string PayId { get; set; } = null!;
+    public string PayId { get; set; } = null!;  
 
     public string? Oid { get; set; }
 

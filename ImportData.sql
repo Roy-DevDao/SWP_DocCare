@@ -2,7 +2,7 @@ USE DocCare;
 GO
 
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a1', 'admin', 'admin', 'admin@example.com', 2, 1);
+VALUES ('a1', 'admin', 'admin', 'baoptde180439@fpt.edu.vn', 0, 1);
 
 -- Insert doctor account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
@@ -1484,7 +1484,7 @@ VALUES ('a370', 'doctor370', 'password123', 'doctor370@example.com', 2, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a371', 'patient1', 'password123', 'patient1@example.com', 1, 1);
+VALUES ('a371', 'patient1', 'password123', 'baook43210@gmail.com', 3, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
@@ -2296,51 +2296,98 @@ VALUES ('a573', 'patient203', 'password123', 'patient203@example.com', 1, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a574', 'patient204', 'password123', 'patient204@example.com', 1, 1);
+VALUES ('a574', 'patient204', 'password123', 'patient204@example.com', 3, 1);
+INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
+VALUES ('a575', 'staff1', 'password123', 'baook01234@gamil.com', 1, 1);
 
 -- Import specialty data
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s1', N'Cơ Xương Khớp', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-co-xuong-khop.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s10', N'Siêu âm thai', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-sieu-am-thai.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s105', N'Niềng răng', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nieng-rang.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s106', N'Bọc răng sứ', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-boc-rang-su.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s107', N'Trồng răng implant', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-trong-rang.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s108', N'Nhổ răng khôn', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nho-rang-khon.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s109', N'Nha khoa tổng quát', 'https://cdn.bookingcare.vn/fo/2023/12/26/104709-nha-khoa-tong-quat.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s11', N'Da liễu', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-da-lieu.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s110', N'Nha khoa trẻ em', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nha-khoa-tre-em.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s116', N'Tuyến giáp', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-tuyen-giap.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s15', N'Ung bướu', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-ung-buou.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s17', N'Nội khoa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-noi-khoa.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s18', N'Thần kinh', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-than-kinh.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s19', N'Sản Phụ khoa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-san-phu-khoa.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s21', N'Tiểu đường - Nội tiết', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tieu-duong.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s22', N'Tiêu hoá', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tieu-hoa.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s24', N'Cột sống', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cot-song.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s26', N'Nam học', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nam-hoc.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s27', N'Sức khỏe tâm thần', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-suc-khoe-tam-than.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s28', N'Bệnh Viêm gan', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-viem-gan.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s29', N'Chuyên khoa Mắt', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-mat.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s3', N'Tim mạch', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tim-mach.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s30', N'Phục hồi chức năng', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-phuc-hoi-chuc-nang.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s32', N'Thận - Tiết niệu', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-than-tiet-nieu.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s33', 'Nha khoa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nha-khoa.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s36', N'Dị ứng miễn dịch', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-di-ung-mien-dich.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s39', N'Y học Cổ truyền', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-y-hoc-co-truyen.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s4', N'Tai Mũi Họng', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tai-mui-hong.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s40', N'Châm cứu', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cham-cuu.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s41', N'Bác sĩ gia đình', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-bac-si-gia-dinh.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s42', N'Tạo hình Hàm Mặt', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tao-hinh-ham-mat.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s43', N'Hô hấp - Phổi', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-ho-hap-phoi.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s5', 'Nhi khoa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nhi-khoa.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s66', N'Tư vấn, trị liệu Tâm lý', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-tu-van-tam-ly.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s67', N'Vô sinh - Hiếm muộn', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-vo-sinh-hiem-muon.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s7', N'Chụp Cộng hưởng từ', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cong-huong-tu.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s71', N'Ngoại thần kinh', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-ngoai-than-kinh.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s72', N'Da liễu thẩm mỹ', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-da-lieu-tham-my.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s73', N'Chấn thương chỉnh hình', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-chan-thuong-chinh-hinh.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s74', N'Truyền nhiễm', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-truyen-nhiem.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s8', N'Chụp cắt lớp vi tính', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-chup-cat-lop.png');
-INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg) VALUES ('s9', N'Nội soi Tiêu hóa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-noi-soi-tieu-hoa.png');
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s1', N'Orthopedics', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-co-xuong-khop.png', N'Specialized in bone and joint treatment.', N'Orthopedics specializes in diagnosing, treating, and preventing disorders related to bones, joints, muscles, and ligaments.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s10', N'Fetal Ultrasound', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-sieu-am-thai.png', N'Specialized in ultrasound imaging of fetuses.', N'This service offers high-quality fetal ultrasound imaging, aiding in the health assessment and development of the unborn child.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s105', N'Teeth Braces', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nieng-rang.png', N'Specialized in dental braces for teeth alignment.', N'This service provides orthodontic treatment to help patients straighten their teeth using braces.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s106', N'Dental Crowns', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-boc-rang-su.png', N'Specialized in ceramic dental crowns.', N'This specialty focuses on improving dental aesthetics and function through dental crown procedures.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s107', N'Dental Implants', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-trong-rang.png', N'Specialized in dental implants.', N'This service offers dental implants to replace missing teeth, providing both aesthetic and functional improvements.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s108', N'Wisdom Tooth Extraction', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nho-rang-khon.png', N'Specialized in removing wisdom teeth.', N'This service offers wisdom tooth extraction to prevent future dental issues and relieve discomfort.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s109', N'General Dentistry', 'https://cdn.bookingcare.vn/fo/2023/12/26/104709-nha-khoa-tong-quat.png', N'Comprehensive dental care services.', N'General dentistry covers preventive and routine dental care to maintain optimal oral health.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s11', N'Dermatology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-da-lieu.png', N'Specialized in skin care and treatment.', N'This specialty focuses on diagnosing and treating skin, hair, and nail disorders.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s110', N'Pediatric Dentistry', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nha-khoa-tre-em.png', N'Specialized in dental care for children.', N'This specialty offers comprehensive dental care for children, including preventive and corrective treatments.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s116', N'Thyroid', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-tuyen-giap.png', N'Specialized in thyroid health and diseases.', N'This service focuses on diagnosing and treating thyroid-related conditions such as hyperthyroidism and hypothyroidism.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s15', N'Oncology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-ung-buou.png', N'Specialized in cancer treatment.', N'Oncology involves the diagnosis, treatment, and prevention of various types of cancers.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s17', N'Internal Medicine', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-noi-khoa.png', N'Specialized in internal medical treatments.', N'This specialty deals with the prevention, diagnosis, and treatment of adult diseases.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s18', N'Neurology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-than-kinh.png', N'Specialized in treating neurological disorders.', N'Neurology focuses on diagnosing and treating disorders related to the nervous system.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s19', N'Obstetrics and Gynecology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-san-phu-khoa.png', N'Specialized in women’s reproductive health.', N'This specialty provides services related to pregnancy, childbirth, and women’s reproductive health.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s21', N'Diabetes - Endocrinology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tieu-duong.png', N'Specialized in diabetes and hormonal disorders.', N'This service focuses on treating diabetes and disorders of the endocrine system, such as thyroid and adrenal problems.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s22', N'Gastroenterology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tieu-hoa.png', N'Specialized in digestive system treatment.', N'Gastroenterology focuses on diagnosing and treating conditions related to the digestive system, including the stomach and intestines.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s24', N'Spine', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cot-song.png', N'Specialized in spine care.', N'This specialty offers treatment for spine-related conditions, including injuries and chronic issues such as scoliosis.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s26', N'Andrology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nam-hoc.png', N'Specialized in male reproductive health.', N'Andrology focuses on the diagnosis and treatment of male reproductive and urological issues.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s27', N'Mental Health', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-suc-khoe-tam-than.png', N'Specialized in mental health care.', N'This specialty focuses on diagnosing and treating mental health disorders, including depression, anxiety, and schizophrenia.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s28', N'Hepatology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-viem-gan.png', N'Specialized in liver diseases.', N'This service specializes in diagnosing and treating liver diseases, including hepatitis and cirrhosis.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s29', N'Ophthalmology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-mat.png', N'Specialized in eye care and vision.', N'Ophthalmology focuses on diagnosing and treating eye conditions and improving vision through corrective procedures.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s3', N'Cardiology', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tim-mach.png', N'Specialized in heart and cardiovascular treatment.', N'Cardiology deals with the diagnosis and treatment of heart conditions and diseases affecting the cardiovascular system.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s30', N'Rehabilitation', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-phuc-hoi-chuc-nang.png', N'Specialized in rehabilitation and recovery.', N'This service provides physical and occupational therapy to help patients recover from injuries, surgeries, or chronic conditions.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s33', N'Otolaryngology (ENT)', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tai-mui-hong.png', N'Specialized in ear, nose, and throat treatment.', N'Otolaryngology deals with diagnosing and treating disorders of the ear, nose, and throat, including issues related to hearing and breathing.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s4', N'Pediatrics', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-nhi-khoa.png', N'Specialized in child health care.', N'Pediatrics focuses on providing medical care to infants, children, and adolescents, covering preventive, diagnostic, and treatment services.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s5', N'Reproductive Health', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-vo-sinh-hiem-muon.png', N'Specialized in infertility and reproductive health.', N'This specialty offers diagnostic and treatment services for infertility and reproductive health issues in both men and women.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s6', N'Diagnostic Imaging', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-chan-doan-hinh-anh.png', N'Specialized in diagnostic imaging services.', N'This service provides a variety of diagnostic imaging technologies such as X-rays, MRIs, and CT scans to help in the diagnosis of various conditions.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s7', N'Nutrition', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-dinh-duong.png', N'Specialized in nutrition and dietetics.', N'This specialty focuses on nutritional counseling and treatment for patients seeking to improve their health through diet.');
+
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription, LongDescription) 
+VALUES ('s9', N'Physiotherapy', 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-vat-ly-tri-lieu.png', N'Specialized in physical therapy and rehabilitation.', N'Physiotherapy offers treatment for patients suffering from physical impairments or disabilities, helping them regain movement and function.');
+
 
 
 
@@ -6138,30 +6185,41 @@ INSERT INTO [Option] (OptionId, DId, DateExam) VALUES
 ('opt10', 'a10', '2024-10-04 09:15:00');
 
 -- import HealthRecord data
-INSERT INTO HealthRecord (RecordId, DId, PId, Diagnosis, Description, Note, DateExam) VALUES
-('hr1', 'a1', 'a371', N'Tăng huyết áp', N'Huyết áp thường xuyên trên 140/90 mmHg', N'Đề xuất thay đổi lối sống và dùng thuốc', '2024-09-25 10:00:00'),
-('hr2', 'a2', 'a372', N'Cảm lạnh thông thường', N'Triệu chứng bao gồm sổ mũi, đau họng và ho', N'Khuyên nghỉ ngơi và dùng thuốc không kê đơn', '2024-09-26 11:30:00'),
-('hr3', 'a3', 'a373', N'Tiểu đường type 2', N'Mức đường huyết lúc đói từ 126 mg/dL trở lên', N'Bắt đầu điều trị bằng metformin và thay đổi chế độ ăn', '2024-09-27 12:45:00'),
-('hr4', 'a4', 'a374', N'Đau nửa đầu', N'Đau đầu tái phát kèm nhạy cảm với ánh sáng và âm thanh', N'Kê đơn sumatriptan cho các cơn cấp tính', '2024-09-28 15:15:00'),
-('hr5', 'a5', 'a375', N'Bệnh trào ngược dạ dày thực quản (GERD)', N'Ợ nóng và trào ngược thường xuyên', N'Đề xuất thuốc ức chế bơm proton và điều chỉnh chế độ ăn', '2024-09-29 17:00:00'),
-('hr6', 'a6', 'a376', N'Hen suyễn', N'Thở khò khè và khó thở, đặc biệt khi tập thể dục', N'Kê đơn corticosteroid dạng hít và thuốc cắt cơn', '2024-09-30 10:30:00'),
-('hr7', 'a7', 'a377', N'Viêm xương khớp', N'Đau và cứng khớp ở đầu gối', N'Đề xuất vật lý trị liệu và quản lý cơn đau', '2024-10-01 12:00:00'),
-('hr8', 'a8', 'a378', N'Rối loạn lo âu', N'Lo lắng quá mức và bồn chồn ảnh hưởng đến cuộc sống hàng ngày', N'Bắt đầu liệu pháp nhận thức hành vi và xem xét dùng thuốc', '2024-10-02 14:45:00'),
-('hr9', 'a9', 'a379', N'Nhiễm trùng đường tiết niệu', N'Tiểu nhiều lần, cảm giác bỏng rát', N'Kê đơn kháng sinh trong 7 ngày', '2024-10-03 16:30:00'),
-('hr10', 'a10', 'a380', N'Cường giáp', N'Nồng độ hormone tuyến giáp tăng cao, sụt cân và tim đập nhanh', N'Bắt đầu điều trị bằng thuốc kháng giáp', '2024-10-04 11:15:00');
+INSERT INTO HealthRecord (RecordId, DId, PId, OId, Diagnosis, Description, Note, DateExam) VALUES
+('hr1', 'a1', 'a371', 'ord1', N'Tăng huyết áp', N'Huyết áp thường xuyên trên 140/90 mmHg', N'Đề xuất thay đổi lối sống và dùng thuốc', '2024-09-25 10:00:00'),
+('hr2', 'a2', 'a372', 'ord2', N'Cảm lạnh thông thường', N'Triệu chứng bao gồm sổ mũi, đau họng và ho', N'Khuyên nghỉ ngơi và dùng thuốc không kê đơn', '2024-09-26 11:30:00'),
+('hr3', 'a3', 'a373', 'ord3', N'Tiểu đường type 2', N'Mức đường huyết lúc đói từ 126 mg/dL trở lên', N'Bắt đầu điều trị bằng metformin và thay đổi chế độ ăn', '2024-09-27 12:45:00'),
+('hr4', 'a4', 'a374', 'ord4', N'Đau nửa đầu', N'Đau đầu tái phát kèm nhạy cảm với ánh sáng và âm thanh', N'Kê đơn sumatriptan cho các cơn cấp tính', '2024-09-28 15:15:00'),
+('hr5', 'a5', 'a375', 'ord5', N'Bệnh trào ngược dạ dày thực quản (GERD)', N'Ợ nóng và trào ngược thường xuyên', N'Đề xuất thuốc ức chế bơm proton và điều chỉnh chế độ ăn', '2024-09-29 17:00:00'),
+('hr6', 'a6', 'a376', 'ord6', N'Hen suyễn', N'Thở khò khè và khó thở, đặc biệt khi tập thể dục', N'Kê đơn corticosteroid dạng hít và thuốc cắt cơn', '2024-09-30 10:30:00'),
+('hr7', 'a7', 'a377', 'ord7', N'Viêm xương khớp', N'Đau và cứng khớp ở đầu gối', N'Đề xuất vật lý trị liệu và quản lý cơn đau', '2024-10-01 12:00:00'),
+('hr8', 'a8', 'a378', 'ord8', N'Rối loạn lo âu', N'Lo lắng quá mức và bồn chồn ảnh hưởng đến cuộc sống hàng ngày', N'Bắt đầu liệu pháp nhận thức hành vi và xem xét dùng thuốc', '2024-10-02 14:45:00'),
+('hr9', 'a9', 'a379', 'ord9', N'Nhiễm trùng đường tiết niệu', N'Tiểu nhiều lần, cảm giác bỏng rát', N'Kê đơn kháng sinh trong 7 ngày', '2024-10-03 16:30:00'),
+('hr10', 'a10', 'a380', 'ord10', N'Cường giáp', N'Nồng độ hormone tuyến giáp tăng cao, sụt cân và tim đập nhanh', N'Bắt đầu điều trị bằng thuốc kháng giáp', '2024-10-04 11:15:00');
 
 
-INSERT INTO Schedule (ScheduleId, DId, DateWork, TimeWork, Status) VALUES
-('sch1', 'a1', '2024-09-25', '09:00:00', 'Confirmed'),
-('sch2', 'a2', '2024-09-26', '10:00:00', 'Pending'),
-('sch3', 'a3', '2024-09-27', '11:00:00', 'Confirmed'),
-('sch4', 'a4', '2024-09-28', '12:00:00', 'Canceled'),
-('sch5', 'a5', '2024-09-29', '13:00:00', 'Confirmed'),
-('sch6', 'a6', '2024-09-30', '14:00:00', 'Pending'),
-('sch7', 'a7', '2024-10-01', '15:00:00', 'Confirmed'),
-('sch8', 'a8', '2024-10-02', '16:00:00', 'Pending'),
-('sch9', 'a9', '2024-10-03', '17:00:00', 'Canceled'),
-('sch10', 'a10', '2024-10-04', '18:00:00', 'Confirmed');
+INSERT INTO Schedule (ScheduleId, DId, DateWork, TimeStart, TimeEnd, Status) VALUES
+('sch1', 'a1', '2024-09-25', '06:00:00', '07:00:00', 'Confirmed'),
+('sch2', 'a1', '2024-09-25', '08:00:00', '09:00:00', 'Available'),
+('sch3', 'a1', '2024-09-25', '10:00:00', '11:00:00', 'Pending'),
+('sch4', 'a2', '2024-09-26', '09:00:00', '10:00:00', 'Available'),
+('sch5', 'a2', '2024-09-26', '11:00:00', '12:00:00', 'Pending'),
+('sch6', 'a3', '2024-09-27', '08:00:00', '09:00:00', 'Confirmed'),
+('sch7', 'a3', '2024-09-27', '10:00:00', '11:00:00', 'Available'),
+('sch8', 'a3', '2024-09-27', '12:00:00', '13:00:00', 'Pending'),
+('sch9', 'a4', '2024-09-28', '09:00:00', '10:00:00', 'Available'),
+('sch10', 'a4', '2024-09-28', '11:00:00', '12:00:00', 'Pending'),
+('sch11', 'a4', '2024-09-28', '13:00:00', '14:00:00', 'Confirmed'),
+('sch12', 'a5', '2024-09-29', '08:00:00', '09:00:00', 'Confirmed'),
+('sch13', 'a5', '2024-09-29', '10:00:00', '11:00:00', 'Available'),
+('sch14', 'a5', '2024-09-29', '12:00:00', '13:00:00', 'Pending'),
+('sch15', 'a6', '2024-09-30', '09:00:00', '10:00:00', 'Available'),
+('sch16', 'a6', '2024-09-30', '11:00:00', '12:00:00', 'Pending'),
+('sch17', 'a6', '2024-09-30', '13:00:00', '14:00:00', 'Confirmed'),
+('sch18', 'a7', '2024-10-01', '08:00:00', '09:00:00', 'Confirmed'),
+('sch19', 'a7', '2024-10-01', '10:00:00', '11:00:00', 'Available'),
+('sch20', 'a7', '2024-10-01', '12:00:00', '13:00:00', 'Pending');
+
 
 INSERT INTO [Order] (OId, PId, OptionId, Status, DateOrder, Symptom) VALUES
 ('ord1', 'a371', 'opt1', 'Pending', '2024-09-25 09:00:00', N'Đau đầu và mệt mỏi'),
@@ -6188,6 +6246,27 @@ INSERT INTO Payment (PayId, OId, Method, DatePay) VALUES
 ('pay10', 'ord10', 'Credit Card', '2024-10-04 09:30:00');
 
 
+INSERT INTO Contact (ContactId, Name, Email, Title, Description, Status) VALUES
+('con1', N'Nguyễn Thị Lan', 'lan.nguyen@example.com', N'Tư vấn sức khỏe', N'Tôi muốn tư vấn về việc kiểm tra sức khỏe định kỳ.', 'Pending'),
+('con2', N'Trần Văn Minh', 'minh.tran@example.com', N'Đặt lịch khám', N'Tôi cần đặt lịch khám tổng quát.', 'Completed'),
+('con3', N'Phạm Thị Hòa', 'hoa.pham@example.com', N'Vấn đề về tiêu hóa', N'Tôi thường xuyên gặp vấn đề về đau bụng và tiêu chảy.', 'Pending'),
+('con4', N'Lê Văn Hải', 'hai.le@example.com', N'Kiểm tra huyết áp', N'Tôi muốn kiểm tra và theo dõi huyết áp hàng tháng.', 'Canceled'),
+('con5', N'Đỗ Thị Vân', 'van.do@example.com', N'Tư vấn dinh dưỡng', N'Tôi cần tư vấn về chế độ dinh dưỡng cho người cao tuổi.', 'Completed'),
+('con6', N'Ngô Văn Tùng', 'tung.ngo@example.com', N'Khám sức khỏe cho trẻ em', N'Tôi muốn đặt lịch khám sức khỏe cho con tôi.', 'Pending'),
+('con7', N'Vũ Thị Hạnh', 'hanh.vu@example.com', N'Vấn đề về hô hấp', N'Tôi gặp khó khăn khi thở vào buổi sáng.', 'Pending'),
+('con8', N'Trịnh Văn Khoa', 'khoa.trinh@example.com', N'Đau đầu kéo dài', N'Tôi bị đau đầu liên tục trong nhiều ngày.', 'Completed'),
+('con9', N'Bùi Thị Quỳnh', 'quynh.bui@example.com', N'Tư vấn về tiểu đường', N'Tôi muốn biết cách kiểm soát tiểu đường type 2.', 'Completed'),
+('con10', N'Hồ Văn Khánh', 'khanh.ho@example.com', N'Đặt lịch khám tim mạch', N'Tôi muốn đặt lịch khám tim mạch tại bệnh viện X.', 'Pending'),
+('con11', N'Nguyễn Văn Cường', 'cuong.nguyen@example.com', N'Vấn đề về da liễu', N'Tôi bị ngứa và nổi mẩn đỏ khắp người.', 'Completed'),
+('con12', N'Trần Thị Mai', 'mai.tran@example.com', N'Tư vấn chăm sóc người cao tuổi', N'Tôi muốn tìm hiểu về cách chăm sóc sức khỏe cho bố mẹ tôi.', 'Pending'),
+('con13', N'Lê Văn Đức', 'duc.le@example.com', N'Tư vấn về sức khỏe tâm thần', N'Tôi muốn gặp bác sĩ tư vấn về tình trạng lo lắng và mất ngủ.', 'Pending'),
+('con14', N'Phạm Thị Thanh', 'thanh.pham@example.com', N'Khám bệnh định kỳ', N'Tôi muốn đặt lịch khám định kỳ cho cả gia đình.', 'Completed'),
+('con15', N'Ngô Thị Bích', 'bich.ngo@example.com', N'Vấn đề về khớp', N'Tôi bị đau khớp gối khi đi lại.', 'Pending'),
+('con16', N'Hoàng Văn Tuấn', 'tuan.hoang@example.com', N'Vấn đề về mắt', N'Tôi có vấn đề về thị lực và muốn kiểm tra mắt.', 'Canceled'),
+('con17', N'Bùi Thị Yến', 'yen.bui@example.com', N'Tư vấn về thai kỳ', N'Tôi cần tư vấn về chế độ ăn uống trong giai đoạn mang thai.', 'Completed'),
+('con18', N'Vũ Văn Bình', 'binh.vu@example.com', N'Xét nghiệm máu', N'Tôi muốn làm xét nghiệm máu để kiểm tra sức khỏe tổng quát.', 'Pending'),
+('con19', N'Lý Thị Ngọc', 'ngoc.ly@example.com', N'Kiểm tra tim mạch', N'Tôi muốn kiểm tra chức năng tim vì có cảm giác hồi hộp.', 'Pending'),
+('con20', N'Trương Văn Thành', 'thanh.truong@example.com', N'Khám bệnh hô hấp', N'Tôi bị ho kéo dài và khó thở, muốn gặp bác sĩ chuyên khoa hô hấp.', 'Completed');
 
 
 

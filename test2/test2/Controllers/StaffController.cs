@@ -39,7 +39,7 @@ namespace test2.Controllers
 
         public IActionResult AppointmentDetail()
         {
-            return View();  // This will render /Views/Staff/AppointmentDetail.cshtml
+            return View();  
         }
 
         public IActionResult ServiceAppointList()
@@ -48,7 +48,7 @@ namespace test2.Controllers
             var appointments = dc.Orders.Include(o => o.PidNavigation)
             .Include(o => o.Option)
          .ThenInclude(opt => opt.DidNavigation)
-         .ThenInclude(d => d.Specialty) // Include Specialty
+         .ThenInclude(d => d.Specialty) 
          .Select(o => new ServiceAppointmentModel
          {
              AppointmentId = o.Oid,

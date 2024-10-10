@@ -11,5 +11,9 @@ public partial class Specialty
 
     public string? SpecialtyImg { get; set; }
 
+    public string? ShortDescription { get; set; }
+
+    public string? LongDescription { get; set; }
+
     public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
 }
