@@ -1,24 +1,25 @@
-﻿@{
+﻿@model test2.Data.Patient
+
+@{
     Layout = "_Layout";
     ViewBag.Title = "View Patient Detail";
 
-    // ActiveTab value would come from a form submission or URL query parameter
+    // Lấy tab đang active (mặc định là "profile" nếu không có)
     var activeTab = Context.Request.Query["tab"].FirstOrDefault() ?? "profile";
 
-    // Sample appointments data
-    var appointments = new List<dynamic> {
-        new { date = "2024-09-30", time = "10:00 AM", patient = "John Doe", status = "Confirmed" },
-        new { date = "2024-09-30", time = "11:30 AM", patient = "Jane Smith", status = "Pending" },
-        new { date = "2024-09-30", time = "01:00 PM", patient = "Emily Johnson", status = "Cancelled" },
-        new { date = "2024-09-30", time = "03:00 PM", patient = "Michael Brown", status = "Confirmed" },
-        new { date = "2024-09-30", time = "04:30 PM", patient = "Jessica Davis", status = "Confirmed" }
-    };
+    // Lấy danh sách các cuộc hẹn của bệnh nhân (thay thế bằng dữ liệu thực tế)
+    var appointments = Model.Orders.Select(o => new
+    {
+        Date = o.Option?.DateExam?.ToString("yyyy-MM-dd") ?? "N/A",
+        Time = o.Option?.DateExam?.ToString("HH:mm") ?? "N/A",
+        Status = o.Status
+    }).ToList();
 }
 
 <div class="mt-20 pt-6 border-b border-gray-200 dark:border-gray-700">
     <ul class="flex flex-wrap -mb-px ml-48 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
         <li class="me-2">
-            <a href="@Url.Action("ViewPatientDetail", new { tab = "profile" })"
+            <a href="@Url.Action("ViewPatientDetail", new { tab = "profile", pid = Model.Pid })"
                class="inline-flex text-2xl items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == "profile" ? "border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group")">
                 <svg class="w-6 h-6 me-2 @(activeTab == "profile" ? "text-blue-600 dark:text-blue-500" : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300")"
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -28,7 +29,7 @@
             </a>
         </li>
         <li class="me-2">
-            <a href="@Url.Action("ViewPatientDetail", new { tab = "appointment" })"
+            <a href="@Url.Action("ViewPatientDetail", new { tab = "appointment", pid = Model.Pid })"
                class="inline-flex text-2xl items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == "appointment" ? "border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group")">
                 <svg class="w-6 h-6 me-2 @(activeTab == "appointment" ? "text-blue-600 dark:text-blue-500" : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300")"
                      aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
@@ -46,7 +47,7 @@
             <div class="flex items-center mb-4">
                 <img class="w-24 h-24 rounded" src="https://i.pinimg.com/736x/52/c9/1c/52c91c32ae7ac4b75252fcb9a67d567b.jpg" alt="Default avatar">
                 <div class="ml-4">
-                    <h2 class="text-2xl font-bold text-gray-800">John Doe</h2>
+                    <h2 class="text-2xl font-bold text-gray-800">@Model.Name</h2>
                     <p class="text-gray-600">"Your health, our priority."</p>
                 </div>
             </div>
@@ -55,12 +56,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white p-4 shadow-md rounded-lg">
                     <h3 class="font-semibold text-lg text-gray-700">Contact Information</h3>
-                    <p class="text-gray-600">Email: johndoe@example.com</p>
-                    <p class="text-gray-600">Phone: +123 456 7890</p>
+                    <p class="text-gray-600">Email: @Model.PidNavigation.Email</p>
+                    <p class="text-gray-600">Phone: @Model.Phone</p>
                 </div>
                 <div class="bg-white p-4 shadow-md rounded-lg">
-                    <h3 class="font-semibold text-lg text-gray-700">Address</h3>
-                    <p class="text-gray-600">123 Main St, City, Country</p>
+                    <h3 class="font-semibold text-lg text-gray-700">Date of Birth</h3>
+                    <p class="text-gray-600">@Model.Dob?.ToString("yyyy-MM-dd")</p>
                 </div>
             </div>
         </div>
@@ -72,23 +73,30 @@
                 <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                     <thead>
                         <tr class="bg-blue-600 text-white text-left">
-                            <th class="py-3 px-4 uppercase font-semibold text-sm">Id</th>
                             <th class="py-3 px-4 uppercase font-semibold text-sm">Date</th>
                             <th class="py-3 px-4 uppercase font-semibold text-sm">Time</th>
                             <th class="py-3 px-4 uppercase font-semibold text-sm">Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int i = 0; i < appointments.Count; i++)
+                        @if (appointments.Count > 0)
                         {
-                            var appointment = appointments[i];
-                            <tr class="@(i % 2 == 0 ? "bg-white" : "bg-gray-50") hover:bg-gray-100 transition duration-300">
-                                <td class="py-3 px-4 border-b border-gray-300">001</td>
-                                <td class="py-3 px-4 border-b border-gray-300">@appointment.date</td>
-                                <td class="py-3 px-4 border-b border-gray-300">@appointment.time</td>
-                                <td class="py-3 px-4 border-b border-gray-300 @(appointment.status == "Confirmed" ? "text-green-600" : appointment.status == "Pending" ? "text-yellow-600" : "text-red-600")">
-                                    @appointment.status
-                                </td>
+                            @for (int i = 0; i < appointments.Count; i++)
+                            {
+                                var appointment = appointments[i];
+                                <tr class="@(i % 2 == 0 ? "bg-white" : "bg-gray-50") hover:bg-gray-100 transition duration-300">
+                                    <td class="py-3 px-4 border-b border-gray-300">@appointment.Date</td>
+                                    <td class="py-3 px-4 border-b border-gray-300">@appointment.Time</td>
+                                    <td class="py-3 px-4 border-b border-gray-300 @(appointment.Status == "Confirmed" ? "text-green-600" : appointment.Status == "Pending" ? "text-yellow-600" : "text-red-600")">
+                                        @appointment.Status
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center py-3 px-4">No appointments available.</td>
                             </tr>
                         }
                     </tbody>

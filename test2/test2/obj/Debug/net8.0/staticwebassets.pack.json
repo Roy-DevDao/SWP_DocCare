@@ -1,575 +1,575 @@
 {
   "Files": [
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\test2.bundle.scp.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\test2.bundle.scp.css",
       "PackagePath": "staticwebassets\\test2.bundle.scp.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\bootstrap.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\bootstrap.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\dist\\css\\bootstrap.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\assets\\css\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\dist\\css\\bootstrap_1.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\dist\\css\\bootstrap_1.css",
       "PackagePath": "staticwebassets\\assets\\css\\dist\\css\\bootstrap_1.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\flatpickr.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\flatpickr.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\flatpickr.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\fullcalendar.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\fullcalendar.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\fullcalendar.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\jquery.timepicker.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\jquery.timepicker.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\jquery.timepicker.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\materialdesignicons.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\materialdesignicons.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\materialdesignicons.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\remixicon.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\remixicon.css",
       "PackagePath": "staticwebassets\\assets\\css\\remixicon.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\select2.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\select2.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\select2.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\simplebar.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\simplebar.css",
       "PackagePath": "staticwebassets\\assets\\css\\simplebar.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\slick-theme.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\slick-theme.css",
       "PackagePath": "staticwebassets\\assets\\css\\slick-theme.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\slick.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\slick.css",
       "PackagePath": "staticwebassets\\assets\\css\\slick.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\style.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\style.min.css",
       "PackagePath": "staticwebassets\\assets\\css\\style.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\tiny-slider.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\tiny-slider.css",
       "PackagePath": "staticwebassets\\assets\\css\\tiny-slider.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\css\\tiny-slider.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\css\\tiny-slider.scss",
       "PackagePath": "staticwebassets\\assets\\css\\tiny-slider.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\fonts\\materialdesignicons-webfont.woff2",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\fonts\\materialdesignicons-webfont.woff2",
       "PackagePath": "staticwebassets\\assets\\fonts\\materialdesignicons-webfont.woff2"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\fonts\\remixicon.woff2",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\fonts\\remixicon.woff2",
       "PackagePath": "staticwebassets\\assets\\fonts\\remixicon.woff2"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\about\\about.jpg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\about\\about.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\about\\about.jpg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\avata.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\avata.png",
       "PackagePath": "staticwebassets\\assets\\images\\avata.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\bg\\banner.jpg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\bg\\banner.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\bg\\banner.jpg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\bg\\bg-lines-one.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\bg\\bg-lines-one.png",
       "PackagePath": "staticwebassets\\assets\\images\\bg\\bg-lines-one.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-an.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-an.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-an.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-doan.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-doan.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-doan.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-duy.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-duy.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-duy.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-hanh.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-hanh.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-hanh.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-huong.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-huong.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-huong.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-ngoc.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-ngoc.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-ngoc.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-oanh.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-oanh.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-oanh.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-tuan.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\doctors\\bs-tuan.png",
       "PackagePath": "staticwebassets\\assets\\images\\doctors\\bs-tuan.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\favicon.ico",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\favicon.ico",
       "PackagePath": "staticwebassets\\assets\\images\\favicon.ico"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\gif\\bookingsuccess.gif",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\gif\\bookingsuccess.gif",
       "PackagePath": "staticwebassets\\assets\\images\\gif\\bookingsuccess.gif"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\gif\\payment_failed.gif",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\gif\\payment_failed.gif",
       "PackagePath": "staticwebassets\\assets\\images\\gif\\payment_failed.gif"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\gif\\payment_success.gif",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\gif\\payment_success.gif",
       "PackagePath": "staticwebassets\\assets\\images\\gif\\payment_success.gif"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\icon-logo.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\icon-logo.png",
       "PackagePath": "staticwebassets\\assets\\images\\icon-logo.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\logo-dark.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\logo-dark.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo-dark.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\logo-icon.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\logo-icon.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo-icon.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\logo-light.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\logo-light.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo-light.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\logo.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\logo.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\medical.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\medical.png",
       "PackagePath": "staticwebassets\\assets\\images\\medical.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\service\\03.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\service\\03.png",
       "PackagePath": "staticwebassets\\assets\\images\\service\\03.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\service\\04.jpg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\service\\04.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\service\\04.jpg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\service\\05.jpg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\service\\05.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\service\\05.jpg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\service\\06.jpg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\service\\06.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\service\\06.jpg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\service\\07.jpg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\service\\07.jpg",
       "PackagePath": "staticwebassets\\assets\\images\\service\\07.jpg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\service\\08.png",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\service\\08.png",
       "PackagePath": "staticwebassets\\assets\\images\\service\\08.png"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\svg\\401.svg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\svg\\401.svg",
       "PackagePath": "staticwebassets\\assets\\images\\svg\\401.svg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\svg\\500.svg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\svg\\500.svg",
       "PackagePath": "staticwebassets\\assets\\images\\svg\\500.svg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\images\\svg\\error.svg",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\svg\\error.svg",
       "PackagePath": "staticwebassets\\assets\\images\\svg\\error.svg"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\apexcharts.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\apexcharts.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\apexcharts.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\app.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\app.js",
       "PackagePath": "staticwebassets\\assets\\js\\app.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\bootstrap.bundle.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\ckeditor.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\ckeditor.js",
       "PackagePath": "staticwebassets\\assets\\js\\ckeditor.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\columnchart.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\columnchart.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\columnchart.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\counter.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\counter.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\counter.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\feather.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\feather.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\feather.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\flatpickr.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\flatpickr.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\flatpickr.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\flatpickr.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\flatpickr.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\flatpickr.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\fullcalendar.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\fullcalendar.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\fullcalendar.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\fullcalendar.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\fullcalendar.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\fullcalendar.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\jquery.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\jquery.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\jquery.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\jquery.timepicker.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\jquery.timepicker.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\jquery.timepicker.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\select2.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\select2.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\select2.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\select2.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\select2.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\select2.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\simplebar.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\simplebar.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\simplebar.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\slick.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\slick.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\slick.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\slick.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\slick.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\slick.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\sweetalert.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\sweetalert.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\sweetalert.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\timepicker.init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\timepicker.init.js",
       "PackagePath": "staticwebassets\\assets\\js\\timepicker.init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\tiny-slider-init.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\tiny-slider-init.js",
       "PackagePath": "staticwebassets\\assets\\js\\tiny-slider-init.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\tiny-slider.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\tiny-slider.js",
       "PackagePath": "staticwebassets\\assets\\js\\tiny-slider.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\js\\vn.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\vn.js",
       "PackagePath": "staticwebassets\\assets\\js\\vn.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_animated.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_animated.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_animated.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_core.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_core.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_core.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_extras.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_extras.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_extras.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_functions.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_functions.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_functions.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_icons.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_icons.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_icons.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_path.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_path.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_path.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\_variables.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\_variables.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\_variables.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\assets\\scss\\materialdesignicons.scss",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\scss\\materialdesignicons.scss",
       "PackagePath": "staticwebassets\\assets\\scss\\materialdesignicons.scss"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\css\\NewFolder\\StyleSheet.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\css\\NewFolder\\StyleSheet.css",
       "PackagePath": "staticwebassets\\css\\NewFolder\\StyleSheet.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\css\\PatientList.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\css\\PatientList.css",
       "PackagePath": "staticwebassets\\css\\PatientList.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\css\\StyleSheet.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\css\\StyleSheet.css",
       "PackagePath": "staticwebassets\\css\\StyleSheet.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\css\\StyleSheet1.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\css\\StyleSheet1.css",
       "PackagePath": "staticwebassets\\css\\StyleSheet1.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\css\\site.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\js\\site.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "D:\\FPT\\Ki5\\SWP\\DocCareFinal1\\SWP_DocCare\\test2\\test2\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {

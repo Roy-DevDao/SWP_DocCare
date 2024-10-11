@@ -1,56 +1,87 @@
-﻿@model dynamic
+﻿@model test2.Data.Order
 
 @{
     Layout = "_Layout";
-    var appointment = new
+    var appointment = Model;
+
+    if (appointment == null)
     {
-        patientName = "John Doe",
-        phone = "0905XXXXXX",
-        email = "john.doe@example.com",
-        date = DateTime.Parse("2024-09-30T14:00:00Z"),
-        time = DateTime.Parse("2024-09-30T14:00:00Z"),
-        location = "123 Main St, City",
-        notes = "A heart attack, also known as a myocardial infarction, happens when the flow of blood that brings oxygen to a part of your heart muscle suddenly becomes blocked. Your heart can't get enough oxygen. If blood flow is not restored quickly, the heart muscle will begin to die. Heart attacks are very common."
-    };
+        <h2>Appointment not found</h2>
+    }
+    else
+    {
+        <!-- Render dữ liệu cuộc hẹn -->
+        <div class="container mx-auto mt-10 pt-10 bg-white rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-blue-500 mb-4">Appointment Details</h2>
+            <div class="flex items-center mb-2">
+                @if (appointment.PidNavigation != null && !string.IsNullOrEmpty(appointment.PidNavigation.PatientImg))
+                {
+                    <img class="w-24 h-24 rounded mb-3" src="@appointment.PidNavigation.PatientImg" alt="Patient avatar">
+                }
+                else
+                {
+                    <img class="w-24 h-24 rounded mb-3" src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg" alt="Default avatar">
+                }
+
+                <div class="bg-gray-100 p-4 ml-3 rounded-lg">
+                    <h3 class="font-semibold text-gray-700">Patient Information</h3>
+                    <p><strong>Name:</strong> @(appointment.PidNavigation != null ? appointment.PidNavigation.Name : "Unknown")</p>
+                    <p><strong>Phone:</strong> @(appointment.PidNavigation != null ? appointment.PidNavigation.Phone : "Unknown")</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Patient Information -->
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="font-semibold text-gray-700">Specialty : </h3>
+                    <p>
+                        <strong>
+                            @if (appointment.Option != null && appointment.Option.DidNavigation != null && appointment.Option.DidNavigation.Specialty != null)
+                            {
+                                @appointment.Option.DidNavigation.Specialty.SpecialtyName
+                            }
+                            else
+                            {
+                                <span>Specialty not available</span>
+                            }
+                        </strong>
+                    </p>
+
+                    <h3 class="font-semibold text-gray-700 mt-2">Price : </h3>
+                    <p>
+                        <strong>
+                            @if (appointment.Option != null && appointment.Option.DidNavigation != null && appointment.Option.DidNavigation.Price.HasValue)
+                            {
+                                @appointment.Option.DidNavigation.Price.Value.ToString("C")
+                            }
+                            else
+                            {
+                                <span>Price not available</span>
+                            }
+                        </strong>
+                    </p>
+                </div>
+
+                <!-- Appointment Information -->
+                <div class="bg-gray-100 p-4 rounded-lg">
+                    <h3 class="font-semibold text-gray-700">Appointment Information</h3>
+                    <p><strong>Date:</strong> @appointment.DateOrder?.ToString("MM/dd/yyyy")</p>
+                    <p><strong>Time:</strong> @appointment.DateOrder?.ToString("hh:mm tt")</p>
+                    
+                </div>
+
+                <!-- Notes -->
+                <div class="bg-gray-100 p-4 rounded-lg col-span-1 md:col-span-2">
+                    <h3 class="font-semibold text-gray-700">Symptom</h3>
+                    <p>@(string.IsNullOrEmpty(appointment.Symptom) ? "No additional notes." : appointment.Symptom)</p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <a asp-action="ViewAppointment" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
+                    Back to Appointments
+                </a>
+            </div>
+        </div>
+    }
 }
-
-<div class="container mx-auto mt-10 pt-10 bg-white rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold text-blue-500 mb-4">Appointment Details</h2>
-    <div class="flex items-center mb-2">
-        <img class="w-24 h-24 rounded mb-3" src="https://i.pinimg.com/736x/52/c9/1c/52c91c32ae7ac4b75252fcb9a67d567b.jpg" alt="Default avatar">
-        <div class="bg-gray-100 p-4 ml-3 rounded-lg">
-            <h3 class="font-semibold text-gray-700">Patient Information</h3>
-            <p><strong>Name:</strong> @appointment.patientName</p>
-            <p><strong>Phone:</strong> @appointment.phone</p>
-            <p><strong>Email:</strong> @appointment.email</p>
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Patient Information -->
-        <div class="bg-gray-100 p-4 rounded-lg">
-            <h3 class="font-semibold text-gray-700">Specialty : </h3>
-            <p><strong>Orthopedic</strong> </p>
-            <h3 class="font-semibold text-gray-700 mt-2">Price : </h3>
-            <p><strong>1.000.000 vnd</strong></p>
-        </div>
-
-        <!-- Appointment Information -->
-        <div class="bg-gray-100 p-4 rounded-lg">
-            <h3 class="font-semibold text-gray-700">Appointment Information</h3>
-            <p><strong>Date:</strong> @appointment.date.ToString("MM/dd/yyyy")</p>
-            <p><strong>Time:</strong> @appointment.time.ToString("hh:mm tt")</p>
-            <p><strong>Location:</strong> @appointment.location</p>
-        </div>
-
-        <!-- Notes -->
-        <div class="bg-gray-100 p-4 rounded-lg col-span-1 md:col-span-2">
-            <h3 class="font-semibold text-gray-700">Notes</h3>
-            <p>@(string.IsNullOrEmpty(appointment.notes) ? "No additional notes." : appointment.notes)</p>
-        </div>
-    </div>
-
-    <div class="mt-6">
-        <a asp-area="" asp-controller="Home" asp-action="ViewAppointment" class="text-blue-600 hover:underline">Back to Appointments</a>
-    </div>
-</div>

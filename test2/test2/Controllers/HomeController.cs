@@ -18,13 +18,22 @@ namespace test2.Controllers
 
         public IActionResult Index()
         {
+            
+            var doctors = dc.Doctors.Take(8).ToList();
+            var specialties = dc.Specialties.Take(8).ToList();
+
+            //truyen data thong qua view bag
+            ViewBag.Doctors = doctors;
+            ViewBag.Specialties = specialties;
+        
             return View();
+
         }
 
         public IActionResult DoctorList()
         {
-            var doctor = dc.Doctors.ToList();
-            return View(doctor);
+            var doctors = dc.Doctors.ToList();
+            return View(doctors);
         }
 
         public IActionResult DoctorDetail()

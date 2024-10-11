@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using test2.DAO;
 using test2.Data;
 
 namespace test2
@@ -17,6 +18,25 @@ namespace test2
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<DocCareContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DocCare"));
+            });
+
+
+            // thang them ----------------------------------------
+            // ??ng ký DocCareContext v?i DI container
+            //builder.Services.AddDbContext<DocCareContext>(options =>
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+            // ??ng ký DAO
+            builder.Services.AddScoped<PatientDao>();
+            builder.Services.AddScoped<DoctorDAO>();
+            builder.Services.AddScoped<AppointmentDAO>();
+            builder.Services.AddScoped<FeedbackDAO>();
+
+
+
 
             var app = builder.Build();
 
@@ -31,7 +51,7 @@ namespace test2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.MapControllers(); // thang them -------------------------------------------------------------------------------------
             app.UseAuthorization();
 
             // Default route for Home controller
