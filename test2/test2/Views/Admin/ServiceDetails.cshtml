@@ -153,17 +153,14 @@
                     </div>
                     <div class="basic-info-main">
                         <div class="info-row">
-                            <div class="label">Category:</div>
-                            <div class="value">Health</div>
+                            <div class="label">Intro:</div>
+                            <div class="value">@Model.ShortDescription</div>
                         </div>
                         <div class="info-row">
                             <div class="label">Price:</div>
-                            <div class="value">$100</div>
+                            <div class="value">@Model.Doctors.FirstOrDefault()?.Price</div>
                         </div>
-                        <div class="info-row">
-                            <div class="label">Description:</div>
-                            <div class="value">A comprehensive health checkup.</div>
-                        </div>
+                        
                         <div class="info-row">
                             <div class="label">Duration:</div>
                             <div class="value">1 hour</div>
@@ -177,10 +174,10 @@
 
                 <div class="intro">
                     <div class="basic-info-header">
-                        <h5>Introduction</h5>
+                        <h5>Description</h5>
                     </div>
                     <div class="intro-main">
-                        Our general checkup service is designed to ensure your overall health and well-being.
+                        @Model.LongDescription
                     </div>
                 </div>
             </div>
@@ -213,6 +210,40 @@
                             <li>Limited availability</li>
                         </ul>
                     </div>
+                    // xử lí chọn sao hiện ra feedback của từng sao
+                    @* <div class="feedback-section">
+                        <h5>Doctor Feedback</h5>
+
+                        @if (Model.Doctors != null && Model.Doctors.Any())
+                        {
+                            foreach (var doctor in Model.Doctors)
+                            {
+                                <h6>Feedback for @doctor.Name</h6>
+
+                                @if (doctor.Feedbacks != null && doctor.Feedbacks.Any())
+                                {
+                                    <ul>
+                                        @foreach (var feedback in doctor.Feedbacks)
+                                        {
+                                            <li>
+                                                <strong>@feedback.Name</strong> - @feedback.Star stars
+                                                <p>@feedback.Description</p>
+                                                <small>Commented on: @(feedback.DateCmt.HasValue ? feedback.DateCmt.Value.ToString("yyyy-MM-dd") : "No date available")</small>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <p>No feedback available for @doctor.Name.</p>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p>No doctors assigned to this specialty.</p>
+                        }
+                    </div> *@
                 </div>
             </div>
         </div>

@@ -176,7 +176,7 @@
                         </div>
                         <div class="info-row">
                             <div class="label">Rating Consultant:</div>
-                            <div class="value">@Model.Feedbacks</div>
+                            <div class="value">@Model.Feedbacks.FirstOrDefault()?.Star</div>
                         </div>
                     </div>
                 </div>

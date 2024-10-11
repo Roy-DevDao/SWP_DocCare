@@ -235,15 +235,18 @@ namespace test2.Controllers
         public IActionResult ServiceDetails(string id)
         {
             // Fetch the doctor with the given ID from the database
-            var serviceId = _context.Specialties.FirstOrDefault(d => d.SpecialtyId.Equals(id));
+            var serviceId = _context.Specialties.Include(s=> s.Doctors).ThenInclude(d=> d.Feedbacks).FirstOrDefault(d => d.SpecialtyId.Equals(id));
 
             // If no doctor is found, return a "Not Found" view or redirect to an error page
             if (serviceId == null)
             {
                 return NotFound(); // You can customize this to redirect or show a custom view
             }
+            var feedback = serviceId.Doctors.SelectMany(d => d.Feedbacks).ToList();
+            var averageFeedback = feedback.Average(f => f.Star);
 
             // Pass the doctor data to the view
+            ViewBag.AverageFeedback = averageFeedback;
             return View(serviceId);
         }
 

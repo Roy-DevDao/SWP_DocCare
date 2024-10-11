@@ -194,8 +194,8 @@
     <div class="whole-main">
         <div class="profile-header">
             <div class="profile-info">
-                <h4>Id: 456</h4>
-                <h4>Patient: John Doe</h4>
+                <h4>Id: @Model.Pid</h4>
+                <h4>Patient: @Model.Name</h4>
             </div>
             <div class="divider"></div>
             <div class="profile-status">
@@ -213,19 +213,16 @@
                     <div class="basic-info-main">
                         <div class="info-row">
                             <div class="label">Gender:</div>
-                            <div class="value">Male</div>
+                            <div class="value">@Model.Gender</div>
                         </div>
                         <div class="info-row">
                             <div class="label">DOB:</div>
-                            <div class="value">01/01/1990</div>
+                            <div class="value">@Model.Dob</div>
                         </div>
-                        <div class="info-row">
-                            <div class="label">Address:</div>
-                            <div class="value">123 Main St, City</div>
-                        </div>
+                        
                         <div class="info-row">
                             <div class="label">Phone:</div>
-                            <div class="value">+123456789</div>
+                            <div class="value">@Model.Phone</div>
                         </div>
                     </div>
                 </div>

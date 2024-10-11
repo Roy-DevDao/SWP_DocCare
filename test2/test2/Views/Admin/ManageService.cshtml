@@ -162,6 +162,11 @@
                 </th>
                 <th>
                     <div class="icon-text">
+                        <i class="fas fa-info"></i> Description
+                    </div>
+                </th>
+                <th>
+                    <div class="icon-text">
                         <i class="fas fa-cogs"></i> Options
                     </div>
                 </th>
@@ -185,6 +190,7 @@
                         }
                         @price
                     </td>
+                    <td>@service.ShortDescription</td>
                     <td>
                         <a asp-controller="Admin" asp-action="ServiceDetails" asp-route-id="@service.SpecialtyId">
                             <button class="btn btn-info">Details</button>
