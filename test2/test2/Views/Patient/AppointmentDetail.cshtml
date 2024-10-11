@@ -1,0 +1,82 @@
+﻿﻿@{
+    Layout = "_Layout";
+}
+
+@model test2.Data.Order
+
+<div class="max-w-7xl mx-auto p-8 bg-gray-100 shadow-lg rounded-lg mt-10">
+    <!-- Appointment Information Section -->
+    <div class="bg-white p-6 shadow rounded-lg mb-8">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Appointment Details</h1>
+            <span class="px-4 py-2 text-sm rounded-full @if(Model.Status == "Pending") {
+            <text>bg-yellow-400 text-gray-800</text>
+} else if(Model.Status == "Canceled") {
+            <text>bg-red-500 text-white</text>
+ } else {
+            <text>bg-blue-500 text-white</text>
+}" >@Model.Status</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <p class="text-gray-600"><strong>Order ID:</strong> @Model.Oid</p>
+                <p class="text-gray-600"><strong>Date Ordered:</strong> @Model.DateOrder?.ToString("MMM dd, yyyy")</p>
+                <p class="text-gray-600"><strong>Symptom:</strong> @Model.Symptom</p>
+            </div>
+            <div>
+                <p class="text-gray-600"><strong>Appointment Date:</strong> @Model.Option?.DateExam?.ToString("MMM dd, yyyy")</p>
+                <p class="text-gray-600"><strong>Doctor:</strong> Dr. @Model.Option?.DidNavigation?.Name</p>
+                <p class="text-gray-600"><strong>Specialty:</strong> @Model.Option?.DidNavigation?.Specialty?.SpecialtyName</p>
+                <p class="text-gray-600"><strong>Price:</strong> 500.000 vnd</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Information Section -->
+    <div class="bg-white p-6 shadow rounded-lg mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Patient Information</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <p class="text-gray-600"><strong>Patient Name:</strong> @Model.PidNavigation?.Name</p>
+                <p class="text-gray-600"><strong>Phone:</strong> @Model.PidNavigation?.Phone</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctor Information Section -->
+    <div class="bg-white p-6 shadow rounded-lg mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Doctor Information</h2>
+        <div class="flex items-center">
+            <img class="w-20 h-20 rounded-full shadow-lg mr-6" src="@Model.Option?.DidNavigation?.DoctorImg" alt="Doctor Image">
+            <div>
+                <p class="text-gray-800 text-lg font-bold">Dr. @Model.Option?.DidNavigation?.Name</p>
+                <p class="text-gray-600">@Model.Option?.DidNavigation?.Position</p>
+                <p class="text-gray-600">Specialty: @Model.Option?.DidNavigation?.Specialty?.SpecialtyName</p>
+                <p class="text-gray-600">Phone: @Model.Option?.DidNavigation?.Phone</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Records Section -->
+    <div class="bg-white p-6 shadow rounded-lg">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Health Records</h2>
+        @if (Model.Status == "Completed")
+        {
+            <ul class="space-y-6">
+                @foreach (var record in Model.HealthRecords)
+                {
+                    <li class="p-6 bg-gray-50 rounded-lg shadow">
+                        <p class="text-lg font-semibold text-gray-800">Diagnosis: @record.Diagnosis</p>
+                        <p class="text-gray-600"><strong>Date of Examination:</strong> @record.DateExam?.ToString("MMM dd, yyyy")</p>
+                        <p class="text-gray-600"><strong>Description:</strong> @record.Description</p>
+                        <p class="text-gray-600"><strong>Doctor's Note:</strong> @record.Note</p>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="text-gray-600">No health records available.</p>
+        }
+    </div>
+</div>

@@ -14,28 +14,29 @@
                     <h5 class="mb-0">Reservations</h5>
                 </div>
             </div>
-            <div class="col-md-7">
-                <form action="reservationmanage?action=filter" method="POST" onSubmit="document.getElementById('submit').disabled = true;">
-                    <div class="justify-content-md-end row">
-                        <div class="col-md-5 row align-items-center">
-                            <div class="col-md-3">
-                                <label class="form-label">Service</label>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <!-- Form tìm kiếm theo tên dịch vụ -->
+                    <form action="serviceappointlist" method="GET">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <label class="form-label"></label>
+                                <input type="text" name="search_service" class="form-control" value="@ViewBag.SearchService" placeholder="Enter service name..." />
                             </div>
-                            <div class="col-md-9">
-                                <select name="service_id" class="form-select" aria-label="Default select example">
-                                    <option value="all" selected>All</option>
-                                    <option value="1">Service A</option>
-                                    <option value="2">Service B</option>
-                                    <option value="3">Service C</option>
-                                </select>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary mt-4">Search</button>
                             </div>
                         </div>
-                        <div class="col-md-5 row align-items-center">
-                            <div class="col-md-4">
-                                <label class="form-label">Status</label>
-                            </div>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <!-- Form lọc theo trạng thái -->
+                    <form action="serviceappointlist" method="GET">
+                        <div class="row align-items-center">
                             <div class="col-md-8">
-                                <select name="status" class="form-select" aria-label="Default select example">
+                                <label class="form-label">Filter by Status</label>
+                                <select name="status" class="form-select">
                                     <option value="all" selected>All</option>
                                     <option value="Complete">Complete</option>
                                     <option value="Assigned">Assigned</option>
@@ -43,12 +44,12 @@
                                     <option value="Cancelled">Cancelled</option>
                                 </select>
                             </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                            </div>
                         </div>
-                        <div class="col-md-1 md-0">
-                            <button type="submit" class="btn btn-primary">Filter</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -79,7 +80,7 @@
                                     <td class="p-3">@appointment.DoctorName</td>
                                     <td class="p-3">@appointment.Status</td>
                                     <td class="text-end p-3">
-                                        <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointmentDetail" asp-route-id="@appointment.AppointmentId" type="button" class="btn btn-info">Details</a>
+                                        <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointDetail" asp-route-id="@appointment.AppointmentId" type="button" class="btn btn-info">Details</a>
                                     </td>
                                 </tr>
                             }
@@ -91,16 +92,82 @@
         </div>
 
         <!-- Pagination Section -->
-        <c:set var="page" value="${page}" />
+
         <div class="row text-center">
             <div class="col-12 mt-4">
                 <div class="d-md-flex align-items-center text-center justify-content-between">
                     <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                        <c:forEach begin="${1}" end="${num}" var="i">
-                            <li class="page-item ${i==page?" active":""}">
-                                <a class="page-link" href="${url}&page=${i}">${i}</a>
+                        @if (ViewBag.PageNumber > 1)
+
+
+
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="ServiceAppointList"
+                                   asp-route-gender="@ViewBag.Gender"
+                                   asp-route-speciality="@ViewBag.Speciality"
+                                   asp-route-sort="@ViewBag.Sort"
+                                   asp-route-pageNumber="@(ViewBag.PageNumber - 1)"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
                             </li>
-                        </c:forEach>
+                        }
+
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+
+
+
+                        {
+
+
+
+                            if (i <= 4 || i == ViewBag.TotalPages || (i == ViewBag.PageNumber - 1) || (i == ViewBag.PageNumber + 1))
+
+
+
+                            {
+                                <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                                    <a class="page-link" asp-action="ServiceAppointList"
+                                       asp-route-gender="@ViewBag.Gender"
+                                       asp-route-speciality="@ViewBag.Speciality"
+                                       asp-route-sort="@ViewBag.Sort"
+                                       asp-route-pageNumber="@i">
+                                        @i
+                                    </a>
+                                </li>
+                            }
+
+
+
+                            else if (i == 5 && ViewBag.PageNumber > 5)
+
+
+
+                            {
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            }
+
+
+
+                        }
+
+                        @if (ViewBag.PageNumber < ViewBag.TotalPages)
+
+
+
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="ServiceAppointList"
+                                   asp-route-gender="@ViewBag.Gender"
+                                   asp-route-speciality="@ViewBag.Speciality"
+                                   asp-route-sort="@ViewBag.Sort"
+                                   asp-route-pageNumber="@(ViewBag.PageNumber + 1)"
+                                   aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

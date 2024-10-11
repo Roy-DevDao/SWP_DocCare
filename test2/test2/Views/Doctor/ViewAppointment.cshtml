@@ -1,22 +1,18 @@
-﻿@{
+﻿﻿
+@model List<test2.Data.Order>
+
+@{
     Layout = "_Layout";
-    // Mock data for appointments
-    var appointments = new List<dynamic>
-    {
-        new { id = 1, name = "Trung Phan", patient_id = "123", dateBooking = "23/12/04", Status = "Assigned" },
-        new { id = 2, name = "Nguyen Van A", patient_id = "456", dateBooking = "23/12/05", Status = "Assigned" },
-        new { id = 3, name = "Le Thi B", patient_id = "789", dateBooking = "23/12/06", Status = "Assigned" },
-    };
 }
 
 <div class="container mx-auto mt-10 pt-10">
-    <h2 class="text-2xl font-bold  text-blue-500 mb-4">Appointment List</h2>
+    <h2 class="text-2xl font-bold text-blue-500 mb-4">Appointment List</h2>
+
     <!-- Search form -->
     <form class="flex items-center max-w-sm mx-auto mb-5">
-
         <div>
             <button id="filter-drop" data-dropdown-toggle="filter-dropdown"
-                    class=" flex text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-2 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                    class="flex text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-2 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                     type="button">
                 <p class="w-24">Filter by Date</p>
                 <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -63,7 +59,7 @@
         </button>
     </form>
 
-    <!-- Table displaying appointments -->
+
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -77,51 +73,34 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var appointment in appointments)
+                @foreach (var appointment in Model)
                 {
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            @appointment.id
+                            @appointment.Oid
                         </th>
-                        <td class="px-6 py-4">@appointment.name</td>
-                        <td class="px-6 py-4"><img class="w-24 h-24 rounded" src="https://i.pinimg.com/736x/8c/a8/53/8ca853dd7bbf2223839e123a042070e5.jpg" /></td>
-                        <td class="px-6 py-4">@appointment.dateBooking</td>
-                        @if (appointment.id == 3)
-                        {
-                            <td class="px-6 py-4">
-                                <span class="bg-red-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">finished</span>
-                            </td>
-                        }
-                        else
-                        {
-                            <td class="px-6 py-4">
-                                <span class="bg-blue-300 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">@appointment.Status</span>
-                            </td>
-                        }
-
+                        <td class="px-6 py-4">@appointment.PidNavigation.Name</td>
                         <td class="px-6 py-4">
-                            <a asp-area="" asp-controller="Home" asp-action="ViewAppointmentDetail" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                            @if (appointment.PidNavigation != null && !string.IsNullOrEmpty(appointment.PidNavigation.PatientImg))
+                            {
+                                <img class="w-24 h-24 rounded mb-3" src="@appointment.PidNavigation.PatientImg" alt="Patient avatar">
+                            }
+                            else
+                            {
+                                <img class="w-24 h-24 rounded mb-3" src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg" alt="Default avatar">
+                           }
+                          
+                        </td>
+                        <td class="px-6 py-4">@appointment.DateOrder?.ToString("dd/MM/yyyy")</td>
+                        <td class="px-6 py-4">
+                            <span class="bg-blue-300 text-white text-xs font-medium px-2.5 py-0.5 rounded">@appointment.Status</span>
+                        </td>
+                        <td class="px-6 py-4">
+                            <a asp-action="ViewAppointmentDetail" asp-route-appointmentdetail="@appointment.Oid" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-
-        <!-- Pagination -->
-        <div class="flex flex-row-reverse items-center p-4">
-            <button class="p-2">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
-                </svg>
-            </button>
-            <button class="p-2">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
-                </svg>
-            </button>
-            <div class="flex justify-center">
-                <p class="text-center">Page 1 of 10</p>
-            </div>
-        </div>
     </div>
 </div>

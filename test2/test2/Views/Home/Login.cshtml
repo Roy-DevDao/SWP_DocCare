@@ -1,7 +1,8 @@
-﻿
+﻿﻿
 @{
     ViewData["Title"] = "Login";
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,20 +32,13 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var alertType = 'success'; 
-            var message = 'Đăng nhập thành công!'; 
-            if (alertType) {
-                toastr[alertType](message, 'Thông báo', { timeOut: 5000 });
-            }
-        });
-    </script>
 </head>
 <body>
+
     <div class="back-to-home rounded d-none d-sm-block">
         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
     </div>
+
 
     <!-- Hero Start -->
     <section class="bg-home d-flex bg-light align-items-center">
@@ -56,15 +50,8 @@
                             <h4 class="text-center">Login</h4>
 
                             <!-- Login form -->
-                            <form action="user?action=checklogin" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled=true;">
-                                <p style="color: red; align-content: center;">
-                                    <!-- Replace this with server-side error message -->
-                                    Error message here
-                                </p>
-                                <p style="color: blue; align-content: center;">
-                                    <!-- Replace this with server-side success message -->
-                                    Success message here
-                                </p>
+                            <form method="post" asp-action="Login" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled=true;">
+                               
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="mb-3">

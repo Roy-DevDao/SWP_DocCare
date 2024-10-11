@@ -1,25 +1,31 @@
 ﻿@{
+    var doctors = ViewBag.Doctors as IEnumerable<test2.Data.Doctor>;
+
+    var specialties = ViewBag.Specialties as IEnumerable<test2.Data.Specialty>;
+}
+@{
     Layout = "Layout";
+
     ViewData["Title"] = "Home Page";
 }
 
-
-  <section class="bg-half-260 d-table w-100" style="background: url('@Url.Content("~/assets/images/bg/banner.jpg")') center;">
-      <div class="bg-overlay bg-overlay-"></div>
-      <div class="container">
-          <div class="row mt-5 mt-lg-0">
-              <div class="col-12">
-                  <div class="heading-title">
-                      <img src="assets/images/icon-logo.png" height="5" width="5" alt="">
-                      <h4 class="display-4 fw-bold text-white title- mt-3 mb-4">
+<section class="bg-half-260 d-table w-100" style="background: url('@Url.Content("~/assets/images/bg/banner.jpg")') center;">
+    <div class="bg-overlay bg-overlay-"></div>
+    <div class="container">
+        <div class="row mt-5 mt-lg-0">
+            <div class="col-12">
+                <div class="heading-title">
+                    <img src="assets/images/icon-logo.png" height="5" width="5" alt="">
+                    <h4 class="display-4 fw-bold text-white title- mt-3 mb-4">
                         <br>
-                          Online Healthcare <br> Registration System</h4>
-                      <p class="para-desc text-white-50 mb-0">If you or your loved one needs immediate assistance, emergency treatment through a simple consultation.</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
+                        Online Healthcare <br> Registration System
+                    </h4>
+                    <p class="para-desc text-white-50 mb-0">If you or your loved one needs immediate assistance, emergency treatment through a simple consultation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="section">
     <div class="container">
@@ -89,15 +95,17 @@
             </div>
 
 
-                    <div class="mt-4">
-                        <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="btn btn-primary">More.. <i class="ri-arrow-right-line align-middle"></i></a>
-                    </div>
-                </div>
+            <div class="mt-4">
+                <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="btn btn-primary">More.. <i class="ri-arrow-right-line align-middle"></i></a>
             </div>
         </div>
     </div>
+    </div>
+    </div>
 </section>
 
+
+<!-- Show Service List -->
 <section class="section">
     <div class="container">
         <div class="row justify-content-center">
@@ -113,95 +121,44 @@
         <div class="row">
             <div class="col-12">
                 <div class="service-slider">
-                    <!-- Specialty 1 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img style="height: 14rem;width: 100%" src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-controller="Home" asp-action="ServiceDetail" class="title text- h5 d-block mb-0">Service 1</a>
-                                <small class="text-muted speciality">Specialty 1</small>
-                            </div>
-                        </div>
-                    </div>
+                    @if (specialties != null && specialties.Any())
 
-                    <!-- Specialty 2 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img style="height: 14rem;width: 100%" src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-controller="Home" asp-action="ServiceDetail" class="title text- h5 d-block mb-0">Service 2</a>
-                                <small class="text-muted speciality">Specialty 2</small>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        @foreach (var specialty in specialties)
 
-                    <!-- Specialty 3 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img style="height: 14rem;width: 100%" src="~/assets/images/service/03.png" class="img-fluid" alt="">
+                        {
+                            <div>
+                                <a asp-controller="Home" asp-action="ServiceDetail" asp-route-service="@specialty.SpecialtyId">
+                                    <div class="card team border-0 rounded shadow overflow-hidden">
+                                        <div class="team-img position-relative">
+                                            <img style="height: 14rem;width: 100%" src="@specialty.SpecialtyImg" class="img-fluid rounded" alt="Specialty @specialty.SpecialtyName">
+                                        </div>
+                                        <div class="card-body content text-center">
+                                            <a class="title text-dark h5 d-block mb-0">@specialty.SpecialtyName</a>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="card-body content text-center">
-                                <a asp-controller="Home" asp-action="ServiceDetail" class="title text- h5 d-block mb-0">Service 3</a>
-                                <small class="text-muted speciality">Specialty 3</small>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
 
-                    <!-- Specialty 4 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img style="height: 14rem;width: 100%" src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-controller="Home" asp-action="ServiceDetail" class="title text- h5 d-block mb-0">Service 4</a>
-                                <small class="text-muted speciality">Specialty 4</small>
-                            </div>
-                        </div>
-                    </div>
+                    else
 
-                    <!-- Specialty 5 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img style="height: 14rem;width: 100%" src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-controller="Home" asp-action="ServiceDetail" class="title text- h5 d-block mb-0">Service 5</a>
-                                <small class="text-muted speciality">Specialty 5</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Specialty 6 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img style="height: 14rem;width: 100%" src="~/assets/images/service/03.png" class="img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-controller="Home" asp-action="ServiceDetail" class="title text- h5 d-block mb-0">Service 6</a>
-                                <small class="text-muted speciality">Specialty 6</small>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="slick-prev"></button>
-                    <button class="slick-next"></button>
+                    {
+                        <p>No services available at the moment.</p>
+                    }
                 </div>
+
                 <div class="mt-4 text-center">
                     <a asp-area="" asp-controller="Home" asp-action="ServiceList" class="btn btn-primary">Find More</a>
                 </div>
-
-
             </div>
         </div>
-
+    </div>
 </section>
+
+<!-- Show Doctor List -->
+<!--        thangs's code start            -->
 <section class="section">
     <div class="container">
         <div class="row justify-content-center">
@@ -217,105 +174,33 @@
         <div class="row">
             <div class="col-12">
                 <div class="doctor-slider">
-                    <!-- Doctor 1 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-an.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 1</a>
-                                <small class="text-muted speciality">Specialty 1</small>
-                            </div>
-                        </div>
-                    </div>
+                    @if (doctors != null && doctors.Any())
 
-                    <!-- Doctor 2 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-doan.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 2</a>
-                                <small class="text-muted speciality">Specialty 2</small>
-                            </div>
-                        </div>
-                    </div>
+                    {
+                        @foreach (var doctor in doctors)
 
-                    <!-- Doctor 3 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-duy.png" class="rounded img-fluid" alt="">
+                        {
+                            <div>
+                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-service="@doctor.Did">
+                                    <div class="card team border-0 rounded shadow overflow-hidden">
+                                        <div class="team-img position-relative">
+                                            <img src="@doctor.DoctorImg" style="height: 16rem;width: 100%" class="img-fluid rounded" alt="Bác sĩ @doctor.Name">
+                                        </div>
+                                        <div class="card-body content text-center">
+                                            <a class="title text-dark h5 d-block mb-0">@doctor.Name</a>
+                                            <small class="text-muted speciality">Specialty: @doctor.Specialty?.SpecialtyName</small>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 3</a>
-                                <small class="text-muted speciality">Specialty 3</small>
-                            </div>
-                        </div>
-                    </div>
+                        }
+                    }
 
-                    <!-- Doctor 4 -->
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-hanh.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 4</a>
-                                <small class="text-muted speciality">Specialty 4</small>
-                            </div>
-                        </div>
-                    </div>
+                    else
 
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-an.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 1</a>
-                                <small class="text-muted speciality">Specialty 1</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-an.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 1</a>
-                                <small class="text-muted speciality">Specialty 1</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-an.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 1</a>
-                                <small class="text-muted speciality">Specialty 1</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="card team border-0 rounded shadow overflow-hidden">
-                            <div class="team-img position-relative">
-                                <img src="~/assets/images/doctors/bs-an.png" class="rounded img-fluid" alt="">
-                            </div>
-                            <div class="card-body content text-center">
-                                <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" class="title text- h5 d-block mb-0">Doctor 1</a>
-                                <small class="text-muted speciality">Specialty 1</small>
-                            </div>
-                        </div>
-                    </div>
-
+                    {
+                        <p>No doctors available at the moment.</p>
+                    }
                 </div>
 
                 <div class="mt-4 text-center">
@@ -325,9 +210,8 @@
         </div>
     </div>
 </section>
-
-
-
+<!--         thangs's code end             -->
+<!-- Video-->
 <section class="section pt-0">
     <div class="container">
         <div class="row justify-content-center">
@@ -347,6 +231,7 @@
         <div class="feature-posts-placeholder bg-primary"></div>
     </div>
 </section>
+
 <style>
     .slick-prev, .slick-next {
         background-color: transparent;
@@ -370,6 +255,10 @@
         .slick-prev:hover, .slick-next:hover {
             color: #00ff00; /* Màu sắc khi hover */
         }
+
+    .slick-prev, .slick-next {
+        display: block !important; /* Đảm bảo mũi tên luôn hiển thị */
+    }
 </style>
 
 <script>
@@ -379,6 +268,7 @@
             slidesToShow: 3,
             slidesToScroll: 3,
             autoplay: false,
+            infinite: true, // Thêm thuộc tính này
             dots: false,
             arrows: true,
             prevArrow: '<button type="button" class="slick-prev"></button>',

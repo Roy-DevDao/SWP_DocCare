@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<test2.Data.Doctor>
 @{
     Layout = "Layout_staff";
     ViewData["Title"] = "Schedule from Staff";
@@ -14,9 +14,11 @@
                 <div class="col-6 form-group">
                     <label for="doctor-select">Choose Doctor</label>
                     <select id="doctor-select" class="form-select">
-                        <option value="1">Dr. John Doe</option>
-                        <option value="2">Dr. Jane Smith</option>
-                        <!-- Add more options dynamically based on doctors available -->
+                        @foreach (var doctor in Model)
+
+                        {
+                            <option value="@doctor.Did">@doctor.Name</option>
+                        }
                     </select>
                 </div>
 
@@ -31,7 +33,6 @@
                     <button class="btn btn-schedule">11:00 - 13:00</button>
                     <button class="btn btn-schedule">13:00 - 15:00</button>
                     <button class="btn btn-schedule">15:00 - 17:00</button>
-                    <!-- Add more time slots dynamically based on available slots -->
                 </div>
 
                 <div class="col-12">

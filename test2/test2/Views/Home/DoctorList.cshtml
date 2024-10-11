@@ -41,8 +41,9 @@
                                     <small class="text-muted speciality position-text" style="max-height: 40px; overflow: hidden; text-overflow: ellipsis; display: block;">Position: @item.Position</small>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mt-2">
-                                    <ul class="list-unstyled mb-0">
+                                    <ul class="list-unstyled mb-0 d-flex" style="flex-wrap: nowrap;">
                                         @for (int i = 0; i < 5; i++)
+
                                         {
                                             <li class="list-inline-item">
                                                 <i class="mdi mdi-star @(i < Math.Ceiling(item.Rating) ? "text-warning" : "")"></i>
@@ -51,6 +52,7 @@
                                     </ul>
                                     <p class="text-muted mb-0">@item.NumberOfFeedbacks feedbacks</p>
                                 </div>
+
                                 <small class="text-muted speciality">Price: $@item.Price</small>
                                 <div class="pt-2">
                                     <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient", new { id = @item.DoctorId })'">Book</button>

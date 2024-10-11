@@ -1,8 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
+using System.Text.RegularExpressions;
+using test2.Context;
 using test2.Data;
 using test2.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Security.Claims;
 
 namespace test2.Controllers
 {
@@ -16,10 +24,19 @@ namespace test2.Controllers
             _logger = logger;
             dc = db;
         }
-//--------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------
         public IActionResult Index()
         {
+
+            var doctors = dc.Doctors.Take(8).ToList();
+            var specialties = dc.Specialties.Take(8).ToList();
+
+            //truyen data thong qua view bag
+            ViewBag.Doctors = doctors;
+            ViewBag.Specialties = specialties;
+
             return View();
+
         }
         //--------------------------------------------------------------------------------------------
 
@@ -129,15 +146,137 @@ namespace test2.Controllers
         //--------------------------------------------------------------------------------------------
 
         public IActionResult Login()
+        {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            // Validate user credentials (replace this with your actual logic)
+            var user = dc.Accounts.Where(dc => dc.Email == email).FirstOrDefault();
+            if (user != null)
+            {
+                if (user.Password == password)
+                {
+                    var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, email),
+                new Claim(ClaimTypes.Role, user.Role.ToString()) // Thêm role của user
+            };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
+                    var authProperties = new AuthenticationProperties
+                    {
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30),
+                        IsPersistent = true
+                    };
+
+                    await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                    // Điều hướng người dùng dựa trên role
+                    switch (user.Role)
+                    {
+                        case 0: // Admin
+                            return RedirectToAction("Index", "Admin");
+                        case 1: // Staff
+                            return RedirectToAction("AppointmentList", "Staff");
+                        case 2: // Doctor
+                            return RedirectToAction("ViewAppointment", "Doctor");
+                        case 3: // Patient
+                            return RedirectToAction("AppointmentHistory", "Patient");
+                        default:
+                            TempData["ErrorMessage"] = "Role not recognized.";
+                            return RedirectToAction("Login");
+                    }
+                }
+            }
+
+            TempData["ErrorMessage"] = "Invalid login attempt.";
+            return RedirectToAction("Login");
+        }
+
         //--------------------------------------------------------------------------------------------
 
         public IActionResult SignUp()
+        {
+            return View();
+        }
+
+
+        public IActionResult SignUp1(RegisterViewModel model)
+        {
+            // Kiểm tra tính hợp lệ của model
+            if (!ModelState.IsValid)
             {
-                return View();
+                // Trả lại view với các lỗi xác thực
+                return View("SignUp", model);
             }
+
+            // Kiểm tra mật khẩu
+            if (model.Password.Length < 8 || !Regex.IsMatch(model.Password, @"[A-Za-z]") || !Regex.IsMatch(model.Password, @"[0-9]"))
+            {
+                ModelState.AddModelError("", "Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.");
+                return View("SignUp", model);
+            }
+
+            // Kiểm tra xem tài khoản đã tồn tại chưa
+            var existingAccount = dc.Accounts.FirstOrDefault(a => a.Username == model.Username || a.Email == model.Email);
+            if (existingAccount != null)
+            {
+                ModelState.AddModelError("", "Tài khoản hoặc email đã tồn tại.");
+                return View("SignUp", model);
+            }
+
+            try
+            {
+                // Tạo tài khoản mới
+                var newAccount = new Account
+                {
+                    Id = Guid.NewGuid().ToString(), // Tạo ID ngẫu nhiên
+                    Username = model.Username,
+                    Password = model.Password,
+                    //Password = BCrypt.Net.BCrypt.HashPassword(model.Password), // Mã hóa mật khẩu
+                    Email = model.Email,
+                    Role = 3, // Mặc định là Patient
+                    Status = true // Có thể thay đổi tùy theo yêu cầu
+                };
+
+                // Thêm tài khoản vào cơ sở dữ liệu
+                dc.Accounts.Add(newAccount);
+                dc.SaveChanges();
+
+                // Tạo bản ghi Patient
+                var newPatient = new Patient
+                {
+                    Pid = newAccount.Id, // Sử dụng ID từ Account
+                    Name = model.Name,
+                    Phone = model.Phone,
+                    Gender = model.Gender,
+                    PatientImg = null // Hoặc đường dẫn đến ảnh người dùng
+                };
+
+                // Thêm patient vào cơ sở dữ liệu
+                dc.Patients.Add(newPatient);
+                dc.SaveChanges();
+
+                // Ghi nhận thông báo thành công
+                TempData["SuccessMessage"] = "Đăng ký thành công! Chuyển đến trang đăng nhập.";
+                return RedirectToAction("Login", "Home"); // Điều hướng đến trang đăng nhập
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra: " + ex.Message);
+                return View("SignUp", model);
+            }
+        }
+
+
         //--------------------------------------------------------------------------------------------
 
         public IActionResult Profile()
@@ -248,6 +387,13 @@ namespace test2.Controllers
                 return View();
             }
         //--------------------------------------------------------------------------------------------
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync("MyCookieAuth");
+            return RedirectToAction("Index", "Home"); 
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

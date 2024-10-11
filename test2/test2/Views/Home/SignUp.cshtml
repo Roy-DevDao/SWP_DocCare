@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Sign Up";
 }
 
@@ -11,108 +10,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="doccare, medical, appointment, doctor, booking" />
     <meta name="description" content="Healthcare system, appointment scheduling" />
-    <meta property="og:title" content="Doccare.ml - Find Doctors Easily - Schedule Appointments Conveniently" />
-    <meta property="og:description" content="Healthcare system, appointment scheduling" />
-    <meta property="og:site_name" content="doccare.ml" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
     <link rel="shortcut icon" href="https://shreethemes.in/Doccare/layouts/assets/images/favicon.ico">
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
-    <link href="~/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="~/assets/css/tiny-slider.css" />
-    <link href="~/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-    <link href="~/assets/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/assets/css/flatpickr.min.css">
-    <link href="~/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
     <script src="~/assets/js/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <script type="text/javascript">
         $(document).ready(function () {
-            var alertType = 'success';
-            var message = 'Đăng nhập thành công!';
-            if (alertType) {
-                toastr[alertType](message, 'Thông báo', { timeOut: 5000 });
+            // Hiển thị thông báo thành công nếu đăng ký thành công
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage) {
+                toastr['success'](successMessage, 'Thành công');
+                // Chuyển đến trang đăng nhập sau 2 giây
+                setTimeout(function () {
+                    window.location.href = '@Url.Action("Login", "Home")';
+                }, 2000);
+            }
+
+            // Hiển thị thông báo lỗi nếu có
+            var errorMessage = '@Html.ValidationSummary("", new { @class = "text-danger" })';
+            if (errorMessage) {
+                toastr['error'](errorMessage, 'Lỗi');
             }
         });
     </script>
 </head>
 <body>
-    <div class="back-to-home rounded d-none d-sm-block">
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
-    </div>
-
-    <section class="bg-half-150 d-table w-100 bg-light">
+    <section class="bg-light">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-8">
                     <div class="card login-page bg-white shadow mt-4 rounded border-0">
                         <div class="card-body">
                             <h4 class="text-center">Register</h4>
-                            <p style="color: red; align-content: center;">
-                                <!-- Display error (if any) via JavaScript or client-side handling -->
-                            </p>
-                            <form action="user?action=checkregister" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled=true;">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Username <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="username" required="">
+                            <form action="@Url.Action("SignUp1", "Home")" method="POST" class="login-form mt-4">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="mb-3">
+                                    <label class="form-label">Username <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="username" required="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="name" required="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                    <div class="my-3">
+                                        <div class="form-check">
+                                            <input id="male" name="gender" value="Male" type="radio" class="form-check-input" required>
+                                            <label class="form-check-label" for="male">Male</label>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Full Name <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="name" required="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Gender <span class="text-danger">*</span></label>
-                                            <div class="my-3">
-                                                <div class="form-check">
-                                                    <input id="credit" name="gender" value="true" type="radio" class="form-check-input" checked required>
-                                                    <label class="form-check-label">Male</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input id="debit" name="gender" value="false" type="radio" class="form-check-input" required>
-                                                    <label class="form-check-label">Female</label>
-                                                </div>
-                                            </div>
+                                        <div class="form-check">
+                                            <input id="female" name="gender" value="Female" type="radio" class="form-check-input" required>
+                                            <label class="form-check-label" for="female">Female</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Phone Number <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="phone" required="">
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="phone" required="">
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" name="email" required="">
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" required="">
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Password <span class="text-danger">*</span></label>
-                                        <input type="password" id="password" class="form-control" name="password" required="">
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Password <span class="text-danger">*</span></label>
+                                    <input type="password" id="password" class="form-control" name="password" required="">
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                                        <input type="password" class="form-control" name="repassword" required="">
-                                    </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="ConfirmPassword" required="">
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="d-grid">
-                                        <button class="btn btn-primary" id="submit">Register</button>
-                                    </div>
+
+                                <div class="d-grid">
+                                    <button class="btn btn-primary" id="submit">Register</button>
                                 </div>
                                 <div class="mx-auto">
                                     <p class="mb-0 mt-3"><small class="text-dark me-2">Already have an account?</small> <a asp-area="" asp-controller="Home" asp-action="Login" class="text-dark fw-bold">Login</a></p>
@@ -125,9 +98,6 @@
         </div>
     </section>
 
-
     <script src="~/assets/js/bootstrap.bundle.min.js"></script>
-    <script src="~/assets/js/feather.min.js"></script>
-    <script src="~/assets/js/app.js"></script>
 </body>
 </html>

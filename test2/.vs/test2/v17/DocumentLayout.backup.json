@@ -3,20 +3,12 @@
   "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\admin\\servicedetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\admin\\servicedetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\admin\\addpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\admin\\addpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ServiceDetails.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Admin\\ServiceDetails.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Admin\\ServiceDetails.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Admin\\ServiceDetails.cshtml",
-              "RelativeToolTip": "test2\\Views\\Admin\\ServiceDetails.cshtml",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAAAIAAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-10T17:28:47.322Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AddPatient.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Admin\\AddPatient.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Admin\\AddPatient.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Admin\\AddPatient.cshtml",
-              "RelativeToolTip": "test2\\Views\\Admin\\AddPatient.cshtml",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALkAAAAAAAAAAAAAALkAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-10T17:27:31.387Z",
+              "WhenOpened": "2024-10-11T07:32:05.676Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "test2\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "test2\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T17:25:11.109Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "test2\\Controllers\\AdminController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Controllers\\AdminController.cs",
-              "RelativeToolTip": "test2\\Controllers\\AdminController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-10T17:24:42.696Z",
+              "DocumentIndex": 0,
+              "Title": "Layout_Doctor.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAAALkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T07:24:53.842Z",
               "EditorCaption": ""
             }
           ]

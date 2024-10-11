@@ -96,6 +96,15 @@
                         <i class="fas fa-procedures me-2"></i> Manage Patients
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <form asp-controller="Home" asp-action="Logout" method="post" style="display: inline;">
+                        <button type="submit" class="nav-link d-flex align-items-center" style="background: none; border: none;">
+                            <i class="fas fa-procedures me-2"></i> Log Out
+                        </button>
+                    </form>
+                </li>
+
             </ul>
 
         </div>

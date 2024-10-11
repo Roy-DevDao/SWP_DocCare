@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using test2.DAO;
 using test2.Data;
 
 namespace test2
@@ -15,9 +16,20 @@ namespace test2
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DocCare"));
             });
 
+            builder.Services.AddAuthentication("MyCookieAuth")
+            .AddCookie("MyCookieAuth", options =>
+            {
+                options.Cookie.Name = "MyAuthCookie";
+                options.LoginPath = "/Home/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<PatientDao>();
+            builder.Services.AddScoped<DoctorDAO>();
+            builder.Services.AddScoped<AppointmentDAO>();
+            builder.Services.AddScoped<FeedbackDAO>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,7 +43,7 @@ namespace test2
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.MapControllers();
             app.UseAuthorization();
 
             // Default route for Home controller

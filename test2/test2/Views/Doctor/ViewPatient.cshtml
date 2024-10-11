@@ -1,120 +1,55 @@
-﻿@{
-    Layout = "_Layout";
-    var patients = new List<dynamic>
-    {
-        new { phone = 0945769372, name = "Trung Phan", email = "hung@gmail.com", dateBooking = "23/12/04", dob = "23/12/04" },
-        new { phone = 0965769372, name = "Nguyen Van A", email = "hai@gmail.com", dateBooking = "23/12/05", dob = "23/12/04" },
-        new { phone = 0945769332, name = "Le Thi B", email = "huyen@gmail.com", dateBooking = "23/12/06", dob = "23/12/04" },
-    };
-}
-<div class="container mx-auto mt-10 p-5">
-    <h2 class="text-2xl  text-blue-500 font-bold mb-4">Patients List</h2>
+﻿﻿
+@model IEnumerable<test2.Data.Patient>
 
+@{
+    Layout = "_Layout";
+}
+
+<div class="container mx-auto mt-10 p-5">
+    <h2 class="text-2xl text-blue-500 font-bold mb-4">Patients List for Doctor ID: @ViewData["DoctorId"]</h2>
 
     <form class="flex items-center justify-center max-w-sm mx-auto mb-5">
-        <button type="button" class="text-white px-4 py-2 flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  text-center me-2 mb-2">
-            <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+        <button type="button" class="text-white px-4 py-2 flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm text-center me-2 mb-2">
+            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
             </svg>
-            <h1 class="px-1">3</h1>
+            <h1 class="px-1">@Model.Count()</h1>
             <h1> total</h1>
-
-        </button>
-        <label for="simple-search" class="sr-only">Search</label>
-        <div class="relative w-full">
-            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
-                </svg>
-            </div>
-            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search name..." required />
-        </div>
-        <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-            </svg>
-            <span class="sr-only">Search</span>
         </button>
     </form>
-
-
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Image
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Phone
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Email
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Date Booking
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        DoB
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
+                    <th class="px-6 py-3">Name</th>
+                    <th class="px-6 py-3">Phone</th>
+                    <th class="px-6 py-3">Email</th>
+                    <th class="px-6 py-3">Date Booking</th>
+                    <th class="px-6 py-3">DoB</th>
+                    <th class="px-6 py-3">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var patient in patients)
+                @foreach (var patient in Model)
                 {
+                    // Lấy ngày đặt lịch từ đơn hàng đầu tiên của bệnh nhân (nếu có)
+                    var dateOrder = patient.Orders.FirstOrDefault()?.DateOrder;
+
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            @patient.name
+                        <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @patient.Name
                         </th>
+                        <td class="px-6 py-4">@patient.Phone</td>
+                        <td class="px-6 py-4">@patient.PidNavigation?.Email</td>
+                        <td class="px-6 py-4">@dateOrder?.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td class="px-6 py-4">@patient.Dob?.ToString("yyyy-MM-dd")</td>
                         <td class="px-6 py-4">
-                            <img class="w-20 h-20 rounded" src="https://i.pinimg.com/736x/52/c9/1c/52c91c32ae7ac4b75252fcb9a67d567b.jpg" alt="Default avatar">
-                        </td>
-                        <td class="px-6 py-4">
-                            @patient.phone
-                        </td>
-                        <td class="px-6 py-4">
-                            @patient.email
-                        </td>
-                        <td class="px-6 py-4">
-                            @patient.dateBooking
-                        </td>
-                        <td class="px-6 py-4">
-                            @patient.dob
-                        </td>
-                        <td class="px-6 py-4">
-                            <a asp-area="" asp-controller="Home" asp-action="ViewPatientDetail" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                            <a asp-controller="Doctor" asp-action="ViewPatientDetail" asp-route-pid="@patient.Pid" asp-route-tab="profile" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                         </td>
                     </tr>
                 }
-
-
             </tbody>
-
         </table>
-        <div class="flex flex-row-reverse items-center">
-            <button class="p-2">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7" />
-                </svg>
-            </button>
-            <button class="p-2">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7" />
-                </svg>
-            </button>
-            <div class="flex justify-center">
-                <p class="text-center">Page 1 of 10</p>
-            </div>
-
-
-        </div>
     </div>
-
 </div>
