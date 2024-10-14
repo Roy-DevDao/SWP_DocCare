@@ -168,8 +168,10 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
     </style>
 
 }
+@model test2.Data.Doctor
+
 <main class="layout-default_body_main p-8 ">
-    <form class="space-y-8 bg-white p-8 shadow rounded-lg">
+    <form method="post" class="space-y-8 bg-white p-8 shadow rounded-lg">
         <div class="section space-y-6">
             <h1 class="first-text">Doctor Information</h1>
 
@@ -188,22 +190,25 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
                 </div>
 
                 <div class="col">
-                    <label for="first-name">First Name</label>
+                    <label for="first-name">Speciality ID: </label>
                     <input id="first-name" name="first-name" type="text" autocomplete="given-name">
                 </div>
 
                 <div class="col">
-                    <label for="last-name">Last Name</label>
+                    <label for="last-name">Full Name</label>
                     <input id="last-name" name="last-name" type="text" autocomplete="family-name">
                 </div>
 
                 <div class="col">
                     <label for="gender">Gender</label>
                     <select id="gender" name="gender">
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Other</option>
+                        @foreach (var gender in ViewBag.Gender)
+                        {
+                            <option value="@gender">@gender</option>
+                            // Display the gender text
+                        }
                     </select>
+
                 </div>
 
                 <div class="col">
@@ -211,12 +216,9 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
                     <input id="dob" name="dob" type="date">
                 </div>
 
-                <div class="col">
-                    <label for="address">Address</label>
-                    <input id="address" name="address" type="text" placeholder="Doctor's address">
-                </div>
+             
 
-                <div class="col">
+                <div class="col-full">
                     <label for="phone">Phone Number</label>
                     <input id="phone" name="phone" type="tel" placeholder="Phone number">
                 </div>
@@ -228,34 +230,35 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
 
             <div class="grid grid-cols-2 gap-6">
                 <div class="col">
-                    <label for="position">Position</label>
-                    <select id="position" name="position">
-                        <option>Senior Doctor</option>
-                        <option>Junior Doctor</option>
-                        <option>Specialist</option>
-                        <option>Consultant</option>
+                    <label for="Position">Position</label>
+                    <select id="Position" name="Position">
+                        @foreach (var position in ViewBag.Position)
+                        {
+                            <option value="@position">@position</option>
+                        }
                     </select>
+
                 </div>
 
                 <div class="col">
-                    <label for="speciality">Speciality</label>
-                    <select id="speciality" name="speciality">
-                        <option>Cardiology</option>
-                        <option>Neurology</option>
-                        <option>Orthopedics</option>
-                        <option>Dermatology</option>
-                        <option>Pediatrics</option>
+                    <label for="Speciality">Speciality</label>
+                    <select id="Speciality" name="Speciality">
+                        @foreach (var speciality in ViewBag.Specialties)
+                        {
+                            <option value="@speciality">@speciality</option>
+                        }
                     </select>
+
                 </div>
 
                 <div class="col-full">
-                    <label for="experience">Experience</label>
-                    <textarea id="experience" name="experience" rows="3" placeholder="Enter doctor's experience details"></textarea>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="3" placeholder="Enter doctor's description details"></textarea>
                 </div>
 
                 <div class="col-full">
-                    <label for="awards">Awards</label>
-                    <textarea id="awards" name="awards" rows="3" placeholder="List any awards or recognitions"></textarea>
+                    <label for="details">Details ID: </label>
+                    <textarea id="details" name="details" rows="3" placeholder="List  details"></textarea>
                 </div>
 
                 <div class="col">
