@@ -10,11 +10,11 @@ namespace test2.Controllers
 {
     public class StaffController : Controller
     {
-        private readonly DocCareContext dc;
+        private readonly Data.DocCareContext dc;
 
         private readonly ILogger<StaffController> _logger;
 
-        public StaffController(ILogger<StaffController> logger, DocCareContext dc)
+        public StaffController(ILogger<StaffController> logger, Data.DocCareContext dc)
         {
             _logger = logger;
             this.dc = dc;

@@ -3,25 +3,19 @@ using System.Collections.Generic;
 
 namespace test2.Data;
 
-public partial class Order
+public class Order
 {
-    public string Oid { get; set; } = null!;
+    public string OId { get; set; }
+    public string PId { get; set; }
+    public string OptionId { get; set; }
+    public string Status { get; set; }
+    public DateTime DateOrder { get; set; }
+    public string Symptom { get; set; }
 
-    public string? Pid { get; set; }
+    // Navigation property to Patient and Option
+    public virtual Patient Patient { get; set; }
+    public virtual Option Option { get; set; }
 
-    public string? OptionId { get; set; }
-
-    public string? Status { get; set; }
-
-    public DateTime? DateOrder { get; set; }
-
-    public string? Symptom { get; set; }
-
-    public virtual ICollection<HealthRecord> HealthRecords { get; set; } = new List<HealthRecord>();
-
-    public virtual Option? Option { get; set; }
-
-    public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-    public virtual Patient? PidNavigation { get; set; }
+    public virtual ICollection<HealthRecord> HealthRecords { get; set; }
 }
+

@@ -10,9 +10,9 @@ namespace test2.Controllers
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
-        private readonly DocCareContext _context;
+        private readonly Context.DocCareContext _context;
 
-        public AdminController(ILogger<AdminController> logger, DocCareContext context)
+        public AdminController(ILogger<AdminController> logger, Context.DocCareContext context)
         {
             _logger = logger;
             _context = context; // Kh?i t?o DbContext

@@ -1,13 +1,89 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\",
+  "WorkspaceRootPath": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\context\\doccarecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\context\\doccarecontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\option.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\option.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\healthrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\healthrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\dao\\appointmentdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\appointmentdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\detailspecialty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\detailspecialty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\detaildoctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\detaildoctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\schedule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\specialty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\specialty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_doccare-master\\swp_doccare-master\\test2\\test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
@@ -18,30 +94,280 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "test2\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAALkAAAAAAAAAAAAAALkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-11T07:32:05.676Z",
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\DoctorController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\DoctorController.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\DoctorController.cs",
+              "RelativeToolTip": "test2\\Controllers\\DoctorController.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAawFgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T16:06:54.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\AdminController.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "test2\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAEwFEAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T16:04:44.237Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Order.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Order.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Order.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Order.cs",
+              "RelativeToolTip": "test2\\Data\\Order.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:26:03.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Option.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Option.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Option.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Option.cs",
+              "RelativeToolTip": "test2\\Data\\Option.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:25:56.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Doctor.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Doctor.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Doctor.cs",
+              "RelativeToolTip": "test2\\Data\\Doctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:24:40.191Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "DocCareContext.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Context\\DocCareContext.cs",
+              "RelativeDocumentMoniker": "test2\\Context\\DocCareContext.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Context\\DocCareContext.cs",
+              "RelativeToolTip": "test2\\Context\\DocCareContext.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAApwCMAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:16:06.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\appsettings.json",
+              "RelativeDocumentMoniker": "test2\\appsettings.json",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\appsettings.json",
+              "RelativeToolTip": "test2\\appsettings.json",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-15T15:18:44.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Contact.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Contact.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Contact.cs",
+              "RelativeToolTip": "test2\\Data\\Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:22:06.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HealthRecord.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\HealthRecord.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\HealthRecord.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\HealthRecord.cs",
+              "RelativeToolTip": "test2\\Data\\HealthRecord.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABIAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:26:10.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Patient.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Patient.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Patient.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Patient.cs",
+              "RelativeToolTip": "test2\\Data\\Patient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA4AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:24:29.66Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Feedback.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Feedback.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Feedback.cs",
+              "RelativeToolTip": "test2\\Data\\Feedback.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAA1wA0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:25:26.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AppointmentDAO.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\DAO\\AppointmentDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\AppointmentDAO.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\DAO\\AppointmentDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\AppointmentDAO.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAawEQAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:16:06.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Payment.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Payment.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Payment.cs",
+              "RelativeToolTip": "test2\\Data\\Payment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:26:19.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "test2\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAGEBAAAAAAAAAAAawHEBAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:16:55.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DetailSpecialty.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\DetailSpecialty.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\DetailSpecialty.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\DetailSpecialty.cs",
+              "RelativeToolTip": "test2\\Data\\DetailSpecialty.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:28:26.195Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DetailDoctor.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\DetailDoctor.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\DetailDoctor.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\DetailDoctor.cs",
+              "RelativeToolTip": "test2\\Data\\DetailDoctor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:25:20.065Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Schedule.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Schedule.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Schedule.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Schedule.cs",
+              "RelativeToolTip": "test2\\Data\\Schedule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:25:49.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Specialty.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Specialty.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Specialty.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Specialty.cs",
+              "RelativeToolTip": "test2\\Data\\Specialty.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:25:10.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Account.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Account.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Account.cs",
+              "RelativeToolTip": "test2\\Data\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-15T15:22:29.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALkAAAAAAAAAAAAAALkAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T07:32:05.676Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "Layout_Doctor.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
               "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_Doctor.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\SWP_DocCare-master\\SWP_DocCare-master\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
               "RelativeToolTip": "test2\\Views\\Shared\\Layout_Doctor.cshtml",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAAAI4AAABTAAAAAAAAAA==",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAGcAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-11T07:24:53.842Z",
               "EditorCaption": ""

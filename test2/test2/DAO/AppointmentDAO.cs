@@ -4,9 +4,9 @@ namespace test2.DAO
 {
     public class AppointmentDAO
     {
-        private readonly DocCareContext _context;
+        private readonly Context.DocCareContext _context;
 
-        public AppointmentDAO(DocCareContext context)
+        public AppointmentDAO(Context.DocCareContext context)
         {
             _context = context;
         }
@@ -14,7 +14,7 @@ namespace test2.DAO
         public List<Order> GetAppointmentsForFirstDoctor()
         {
             // Fetch the first doctor by their ID and retrieve their appointments
-            var firstDoctorId = _context.Doctors.FirstOrDefault()?.Did;
+            var firstDoctorId = _context.Doctors.FirstOrDefault()?.DId;
 
             if (firstDoctorId == null)
             {
@@ -23,17 +23,17 @@ namespace test2.DAO
 
             // Get appointments by joining related tables
             var appointments = _context.Orders
-                .Where(o => o.Option.Did == firstDoctorId)
+                .Where(o => o.Option.DId == firstDoctorId)
                 .Select(o => new Order
                 {
-                    Oid = o.Oid,
-                    Pid = o.Pid,
+                    OId = o.OId,
+                    PId = o.PId,
                     OptionId = o.OptionId,
                     Status = o.Status,
                     DateOrder = o.DateOrder,
                     Symptom = o.Symptom,
                     Option = o.Option,
-                    PidNavigation = o.PidNavigation
+                    Patient = o.Patient,
                 })
                 .ToList();
 
@@ -46,11 +46,11 @@ namespace test2.DAO
         public Order GetAppointmentDetailById(string oid)
         {
             var appointment = _context.Orders
-                .Where(o => o.Oid == oid)
+                .Where(o => o.OId == oid)
                 .Select(o => new Order
                 {
-                    Oid = o.Oid,
-                    PidNavigation = o.PidNavigation,
+                    OId = o.OId,
+                    Patient = o.Patient,
                     Option = o.Option,
                     DateOrder = o.DateOrder,
                     Status = o.Status,
@@ -64,8 +64,8 @@ namespace test2.DAO
                 return _context.Orders
                     .Select(o => new Order
                     {
-                        Oid = o.Oid,
-                        PidNavigation = o.PidNavigation,
+                        OId = o.OId,
+                        Patient = o.Patient,
                         Option = o.Option,
                         DateOrder = o.DateOrder,
                         Status = o.Status,

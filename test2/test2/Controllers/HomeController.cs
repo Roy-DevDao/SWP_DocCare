@@ -16,10 +16,10 @@ namespace test2.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly DocCareContext dc;
+        private readonly Context.DocCareContext dc;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, DocCareContext db)
+        public HomeController(ILogger<HomeController> logger, Context.DocCareContext db)
         {
             _logger = logger;
             dc = db;
@@ -66,7 +66,7 @@ namespace test2.Controllers
             switch (sort)
             {
                 case "star":
-                    doctors = doctors.OrderByDescending(d => d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0);
+                    doctors = doctors.OrderByDescending(d => d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star) : 0);
                     break;
                 case "fee":
                     doctors = doctors.OrderBy(d => d.Price);
@@ -81,14 +81,14 @@ namespace test2.Controllers
             // Phân trang và lấy danh sách bác sĩ
             var doctorList = doctors.Select(d => new DoctorViewModel
             {
-                DoctorId = d.Did,
+                DoctorId = d.DId,
                 Name = d.Name,
                 DoctorImg = d.DoctorImg,
                 Specialty = d.Specialty.SpecialtyName,
-                Price = d.Price ?? 0,
+                Price = d.Price,
                 Position = d.Position,
                 NumberOfFeedbacks = d.Feedbacks.Count(),
-                Rating = d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0
+                Rating = d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star) : 0
             })
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -119,7 +119,7 @@ namespace test2.Controllers
             var doctor = dc.Doctors
                 .Include(d => d.Specialty)
                 .Include(d => d.Feedbacks)
-                .FirstOrDefault(d => d.Did == id);
+                .FirstOrDefault(d => d.DId == id);
 
             if (doctor == null)
             {
@@ -128,14 +128,14 @@ namespace test2.Controllers
 
             var viewModel = new DoctorViewModel
             {
-                DoctorId = doctor.Did,
+                DoctorId = doctor.DId,
                 Name = doctor.Name,
                 DoctorImg = doctor.DoctorImg,
                 Specialty = doctor.Specialty?.SpecialtyName, 
-                Price = doctor.Price ?? 0, 
+                Price = doctor.Price, 
                 Position = doctor.Position,
                 NumberOfFeedbacks = doctor.Feedbacks.Count(),
-                Rating = doctor.Feedbacks.Any() ? doctor.Feedbacks.Average(f => f.Star ?? 0) : 0,
+                Rating = doctor.Feedbacks.Any() ? doctor.Feedbacks.Average(f => f.Star) : 0,
                 Description = doctor.Description, 
                 Feedbacks = doctor.Feedbacks.ToList()
             };
@@ -254,7 +254,7 @@ namespace test2.Controllers
                 // Tạo bản ghi Patient
                 var newPatient = new Patient
                 {
-                    Pid = newAccount.Id, // Sử dụng ID từ Account
+                    PId = newAccount.Id, // Sử dụng ID từ Account
                     Name = model.Name,
                     Phone = model.Phone,
                     Gender = model.Gender,
@@ -354,11 +354,11 @@ namespace test2.Controllers
 
             var feedbacks = dc.Feedbacks
             .AsEnumerable() 
-        .Where(f => service.Doctors.Any(d => d.Did == f.Did))
+        .Where(f => service.Doctors.Any(d => d.DId == f.DId))
         .ToList();
 
 
-            double averageRating = feedbacks.Any() ? feedbacks.Average(f => f.Star ?? 0) : 0;
+            double averageRating = feedbacks.Any() ? feedbacks.Average(f => f.Star) : 0;
             int totalReviews = feedbacks.Count();
 
             var viewModel = new ServiceViewModel
@@ -367,7 +367,7 @@ namespace test2.Controllers
                 SpecialtyName = service.SpecialtyName,
                 SpecialtyImg = service.SpecialtyImg,
                 ShortDescription = service.ShortDescription,
-                LongDescription = service.LongDescription,
+                
                 Price = 500000, 
                 Doctors = service.Doctors.ToList(), 
                 Feedbacks = feedbacks,

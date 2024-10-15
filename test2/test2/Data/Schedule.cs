@@ -3,19 +3,14 @@ using System.Collections.Generic;
 
 namespace test2.Data;
 
-public partial class Schedule
+public class Schedule
 {
-    public string ScheduleId { get; set; } = null!;
+    public string ScheduleId { get; set; }
+    public DateTime DateWork { get; set; }
+    public TimeSpan TimeStart { get; set; }
+    public TimeSpan TimeEnd { get; set; }
 
-    public string? Did { get; set; }
-
-    public DateOnly? DateWork { get; set; }
-
-    public TimeOnly? TimeStart { get; set; }
-
-    public TimeOnly? TimeEnd { get; set; }
-
-    public string? Status { get; set; }
-
-    public virtual Doctor? DidNavigation { get; set; }
+    // Navigation property for related Options
+    public virtual ICollection<Option> Options { get; set; }
 }
+

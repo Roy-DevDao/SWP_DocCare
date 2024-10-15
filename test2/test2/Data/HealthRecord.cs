@@ -3,27 +3,20 @@ using System.Collections.Generic;
 
 namespace test2.Data;
 
-public partial class HealthRecord
+public class HealthRecord
 {
-    public string RecordId { get; set; } = null!;
+    public string RecordId { get; set; }
+    public string PId { get; set; }
+    public string DId { get; set; }
+    public string OId { get; set; }
+    public string Diagnosis { get; set; }
+    public string Description { get; set; }
+    public string Note { get; set; }
+    public DateTime DateExam { get; set; }
 
-    public string? Pid { get; set; }
-
-    public string? Did { get; set; }
-
-    public string? Oid { get; set; }
-
-    public string? Diagnosis { get; set; }
-
-    public string? Description { get; set; }
-
-    public string? Note { get; set; }
-
-    public DateTime? DateExam { get; set; }
-
-    public virtual Doctor? DidNavigation { get; set; }
-
-    public virtual Order? OidNavigation { get; set; }
-
-    public virtual Patient? PidNavigation { get; set; }
+    // Navigation property to Patient, Doctor and Order
+    public virtual Patient Patient { get; set; }
+    public virtual Doctor Doctor { get; set; }
+    public virtual Order Order { get; set; }
 }
+

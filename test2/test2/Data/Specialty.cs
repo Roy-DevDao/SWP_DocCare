@@ -3,17 +3,15 @@ using System.Collections.Generic;
 
 namespace test2.Data;
 
-public partial class Specialty
+public class Specialty
 {
-    public string SpecialtyId { get; set; } = null!;
+    public string SpecialtyId { get; set; }
+    public string SpecialtyName { get; set; }
+    public string SpecialtyImg { get; set; }
+    public string ShortDescription { get; set; }
 
-    public string? SpecialtyName { get; set; }
-
-    public string? SpecialtyImg { get; set; }
-
-    public string? ShortDescription { get; set; }
-
-    public string? LongDescription { get; set; }
-
-    public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
+    // Navigation property for related Doctors and DetailSpecialties
+    public virtual ICollection<Doctor> Doctors { get; set; }
+    public virtual ICollection<DetailSpecialty> DetailSpecialties { get; set; }
 }
+

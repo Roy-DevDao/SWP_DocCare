@@ -8,14 +8,14 @@ namespace test2.Controllers
 {
     public class DoctorController : Controller
     {
-        DocCareContext _context;
+        Context.DocCareContext _context;
         private readonly ILogger<DoctorController> _logger;
         private readonly AppointmentDAO _appointmentDAO;
         private readonly PatientDao _patientDao;
         private readonly FeedbackDAO _feedbackDao;
         private const string DefaultDoctorId = "a4";
 
-        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct)
+        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, Context.DocCareContext ct)
         {
             _logger = logger;
             _appointmentDAO = appointmentDAO;
@@ -74,7 +74,7 @@ namespace test2.Controllers
             var patient = _context.Patients
                 .Include(p => p.Orders)
                 .ThenInclude(o => o.Option)
-                .FirstOrDefault(p => p.Pid == pid);
+                .FirstOrDefault(p => p.PId == pid);
 
             // Nếu bệnh nhân không tồn tại, trả về lỗi 404
             if (patient == null)
