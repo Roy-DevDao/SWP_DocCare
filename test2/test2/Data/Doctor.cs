@@ -5,7 +5,7 @@ namespace test2.Data;
 
 public partial class Doctor
 {
-    public string Did { get; set; } = null!;        
+    public string Did { get; set; } = null!;
 
     public string? Name { get; set; }
 
@@ -34,8 +34,6 @@ public partial class Doctor
     public virtual ICollection<HealthRecord> HealthRecords { get; set; } = new List<HealthRecord>();
 
     public virtual ICollection<Option> Options { get; set; } = new List<Option>();
-
-    public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
 
     public virtual Specialty? Specialty { get; set; }
 }

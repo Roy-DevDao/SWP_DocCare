@@ -57,7 +57,11 @@
                     </ul>
 
                     <h5 class="mt-4 py-2">Description:</h5>
-                    <p class="text-muted">@Model.LongDescription</p>
+                    @foreach(var specialtyDetail in Model.DetailSpecialties)
+                    {
+                    <p class="text-muted" style="font-weight: bold">@specialtyDetail.Title</p>
+                    <p class="text-muted">@specialtyDetail.Content</p>
+                    }
                     <div class="mt-4 pt-2">
                         <a asp-area="" asp-controller="Patient" asp-action="BookingService" class="btn btn-primary">Book an Appointment</a>
                     </div>

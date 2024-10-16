@@ -9,9 +9,13 @@ public partial class Option
 
     public string? Did { get; set; }
 
-    public DateTime? DateExam { get; set; }
+    public string? ScheduleId { get; set; }
+
+    public string? Status { get; set; }
 
     public virtual Doctor? DidNavigation { get; set; }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+    public virtual Schedule? Schedule { get; set; }
 }

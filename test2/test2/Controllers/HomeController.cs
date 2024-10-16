@@ -367,7 +367,7 @@ namespace test2.Controllers
                 SpecialtyName = service.SpecialtyName,
                 SpecialtyImg = service.SpecialtyImg,
                 ShortDescription = service.ShortDescription,
-                LongDescription = service.LongDescription,
+                DetailSpecialties = service.DetailSpecialties.ToList(),
                 Price = 500000, 
                 Doctors = service.Doctors.ToList(), 
                 Feedbacks = feedbacks,

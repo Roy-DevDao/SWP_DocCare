@@ -103,7 +103,6 @@ CREATE TABLE [Option] (
     OptionId NVARCHAR(255) PRIMARY KEY,
     DId NVARCHAR(255),
     ScheduleId NVARCHAR(255),
-    DateExam DATETIME,
     Status NVARCHAR(50),
     FOREIGN KEY (DId) REFERENCES Doctor(DId),
     FOREIGN KEY (ScheduleId) REFERENCES Schedule(ScheduleId)

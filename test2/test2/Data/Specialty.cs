@@ -13,7 +13,7 @@ public partial class Specialty
 
     public string? ShortDescription { get; set; }
 
-    public string? LongDescription { get; set; }
+    public virtual ICollection<DetailSpecialty> DetailSpecialties { get; set; } = new List<DetailSpecialty>();
 
     public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
 }

@@ -1,12 +1,28 @@
 USE DocCare;
 GO
 
+-- list account:
+-- admin: ('a0', 'admin', 'admin', 'baoptde180439@fpt.edu.vn', 1, 1)
+
+-- patient: ('a371', 'baobenhnhan', 'password123', 'anhemxaichung@gmail.com', 1, 1)
+--          ('a372', 'quangbenhnhan', 'password123', 'quangtmde180453@fpt.edu.vn', 1, 1)   
+
+-- doctor: ('a1', 'baodoctor', 'password123', 'baook43210@gmail.com', 2, 1)
+--		   ('a2', 'thangdoctor', 'password123', 'thangtvde180454@gmail.com', 2, 1)
+
+-- staff: ('a373', 'baostaff', 'password123', 'baook01234@gmail.com', 3, 1)
+
+--insert account data 
+
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a1', 'admin', 'admin', 'admin@example.com', 2, 1);
+VALUES ('a0', 'admin', 'admin', 'baoptde180439@fpt.edu.vn', 1, 1);
+
+INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
+VALUES ('a1', 'baodoctor', 'password123', 'baook43210@gmail.com', 2, 1);
 
 -- Insert doctor account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a2', 'doctor2', 'password123', 'doctor2@example.com', 2, 1);
+VALUES ('a2', 'thangdoctor', 'password123', 'thangtvde180454@gmail.com', 2, 1);
 
 -- Insert doctor account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
@@ -1484,15 +1500,15 @@ VALUES ('a370', 'doctor370', 'password123', 'doctor370@example.com', 2, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a371', 'patient1', 'password123', 'patient1@example.com', 1, 1);
+VALUES ('a371', 'baobenhnhan', 'password123', 'anhemxaichung@gmail.com', 1, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a372', 'patient2', 'password123', 'patient2@example.com', 1, 1);
+VALUES ('a372', 'quangbenhnhan', 'password123', 'quangtmde180453@fpt.edu.vn', 1, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
-VALUES ('a373', 'patient3', 'password123', 'patient3@example.com', 1, 1);
+VALUES ('a373', 'baostaff', 'password123', 'baook01234@gmail.com', 3, 1);
 
 -- Insert patient account
 INSERT INTO Account (Id, Username, Password, Email, Role, Status) 
@@ -2340,6 +2356,8 @@ INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescriptio
 INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription) VALUES ('s74', N'Truyền nhiễm', 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-truyen-nhiem.png', N'Chuyên khoa điều trị các bệnh truyền nhiễm');
 INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription) VALUES ('s8', N'Chụp cắt lớp vi tính', 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-chup-cat-lop.png', N'Dịch vụ chụp cắt lớp vi tính');
 INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription) VALUES ('s9', N'Nội soi Tiêu hóa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-noi-soi-tieu-hoa.png', N'Dịch vụ nội soi tiêu hóa');
+INSERT INTO Specialty (SpecialtyId, SpecialtyName, SpecialtyImg, ShortDescription) VALUES ('s5', N'Nhi khoa', 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nhi-khoa.png', N'Dịch vụ Nhi khoa');
+
 
 INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS1', 's1', N'Bác sĩ chuyên khoa Cơ Xương Khớp giỏi', N'Danh sách các bác sĩ uy tín đầu ngành Cơ Xương Khớp tại Việt Nam:
 - Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm
@@ -2378,25 +2396,25 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh Viện Việt Đức, Bệnh Viện Nhi Trung ương, Bệnh viện Y học Cổ truyền Việt Nam...
 - Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,...');
 INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS6', 's22', N'Tư vấn, chẩn đoán và điều trị các bệnh tiêu hóa', N'- Ăn uống kém, không ngon- Rối loạn tiêu hóa, táo bón, trĩ- Nhiễm vi khuẩn HP (Helicobacter pylori)- Nội soi dạ dày, đại tràng, tiêu hóa- Buồn nôn, chướng bụng, đầy bụng ợ chua, đầy hơi- Co thắt thực quản, Hội chứng ruột kích thích- Đau bụng, dạ dày, đại tràng, thượng vị- Viêm đại tràng, dạ dày, tá tràng- Ung thư dạ dày, U nang tuyến tụy- Bệnh lý về gan, mật- ...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS7', 'unknown', N'Bác sĩ chuyên khoa Tim mạch xuất sắc', N'Danh dách các bác sĩ tim mạch uy tín đầu ngành tại Việt Nam:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS7', 's3', N'Bác sĩ chuyên khoa Tim mạch xuất sắc', N'Danh dách các bác sĩ tim mạch uy tín đầu ngành tại Việt Nam:
 - Các chuyên gia được đào tạo bài bản về chuyên ngành Tim mạch tại các trường đại học trong nước và quốc tế.
 - Các giáo sư, phó giáo sư nghiên cứu và giảng dạy tại Đại học Y Hà Nội
 - Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Viện Tim Mạch Quốc Gia, Bệnh viện Bạch Mai, Bệnh viện Việt Đức, Bệnh Viện E, Bệnh Viện Tim Hà Nội
 - Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội Tim Mạch Việt Nam
 - Đạt danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS8', 'unknown', N'Tư vấn chuyên khoa Tim mạch', N'- Khó thở - Đau ngực, đau tim - Tăng huyết áp, hạ huyết áp - Rối loạn mỡ máu, cao huyết áp, chóng mặt - Bệnh van tim (Hẹp hở van tim) - Hẹp động mạch chủ - Cảm giác hồi hộp, tim đập nhanh - Tim bẩm sinh, có tiền sử bệnh tim to, tiền sử tai biến - Đã đặt stent tim, nong động mạch vành - Giãn tĩnh mạch chân');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS9', 'unknown', N'Bác sĩ chuyên khoa Tai Mũi Họng xuất sắc', N'Danh sách các bác sĩ uy tín đầu ngành tại Việt Nam:- Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Tai Mũi Họng tại Hà Nội- Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa Hà Nội- Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh Viện Tai Mũi Họng Trung ương, Bệnh viện Quân Y 108...- Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ cao cấp,...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS10', 'unknown', N'Các bệnh về Tai Mũi Họng', N'- Ù tai, đau tai, chảy máu tai  - Thủng màng nhĩ, điếc đột ngột - Viêm tai giữa - Amidan, V.A - Viêm xoang D13- Nghẹt mũi - Hay bị chảy máu cam - Đau cổ họng, khó nuốt - Ho kéo dài - Ngủ ngáy-…');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS11', 'unknown', N'Bác sĩ chuyên khoa Cột sống xuất sắc', N'Danh sách các bác sĩ Cột sống uy tín đầu ngành tại Việt Nam.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS8', 's3', N'Tư vấn chuyên khoa Tim mạch', N'- Khó thở - Đau ngực, đau tim - Tăng huyết áp, hạ huyết áp - Rối loạn mỡ máu, cao huyết áp, chóng mặt - Bệnh van tim (Hẹp hở van tim) - Hẹp động mạch chủ - Cảm giác hồi hộp, tim đập nhanh - Tim bẩm sinh, có tiền sử bệnh tim to, tiền sử tai biến - Đã đặt stent tim, nong động mạch vành - Giãn tĩnh mạch chân');
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS9', 's4', N'Bác sĩ chuyên khoa Tai Mũi Họng xuất sắc', N'Danh sách các bác sĩ uy tín đầu ngành tại Việt Nam:- Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Tai Mũi Họng tại Hà Nội- Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa Hà Nội- Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh Viện Tai Mũi Họng Trung ương, Bệnh viện Quân Y 108...- Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ cao cấp,...');
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS10', 's4', N'Các bệnh về Tai Mũi Họng', N'- Ù tai, đau tai, chảy máu tai  - Thủng màng nhĩ, điếc đột ngột - Viêm tai giữa - Amidan, V.A - Viêm xoang D13- Nghẹt mũi - Hay bị chảy máu cam - Đau cổ họng, khó nuốt - Ho kéo dài - Ngủ ngáy-…');
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS11', 's24', N'Bác sĩ chuyên khoa Cột sống xuất sắc', N'Danh sách các bác sĩ Cột sống uy tín đầu ngành tại Việt Nam.
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên khoa Thần kinh - Cột sống - Xương khớp tại Hà Nội
 - Các giáo sư, tiến sĩ, bác sĩ là giảng viên Đại học Y khoa Hà Nội, Học viện Quân Y.
 - Các bác sĩ đã, đang công tác tại chuyên Khoa Thần Kinh, Cột sống, Xương Khớp - Bệnh viện Bạch Mai, Bệnh Viện Việt Đức, Bệnh Viện Trung ương Quân đội 108, Bệnh viện 103...
 - Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS12', 'unknown', N'Thần kinh - Các bệnh về cột sống', N'- Đau cột sống, đau thắt lưng - Chấn thương cột sống - Cột sống bị đau, sưng, cong, vẹo - Đau mỏi cổ vai gáy, bả vai - Đau tê mông xuống chân - Phồng đĩa đệm - Tê bì tay chân - Thoái hóa đốt sống - Thoái hóa L4, L5 - Thoát vị đĩa đệm - Vôi hóa cột sống - Xẹp cột sống  -...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS13', 'unknown', N'Bác sĩ chuyên khoa Sản phụ khoa', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa sản giỏi tại Hà Nội.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS12', 's24', N'Thần kinh - Các bệnh về cột sống', N'- Đau cột sống, đau thắt lưng - Chấn thương cột sống - Cột sống bị đau, sưng, cong, vẹo - Đau mỏi cổ vai gáy, bả vai - Đau tê mông xuống chân - Phồng đĩa đệm - Tê bì tay chân - Thoái hóa đốt sống - Thoái hóa L4, L5 - Thoát vị đĩa đệm - Vôi hóa cột sống - Xẹp cột sống  -...');
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS13', 's19', N'Bác sĩ chuyên khoa Sản phụ khoa', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa sản giỏi tại Hà Nội.
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Sản phụ khoa tại Hà Nội
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội như: Bệnh viện Phụ sản Trung ương, Bệnh viện Phụ sản Hà Nội, Khoa Sản - Bệnh viện Bạch Mai.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS14', 'unknown', N'Chuyên gia Siêu âm thai', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa sản - siêu âm thai giỏi tại Hà Nội.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS14', 's10', N'Chuyên gia Siêu âm thai', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa sản - siêu âm thai giỏi tại Hà Nội.
 - Khám thai sản
 - Khám thai lần đầu
 - Siêu âm thai định kỳ
@@ -2404,7 +2422,7 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Siêu âm thai tuần thứ 16
 - Siêu âm thai tuần thứ 18
 - Siêu âm thai tuần thứ 22');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS15', 'unknown', N'Chẩn đoán và điều trị', N'Dưới đây là một số vấn đề thường gặp mà các bác sĩ siêu âm thai thường khám và điều trị
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS15', 's10', N'Chẩn đoán và điều trị', N'Dưới đây là một số vấn đề thường gặp mà các bác sĩ siêu âm thai thường khám và điều trị
 - Khám thai sản
 - Khám thai lần đầu
 - Siêu âm thai định kỳ
@@ -2412,12 +2430,12 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Siêu âm thai tuần thứ 16
 - Siêu âm thai tuần thứ 18
 - Siêu âm thai tuần thứ 22');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS16', 'unknown', N'Bác sĩ chuyên khoa Nhi', N'Danh sách bác sĩ chuyên khoa Nhi giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS16', 's5', N'Bác sĩ chuyên khoa Nhi', N'Danh sách bác sĩ chuyên khoa Nhi giỏi:
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội
 - Các giảng viên đã và đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội
 - Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như: Bệnh viện Nhi Trung ương, Khoa Nhi - Bệnh viện Bạch Mai.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS17', 'unknown', N'Chẩn đoán và điều trị', N'- Bệnh lý sơ sinh - Bệnh tiêu hóa - Bệnh tuần hoàn - Bệnh hô hấp - Bệnh huyết học - Bệnh thận Tiết niệu - Bệnh thần kinh - Bệnh ngoài da - Bệnh xương khớp');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS18', 'unknown', N'Bác sĩ chuyên khoa Da liễu', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa da liễu giỏi tại Hà Nội.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS17', 's5', N'Chẩn đoán và điều trị', N'- Bệnh lý sơ sinh - Bệnh tiêu hóa - Bệnh tuần hoàn - Bệnh hô hấp - Bệnh huyết học - Bệnh thận Tiết niệu - Bệnh thần kinh - Bệnh ngoài da - Bệnh xương khớp');
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS18', 's11', N'Bác sĩ chuyên khoa Da liễu', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa da liễu giỏi tại Hà Nội.
 - Bệnh vẩy nến,Da khô, Ngứa da
 - Rám tàn nhang
 - Mụn cóc sinh dục
@@ -2428,7 +2446,7 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Viêm nang lông
 - Xơ cứng bì
 - Zona thần kinh');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS19', 'unknown', N'Chẩn đoán và điều trị', N'- Bệnh vẩy nến,Da khô, Ngứa da
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS19', 's11', N'Chẩn đoán và điều trị', N'- Bệnh vẩy nến,Da khô, Ngứa da
 - Rám tàn nhang
 - Mụn cóc sinh dục
 - Nấm cơ thể,Nấm da đầu
@@ -2438,17 +2456,17 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Viêm nang lông
 - Xơ cứng bì
 - Zona thần kinh');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS20', 'unknown', N'Bác sĩ chuyên khoa Dị ứng và Miễn dịch xuất sắc', N'Danh sách các giáo sư, bác sĩ chuyên khoa Dị ứng miễn dịch giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS20', 's36', N'Bác sĩ chuyên khoa Dị ứng và Miễn dịch xuất sắc', N'Danh sách các giáo sư, bác sĩ chuyên khoa Dị ứng miễn dịch giỏi:
 - Các bác sĩ uy tín đầu ngành chuyên khoa Dị ứng miễn dịch đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y dược 1 TP.HCM, Bệnh viện E,...
 - Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội dị ứng miễn dịch châu Âu, Hội Hen – Dị ứng - Miễn dịch Lâm sàng TPHCM...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS21', 'unknown', N'Bác sĩ chuyên khoa Hô hấp', N'Danh sách các bác sĩ chuyên khoa Hô hấp - Phổi giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS21', 's43', N'Bác sĩ chuyên khoa Hô hấp', N'Danh sách các bác sĩ chuyên khoa Hô hấp - Phổi giỏi:
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện, phòng khám lớn  như: Bệnh viện Đại học Y dược, Phòng khám Phổi Sài Gòn, Bệnh viện Phổi Trung ương,...
 - Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội Phổi Việt Nam, Hội Hô Hấp Việt Nam...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS22', 'unknown', N'Bác sĩ chuyên khoa Ngoại Thần kinh xuất sắc', N'Danh sách các giáo sư, bác sĩ chuyên khoa Ngoại Thần kinh giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS22', 's71', N'Bác sĩ chuyên khoa Ngoại Thần kinh xuất sắc', N'Danh sách các giáo sư, bác sĩ chuyên khoa Ngoại Thần kinh giỏi:
 - Các giáo sư, bác sĩ uy tín đầu ngành chuyên khoa Ngoại Thần kinh đã và đang công tác tại các bệnh viện lớn như: Bệnh viện 108, Bệnh viện Bạch Mai, Bệnh viện Việt Đức, Bệnh viện Đại học Y Hà Nội...
 - Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội Thần kinh Việt Nam, Hội Phẫu thuật Thần kinh...
 - Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS23', 'unknown', N'Khám bệnh chuyên khoa Ngoại Thần kinh', N'- U não
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS23', 's71', N'Khám bệnh chuyên khoa Ngoại Thần kinh', N'- U não
 - Bệnh lý về chấn thương sọ não
 - Não úng thủy
 - Đau dây thần kinh
@@ -2458,17 +2476,17 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Khuyết sọ
 - U dây thần kinh ngoại biên
 - ...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS24', 'unknown', N'Bác sĩ chuyên khoa Nam học', N'Danh sách bác sĩ Nam học uy tín đầu ngành tại Việt Nam:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS24', 's26', N'Bác sĩ chuyên khoa Nam học', N'Danh sách bác sĩ Nam học uy tín đầu ngành tại Việt Nam:
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Nam học tại Hà Nội
 - Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh Viện Việt Đức, Bệnh viện Xanh-pôn,...
 - Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS25', 'unknown', N'Bác sĩ chuyên khoa Thận - Tiết niệu xuất sắc', N'Bệnh về Thận - Tiết niệu
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS25', 's32', N'Bác sĩ chuyên khoa Thận - Tiết niệu xuất sắc', N'Bệnh về Thận - Tiết niệu
 - Hệ thống BookingCare cung cấp thông tin và lịch khám của các bác sĩ uy tín đầu ngành tại Việt Nam.
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Thận - Tiết niệu tại Hà Nội.
 - Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội.
 - Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh viện Việt Đức,...
 - Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS26', 'unknown', N'Bác sĩ chuyên khoa Nội', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa Nội giỏi tại Hà Nội.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS26', 's17', N'Bác sĩ chuyên khoa Nội', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa Nội giỏi tại Hà Nội.
 - Kiểm tra sức khỏe
 - Chóng mặt
 - Mêt mỏi
@@ -2487,7 +2505,7 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Nổi mề đay
 - Rối loạn miễn dịch
 - Rối loạn chuyển hóa');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS27', 'unknown', N'Chẩn đoán và điều trị', N'Bệnh nhân nên đặt khám với các bác sĩ nếu gặp các triệu chứng bên dưới đây:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS27', 's17', N'Chẩn đoán và điều trị', N'Bệnh nhân nên đặt khám với các bác sĩ nếu gặp các triệu chứng bên dưới đây:
 - Kiểm tra sức khỏe
 - Chóng mặt
 - Mêt mỏi
@@ -2506,10 +2524,10 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Nổi mề đay
 - Rối loạn miễn dịch
 - Rối loạn chuyển hóa');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS28', 'unknown', N'Bác sĩ chuyên khoa Nha khoa', N'Danh sách  bác sĩ Nha khoa uy tín tại Việt Nam:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS28', 's33', N'Bác sĩ chuyên khoa Nha khoa', N'Danh sách  bác sĩ Nha khoa uy tín tại Việt Nam:
 - Các chuyên gia có quá trình đào tạo bài bản, nhiều năm kinh nghiệm và khám, điều trị các bệnh lý nha khoa và răng thẩm mỹ tại Hà Nội.
 - Các bác sĩ đã hoặc đang công tác tại các bệnh viện, phòng khám nha khoa uy tín, với các trang thiết bị hiện đại.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS29', 'unknown', N'Khám, tư vấn và điều trị các bệnh lý về răng, làm răng thẩm mỹ', N'- Nhổ răng
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS29', 's33', N'Khám, tư vấn và điều trị các bệnh lý về răng, làm răng thẩm mỹ', N'- Nhổ răng
 - Hàn răng
 - Điều trị tủy
 - Điều trị Viêm nha chu
@@ -2517,10 +2535,10 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Làm răng giả
 - Dán sứ Veneer
 - Niềng răng (nắn chỉnh răng)');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS30', 'unknown', N'Bác sĩ chuyên khoa Nội tiết', N'Danh sách bác sĩ chuyên khoa Nội tiết giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS30', 's21', N'Bác sĩ chuyên khoa Nội tiết', N'Danh sách bác sĩ chuyên khoa Nội tiết giỏi:
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội như: Bệnh viện Bạch Mai, Bệnh viện Quân Y 103, Bệnh viện Nội tiết Trung ương, Bệnh viện Đại học Y Hà Nội.
 - Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS31', 'unknown', N'Tư vấn, khám và điều trị', N'
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS31', 's21', N'Tư vấn, khám và điều trị', N'
 - Bướu cổ
 - Cường cận giáp
 - Đái tháo đường
@@ -2531,10 +2549,10 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Tiểu đường
 - Tiểu đường tuýp 1, 2
 - Ung thư tuyến giáp');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS32', 'unknown', N'Bác sĩ chuyên khoa Phục hồi chức năng xuất sắc', N'Danh sách bác sĩ chuyên khoa Phục hồi chức năng giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS32', 's30', N'Bác sĩ chuyên khoa Phục hồi chức năng xuất sắc', N'Danh sách bác sĩ chuyên khoa Phục hồi chức năng giỏi:
 - Các bác sĩ uy tín đầu ngành chuyên khoa Phục hồi chức năng đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y Hà Nội, Bệnh viện Thanh Nhàn,...
 - Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS33', 'unknown', N'Kỹ thuật Chụp cắt lớp', N'- Chụp CT bụng chung
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS33', 's8', N'Kỹ thuật Chụp cắt lớp', N'- Chụp CT bụng chung
 - Chụp CT một chi
 - Chụp CT hai chi
 - Chụp CT động mạch chủ 64 dãy
@@ -2550,13 +2568,13 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Chụp CT vùng hầu họng 64 dãy
 - Chụp CT khớp háng
 - Chụp CT mô mềm');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS34', 'unknown', N'Kỹ thuật Nội soi Tiêu hóa', N'Nội soi là một phương tiện hữu hiệu trong chẩn đoán và điều trị các bệnh lý tiêu hóa.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS34', 's9', N'Kỹ thuật Nội soi Tiêu hóa', N'Nội soi là một phương tiện hữu hiệu trong chẩn đoán và điều trị các bệnh lý tiêu hóa.
 - Đau thượng vị, buồn nôn, nôn mửa, nuốt nghẹn, nuốt khó
 - Các rối loạn tiêu hóa như chậm tiêu, ợ hơi, ợ nóng, nóng rát thượng vị.
 - Các triệu chứng trào ngược, thiếu máu, sụt cân không rõ nguyên nhân, xuất huyết tiêu hóa trên.
 - Bệnh lý viêm, loét, u đường tiêu hóa dưới
 - Tiêu chảy kéo dài không lý giải được, đau bụng không lý giải được.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS35', 'unknown', N'Kỹ thuật Nội soi', N'- Nội soi dạ dày
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS35', 's9', N'Kỹ thuật Nội soi', N'- Nội soi dạ dày
 - Nội soi dạ dày không đau
 - Nội soi dạ dày mê
 - Nội soi dạ dày tá tràng
@@ -2569,28 +2587,28 @@ INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS
 - Nội soi tiêu hóa
 - Nội soi tiêu hóa không đau
 - Nội soi tiêu hóa mê');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS36', 'unknown', N'Bác sĩ chuyên khoa Ung bướu xuất sắc', N'Danh sách các bác sĩ uy tín đầu ngành Ung bướu tại Việt Nam:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS36', 's15', N'Bác sĩ chuyên khoa Ung bướu xuất sắc', N'Danh sách các bác sĩ uy tín đầu ngành Ung bướu tại Việt Nam:
 - Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm
 - Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Ung bướu - Bệnh viện K, Bệnh viện Hữu nghị Việt Đức, Bệnh viện Ung bướu Hưng Việt,...');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS37', 'unknown', N'Bác sĩ chuyên khoa Da liễu thẩm mỹ', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa da liễu thẩm mỹ giỏi.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS37', 's72', N'Bác sĩ chuyên khoa Da liễu thẩm mỹ', N'BookingCare cung cấp thông tin và lịch khám của các bác sĩ chuyên khoa da liễu thẩm mỹ giỏi.
 - Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội như: Bệnh viện Da liễu Trung ương, Bệnh viện Da liễu Hà Nội');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS38', 'unknown', N'Chẩn đoán và điều trị', N'- Bớt sắc tố: Nốt, mảng tăng sắc tố khu trú hoặc lan tỏa trên cơ thể, bề mặt phẳng, màu nâu, đen , xanh. Không đau , không ngứa rát.
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS38', 's72', N'Chẩn đoán và điều trị', N'- Bớt sắc tố: Nốt, mảng tăng sắc tố khu trú hoặc lan tỏa trên cơ thể, bề mặt phẳng, màu nâu, đen , xanh. Không đau , không ngứa rát.
 - Nám da: Dát tăng sắc tố màu nâu, xanh đen đối xứng 2 bên mặt, bằng phẳng, bờ không đều, không teo da, không ngứa.
 - Trứng cá: Mụn nhân trắng đen, mụn viêm , mụn nang, mụn bọc
 - Sẹo lõm: Tổn thương lõm sâu xuống dưới bề mặt da, màu đậm hoặc cùng màu da, không đau. Sẹo đáy nhọn, sẹo đáy hộp, sẹo đáy tròn
 - Sẹo lồi: Tổn thương nổi gồ trên bề mặt da, không đau, màu trùng màu da hoặc đậm hơn
 - Lão hóa da: Da bị chảy xệ, trùng nhão không được săn chắc. Nhiều nếp nhăn vùng trán, đuôi mắt, rãnh mũi má');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS39', 'unknown', N'Bác sĩ chuyên khoa Phẫu thuật Hàm Mặt xuất sắc', N'Danh sách các bác sĩ uy tín đầu ngành Tạo hình hàm mặt tại Việt Nam:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS39', 's42', N'Bác sĩ chuyên khoa Phẫu thuật Hàm Mặt xuất sắc', N'Danh sách các bác sĩ uy tín đầu ngành Tạo hình hàm mặt tại Việt Nam:
 - Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm
 - Các bác sĩ đã, đang công tác tại bệnh viện Bệnh viện Hữu nghị Việt Đức.');
-INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS40', 'unknown', N'Bác sĩ chuyên khoa Chỉnh hình xuất sắc', N'Danh sách bác sĩ chuyên khoa Chấn thương chỉnh hình giỏi:
+INSERT INTO DetailSpecialty (DetailId, SpecialtyId, Title, Content) VALUES ('deS40', 's73', N'Bác sĩ chuyên khoa Chỉnh hình xuất sắc', N'Danh sách bác sĩ chuyên khoa Chấn thương chỉnh hình giỏi:
 - Các bác sĩ uy tín đầu ngành chuyên khoa Chấn thương chỉnh hình đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y Hà Nội, Bệnh viện Thanh Nhàn, Bệnh viện Chấn thương chỉnh hình...
 - Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm');
 
 
-INSERT INTO Patient (PId, Name, PatientImg, Phone, Gender, DOB) VALUES ('a371', N'Võ Ngọc Thiên Bảo', NULL, '0901234560', 'Male', '1990-01-01');
+INSERT INTO Patient (PId, Name, PatientImg, Phone, Gender, DOB) VALUES ('a371', N'Nguyễn Thanh Bảo', 'https://i.pinimg.com/564x/44/c1/f4/44c1f4eeba11e34c657f64ab7c25417e.jpg', '0901234560', 'Male', '1990-01-01');
 
-INSERT INTO Patient (PId, Name, PatientImg, Phone, Gender, DOB) VALUES ('a372', N'Nguyễn Thị Mong', NULL, '0901234561', 'Female', '1990-01-01');
+INSERT INTO Patient (PId, Name, PatientImg, Phone, Gender, DOB) VALUES ('a372', N'Trần Minh Quang', 'https://i.pinimg.com/564x/7d/4a/e9/7d4ae9c0d99a7b169055d55258d694f3.jpg', '0901234561', 'Male', '1990-01-01');
 
 INSERT INTO Patient (PId, Name, PatientImg, Phone, Gender, DOB) VALUES ('a373', N'Lương Thị Thuỳ Linh', NULL, '0901234562', 'Female', '1990-01-01');
 
@@ -6362,66 +6380,36 @@ INSERT INTO Feedback (FeedbackId, DId, PId, Name, DateCmt, Description, Star) VA
 INSERT INTO Feedback (FeedbackId, DId, PId, Name, DateCmt, Description, Star) VALUES ('f242', 'a369', 'a457', N'Kiều Phương Anh', '2023-08-08 03:26:33', N'Dịch vụ tốt', 4);
 
 INSERT INTO Schedule (ScheduleId, DateWork, TimeStart, TimeEnd) VALUES
-('sch1', '2024-09-25', '09:00:00', '10:00:00'),
-('sch2', '2024-09-26', '10:00:00', '11:00:00'),
-('sch3', '2024-09-27', '11:00:00', '12:00:00'),
-('sch4', '2024-09-28', '12:00:00', '13:00:00'),
-('sch5', '2024-09-29', '13:00:00', '14:00:00'),
-('sch6', '2024-09-30', '14:00:00', '15:00:00'),
-('sch7', '2024-10-01', '15:00:00', '16:00:00'),
-('sch8', '2024-10-02', '16:00:00', '17:00:00'),
-('sch9', '2024-10-03', '17:00:00', '18:00:00'),
-('sch10', '2024-10-04', '18:00:00', '19:00:00'),
--- Thêm 10 dòng mới
-('sch11', '2024-10-05', '10:00:00', '11:00:00'),
-('sch12', '2024-10-06', '11:00:00', '12:00:00'),
-('sch13', '2024-10-07', '12:00:00', '13:00:00'),
-('sch14', '2024-10-08', '13:00:00', '14:00:00'),
-('sch15', '2024-10-09', '14:00:00', '15:00:00'),
-('sch16', '2024-10-10', '15:00:00', '16:00:00'),
-('sch17', '2024-10-11', '16:00:00', '17:00:00'),
-('sch18', '2024-10-12', '17:00:00', '18:00:00'),
-('sch19', '2024-10-13', '18:00:00', '19:00:00'),
-('sch20', '2024-10-14', '19:00:00', '20:00:00');
+('sch1', '2024-10-15', '08:00:00', '09:00:00'),
+('sch2', '2024-10-15', '09:00:00', '10:00:00'),
+('sch3', '2024-10-15', '10:00:00', '11:00:00'),
+('sch4', '2024-10-15', '13:00:00', '14:00:00'),
+('sch5', '2024-10-15', '14:00:00', '15:00:00'),
+('sch6', '2024-10-15', '15:00:00', '16:00:00'),
+
+('sch7', '2024-10-16', '08:00:00', '09:00:00'),
+('sch8', '2024-10-16', '09:00:00', '10:00:00'),
+('sch9', '2024-10-16', '10:00:00', '11:00:00'),
+('sch10', '2024-10-16', '13:00:00', '14:00:00'),
+('sch11', '2024-10-16', '14:00:00', '15:00:00'),
+('sch12', '2024-10-16', '15:00:00', '16:00:00')
 
 -- import another random data
-INSERT INTO [Option] (OptionId, DId, ScheduleId, DateExam, Status) VALUES
-('opt1', 'a1', 'sch1', '2024-09-25 09:00:00', 'Confirm'),
-('opt2', 'a2', 'sch2', '2024-09-26 10:30:00', 'Pending'),
-('opt3', 'a3', 'sch3', '2024-09-27 11:15:00', 'Confirm'),
-('opt4', 'a4', 'sch4', '2024-09-28 12:45:00', 'Available'),
-('opt5', 'a5', 'sch5', '2024-09-29 14:00:00', 'Confirm'),
-('opt6', 'a6', 'sch6', '2024-09-30 15:30:00', 'Pending'),
-('opt7', 'a7', 'sch7', '2024-10-01 16:45:00', 'Confirm'),
-('opt8', 'a8', 'sch8', '2024-10-02 17:30:00', 'Available'),
-('opt9', 'a9', 'sch9', '2024-10-03 08:00:00', 'Pending'),
-('opt10', 'a10', 'sch10', '2024-10-04 09:15:00', 'Confirm'),
+INSERT INTO [Option] (OptionId, DId, ScheduleId, Status) VALUES
+('opt1', 'a1', 'sch1', 'Confirm'),
+('opt2', 'a2', 'sch2', 'Pending'),
+('opt3', 'a3', 'sch3', 'Confirm'),
+('opt4', 'a4', 'sch4', 'Available'),
+('opt5', 'a5', 'sch5', 'Confirm'),
+('opt6', 'a6', 'sch6', 'Pending'),
+('opt7', 'a7', 'sch7', 'Confirm'),
+('opt8', 'a8', 'sch8', 'Available'),
+('opt9', 'a9', 'sch9', 'Pending'),
+('opt10', 'a10', 'sch10', 'Confirm'),
 -- Thêm 10 dòng mới
-('opt11', 'a11', 'sch11', '2024-10-05 10:00:00', 'Available'),
-('opt12', 'a12', 'sch12', '2024-10-06 11:30:00', 'Pending'),
-('opt13', 'a13', 'sch13', '2024-10-07 12:45:00', 'Confirm'),
-('opt14', 'a14', 'sch14', '2024-10-08 14:00:00', 'Pending'),
-('opt15', 'a15', 'sch15', '2024-10-09 15:30:00', 'Available'),
-('opt16', 'a16', 'sch16', '2024-10-10 16:45:00', 'Confirm'),
-('opt17', 'a17', 'sch17', '2024-10-11 17:30:00', 'Available'),
-('opt18', 'a18', 'sch18', '2024-10-12 08:00:00', 'Pending'),
-('opt19', 'a19', 'sch19', '2024-10-13 09:15:00', 'Confirm'),
-('opt20', 'a20', 'sch20', '2024-10-14 10:30:00', 'Available');
+('opt11', 'a11', 'sch11', 'Available'),
+('opt12', 'a12', 'sch12', 'Pending')
 
--- 5 dòng mới cho sch1
-INSERT INTO [Option] (OptionId, DId, ScheduleId, DateExam, Status) VALUES
-('opt21', 'a21', 'sch1', '2024-09-25 10:00:00', 'Available'),
-('opt22', 'a22', 'sch1', '2024-09-25 10:30:00', 'Pending'),
-('opt23', 'a23', 'sch1', '2024-09-25 11:00:00', 'Confirm'),
-('opt24', 'a24', 'sch1', '2024-09-25 11:30:00', 'Available'),
-('opt25', 'a25', 'sch1', '2024-09-25 12:00:00', 'Confirm'),
-
--- 5 dòng mới cho sch2
-('opt26', 'a26', 'sch2', '2024-09-26 11:00:00', 'Available'),
-('opt27', 'a27', 'sch2', '2024-09-26 11:30:00', 'Pending'),
-('opt28', 'a28', 'sch2', '2024-09-26 12:00:00', 'Confirm'),
-('opt29', 'a29', 'sch2', '2024-09-26 12:30:00', 'Available'),
-('opt30', 'a30', 'sch2', '2024-09-26 13:00:00', 'Confirm');
 
 -- import HealthRecord data
 INSERT INTO HealthRecord (RecordId, DId, PId, Diagnosis, Description, Note, DateExam) VALUES

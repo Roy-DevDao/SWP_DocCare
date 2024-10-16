@@ -10,6 +10,7 @@ namespace test2.Models
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public decimal Price { get; set; }
+        public List<DetailSpecialty> DetailSpecialties { get; set; }
         public List<Doctor> Doctors { get; set; }
         public List<Feedback> Feedbacks { get; set; }
         public double AverageRating { get; set; }
