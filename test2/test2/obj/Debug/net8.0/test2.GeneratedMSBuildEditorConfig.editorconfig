@@ -154,8 +154,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxQYXltZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/BAO/MAJOR/SE5/SWP_DocCare-master/SWP_DocCare-master/test2/test2/Views/Patient/PaymentFail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxQYXltZW50RmFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/BAO/MAJOR/SE5/SWP_DocCare-master/SWP_DocCare-master/test2/test2/Views/Patient/ServiceHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxTZXJ2aWNlSGlzdG9yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BAO/MAJOR/SE5/SWP_DocCare-master/SWP_DocCare-master/test2/test2/Views/Patient/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxTdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BAO/MAJOR/SE5/SWP_DocCare-master/SWP_DocCare-master/test2/test2/Views/Shared/Layout_Admin.cshtml]

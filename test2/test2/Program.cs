@@ -1,8 +1,11 @@
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using test2.DAO;
 using test2.Data;
+using test2.Services;
 
 namespace test2
 {
@@ -16,13 +19,33 @@ namespace test2
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DocCare"));
             });
 
-            builder.Services.AddAuthentication("MyCookieAuth")
+            // Cấu hình Google OAuth và Cookie authentication
+            builder.Services.AddAuthentication(options =>
+            {
+                //options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultScheme = "MyCookieAuth";
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+
             .AddCookie("MyCookieAuth", options =>
             {
                 options.Cookie.Name = "MyAuthCookie";
                 options.LoginPath = "/Home/Login";
-                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.AccessDeniedPath = "/Home/Login";
+            }).AddGoogle(googleOptions =>
+            {
+                //googleOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                googleOptions.SignInScheme = "MyCookieAuth";
+                //IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
+                //googleOptions.ClientId = googleAuthNSection["ClientId"];
+                //googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
+                googleOptions.ClientId = builder.Configuration["Google:ClientId"];
+                googleOptions.ClientSecret = builder.Configuration["Google:ClientSecret"];
+                googleOptions.CallbackPath = new PathString("/signin-google");
+
             });
+
+            builder.Services.AddSingleton<IVnPayService, VnPayService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -30,6 +53,7 @@ namespace test2
             builder.Services.AddScoped<DoctorDAO>();
             builder.Services.AddScoped<AppointmentDAO>();
             builder.Services.AddScoped<FeedbackDAO>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -43,7 +67,9 @@ namespace test2
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.MapControllers();
+
+            // Thêm UseAuthentication trước UseAuthorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
             // Default route for Home controller
@@ -63,6 +89,7 @@ namespace test2
             app.MapControllerRoute(
                name: "patient",
                pattern: "{controller=Patient}/{action=AppointmentHistory}/{id?}");
+
             app.MapControllerRoute(
               name: "admin",
               pattern: "{controller=Admin}/{action=Index}/{id?}");

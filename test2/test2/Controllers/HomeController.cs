@@ -11,6 +11,8 @@ using test2.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 
 namespace test2.Controllers
 {
@@ -173,7 +175,7 @@ namespace test2.Controllers
                     var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
                     var authProperties = new AuthenticationProperties
                     {
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30),
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
                         IsPersistent = true
                     };
 
@@ -185,7 +187,7 @@ namespace test2.Controllers
                         case 0: // Admin
                             return RedirectToAction("Index", "Admin");
                         case 1: // Staff
-                            return RedirectToAction("AppointmentList", "Staff");
+                            return RedirectToAction("AppoitmentList", "Staff");
                         case 2: // Doctor
                             return RedirectToAction("ViewAppointment", "Doctor");
                         case 3: // Patient
@@ -202,6 +204,76 @@ namespace test2.Controllers
         }
 
         //--------------------------------------------------------------------------------------------
+
+        public IActionResult GoogleLogin()
+        {
+            var redirectUrl = Url.Action("GoogleResponse", "Home");
+            var properties = new AuthenticationProperties { RedirectUri =  redirectUrl };
+            return Challenge(properties,GoogleDefaults.AuthenticationScheme);
+        }
+        public async Task<IActionResult> GoogleResponse()
+        {
+            // Try to authenticate using MyCookieAuth scheme
+            var result = await HttpContext.AuthenticateAsync("MyCookieAuth");
+
+            if (result?.Principal == null)
+            {
+                // Khi người dùng từ chối hoặc không có Principal
+                TempData["ErrorMessage"] = "Bạn đã hủy quá trình đăng nhập hoặc không có quyền truy cập.";
+                return RedirectToAction("Login");
+            }
+
+            // Tiếp tục xử lý khi đăng nhập thành công
+            var claims = result.Principal.Identities.FirstOrDefault().Claims.Select(claim => new
+            {
+                claim.Issuer,
+                claim.OriginalIssuer,
+                claim.Type,
+                claim.Value
+            });
+
+            var username = claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            var user = dc.Accounts.Where(dc => dc.Email == username).FirstOrDefault();
+
+            if (user == null)
+            {
+                return View("Login");
+            }
+
+            var addClaim = new List<Claim>()
+    {
+        new Claim(ClaimTypes.Email, username),
+        new Claim(ClaimTypes.Role, user.Role.ToString()),
+    };
+
+            var identity = new ClaimsIdentity(addClaim, "MyCookieAuth");
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                IsPersistent = true
+            };
+
+            var principal = new ClaimsPrincipal(identity);
+            await HttpContext.SignInAsync("MyCookieAuth", principal, authProperties);
+
+            // Điều hướng theo vai trò
+            switch (user.Role)
+            {
+                case 0: // Admin
+                    return RedirectToAction("Index", "Admin");
+                case 1: // Staff
+                    return RedirectToAction("AppoitmentList", "Staff");
+                case 2: // Doctor
+                    return RedirectToAction("ViewAppointment", "Doctor");
+                case 3: // Patient
+                    return RedirectToAction("AppointmentHistory", "Patient");
+                default:
+                    TempData["ErrorMessage"] = "Role không được nhận diện.";
+                    return RedirectToAction("Login");
+            }
+        }
+
+
 
         public IActionResult SignUp()
         {

@@ -78,7 +78,7 @@ namespace test2.Controllers
         
         public IActionResult ManageDoctor(int page =1, string sortPrice="", string sortId="", string sortGender="")
         {
-            int pageSize = 20;
+            int pageSize = 10;
             var filterDoctors=_context.Doctors.Where(doctor => doctor.Did != null && doctor.DoctorImg != null && doctor.Name != null && doctor.Gender!=null && doctor.Position != null && doctor.Price != null);
             // Lọc theo giới tính
             if (!string.IsNullOrEmpty(sortGender))
@@ -148,7 +148,7 @@ namespace test2.Controllers
         // patient
         public IActionResult ManagePatient(int page=1)
         {
-            int pageSize = 20;
+            int pageSize = 10;
             var filterPatients = _context.Patients.Where(patient => patient.Pid != null && patient.Name != null && patient.Gender != null
                 && patient.Dob != null && patient.Phone != null);
 
