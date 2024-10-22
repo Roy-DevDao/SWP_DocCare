@@ -5,12 +5,18 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Configuration;
 using test2.Context;
 using test2.Data;
 using test2.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using System.Net.Mail;
+using System.Net;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Configuration;
 
 namespace test2.Controllers
 {
@@ -18,11 +24,13 @@ namespace test2.Controllers
     {
         private readonly DocCareContext dc;
         private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger, DocCareContext db)
+        public HomeController(ILogger<HomeController> logger, DocCareContext db, IConfiguration configuration)
         {
             _logger = logger;
             dc = db;
+            _configuration = configuration;
         }
         //--------------------------------------------------------------------------------------------
         public IActionResult Index()
@@ -283,12 +291,105 @@ namespace test2.Controllers
             {
                 return View();
             }
-//--------------------------------------------------------------------------------------------
-
-            public IActionResult ForgotPass()
+        //--------------------------------------------------------------------------------------------
+        [HttpGet]
+        public IActionResult ForgotPass(string type)
+        {
+            if (type == "Password")
             {
-                return View();
+                return View(new ResetPassModel());
             }
+            else
+            {
+                return View(new ForgotPassModel());
+            }
+        }
+
+        public async Task<IActionResult> ForgotPass(ForgotPassModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.FormType = "Email";
+                return View(model);
+            }
+
+            var user = dc.Accounts.FirstOrDefault(u => u.Email == model.Email);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "Email không tồn tại trong hệ thống.";
+                ViewBag.FormType = "Email";
+                return View(model);
+            }
+
+            // Tạo mã xác nhận ngẫu nhiên
+            var verificationCode = new Random().Next(100000, 999999).ToString();
+            user.Password = verificationCode; // Lưu mã xác nhận tạm thời
+            dc.SaveChanges();
+
+            // Lấy thông tin cấu hình SMTP từ appsettings.json
+            var smtpSettings = _configuration.GetSection("SmtpSettings");
+            var smtpHost = smtpSettings["Host"];
+            var smtpPort = int.Parse(smtpSettings["Port"]);
+            var smtpUsername = smtpSettings["Username"];
+            var smtpPassword = smtpSettings["Password"];
+            var enableSsl = bool.Parse(smtpSettings["EnableSsl"]);
+
+            // Sử dụng thông tin cấu hình để gửi email
+            using var smtpClient = new SmtpClient
+            {
+                Host = smtpHost,
+                Port = smtpPort,
+                EnableSsl = enableSsl,
+                Credentials = new NetworkCredential(smtpUsername, smtpPassword)
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(smtpUsername),
+                Subject = "Password Reset Verification Code",
+                Body = $"Your verification code is: {verificationCode}",
+                IsBodyHtml = true
+            };
+            mailMessage.To.Add(user.Email);
+
+            try
+            {
+                await smtpClient.SendMailAsync(mailMessage);
+                ViewBag.SuccessMessage = "Mã xác nhận đã được gửi về email của bạn.";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Lỗi khi gửi email: {ex.Message}";
+            }
+
+            ViewBag.FormType = "Password";
+            return View(new ResetPassModel { Email = model.Email });
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPassModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.FormType = "Password";
+                return View(model);
+            }
+
+            var user = dc.Accounts.FirstOrDefault(u => u.Email == model.Email);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = "Email không tồn tại trong hệ thống.";
+                ViewBag.FormType = "Password";
+                return View(model);
+            }
+
+            // Đặt lại mật khẩu
+            user.Password = model.Password; // Lưu mật khẩu mới vào trường Password
+            dc.SaveChanges();
+
+            ViewBag.SuccessMessage = "Mật khẩu đã được thay đổi thành công. Bạn có thể đăng nhập lại.";
+            return RedirectToAction("Login");
+        }
         //--------------------------------------------------------------------------------------------
 
         public IActionResult ServiceList(int pageNumber = 1, string search = "", string sort = "")

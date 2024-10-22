@@ -1,8 +1,7 @@
-﻿
-@{
-    ViewData["Title"] = "Forgot Password";
+﻿@{
+    ViewData["Title"] = "Password Recovery";
+    var formType = ViewBag.FormType as string;
 }
-
 
 
 <!DOCTYPE html>
@@ -32,22 +31,26 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var alertType = 'success';
-            var message = 'Đăng nhập thành công!';
-            if (alertType) {
-                toastr[alertType](message, 'Thông báo', { timeOut: 5000 });
-            }
-        });
-    </script>
+    <!--
+        <script type="text/javascript">
+         $(document).ready(function () {
+             var alertType = 'success';
+             var message = 'Đăng nhập thành công!';
+             if (alertType) {
+                 toastr[alertType](message, 'Thông báo', { timeOut: 5000 });
+             }
+         });
+     </script>
+     -->
 </head>
     <body>
+        
         <div class="back-to-home rounded d-none d-sm-block">
         <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-icon btn-primary"><i data-feather="home" class="icons"></i></a>
         </div>
 
         <!-- Hero Start -->
+        <p>gfjhdalkfhdsajkfhdsajkaflhdsajaklfdska</p>
         <section class="bg-home d-flex bg-light align-items-center">
             <div class="container">
                 <div class="row justify-content-center">
@@ -55,60 +58,67 @@
                         <div class="card login-page bg-white shadow mt-4 rounded border-0">
                             <div class="card-body">
                                 <h4 class="text-center">Password Recovery</h4>
-                                <p style="color: red; text-align: center;">
-                                    <!-- Example error message -->
-                                    Email not found in the system.
-                                </p>
-                                <p style="color: blue; text-align: center;">
-                                    <!-- Example success message -->
-                                    A new password has been sent to your email.
-                                </p>
-                                <c:if test="${requestScope.type == null}">
-                                    <form action="user?action=checkemail" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <p class="text-muted">Please enter your email, we will send the new password to your email.</p>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                    <input value="" oninvalid="CheckEmail(this);" oninput="CheckEmail(this);" type="email" class="form-control" name="email" required="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="d-grid">
-                                                    <button id="submit" class="btn btn-primary">Confirm</button>
-                                                </div>
-                                            </div>
-                                            <div class="mx-auto">
-                                                <p class="mb-0 mt-3"><a href="user?action=login" class="text-dark h6 mb-0">Login</a></p>
+
+                                  @if (ViewBag.ErrorMessage != null)
+                                   {
+                                       <p style="color: red; text-align: center;">@ViewBag.ErrorMessage</p>
+                                   }
+                                  @if (ViewBag.SuccessMessage != null)
+                                  {
+                                        <p style="color: blue; text-align: center;">@ViewBag.SuccessMessage</p>
+                                  }
+
+                                @if (Model is ForgotPassModel)
+                            {
+                                <form asp-action="ForgotPassword" method="post" class="login-form mt-4">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="text-muted">Please enter your email, we will send the new password to your email.</p>
+                                            <div class="mb-3">
+                                                <label class="form-label">Email <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="email" required />
+                                                <span class="text-danger"></span>
                                             </div>
                                         </div>
-                                    </form> 
-                                </c:if>
-                                <c:if test="${requestScope.type == 'recover'}">
-                                    <form action="user?action=forgot" method="POST" class="login-form mt-4" onSubmit="document.getElementById('submit').disabled = true;">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <p class="text-muted">Please enter your new password.</p>
-                                                <div class="mb-3">
-                                                    <label class="form-label">New Password: <span class="text-danger">*</span></label>
-                                                    <input value="" oninvalid="CheckPassword(this);" oninput="CheckPassword(this);" type="password" id="password" class="form-control" name="password" required="">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Confirm Password: <span class="text-danger">*</span></label>
-                                                    <input value="" oninvalid="CheckRePassword(this);" oninput="CheckRePassword(this);" type="password" class="form-control" name="repassword" required="">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="d-grid">
-                                                    <button id="submit" class="btn btn-primary">Confirm</button>
-                                                </div>
-                                            </div>
-                                            <div class="mx-auto">
-                                            <p class="mb-0 mt-3"><a asp-area="" asp-controller="Home" asp-action="Login" class="text-dark h6 mb-0">Login</a></p>
+                                        <div class="col-lg-12">
+                                            <div class="d-grid">
+                                                <button id="submit" class="btn btn-primary">Confirm</button>
                                             </div>
                                         </div>
-                                    </form>
-                                </c:if>
+                                        <div class="mx-auto">
+                                            <p class="mb-0 mt-3"><a asp-action="Login" class="text-dark h6 mb-0">Login</a></p>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
+                            else if (Model is ResetPassModel)
+                            {
+                                <form asp-action="ResetPassword" method="post" class="login-form mt-4">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p class="text-muted">Please enter your new password.</p>
+                                            <div class="mb-3">
+                                                <label class="form-label">New Password: <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="password" required />
+                                                <span class="text-danger"></span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Confirm Password: <span class="text-danger">*</span></label>
+                                                <input class="form-control" type="password" required />
+                                                <span class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="d-grid">
+                                                <button id="submit" class="btn btn-primary">Confirm</button>
+                                            </div>
+                                        </div>
+                                        <div class="mx-auto">
+                                            <p class="mb-0 mt-3"><a asp-action="Login" class="text-dark h6 mb-0">Login</a></p>
+                                        </div>
+                                    </div>
+                                </form>
+                            }
                             </div>
                         </div>
                     </div>
