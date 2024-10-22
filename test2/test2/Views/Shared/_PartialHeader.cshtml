@@ -1,0 +1,78 @@
+﻿@using test2.DAO
+
+
+
+@{
+    var userDAO = new UserDAO(); 
+    var user = userDAO.GetLoggedInUser(User) ?? new PatientProfileViewModel(); 
+}
+
+<header class="header">
+    <nav class="navbar navbar-expand-lg header-nav">
+        <div class="navbar-header">
+            <a id="mobile_btn" href="javascript:void(0);">
+                <span class="bar-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </a>
+            <a href="/" class="navbar-brand logo">
+                <img src="~/assets/images/medical.png" class="img-fluid" alt="Logo">
+            </a>
+        </div>
+        <div class="main-menu-wrapper">
+            <div class="menu-header">
+                <a href="/" class="menu-logo">
+                    <img src="~/Content/theme/img/logo.png" class="img-fluid" alt="Logo">
+                </a>
+                <a id="menu_close" class="menu-close" href="javascript:void(0);">
+                    <i class="fas fa-times"></i>
+                </a>
+            </div>
+            <ul class="main-nav">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li class="has-submenu">
+                    <a href="#">Doctor <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a asp-area="" asp-controller="Home" asp-action="DoctorList">Search Doctor</a></li>
+                    </ul>
+                </li>
+                <li class="has-submenu">
+                    <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                    <ul class="submenu">
+                        <li><a asp-area="" asp-controller="Home" asp-action="ServiceList">Services Search</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/article">Blog</a>
+                </li>
+            </ul>
+        </div>
+        <ul class="nav header-navbar-rht">
+            <li class="nav-item contact-item">
+                <div class="header-contact-img">
+                    <i class="far fa-hospital"></i>
+                </div>
+                <div class="header-contact-detail">
+                    <p class="contact-header">Contact</p>
+                    <p class="contact-info-header"> +84 987367341</p>
+                </div>
+            </li>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <li class="nav-item">
+                    <a class="nav-link header-login" asp-area="" asp-controller="Home" asp-action="Login">Login / Signup</a>
+                </li>
+            }
+            else
+            {
+                <li><a asp-area="" asp-controller="Home" asp-action="Profile"><i class="fa fa-user" style="margin-right: 8px"> @user.Name</i></a></li>
+                <li><a asp-area="" asp-controller="Home" asp-action="Logout"><i class="fa fa-sign-out" style="margin-right: 8px"> Đăng xuất</i></a></li>
+            }
+        </ul>
+    </nav>
+</header>
+<!-- End Header -->

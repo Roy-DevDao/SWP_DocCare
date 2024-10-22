@@ -1,0 +1,219 @@
+
+
+@model IEnumerable<DoctorViewModel>
+@{
+    Layout = "Layout";
+    ViewData["Title"] = "Doctor List";
+}
+<section class="bg-half-150 bg-light d-table w-100">
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h3 class="sub-title mb-4">Doctor List</h3>
+                    <p class="para-desc mx-auto text-muted">If you or your loved ones need immediate assistance or emergency treatment, please book an appointment.</p>
+                    <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                        <ul class="breadcrumb bg-transparent mb-0">
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 row align-items-center">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 mt-2 pt-2">
+                        <div class="card team border-0 rounded shadow overflow-hidden" style="height: 400px;">
+                            <div class="team-person position-relative overflow-hidden">
+                                <img src="@item.DoctorImg" style="width: 100%; height: 200px; object-fit: cover;" class="img-fluid" alt="@item.Name">
+                            </div>
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div>
+                                    <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@item.DoctorId" class="title text-dark h5 d-block mb-0">@item.Name</a>
+                                    <small class="text-muted speciality">@item.Specialty</small>
+                                    <br>
+                                    <small class="text-muted speciality position-text" style="max-height: 40px; overflow: hidden; text-overflow: ellipsis; display: block;">Position: @item.Position</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <ul class="list-unstyled mb-0 d-flex" style="flex-wrap: nowrap;">
+                                        @for (int i = 0; i < 5; i++)
+
+                                        {
+                                            <li class="list-inline-item">
+                                                <i class="mdi mdi-star @(i < Math.Ceiling(item.Rating) ? "text-warning" : "")"></i>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <p class="text-muted mb-0">@item.NumberOfFeedbacks feedbacks</p>
+                                </div>
+
+                                <small class="text-muted speciality">Price: $@item.Price</small>
+                                <div class="pt-2">
+                                    <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("BookingAppointment", "Patient", new { id = @item.DoctorId })'">Book</button>
+                                    <button class="btn btn-soft-primary" onclick="window.location.href = '@Url.Action("DoctorDetail", "Home", new { id = @item.DoctorId })'">Detail</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-lg-3 mt-3 pt-2">
+                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                    <div class="card-body">
+                        <form action="@Url.Action("DoctorList")" method="GET">
+                            <div class="widget mb-4 pb-2">
+                                <h5 class="widget-title">Filter</h5>
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Gender</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <select name="gender" class="form-select">
+                                            <option value="all">--------------</option>
+                                            <option value="all">All</option>
+                                            <option value="true">Male</option>
+                                            <option value="false">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <label class="form-label">Speciality</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <select name="speciality" class="form-select">
+                                            <option value="all">--------------</option>
+                                            <option value="all">All</option>
+                                            @foreach (var specialty in ViewBag.Specialties)
+                                            {
+                                                <option value="@specialty.SpecialtyId">@specialty.SpecialtyName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Filter</button>
+                            </div>
+
+                            <div class="widget mb-4 pb-2">
+                                <h5 class="widget-title">Sort</h5>
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <select name="sort" onchange="this.form.submit()" class="form-select">
+                                            <option value="all">--------------</option>
+                                            <option value="all">All</option>
+                                            <option value="star">Star</option>
+                                            <option value="fee-">Descending Price</option>
+                                            <option value="fee">Ascending Price</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-12 mt-4">
+                <div class="d-md-flex align-items-center text-center justify-content-between">
+                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                        @if (ViewBag.PageNumber > 1)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="DoctorList"
+                                   asp-route-gender="@ViewBag.Gender"
+                                   asp-route-speciality="@ViewBag.Speciality"
+                                   asp-route-sort="@ViewBag.Sort"
+                                   asp-route-pageNumber="@(ViewBag.PageNumber - 1)"
+                                   aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        }
+
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            if (i <= 4 || i == ViewBag.TotalPages || (i == ViewBag.PageNumber - 1) || (i == ViewBag.PageNumber + 1))
+                            {
+                                <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                                    <a class="page-link" asp-action="DoctorList"
+                                       asp-route-gender="@ViewBag.Gender"
+                                       asp-route-speciality="@ViewBag.Speciality"
+                                       asp-route-sort="@ViewBag.Sort"
+                                       asp-route-pageNumber="@i">
+                                        @i
+                                    </a>
+                                </li>
+                            }
+                            else if (i == 5 && ViewBag.PageNumber > 5)
+                            {
+                                <li class="page-item disabled"><span class="page-link">...</span></li>
+                            }
+                        }
+
+                        @if (ViewBag.PageNumber < ViewBag.TotalPages)
+                        {
+                            <li class="page-item">
+                                <a class="page-link" asp-action="DoctorList"
+                                   asp-route-gender="@ViewBag.Gender"
+                                   asp-route-speciality="@ViewBag.Speciality"
+                                   asp-route-sort="@ViewBag.Sort"
+                                   asp-route-pageNumber="@(ViewBag.PageNumber + 1)"
+                                   aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<style>
+    .current-page {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .widget-title {
+        font-weight: bold;
+        color: #007bff;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+
+    .filter-label {
+        font-weight: bold;
+        color: #007bff;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+        display: inline-block;
+        background-color: #e7f0ff;
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+        .filter-label:hover {
+            color: #0056b3;
+            background-color: #d1e7fd;
+        }
+</style>

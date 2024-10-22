@@ -1,0 +1,226 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "Layout_Admin";
+}
+@section Styles {
+    <style>
+
+        .layout-default_body_main {
+            width: 100%;
+        }
+        /* doctor details  */
+
+        .whole-main {
+            border: 2px solid #F1F1F1;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+        }
+
+            .profile-header h3, .profile-header h2 {
+                font-weight: 600;
+            }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-status {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-left: 20px;
+            color: #e05d3b;
+        }
+
+        .divider {
+            height: 60px;
+            width: 1px;
+            background-color: #ccc;
+            margin: 0 20px;
+        }
+
+        .profile-main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .box-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .box-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .basic-info, .feedback, .intro {
+            border: 2px solid #F1F1F1;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        .basic-info-header {
+            background-color: #0D6EFD;
+            padding: 15px 20px;
+            font-size: larger;
+            font-weight: 600;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            color: white;
+        }
+
+        .basic-info-main, .intro-main, .feedback-stats {
+            padding: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .value {
+            color: #333;
+        }
+
+        .feedback-stats h3 {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .feedback-stats ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+            .feedback-stats ul li {
+                margin-bottom: 10px;
+                font-size: 16px;
+                color: #555;
+            }
+
+        .star-rating {
+            display: inline-block;
+            color: #FFD700; /* Gold color for stars */
+            font-size: 18px;
+        }
+
+
+    </style>
+}
+
+@model test2.Data.Doctor
+<main class="layout-default_body_main">
+    <div class="whole-main">
+        <div class="profile-header">
+            <div class="profile-info">
+                <h4>Id: @Model.Did</h4>
+                <h4>Doctor: Dr. @Model.Name</h4>
+            </div>
+            <div class="divider"></div>
+            <div class="profile-status">
+                <p>Status:</p>
+                <p>Available</p>
+            </div>
+        </div>
+
+        <div class="profile-main">
+            <div class="box-left">
+                <div class="basic-info">
+                    <div class="basic-info-header">
+                        <h5><i class="fas fa-info-circle"></i> Basic Information</h5>
+                    </div>
+                    <div class="basic-info-main">
+                        <div class="info-row">
+                            <div class="label">Gender: </div>
+                            <div class="value">@Model.Gender</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Position:</div>
+                            <div class="value">@Model.Position</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Speciality:</div>
+                            <div class="value">@Model.SpecialtyId</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Price:</div>
+                            <div class="value">@Model.Price</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Rating Consultant:</div>
+                            <div class="value">@Model.Feedbacks</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro">
+                    <div class="basic-info-header">
+                        <h5><i class="fas fa-info-circle"></i> Introduce</h5>
+                    </div>
+                    <div class="intro-main">
+                        @Model.Description
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-right">
+                <div class="feedback">
+                    <div class="basic-info-header">
+                        <h5><i class="fas fa-comments"></i> Feedback</h5>
+                    </div>
+                    <div class="feedback-stats">
+                        <h5><i class="fas fa-star"></i> Star Ratings</h5>
+                        <ul>
+                            <li><span class="star-rating">★★★★★</span> 100 reviews</li>
+                            <li><span class="star-rating">★★★★</span> 30 reviews</li>
+                            <li><span class="star-rating">★★★</span> 10 reviews</li>
+                            <li><span class="star-rating">★★</span> 5 reviews</li>
+                            <li><span class="star-rating">★</span> 5 reviews</li>
+                        </ul>
+
+                        <h5><i class="fas fa-thumbs-up"></i> Pros</h5>
+                        <ul>
+                            <li>Good communication</li>
+                            <li>Friendly staff</li>
+                            <li>Quick service</li>
+                        </ul>
+
+                        <h5><i class="fas fa-thumbs-down"></i> Cons</h5>
+                        <ul>
+                            <li>Long waiting time</li>
+                            <li>Limited parking space</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

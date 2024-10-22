@@ -1,0 +1,199 @@
+﻿@model ServiceViewModel
+
+@{
+    Layout = "Layout_login";
+    ViewData["Title"] = "Service Detail";
+}
+
+<section class="bg-half-170 d-table w-100 bg-light">
+    <div class="container">
+        <div class="row mt-5 justify-content-center">
+            <div class="col-12">
+                <div class="section-title text-center">
+                    <h3 class="sub-title mb-4">Services</h3>
+                    <nav aria-label="breadcrumb" class="d-inline-block mt-3">
+                        <ul class="breadcrumb bg-transparent mb-0">
+                            <p class="para-desc mx-auto text-muted">If you or your family member needs immediate help or urgent treatment, please schedule an appointment.</p>
+                            <li class="breadcrumb-item"><a asp-area ="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="ServiceList">Service List</a></li>
+                            <li class="breadcrumb-item"><a href="#">Details</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="position-relative">
+    <div class="shape overflow-hidden text-white">
+        <svg viewBox="0 0 2880 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 48H1437.5H2880V0H2160C1442.5 52 720 0 720 0H0V48Z" fill="currentColor"></path>
+        </svg>
+    </div>
+</div>
+
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <div class="slider slider-for">
+                    <div><img src="@Model.SpecialtyImg" class="img-fluid rounded" alt=""></div>
+                </div>
+            </div>
+
+            <div class="col-md-7 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                <div class="section-title ms-md-4">
+                    <h4 class="title">@Model.SpecialtyName</h4>
+                    <p class="text-muted">@Model.ShortDescription</p>
+                    <h5 class="text-muted">@Model.Price.ToString("N0") $</h5>
+                    <ul class="list-unstyled text-warning h5 mb-0">
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item"><i class="mdi mdi-star"></i></li>
+                        <li class="list-inline-item me-2 h6 text-muted">(@Model.TotalReviews Reviews)</li>
+                    </ul>
+
+                    <h5 class="mt-4 py-2">Description:</h5>
+                    @foreach(var specialtyDetail in Model.DetailSpecialties)
+                    {
+                    <p class="text-muted" style="font-weight: bold">@specialtyDetail.Title</p>
+                    <p class="text-muted">@specialtyDetail.Content</p>
+                    }
+                    <div class="mt-4 pt-2">
+                        <a asp-area="" asp-controller="Patient" asp-action="BookingService" class="btn btn-primary">Book an Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-100 mt-60">
+        <div class="row">
+            <div class="col-12">
+                <h5 class="mb-0">User Reviews:</h5>
+            </div>
+        </div>
+
+        <!-- User Reviews Section -->
+        <ul class="media-list list-unstyled mb-0">
+            @foreach (var feedback in Model.Feedbacks)
+            {
+                <li class="mt-4">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <a class="pe-3" href="#">
+                                <img src="~/assets/images/avata.png" class="img-fluid avatar avatar-md-sm rounded-circle shadow" alt="img">
+                            </a>
+                            <div class="commentor-detail">
+                                <h6 class="mb-0"><a href="javascript:void(0)" class="text-dark media-heading">@feedback.Name</a></h6>
+                                <small class="text-muted">
+                                    @(feedback.DateCmt.HasValue ? feedback.DateCmt.Value.ToString("dd/MM/yyyy HH:mm") : "No date")
+                                </small>
+
+                            </div>
+                        </div>
+                        <ul class="list-unstyled text-warning h5 mb-0">
+                            @for (int i = 1; i <= 5; i++)
+
+                            {
+                                <li class="list-inline-item">
+                                    <i class="mdi mdi-star @((i <= feedback.Star) ? "text-warning" : "text-muted")"></i>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        <p class="text-muted font-italic p-3 bg-light rounded">@feedback.Description</p>
+                    </div>
+                </li>
+            }
+        </ul>
+
+        <!-- Rate and Feedback Section -->
+        <div class="row">
+            <h5 class="card-title mt-4 mb-0">Rate:</h5>
+            <form action="rate?service=1" method="POST" class="mt-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5" />
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4" />
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3" />
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2" />
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1" />
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label class="form-label">Your Feedback</label>
+                            <textarea id="message" rows="3" name="comment" class="form-control" required=""></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="send d-grid">
+                            <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+    .rate:not(:checked) > input {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+    .rate:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ccc;
+    }
+    .rate:not(:checked) > label:before {
+        content: '★ ';
+    }
+    .rate > input:checked ~ label {
+        color: #ffc700;
+    }
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;
+    }
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
+</style>
+

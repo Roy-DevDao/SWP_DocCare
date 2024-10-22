@@ -1,0 +1,110 @@
+﻿@model test2.Data.Patient
+@{
+    Layout = "_Layout";
+
+
+
+
+
+    ViewBag.Title = "View Patient Detail";
+
+
+
+    var activeTab = ViewBag.ActiveTab?.ToString() ?? "profile"; // Default to "profile"
+
+
+
+    var appointments = ViewBag.Appointments as List<dynamic>;
+}
+
+
+
+<div class="mt-20 pt-6 border-b border-gray-200 dark:border-gray-700">
+    <ul class="flex flex-wrap -mb-px ml-48 text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+        <li class="me-2">
+            <a href="@Url.Action("ViewPatientDetail", new { tab = "profile", pid = Model.Pid })"
+               class="inline-flex text-2xl items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == "profile" ? "border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group")">
+                <svg class="w-6 h-6 me-2 @(activeTab == "profile" ? "text-blue-600 dark:text-blue-500" : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300")"
+                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z" />
+                </svg>
+                Profile
+            </a>
+        </li>
+        <li class="me-2">
+            <a href="@Url.Action("ViewPatientDetail", new { tab = "appointment", pid = Model.Pid })"
+               class="inline-flex text-2xl items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == "appointment" ? "border-blue-600 text-blue-600 dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group")">
+                <svg class="w-6 h-6 me-2 @(activeTab == "appointment" ? "text-blue-600 dark:text-blue-500" : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300")"
+                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                    <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
+                </svg>
+                Appointment
+            </a>
+        </li>
+    </ul>
+
+    @if (activeTab == "profile")
+    {
+        <div class="container mx-auto p-4">
+            <!-- Profile Header -->
+            <div class="flex items-center mb-4">
+                <img class="w-24 h-24 rounded" src="https://i.pinimg.com/736x/52/c9/1c/52c91c32ae7ac4b75252fcb9a67d567b.jpg" alt="Default avatar">
+                <div class="ml-4">
+                    <h2 class="text-2xl font-bold text-gray-800">@Model.Name</h2>
+                    <p class="text-gray-600">"Your health, our priority."</p>
+                </div>
+            </div>
+
+            <!-- User Details Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 shadow-md rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-700">Contact Information</h3>
+                    <p class="text-gray-600">Email: @Model.PidNavigation.Email</p>
+                    <p class="text-gray-600">Phone: @Model.Phone</p>
+                </div>
+                <div class="bg-white p-4 shadow-md rounded-lg">
+                    <h3 class="font-semibold text-lg text-gray-700">Date of Birth</h3>
+                    <p class="text-gray-600">@Model.Dob?.ToString("yyyy-MM-dd")</p>
+                </div>
+            </div>
+        </div>
+    }
+    else if (activeTab == "appointment")
+    {
+        <div class="container mx-auto p-4">
+            <div class="overflow-x-auto mt-5">
+                <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+                    <thead>
+                        <tr class="bg-blue-600 text-white text-left">
+                            <th class="py-3 px-4 uppercase font-semibold text-sm">Date</th>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm">Time</th>
+                            <th class="py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (appointments.Count > 0)
+                        {
+                            @for (int i = 0; i < appointments.Count; i++)
+                            {
+                                var appointment = appointments[i];
+                                <tr class="@(i % 2 == 0 ? "bg-white" : "bg-gray-50") hover:bg-gray-100 transition duration-300">
+                                    <td class="py-3 px-4 border-b border-gray-300">@appointment.Date</td>
+                                    <td class="py-3 px-4 border-b border-gray-300">@appointment.Time</td>
+                                    <td class="py-3 px-4 border-b border-gray-300 @(appointment.Status == "Confirmed" ? "text-green-600" : appointment.Status == "Pending" ? "text-yellow-600" : "text-red-600")">
+                                        @appointment.Status
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center py-3 px-4">No appointments available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
