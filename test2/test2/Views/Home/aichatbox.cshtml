@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DontCare</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DontCare.styles.css" asp-append-version="true" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+
+    <link rel="shortcut icon" href="https://shreethemes.in/Doccare/layouts/assets/images/favicon.ico">
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/remixicon.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/assets/css/tiny-slider.css" />
+    <link href="~/assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+    <link href="~/assets/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/flatpickr.min.css">
+    <link href="~/assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+<div class="bg-gray-100 h-screen flex">
+    <aside class="w-1/5 bg-white border-r h-full overflow-y-auto">
+        <div tabindex="0" class="mx-auto mt-2.5 min-h-11 w-[200px] flex items-center justify-center justify-self-center rounded-full border-b border-gray-200 bg-primary px-2 py-1" data-testid="new-session-button" style="transition-duration: 0s;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#fff" viewBox="0 0 24 24" preserveAspectRatio="none">
+                <circle cx="12" cy="12" r="10" stroke="#49BCE2" stroke-width="1.5"></circle><path stroke="#49BCE2" stroke-linecap="round" stroke-width="1.5" d="M15 12h-3m0 0H9m3 0V9m0 3v3"></path>
+            </svg>
+            <div dir="auto" class="css-146c3p1 text-sm font-medium text-white">Cuộc trò chuyện mới</div>
+        </div>
+        <div class="flex items-center justify-between border-b-2 py-3 border-gray-300  px-2">
+            <div dir="auto" class="css-146c3p1 r-dnmrzs r-1udh08x r-1udbk01 r-3s2u2q r-1iln25a text-14 font-semibold text-black">Lịch sử</div>
+            <div tabindex="0" class="css-175oi2r r-1i6wzkk r-lrvibr r-1loqt21 r-1otgn73" data-testid="delete-all-session-button" style="transition-duration: 0s;">
+                <div dir="auto" class="css-146c3p1 text-14 text-primary">Xoá tất cả</div>
+            </div>
+        </div>
+        <ul class="bg-[#F9F9F9]">
+            <li class="p-2 rounded-lg cursor-pointer hover:bg-[#ECECEC]">Chat 1</li>
+            <li class="p-2 rounded-lg cursor-pointer hover:bg-[#ECECEC]">Chat 2</li>
+            <li class="p-2 rounded-lg cursor-pointer hover:bg-[#ECECEC]">Chat 3</li>
+            <li class="p-2 rounded-lg cursor-pointer hover:bg-[#ECECEC]">Chat 4</li>
+            <!-- Add more chat history items as needed -->
+        </ul>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <div class=" flex-grow flex flex-col justify-between">
+
+        <!-- Header -->
+        <header class="bg-blue-600 justify-content-center text-white p-4 flex ">
+            <h1 class="text-2xl font-bold"> Assistant AI</h1>
+        </header>
+
+        <!-- Chat Area -->
+        <main id="main_chat" class="flex-grow overflow-y-auto p-4 bg-white space-y-4">
+         
+            
+          
+            
+        </main>
+
+        <!-- Input Section -->
+            <div class="bg-white p-4 border-t flex items-center space-x-4">
+                <input type="text" id="message" placeholder="Type a message..." class="flex-grow border border-gray-300 p-2 rounded-lg focus:outline-none focus:border-blue-500">
+                <button id="getDataBtn" class="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700">Send</button>
+            </div>
+    </div>
+</div>
+
+    <script>
+        const mainChat = document.getElementById('main_chat');
+        const button = document.getElementById('getDataBtn');
+        const input = document.getElementById('message');
+        // Add an event listener for the keydown event on the input field
+        input.addEventListener('keydown', function (event) {
+            // Check if the key pressed is "Enter"
+            if (event.key === 'Enter') {
+                // Trigger the button click
+                button.click();
+            }
+        });
+
+
+        // Bind a click event to the button
+        $('#getDataBtn').click(function () {
+            var message = $('#message').val();
+            if(message.length < 2)return;
+            $('#message').val("");
+
+            function formatTime(num) {
+                return num < 10 ? `0${num}` : num;
+            }
+
+            // Get current hour and minute
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = formatTime(now.getMinutes());
+
+            
+            const messageUser = `
+                <div class="flex items-start space-x-4">
+                    <div class="bg-gray-200 p-4 rounded-lg">
+                        <p class="max-w-md">${message}</p>
+                        <p class="text-xs">${hours}:${minutes}</p>
+
+
+                    </div>
+                </div>
+            `;
+            mainChat.insertAdjacentHTML('beforeend', messageUser);
+            mainChat.scrollTop = mainChat.scrollHeight;
+            console.log("this is message : ", message);
+            var formData = {
+                message: message,
+            }
+
+            $.ajax({
+                url: '/Home/getmessage',  // URL of the action method in the server
+                type: 'POST', 
+                data: formData,
+                success: function (data) {
+                    const now = new Date();
+                    const hours = now.getHours();
+                    const minutes = formatTime(now.getMinutes());
+                    const messageAi = `
+                        <div class="flex flex-col items-start mb-2 space-x-4">
+                                <div class="flex items-center" >
+                                            <img src="/assets/images/carrot.png" />
+                                            <p class="font-bold text-blue-400">Carrot</p>
+                                        </div>
+                                <div class="bg-blue-600 text-white p-2 rounded-lg">
+
+
+                                        <p id="content" class="max-w-2xl"></p>
+                                <p id="time" class="text-xs"></p>
+                            </div>
+                        </div>
+                    `;
+                    mainChat.insertAdjacentHTML('beforeend', messageAi);
+                    
+                    typeEffect(data, hours + ":" + minutes);
+
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log('Error:', error); // Error handling
+                }
+            });
+        });
+        function typeEffect(text,time,speed = 20) {
+            let i = 0;
+            const chatbox = document.getElementById("content");
+            const timebox = document.getElementById("time");
+
+            function typing() {
+                if (i < text.length) {
+                    chatbox.innerHTML += text.charAt(i);
+                    i++;
+                    mainChat.scrollTop = mainChat.scrollHeight;
+                    setTimeout(typing, speed);  // Add delay to mimic typing speed
+                } else {
+                    timebox.innerHTML = time;
+                    timebox.id="";
+                    chatbox.id="";
+                    mainChat.scrollTop = mainChat.scrollHeight;
+                }
+
+            }
+
+            typing();  // Start the typing effect
+        }
+    </script>
+</body>
+</html>
