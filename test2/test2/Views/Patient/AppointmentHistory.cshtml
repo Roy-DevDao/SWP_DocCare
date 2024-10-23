@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿@{
     Layout = "_Layout";
 
     ViewBag.Title = "Appointment History";
@@ -7,13 +7,73 @@
 
     // Sample appointments data
 
-    var appointments = new List<dynamic> {
-        new { id = 1, name = "Trung Phan", specialty= " neurosurgeons", dateBooking = "23/12/04", time = "10am", status = "Upcoming" },
-        new { id = 2, name = "Nguyen Van A", specialty = "Gastroenterologist", dateBooking = "23/12/04", time = "10am", status = "Finished" },
-        new { id = 3, name = "Le Thi B", specialty = "Nephrologists", dateBooking = "23/12/04", time = "10am", status = "Finished" }
-    };
 }
 @model IEnumerable<test2.Data.Order>
+<script>
+    $(document).ready(function () {
+        $('#searchapp').on('input', function () {
+            var input = $(this).val();
+            if (input.length < 2) {
+                document.getElementById('searchdata').classList.add('hidden');
+                document.getElementById('maindata').classList.remove('hidden');
+                return;
+            }
+            document.getElementById('maindata').classList.add('hidden');
+            $.ajax({
+                url: '/Patient/GetAppointmentByQuery',  // URL of the action method in the server
+                type: 'GET',
+                data: { query: input },
+                success: function (data) {
+                    var searchbody = document.getElementById('searchdata');
+                    searchbody.classList.remove('hidden');
+                    searchbody.innerHTML = "";
+                    for (let i = 0; data != "empty" && i < data.length; i++) {
+
+                        var row = `
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            ${data[i].name}
+                        </th>
+                        <td class="px-6 py-4">
+                            <img class="w-20 h-20 rounded" src="${data[i].image}" alt="Default avatar">
+                        </td>
+                        <td class="px-6 py-4">
+                                ${data[i].specialty}
+                        </td>
+                        <td class="px-6 py-4">
+                                ${data[i].date}
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded
+                                    ${data[i].status == "Pending" ? "bg-yellow-300 dark:bg-yellow-900 dark:text-yellow-300" : (data[i].status == "Canceled" ? "bg-red-300 dark:bg-red-900 dark:text-red-300" : "bg-blue-300 dark:bg-blue-900 dark:text-blue-300")}">
+                            
+                                    ${data[i].status}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">
+                             <a href="/Patient/AppointmentDetail?oid=${data[i].id}"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Detail</a>
+                        </td>
+                  
+                    </tr>
+                    `
+                            searchbody.insertAdjacentHTML('beforeend', row);
+
+
+                    }
+
+
+
+
+                    console.log("this is app : ", data);
+                },
+                error: function (error) {
+                    console.log('Error:', error); // Error handling
+                }
+            });
+        });
+    });
+
+</script>
 
 <div class="container mx-auto mt-10 p-5">
     <h2 class="text-2xl text-blue-500 font-bold mb-4">Appointment History</h2>
@@ -51,7 +111,7 @@
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
                 </svg>
             </div>
-            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search name..." required />
+            <input type="text" id="searchapp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search name..." required />
         </div>
         <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -89,7 +149,10 @@
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="searchdata" class="hidden">
+                
+            </tbody>
+            <tbody id="maindata" class="">
                 @foreach (var appointment in Model)
 
                 {
@@ -115,12 +178,8 @@
                         <td class="px-6 py-4">
                             <a asp-controller="Patient" asp-action="AppointmentDetail" asp-route-oid="@appointment.Oid" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Detail</a>
                         </td>
-
-
                     </tr>
                 }
-
-
             </tbody>
 
         </table>
