@@ -1,10 +1,6 @@
-﻿@using test2.DAO
-
-
-
+﻿
 @{
-    var userDAO = new UserDAO(); 
-    var user = userDAO.GetLoggedInUser(User) ?? new PatientProfileViewModel(); 
+    var user = ViewBag.User as PatientProfileViewModel; // Lấy thông tin người dùng
 }
 
 <header class="header">
@@ -70,7 +66,16 @@
             else
             {
                 <li><a asp-area="" asp-controller="Home" asp-action="Profile"><i class="fa fa-user" style="margin-right: 8px"> @user.Name</i></a></li>
-                <li><a asp-area="" asp-controller="Home" asp-action="Logout"><i class="fa fa-sign-out" style="margin-right: 8px"> Đăng xuất</i></a></li>
+                <li>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out" style="margin-right: 8px"></i> Đăng xuất
+                    </a>
+                </li>
+
+                <!-- Form đăng xuất -->
+                <form id="logout-form" action="@Url.Action("Logout", "Home")" method="POST" style="display: none;">
+                    @Html.AntiForgeryToken()  <!-- Bảo vệ CSRF -->
+                </form>
             }
         </ul>
     </nav>

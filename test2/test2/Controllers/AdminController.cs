@@ -17,7 +17,7 @@ namespace test2.Controllers
         public AdminController(ILogger<AdminController> logger, DocCareContext context)
         {
             _logger = logger;
-            _context = context; // Kh?i t?o DbContext
+            _context = context;
         }
 
         public IActionResult Index()

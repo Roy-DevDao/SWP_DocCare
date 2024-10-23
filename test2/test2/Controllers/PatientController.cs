@@ -9,7 +9,7 @@ using test2.Services;
 
 namespace test2.Controllers
 {
-    [Authorize(Roles = "3")]
+    //[Authorize(Roles = "3")]
     public class PatientController : Controller
     {
         private readonly ILogger<PatientController> _logger;
@@ -26,6 +26,11 @@ namespace test2.Controllers
         [Route("Patient/AppointmentHistory")]
         public IActionResult AppointmentHistory()
         {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var list = dc.Orders
                  .Include(o => o.Option)             // Include the Option navigation property
                  .ThenInclude(op => op.DidNavigation)
@@ -38,6 +43,7 @@ namespace test2.Controllers
         [Route("Patient/AppointmentHistory/{status?}")]
         public IActionResult AppointmentHistory(string status)
         {
+
             var orders = dc.Orders
                            .Include(o => o.Option)
                            .ThenInclude(op => op.DidNavigation)
@@ -76,16 +82,31 @@ namespace test2.Controllers
 
         public IActionResult BookingAppointment()
         {
-            return View();  // This will render /Views/Staff/AppointmentDetail.cshtml
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            return View();
         }
 
         public IActionResult BookingService()
         {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();  // This will render /Views/Staff/ServiceAppointList.cshtml
         }
 
         public IActionResult Payment()
         {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             var vnPayModel = new VnPaymentRequestModel
             {
                 Amount = 100000,
@@ -99,6 +120,11 @@ namespace test2.Controllers
 
         public IActionResult ServiceHistory()
         {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();  // This will render /Views/Staff/ServiceAppointDetail.cshtml
         }
 

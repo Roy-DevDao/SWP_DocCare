@@ -1,11 +1,10 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Đăng nhập";
     Layout = "~/Views/Shared/Layout_new.cshtml";
     var url = ViewBag.ReturnUrl;
 }
 
-@section CSS {/
+@section CSS {
     <link href="~/Content/plugin/notifyjs/lobibox.min.css" rel="stylesheet" />
 }
 <!-- Start main-content -->
@@ -14,7 +13,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-
                 <div class="account-content">
                     <div class="row align-items-center justify-content-center">
                         <div class="col-md-7 col-lg-6 login-left">
@@ -24,7 +22,13 @@
                             <div class="login-header">
                                 <h3>Login <span>DocCare</span></h3>
                             </div>
-                            <form name="login-form" class="clearfix" id="frmLogin" autocomplete="off">
+
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger" id="alert-error">@TempData["ErrorMessage"]</div>
+                            }
+
+                            <form method="post" asp-controller="Home" asp-action="Login" name="login-form" class="clearfix" id="frmLogin" autocomplete="off">
                                 <div class="form-group form-focus">
                                     <input type="text" id="Email" placeholder="Email" name="email" autocomplete="false" class="form-control floating">
                                     <label class="focus-label">Email <span class="text-danger">*</span></label>
@@ -51,7 +55,6 @@
                                             Google
                                         </a>
                                     </div>
-                                    
                                 </div>
                                 <div class="text-center dont-have">Don’t have an account? <a asp-area="" asp-controller="Home" asp-action="SignUp">Register</a></div>
                             </form>
@@ -65,6 +68,19 @@
 
 <!-- end main-content -->
 @section Scripts {
-    <script src="~/Scripts/js/live/login.client.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script>
+        // Ẩn thông báo sau 2 giây
+        setTimeout(function() {
+            var errorAlert = document.getElementById('alert-error');
+            var successAlert = document.getElementById('alert-success');
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+            if (successAlert) {
+                successAlert.style.display = 'none';
+            }
+        }, 2000);
+    </script>
 }

@@ -4239,8 +4239,9 @@ fieldset:disabled .btn {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    padding-top: .5rem;
-    padding-bottom: .5rem
+    padding-top: 0;
+    padding-bottom: 25px;
+    height : 50px;
 }
 
 .navbar>.container,
@@ -4283,8 +4284,8 @@ fieldset:disabled .btn {
 }
 
 .navbar-text {
-    padding-top: .5rem;
-    padding-bottom: .5rem
+    padding-top: 0;
+    padding-bottom: 25px;
 }
 
 .navbar-collapse {

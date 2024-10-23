@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using test2.DAO;
 
 namespace test2.Controllers
 {
@@ -19,11 +20,13 @@ namespace test2.Controllers
     {
         private readonly DocCareContext dc;
         private readonly ILogger<HomeController> _logger;
+        private readonly UserDAO _userDAO;
 
-        public HomeController(ILogger<HomeController> logger, DocCareContext db)
+        public HomeController(ILogger<HomeController> logger, DocCareContext db, UserDAO userDAO)
         {
             _logger = logger;
             dc = db;
+            _userDAO = userDAO; // Khởi tạo UserDAO
         }
         //--------------------------------------------------------------------------------------------
         public IActionResult Index()
@@ -35,6 +38,8 @@ namespace test2.Controllers
             //truyen data thong qua view bag
             ViewBag.Doctors = doctors;
             ViewBag.Specialties = specialties;
+            var user = _userDAO.GetLoggedInUser(User) ?? new PatientProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
 
             return View();
 
@@ -212,52 +217,56 @@ namespace test2.Controllers
             }
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
-            // Validate user credentials (replace this with your actual logic)
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                TempData["ErrorMessage"] = "Please enter both email and password.";
+                return RedirectToAction("Login");
+            }
+
             var user = dc.Accounts.Where(dc => dc.Email == email).FirstOrDefault();
-            if (user != null)
+            if (user != null && user.Password == password)
             {
-                if (user.Password == password)
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Email, email),
+            new Claim(ClaimTypes.Role, user.Role.ToString())
+        };
+
+                var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
+                var authProperties = new AuthenticationProperties
                 {
-                    var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.Role, user.Role.ToString()) // Thêm role của user
-            };
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                    IsPersistent = true
+                };
 
-                    var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
-                    var authProperties = new AuthenticationProperties
-                    {
-                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                        IsPersistent = true
-                    };
+                await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                    await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
+                TempData["SuccessMessage"] = "Login successful!";
 
-                    // Điều hướng người dùng dựa trên role
-                    switch (user.Role)
-                    {
-                        case 0: // Admin
-                            return RedirectToAction("Index", "Admin");
-                        case 1: // Staff
-                            return RedirectToAction("AppoitmentList", "Staff");
-                        case 2: // Doctor
-                            return RedirectToAction("ViewAppointment", "Doctor");
-                        case 3: // Patient
-                            return RedirectToAction("AppointmentHistory", "Patient");
-                        default:
-                            TempData["ErrorMessage"] = "Role not recognized.";
-                            return RedirectToAction("Login");
-                    }
+                // Điều hướng người dùng dựa trên role
+                switch (user.Role)
+                {
+                    case 0: // Admin
+                        return RedirectToAction("Index", "Admin");
+                    case 1: // Staff
+                        return RedirectToAction("AppoitmentList", "Staff");
+                    case 2: // Doctor
+                        return RedirectToAction("ViewAppointment", "Doctor");
+                    case 3: // Patient
+                        return RedirectToAction("Index", "Home");
+                    default:
+                        TempData["ErrorMessage"] = "Role not recognized.";
+                        return RedirectToAction("Login");
                 }
             }
 
-            TempData["ErrorMessage"] = "Invalid login attempt.";
+            TempData["ErrorMessage"] = "Invalid email or password.";
             return RedirectToAction("Login");
         }
+
 
         //--------------------------------------------------------------------------------------------
 

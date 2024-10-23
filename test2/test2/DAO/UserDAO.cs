@@ -7,10 +7,11 @@ namespace test2.DAO
 {
     public class UserDAO
     {
-        private readonly DocCareContext _context = new DocCareContext();
+        private readonly DocCareContext _context;
 
-        public UserDAO()
+        public UserDAO(DocCareContext dc)
         {
+            _context = dc;
         }
 
         public PatientProfileViewModel GetLoggedInUser(ClaimsPrincipal user)
