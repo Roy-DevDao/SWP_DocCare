@@ -532,6 +532,17 @@ namespace test2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult aichatbox()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> getmessage(string message)
+        {   
+             return Json(await AIControl.CreateMessage(message));
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
