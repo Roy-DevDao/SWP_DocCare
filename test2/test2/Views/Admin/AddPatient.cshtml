@@ -124,9 +124,9 @@
         }
     </style>
 }
-
+@* 
 <main class="layout-default_body_main">
-    <form>
+    <form method="post" asp-action="AddPatient">
         <!-- Section 1: Patient Information -->
         <div class="section">
             <div class="borsder">
@@ -136,7 +136,7 @@
                     <!-- ID -->
                     <div class="grid-item">
                         <label for="id">ID</label>
-                        <input id="id" name="id" type="text" placeholder="Patient ID">
+                        <input id="Pid" name="Pid" type="text" placeholder="Patient ID">
                     </div>
 
                     <!-- Photo -->
@@ -148,22 +148,23 @@
                         </div>
                     </div>
 
-                    <!-- First Name -->
+                    <!-- Full Name -->
                     <div class="grid-item">
-                        <label for="first-name">First Name</label>
-                        <input id="first-name" name="first-name" type="text">
+                        <label for="full-name">Full Name</label>
+                        <input id="Name" name="Name" type="text" placeholder="Full Name">
                     </div>
 
-                    <!-- Last Name -->
+                    <!-- Phone -->
                     <div class="grid-item">
-                        <label for="last-name">Last Name</label>
-                        <input id="last-name" name="last-name" type="text">
+                        <label for="phone">Phone Number</label>
+                        <input id="Phone" name="Phone" type="tel" placeholder="Phone number">
                     </div>
+
 
                     <!-- Gender -->
                     <div class="grid-item">
                         <label for="gender">Gender</label>
-                        <select id="gender" name="gender">
+                        <select id="Gender" name="Gender">
                             <option>Male</option>
                             <option>Female</option>
                             <option>Other</option>
@@ -173,25 +174,17 @@
                     <!-- Date of Birth -->
                     <div class="grid-item">
                         <label for="dob">Date of Birth</label>
-                        <input id="dob" name="dob" type="date">
+                        <input id="Dob" name="Dob" type="date">
                     </div>
 
-                    <!-- Address -->
-                    <div class="grid-item">
-                        <label for="address">Address</label>
-                        <input id="address" name="address" type="text" placeholder="Patient's address">
-                    </div>
+                    
 
-                    <!-- Phone -->
-                    <div class="grid-item">
-                        <label for="phone">Phone Number</label>
-                        <input id="phone" name="phone" type="tel" placeholder="Phone number">
-                    </div>
+                    
                 </div>
             </div>
         </div>
 
-        <!-- Section 2: Additional Information -->
+       <!-- Section 2: Additional Information -->
         <div class="section">
             <div class="bordser">
                 <h1 class="first-text">Additional Information</h1>
@@ -220,6 +213,68 @@
                     </div>
                 </div>
             </div>
+        </div> 
+
+        <!-- Submit Button -->
+        <div class="submit-container">
+            <button type="button" class="cancel-btn">Cancel</button>
+            <button type="submit" class="save-btn">Save</button>
+        </div>
+    </form>
+</main> *@
+
+<main class="layout-default_body_main">
+    <form method="post" asp-action="AddPatient">
+        <!-- Section 1: Patient Information -->
+        <div class="section">
+            <div class="borsder">
+                <h1 class="first-text">Patient Information</h1>
+
+                <div class="grid-container">
+                    <!-- ID -->
+                    <div class="grid-item">
+                        <label for="id">ID</label>
+                        <input id="Pid" name="Pid" type="text" placeholder="Patient ID" value="@Model?.Pid" />
+                    </div>
+
+                    <!-- Photo -->
+                    @* <div class="grid-item">
+                        <label for="photo">Photo</label>
+                        <div class="flex-container">
+                            <div class="icon photo-icon"></div>
+                            <button type="button" class="change-btn">Change</button>
+                        </div>
+                    </div> *@
+
+                    <!-- Full Name -->
+                    <div class="grid-item">
+                        <label for="full-name">Full Name</label>
+                        <input id="Name" name="Name" type="text" placeholder="Full Name" value="@Model?.Name" />
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="grid-item">
+                        <label for="phone">Phone Number</label>
+                        <input id="Phone" name="Phone" type="tel" placeholder="Phone number" value="@Model?.Phone" />
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="grid-item">
+                        <label for="gender">Gender</label>
+                        <select id="Gender" name="Gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Date of Birth -->
+                    <div class="grid-item">
+                        <label for="dob">Date of Birth</label>
+                        <input id="Dob" name="Dob" type="date" value="@Model?.Dob?.ToString("yyyy-MM-dd")" />
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Submit Button -->
@@ -229,3 +284,4 @@
         </div>
     </form>
 </main>
+

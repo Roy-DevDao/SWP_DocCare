@@ -1,6 +1,13 @@
 ﻿@{
     Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Layout chính mà bạn đã định nghĩa
 }
+@model test2.Data.Specialty
+@section Scripts {
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
 
 @section Styles {
     <style>
@@ -125,6 +132,122 @@
 
     </style>
 }
+
+    <main class="layout-default_body_main">
+        <form method="post" asp-action="AddService" enctype="multipart/form-data">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Section 1: Service Information -->
+            <div class="section">
+                <div class="border">
+                    <h1 class="first-text">Service Information</h1>
+
+                    <div class="grid-container">
+                    <div class="grid-item">
+                        <label asp-for="SpecialtyId">Service ID</label>
+                        <input asp-for="SpecialtyId" class="form-control" placeholder="Service ID">
+                        @Html.ValidationMessageFor(model => model.SpecialtyId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="grid-item">
+                        <label asp-for="SpecialtyName">Service Name</label>
+                        <input asp-for="SpecialtyName" class="form-control" placeholder="Service Name">
+                        @Html.ValidationMessageFor(model => model.SpecialtyName, "", new { @class = "text-danger" })
+                    </div>
+
+                        <!-- Photo -->
+                        @* <div class="grid-item">
+                            <label for="SpecialtyImg">Photo</label>
+                            <div class="flex-container">
+                                <input type="file" id="SpecialtyImg" name="SpecialtyImg" accept="image/*">
+                            </div>
+                        </div> *@
+
+                        <!-- Short Description -->
+                        <div class="grid-item">
+                            <label for="ShortDescription">Short Description</label>
+                            <input id="ShortDescription" name="ShortDescription" type="text" placeholder="Short Description">
+                        </div>
+
+                        <!-- Long Description -->
+                        <div class="grid-item-full">
+                            <label for="LongDescription">Long Description</label>
+                            <textarea id="LongDescription" name="LongDescription" rows="3" placeholder="Detailed description of the service"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="submit-container">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="save-btn">Save</button>
+            </div>
+        </form>
+    </main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const specialtyIdInput = document.getElementById('SpecialtyId');
+        const specialtyNameInput = document.getElementById('SpecialtyName');
+
+        specialtyIdInput.addEventListener('input', function () {
+            const value = specialtyIdInput.value;
+            const regex = /^[A-Za-z]\d*$/;
+
+            if (!value) {
+                showError('SpecialtyId', 'Specialty ID is required.');
+            } else if (!regex.test(value)) {
+                showError('SpecialtyId', 'Specialty ID must start with a letter followed by digits.');
+            } else {
+                clearError('SpecialtyId');
+            }
+        });
+
+        specialtyNameInput.addEventListener('input', function () {
+            const value = specialtyNameInput.value;
+            if (!value) {
+                showError('SpecialtyName', 'Specialty Name is required.');
+            } else if (value.length > 30) {
+                showError('SpecialtyName', 'Specialty Name cannot be longer than 30 characters.');
+            } else if (!/^[A-Za-z\s]*$/.test(value)) {
+                showError('SpecialtyName', 'Specialty Name must contain only letters.');
+            } else {
+                clearError('SpecialtyName');
+            }
+        });
+
+        function showError(elementId, message) {
+            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        function clearError(elementId) {
+            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
 <main class="layout-default_body_main">
     <form>
         <!-- Section 1: Patient Information -->
@@ -192,4 +315,4 @@
             <button type="submit" class="save-btn">Save</button>
         </div>
     </form>
-</main>
+</main> *@

@@ -59,13 +59,33 @@
                     <table class="table mb-0 table-center">
                         <thead>
                             <tr>
-                                <th class="border-bottom p-3">ID</th>
-                                <th class="border-bottom p-3">Patient</th>
-                                <th class="border-bottom p-3">Service</th>
-                                <th class="border-bottom p-3">Date</th>
-                                <th class="border-bottom p-3">Doctor</th>
+                                <th class="border-bottom p-3">ID
+                                    <a asp-action="ServiceAppointList" asp-route-sortColumn="ServiceId" asp-route-sortDirection="@((ViewBag.SortColumn=="ServiceId" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
+                                        <i class="@(ViewBag.SortColumn=="ServiceId" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                    </a>
+                                </th>
+                                <th class="border-bottom p-3">Patient
+                                    <a asp-action="ServiceAppointList" asp-route-sortColumn="PatientName" asp-route-sortDirection="@((ViewBag.SortColumn=="PatientName" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
+                                        <i class="@(ViewBag.SortColumn=="PatientName" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                    </a>
+                                </th>
+                                <th class="border-bottom p-3">Service
+                                    <a asp-action="ServiceAppointList" asp-route-sortColumn="SpecialtyName" asp-route-sortDirection="@((ViewBag.SortColumn=="SpecialtyName" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
+                                        <i class="@(ViewBag.SortColumn=="SpecialtyName" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                    </a>
+                                </th>
+                                <th class="border-bottom p-3">Date
+                                    <a asp-action="ServiceAppointList" asp-route-sortColumn="AppointmentDate" asp-route-sortDirection="@((ViewBag.SortColumn=="AppointmentDate" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
+                                        <i class="@(ViewBag.SortColumn=="AppointmentDate" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                    </a>
+                                </th>
+                                <th class="border-bottom p-3">Doctor
+                                    <a asp-action="ServiceAppointList" asp-route-sortColumn="DoctorName" asp-route-sortDirection="@((ViewBag.SortColumn=="DoctorName" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
+                                        <i class="@(ViewBag.SortColumn=="DoctorName" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                    </a>
+                                </th>
                                 <th class="border-bottom p-3">Status</th>
-                                <th class="border-bottom p-3"></th>
+                                <th class="border-bottom p-3">More details</th>
                             </tr>
                         </thead>
                         <tbody>

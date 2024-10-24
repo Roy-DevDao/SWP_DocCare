@@ -1,4 +1,4 @@
-﻿@section Styles {
+﻿@* @section Styles {
     <style>
 
         .layout-default_body_main {
@@ -52,32 +52,126 @@
             }
 
     </style>
+} *@
+@{
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Layout chính mà bạn đã định nghĩa
+}
+
+ @section Styles {
+    <style>
+        .layout-default_body_main {
+            width: 100%;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Edit Service Container */
+        .edit-service-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Title Styling */
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Form Group */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Input Fields */
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f8f8;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #0D6EFD;
+            outline: none;
+            background-color: #fff;
+        }
+
+        /* Textarea for description fields */
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        /* Save Button */
+        .save-button {
+            padding: 12px;
+            background-color: #0D6EFD;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .save-button:hover {
+            background-color: #45a049;
+        }
+
+        ont-size{
+            : 1rem;}
+            
+        
+    </style>
 }
 
 
 <main class="layout-default_body_main">
-    <div class="edit-service-container">
-        <h1>Edit Service Information</h1>
+    <h1>Edit Service Information</h1>
+
+    <form asp-action="EditService" method="post">
+        <input type="hidden" id="SpecialtyId" name="SpecialtyId" value="@Model.SpecialtyId" />
+
         <div class="form-group">
-            <label for="serviceName">Service Name:</label>
-            <input type="text" id="serviceName" name="serviceName" placeholder="Enter service name" />
+            <label for="SpecialtyName">Service Name:</label>
+            <input type="text" id="SpecialtyName" name="SpecialtyName" value="@Model.SpecialtyName" placeholder="Enter service name" class="form-control" />
         </div>
 
         <div class="form-group">
-            <label for="type">Service Type:</label>
-            <input type="text" id="type" name="type" placeholder="Enter service type" />
+            <label for="ShortDescription">Short Description:</label>
+            <textarea id="ShortDescription" name="ShortDescription" placeholder="Enter short description" class="form-control">@Model.ShortDescription</textarea>
         </div>
 
         <div class="form-group">
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" placeholder="Enter price" />
+            <label for="LongDescription">Long Description:</label>
+            <textarea id="LongDescription" name="LongDescription" placeholder="Enter long description" class="form-control">@Model.LongDescription</textarea>
         </div>
 
         <div class="form-group">
-            <label for="speciality">Speciality:</label>
-            <input type="text" id="speciality" name="speciality" placeholder="Enter speciality" />
+            <label for="SpecialtyImg">Image URL:</label>
+            <input type="text" id="SpecialtyImg" name="SpecialtyImg" value="@Model.SpecialtyImg" placeholder="Enter image URL" class="form-control" />
         </div>
 
-        <button class="save-button" onclick="handleSave()">Save Changes</button>
-    </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
 </main>

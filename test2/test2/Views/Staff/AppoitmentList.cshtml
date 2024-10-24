@@ -40,7 +40,7 @@
             <div class="col-12 mt-4">
                 <div class="table-responsive bg-white shadow rounded">
                     <table class="table mb-0 table-center">
-                        <thead>
+                        @* <thead>
                             <tr>
                                 <th class="border-bottom p-3">ID</th>
                                 <th class="border-bottom p-3">Patient</th>
@@ -49,7 +49,41 @@
                                 <th class="border-bottom p-3">Status</th>
                                 <th class="border-bottom p-3"></th>
                             </tr>
-                        </thead>
+                        </thead> *@
+                            <thead>
+                                <tr>
+                                    <th class="border-bottom p-3">
+                                        ID
+                                        <a asp-action="AppoitmentList" asp-route-sortColumn="AppointmentId" asp-route-sortDirection="@((ViewBag.SortColumn == "AppointmentId" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                                            <i class="@(ViewBag.SortColumn == "AppointmentId" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                        </a>
+                                    </th>
+                                    <th class="border-bottom p-3">
+                                        Patient
+                                        <a asp-action="AppoitmentList" asp-route-sortColumn="PatientName" asp-route-sortDirection="@((ViewBag.SortColumn == "PatientName" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                                            <i class="@(ViewBag.SortColumn == "PatientName" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                        </a>
+                                    </th>
+                                    <th class="border-bottom p-3">
+                                        Doctor
+                                        <a asp-action="AppoitmentList" asp-route-sortColumn="DoctorName" asp-route-sortDirection="@((ViewBag.SortColumn == "DoctorName" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                                            <i class="@(ViewBag.SortColumn == "DoctorName" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                        </a>
+                                    </th>
+                                    <th class="border-bottom p-3">
+                                        Date
+                                        <a asp-action="AppoitmentList" asp-route-sortColumn="AppointmentDate" asp-route-sortDirection="@((ViewBag.SortColumn == "AppointmentDate" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                                            <i class="@(ViewBag.SortColumn == "AppointmentDate" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                                        </a>
+                                    </th>
+                                    <th class="border-bottom p-3">
+                                        Status
+                                        
+                                    </th>
+                                </tr>
+                            </thead>
+
+
                         <tbody>
                             @foreach (var appointment in Model)
 

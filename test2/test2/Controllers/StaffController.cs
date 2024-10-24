@@ -21,52 +21,70 @@ namespace test2.Controllers
 
         }
         //-------------------------------------------------------------------------------------------------------------
-        public IActionResult AppoitmentList(string search_doctor = "", string status = "all", int pageNumber = 1)
+        
+
+        public IActionResult AppoitmentList(string search_doctor = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
         {
-            int pageSize = 10; // Số lượng cuộc hẹn trên mỗi trang
+            int pageSize = 10;
 
-            // Lấy danh sách hẹn
+            // Base query
             var appointmentsQuery = dc.Orders.Include(o => o.PidNavigation)
-                                              .Include(o => o.Option)
-                                              .ThenInclude(opt => opt.DidNavigation)
-                                              .AsQueryable();
+                                             .Include(o => o.Option)
+                                             .ThenInclude(opt => opt.DidNavigation)
+                                             .AsQueryable();
 
-            // Thực hiện tìm kiếm theo tên bác sĩ
+            // Search by doctor's name
             if (!string.IsNullOrEmpty(search_doctor))
             {
                 appointmentsQuery = appointmentsQuery.Where(o => o.Option.DidNavigation.Name.Contains(search_doctor));
             }
 
-            // Thực hiện lọc theo trạng thái
-            if (!string.IsNullOrEmpty(status) && status != "all")
+
+            // Apply sorting
+            switch (sortColumn)
             {
-                appointmentsQuery = appointmentsQuery.Where(o => o.Status == status);
+                case "PatientName":
+                    appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.PidNavigation.Name) : appointmentsQuery.OrderByDescending(o => o.PidNavigation.Name);
+                    break;
+                case "DoctorName":
+                    appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Option.DidNavigation.Name) : appointmentsQuery.OrderByDescending(o => o.Option.DidNavigation.Name);
+                    break;
+                case "AppointmentDate":
+                    appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Option.DateExam) : appointmentsQuery.OrderByDescending(o => o.Option.DateExam);
+                    break;
+                default:
+                    appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Oid) : appointmentsQuery.OrderByDescending(o => o.Oid);
+                    break;
             }
 
-            // Chọn các trường cần thiết và chuyển đổi sang AppointmentViewModel
+            // Pagination
             var appointments = appointmentsQuery.Select(o => new AppointmentViewModel
             {
                 AppointmentId = o.Oid,
                 PatientName = o.PidNavigation.Name,
                 DoctorName = o.Option.DidNavigation.Name,
-                AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
+                AppointmentDate = o.Option.DateExam ?? DateTime.MinValue,
                 Status = o.Status
             })
-            .Skip((pageNumber - 1) * pageSize) // Bỏ qua số lượng cuộc hẹn đã hiển thị ở các trang trước
-            .Take(pageSize) // Lấy số lượng cuộc hẹn tương ứng với trang hiện tại
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToList();
 
-            // Tính tổng số cuộc hẹn
+            // Total pages calculation
             var totalAppointments = appointmentsQuery.Count();
-            ViewBag.TotalPages = (int)Math.Ceiling(totalAppointments / (double)pageSize); // Tổng số trang
-            ViewBag.PageNumber = pageNumber; // Trang hiện tại
+            ViewBag.TotalPages = (int)Math.Ceiling(totalAppointments / (double)pageSize);
+            ViewBag.PageNumber = pageNumber;
 
-            // Giữ lại các tham số lọc để truyền vào view
+            // Preserve sorting and filtering
+            ViewBag.SortColumn = sortColumn;
+            ViewBag.SortDirection = sortDirection;
             ViewBag.SearchDoctor = search_doctor;
-            ViewBag.Status = status;
 
             return View(appointments);
         }
+
+
+
 
 
 
@@ -116,18 +134,18 @@ namespace test2.Controllers
 
         //-------------------------------------------------------------------------------------------------------------
 
-        public IActionResult ServiceAppointList(string search_service = "", string status = "all", int pageNumber = 1)
+        public IActionResult ServiceAppointList(string search_service = "", string sortColumn = "AppointmentId", string sortDirection = "asc", string status = "all", int pageNumber = 1)
         {
-            int pageSize = 10; // Số lượng cuộc hẹn dịch vụ trên mỗi trang
+            int pageSize = 10;
 
-            // Lấy danh sách cuộc hẹn dịch vụ
+            // Base query for service appointments
             var appointmentsQuery = dc.Orders.Include(o => o.PidNavigation)
                 .Include(o => o.Option)
                     .ThenInclude(opt => opt.DidNavigation)
                     .ThenInclude(d => d.Specialty)
                 .AsQueryable();
 
-            // Thực hiện tìm kiếm theo tên dịch vụ
+            // Search by service name
             if (!string.IsNullOrEmpty(search_service))
             {
                 appointmentsQuery = appointmentsQuery
@@ -135,13 +153,44 @@ namespace test2.Controllers
                                 o.Option.DidNavigation.Specialty.SpecialtyName != null &&
                                 o.Option.DidNavigation.Specialty.SpecialtyName.Contains(search_service.Trim()));
             }
-            // Lọc theo trạng thái
+
+            // Filter by status
             if (!string.IsNullOrEmpty(status) && status != "all")
             {
                 appointmentsQuery = appointmentsQuery.Where(o => o.Status == status);
             }
 
-            // Chọn các trường cần thiết và chuyển đổi sang ServiceAppointmentModel
+            // Sorting functionality
+            switch (sortColumn)
+            {
+                case "PatientName":
+                    appointmentsQuery = sortDirection == "asc" ?
+                        appointmentsQuery.OrderBy(o => o.PidNavigation.Name) :
+                        appointmentsQuery.OrderByDescending(o => o.PidNavigation.Name);
+                    break;
+                case "SpecialtyName":
+                    appointmentsQuery = sortDirection == "asc" ?
+                        appointmentsQuery.OrderBy(o => o.Option.DidNavigation.Specialty.SpecialtyName) :
+                        appointmentsQuery.OrderByDescending(o => o.Option.DidNavigation.Specialty.SpecialtyName);
+                    break;
+                case "AppointmentDate":
+                    appointmentsQuery = sortDirection == "asc" ?
+                        appointmentsQuery.OrderBy(o => o.Option.DateExam) :
+                        appointmentsQuery.OrderByDescending(o => o.Option.DateExam);
+                    break;
+                case "DoctorName":
+                    appointmentsQuery = sortDirection == "asc" ?
+                        appointmentsQuery.OrderBy(o => o.Option.DidNavigation.Name) :
+                        appointmentsQuery.OrderByDescending(o => o.Option.DidNavigation.Name);
+                    break;
+                default:
+                    appointmentsQuery = sortDirection == "asc" ?
+                        appointmentsQuery.OrderBy(o => o.Oid) :
+                        appointmentsQuery.OrderByDescending(o => o.Oid);
+                    break;
+            }
+
+            // Select fields and convert to ServiceAppointmentModel
             var appointments = appointmentsQuery.Select(o => new ServiceAppointmentModel
             {
                 AppointmentId = o.Oid,
@@ -151,22 +200,23 @@ namespace test2.Controllers
                 AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
                 Status = o.Status
             })
-            .Skip((pageNumber - 1) * pageSize) // Bỏ qua số lượng cuộc hẹn đã hiển thị ở các trang trước
-            .Take(pageSize) // Lấy số lượng cuộc hẹn tương ứng với trang hiện tại
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .ToList();
 
-            // Tính tổng số cuộc hẹn
+            // Total appointments count for pagination
             var totalAppointments = appointmentsQuery.Count();
-            ViewBag.TotalPages = (int)Math.Ceiling(totalAppointments / (double)pageSize); // Tổng số trang
-            ViewBag.PageNumber = pageNumber; // Trang hiện tại
+            ViewBag.TotalPages = (int)Math.Ceiling(totalAppointments / (double)pageSize);
+            ViewBag.PageNumber = pageNumber;
 
-            // Giữ lại các tham số tìm kiếm và lọc để truyền vào view
+            // Pass search, filter, sort values to the view
             ViewBag.SearchService = search_service;
             ViewBag.Status = status;
+            ViewBag.SortColumn = sortColumn;
+            ViewBag.SortDirection = sortDirection;
 
             return View(appointments);
         }
-
 
         //-------------------------------------------------------------------------------------------------------------
 

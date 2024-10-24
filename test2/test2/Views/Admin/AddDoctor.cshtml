@@ -1,8 +1,11 @@
 ﻿
 
-
+@* 
 @{
 Layout = "~/Views/Shared/Layout_Admin.cshtml";
+} *@
+@{
+    Layout = "Layout_Admin";  // Layout chính mà bạn đã định nghĩa
 }
 
 @section Styles {
@@ -177,12 +180,12 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
 
             <div class="grid grid-cols-2 gap-6">
                 <div class="col">
-                    <label for="id">ID</label>
-                    <input id="id" name="id" type="text" placeholder="Doctor ID">
+                    <label for="Did">ID</label>
+                    <input id="Did" name="Did" type="text" placeholder="Doctor ID" value="@Model.Did">
                 </div>
 
                 <div class="col">
-                    <label for="photo">Photo</label>
+                    <label for="DoctorImg">Photo</label>
                     <div class="flex items-center" style="display: flex; flex-direction: row;">
                         <div class="user-icon"></div>
                         <button type="button" class="change-btn">Change</button>
@@ -190,45 +193,26 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
                 </div>
 
                 <div class="col">
-                    <label for="first-name">Speciality ID: </label>
-                    <input id="first-name" name="first-name" type="text" autocomplete="given-name">
+                    <label for="Name">Full Name</label>
+                    <input id="Name" name="Name" type="text" value="@Model.Name">
                 </div>
 
-                <div class="col">
-                    <label for="last-name">Full Name</label>
-                    <input id="last-name" name="last-name" type="text" autocomplete="family-name">
+                <div class="col-full">
+                    <label for="Phone">Phone Number</label>
+                    <input id="Phone" name="Phone" type="tel" placeholder="Phone number" value="@Model.Phone">
                 </div>
 
                 <div class="col">
                     <label for="gender">Gender</label>
-                    <select id="gender" name="gender">
-                        @foreach (var gender in ViewBag.Gender)
-                        {
-                            <option value="@gender">@gender</option>
-                            // Display the gender text
-                        }
-                    </select>
+                    <input id="Gender" name="Gender "/>
 
                 </div>
 
                 <div class="col">
-                    <label for="dob">Date of Birth</label>
-                    <input id="dob" name="dob" type="date">
+                    <label for="Dob">Date of Birth</label>
+                    <input id="Dob" name="Dob" type="date" value="@Model.Dob?.ToString("yyyy-MM-dd")">
                 </div>
 
-             
-
-                <div class="col-full">
-                    <label for="phone">Phone Number</label>
-                    <input id="phone" name="phone" type="tel" placeholder="Phone number">
-                </div>
-            </div>
-        </div>
-
-        <div class="section space-y-6">
-            <h1 class="first-text">Additional Information</h1>
-
-            <div class="grid grid-cols-2 gap-6">
                 <div class="col">
                     <label for="Position">Position</label>
                     <select id="Position" name="Position">
@@ -238,6 +222,50 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
                         }
                     </select>
 
+                </div>
+
+                @* <div class="col">
+                    <label for="status">Status</label>
+                    <select id="status" name="status">
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Retired</option>
+                    </select>
+                </div> *@
+             
+
+                
+            </div>
+        </div>
+
+        <div class="section space-y-6">
+            <h1 class="first-text">Additional Information</h1>
+
+            <div class="grid grid-cols-2 gap-6">
+                <div class="col">
+                    <label for="SpecialtyId">Specialty ID</label>
+                    <select id="SpecialtyId" name="SpecialtyId">
+                        @foreach (var specialty in ViewBag.Specialties)
+                        {
+                            <option value="@specialty.SpecialtyId">@specialty.SpecialtyId</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-full">
+                    <label for="Description">Short Description</label>
+                    <textarea id="Description" name="Description" rows="3" placeholder="Enter doctor's description">@Model.Description</textarea>
+                </div>
+            </div>
+        </div>
+        @* <div class="section space-y-6">
+            <h1 class="first-text">Additional Information</h1>
+
+            <div class="grid grid-cols-2 gap-6">
+                
+                <div class="col">
+                    <label for="details">Speciality ID: </label>
+                    <textarea id="SpecialtyId" name="SpecialtyId" rows="3" placeholder="List  details"></textarea>
                 </div>
 
                 <div class="col">
@@ -252,25 +280,18 @@ Layout = "~/Views/Shared/Layout_Admin.cshtml";
                 </div>
 
                 <div class="col-full">
-                    <label for="description">Description</label>
-                    <textarea id="description" name="description" rows="3" placeholder="Enter doctor's description details"></textarea>
+                    <label for="Description">Short Description</label>
+                    <textarea id="Description" name="Description" rows="3" placeholder="Enter doctor's description">@Model.Description</textarea>
                 </div>
 
                 <div class="col-full">
-                    <label for="details">Details ID: </label>
-                    <textarea id="details" name="details" rows="3" placeholder="List  details"></textarea>
+                    <label for="details">Details: </label>
+                    <textarea id="details" name="details" rows="3" placeholder="List additional details"></textarea>
                 </div>
 
-                <div class="col">
-                    <label for="status">Status</label>
-                    <select id="status" name="status">
-                        <option>Active</option>
-                        <option>Inactive</option>
-                        <option>Retired</option>
-                    </select>
-                </div>
+                
             </div>
-        </div>
+        </div> *@
 
         <div class="flex justify-end space-x-4">
             <button type="button" class="cancel-btn">Cancel</button>
