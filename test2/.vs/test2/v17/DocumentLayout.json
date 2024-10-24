@@ -1,14 +1,113 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\",
+  "WorkspaceRootPath": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\home\\doctorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\models\\appointmentdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\appointmentdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\doctorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\doctorlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\models\\forgotpasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\forgotpasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\forgotpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\admin\\adddoctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\admin\\adddoctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/TIS/DocCare/True/SqlTable/dbo.Account.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\contact.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\contact.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\doctordetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\doctordetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\staff\\contactlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\staff\\contactlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\models\\resetpasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\resetpasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\admin\\doctordetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\admin\\doctordetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\home\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\home\\resetpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\data\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\chuyen nganh 5\\swp391\\swp_doccare\\test2\\test2\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\userdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,33 +117,345 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 11,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
+              "Title": "ForgotPasswordViewModel.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\ForgotPasswordViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\ForgotPasswordViewModel.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\ForgotPasswordViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\ForgotPasswordViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T02:33:21.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\Login.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\Login.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\Login.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\Login.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABwAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-22T15:45:06.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "test2\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAKwBAAAAAAAAAAAwwPMAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T07:29:13.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "DoctorList.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Home\\DoctorList.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\DoctorList.cshtml",
               "RelativeDocumentMoniker": "test2\\Views\\Home\\DoctorList.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Home\\DoctorList.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\DoctorList.cshtml",
               "RelativeToolTip": "test2\\Views\\Home\\DoctorList.cshtml",
-              "ViewState": "AgIAAKcAAAAAAAAAAAAAwM8AAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAAAGkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-10-22T08:38:07.64Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "test2\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "test2\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAKEAAAAAAAAAAAAqwHMAAABnAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\ErrorViewModel.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\ErrorViewModel.cs",
+              "RelativeToolTip": "test2\\Controllers\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-22T07:29:13.477Z",
+              "WhenOpened": "2024-10-22T16:13:10.829Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ForgotPassword.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\ForgotPassword.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\ForgotPassword.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\ForgotPassword.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\ForgotPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-22T09:49:17.215Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DoctorDetail.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\DoctorDetail.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\DoctorDetail.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\DoctorDetail.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\DoctorDetail.cshtml",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-23T03:02:13.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ContactList.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Staff\\ContactList.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Staff\\ContactList.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Staff\\ContactList.cshtml",
+              "RelativeToolTip": "test2\\Views\\Staff\\ContactList.cshtml",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAAADsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T04:10:50.403Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AddDoctor.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Admin\\AddDoctor.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Admin\\AddDoctor.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Admin\\AddDoctor.cshtml",
+              "RelativeToolTip": "test2\\Views\\Admin\\AddDoctor.cshtml",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAAAK8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T03:32:13.977Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "test2\\Services\\EmailService.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Services\\EmailService.cs",
+              "RelativeToolTip": "test2\\Services\\EmailService.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T15:56:49.79Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppointmentDetailViewModel.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\AppointmentDetailViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\AppointmentDetailViewModel.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\AppointmentDetailViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\AppointmentDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T06:01:09.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-23T03:02:17.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Contact.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\Contact.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\Contact.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\Contact.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\Contact.cshtml",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T06:01:19.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "dbo.Account.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/TIS/DocCare/True/SqlTable/dbo.Account.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/TIS/DocCare/True/SqlTable/dbo.Account.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-10-24T06:05:40.781Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "test2\\appsettings.Development.json",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\appsettings.Development.json",
+              "RelativeToolTip": "test2\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-23T08:25:14.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\LoginViewModel.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T04:01:00.551Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ResetPasswordViewModel.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\ResetPasswordViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\ResetPasswordViewModel.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Models\\ResetPasswordViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\ResetPasswordViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T16:07:49.91Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "test2\\Services\\TokenService.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Services\\TokenService.cs",
+              "RelativeToolTip": "test2\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-23T02:34:47.795Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\appsettings.json",
+              "RelativeDocumentMoniker": "test2\\appsettings.json",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\appsettings.json",
+              "RelativeToolTip": "test2\\appsettings.json",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABwAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-22T09:51:05.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ResetPassword.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\ResetPassword.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Home\\ResetPassword.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Home\\ResetPassword.cshtml",
+              "RelativeToolTip": "test2\\Views\\Home\\ResetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-22T15:47:30.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DoctorDetails.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Admin\\DoctorDetails.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Admin\\DoctorDetails.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Admin\\DoctorDetails.cshtml",
+              "RelativeToolTip": "test2\\Views\\Admin\\DoctorDetails.cshtml",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-24T03:32:41.919Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "StaffController.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\StaffController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\StaffController.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\StaffController.cs",
+              "RelativeToolTip": "test2\\Controllers\\StaffController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAIAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T03:09:33.306Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-23T09:20:35.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Account.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Account.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Account.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Data\\Account.cs",
+              "RelativeToolTip": "test2\\Data\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T15:52:49.119Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Program.cs",
+              "RelativeDocumentMoniker": "test2\\Program.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Program.cs",
+              "RelativeToolTip": "test2\\Program.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwB0AAABjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T16:04:01.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\DoctorController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\DoctorController.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\Controllers\\DoctorController.cs",
+              "RelativeToolTip": "test2\\Controllers\\DoctorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T16:13:12.464Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "UserDAO.cs",
+              "DocumentMoniker": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\DAO\\UserDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\UserDAO.cs",
+              "ToolTip": "D:\\Chuyen nganh 5\\SWP391\\SWP_DocCare\\test2\\test2\\DAO\\UserDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\UserDAO.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-22T15:55:21.632Z"
             }
           ]
         }

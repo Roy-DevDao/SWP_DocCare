@@ -8,7 +8,7 @@ using test2.Models;
 
 namespace test2.Controllers
 {
-    [Authorize(Roles = "1")]
+    //[Authorize(Roles = "1")]
     public class StaffController : Controller
     {
         private readonly DocCareContext dc;

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using test2.DAO;
 using test2.Data;
+using test2.Models;
 using test2.Services;
 
 namespace test2
@@ -17,6 +18,16 @@ namespace test2
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DocCare"));
             });
+
+            // Đăng ký các dịch vụ
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddScoped<EmailService>();
+            builder.Services.AddScoped<TokenService>();
+            builder.Services.AddDbContext<DocCareContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Cấu hình Google OAuth và Cookie authentication
             builder.Services.AddAuthentication(options =>
@@ -56,6 +67,23 @@ namespace test2
 
 
             var app = builder.Build();
+
+            // Cấu hình pipeline middleware
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
