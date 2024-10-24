@@ -1,8 +1,7 @@
 ﻿
 @{
-    var user = ViewBag.User as PatientProfileViewModel; // Lấy thông tin người dùng
+    var user = ViewBag.User as UserProfileViewModel;
 }
-
 <header class="header">
     <nav class="navbar navbar-expand-lg header-nav">
         <div class="navbar-header">
@@ -64,8 +63,15 @@
                 </li>
             }
             else
-            {
-                <li><a asp-area="" asp-controller="Home" asp-action="Profile"><i class="fa fa-user" style="margin-right: 8px"> @user.Name</i></a></li>
+            { if (user.Role == 3) {
+                    <li><a asp-area="" asp-controller="Patient" asp-action="Profile" asp-route-id="@user.Id"><i class="fa fa-user" style="margin-right: 8px"> @user.PatientName</i></a></li>
+                } else if (user.Role == 2)
+                {
+                    <li><a asp-area="" asp-controller="Doctor" asp-action="Profile" asp-route-id="@user.Id"><i class="fa fa-user" style="margin-right: 8px"> @user.DoctorName</i></a></li>
+                } else if(user.Role == 1)
+                {
+                    <li><a asp-area="" asp-controller="Staff" asp-action="Profile" asp-route-id="@user.Id"><i class="fa fa-user" style="margin-right: 8px"> @user.StaffName</i></a></li>
+                }
                 <li>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa fa-sign-out" style="margin-right: 8px"></i> Đăng xuất

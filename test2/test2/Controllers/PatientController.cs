@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Mscc.GenerativeAI;
 using System.Diagnostics;
+using test2.DAO;
 using test2.Data;
 using test2.Models;
 using test2.Services;
@@ -15,13 +17,59 @@ namespace test2.Controllers
         private readonly ILogger<PatientController> _logger;
         private readonly DocCareContext dc;
         private readonly IVnPayService _vnPayservice;
+        private readonly UserDAO _userDAO;
 
-        public PatientController(ILogger<PatientController> logger, DocCareContext db, IVnPayService vnPayservice)
+        public PatientController(ILogger<PatientController> logger, DocCareContext db, IVnPayService vnPayservice, UserDAO userDAO)
         {
             _logger = logger;
             dc = db;
             _vnPayservice = vnPayservice;
+            _userDAO = userDAO;
         }
+
+
+
+        public IActionResult Profile(string id)
+        {
+            _logger.LogInformation("OID received in Profile: {Oid}", id); // Log giá trị oid
+
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Fetch patient details from the database using the oid
+            var patient = (from p in dc.Patients
+                           join a in dc.Accounts on p.Pid equals a.Id
+                           where p.Pid == id
+                           select new PatientProfileViewModel
+                           {
+                               PId = p.Pid,
+                               Username = a.Username,
+                               Email = a.Email,
+                               Role = a.Role,
+                               Status = a.Status,
+                               Name = p.Name,
+                               Phone = p.Phone,
+                               Gender = p.Gender,
+                               Dob = p.Dob,
+                               PatientImg = p.PatientImg
+                           }).FirstOrDefault();
+
+            if (patient == null)
+            {
+                _logger.LogWarning("No patient found with OID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Pass the patient data to the view
+            return View(patient);
+        }
+
+
+
+
         [HttpGet]
         [Route("Patient/AppointmentHistory")]
         public IActionResult AppointmentHistory()
@@ -31,6 +79,8 @@ namespace test2.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             var list = dc.Orders
                  .Include(o => o.Option)             // Include the Option navigation property
                  .ThenInclude(op => op.DidNavigation)

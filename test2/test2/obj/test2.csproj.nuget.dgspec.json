@@ -93,6 +93,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[8.0.5, )"
+            },
+            "Mscc.GenerativeAI": {
+              "target": "Package",
+              "version": "[1.7.0, )"
             }
           },
           "imports": [

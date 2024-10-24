@@ -3,9 +3,9 @@
 
     $.ajax({
         type: 'POST',
-        url: '/account/checkLogin',
+        url: '/Home/Login',
         dataType: 'json',
-        data: { userName: $('#Username').val(), passWord: $('#Password').val() },
+        data: { userName: $('#Email').val(), passWord: $('#Password').val() },
         success: function (response) {
             if (response.status) {
                 utils.done();
@@ -56,7 +56,7 @@ $(document).ready(function () {
         utils.loading();
         var formData = new FormData(this);
         $.ajax({
-            url: '/account/register',
+            url: '/Home/SignUp1',
             type: 'POST',
             data: formData,
             success: function (response) {

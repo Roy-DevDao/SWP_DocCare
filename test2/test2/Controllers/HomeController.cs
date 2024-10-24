@@ -38,7 +38,7 @@ namespace test2.Controllers
             //truyen data thong qua view bag
             ViewBag.Doctors = doctors;
             ViewBag.Specialties = specialties;
-            var user = _userDAO.GetLoggedInUser(User) ?? new PatientProfileViewModel();
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
             ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
 
             return View();
@@ -117,6 +117,8 @@ namespace test2.Controllers
 
         public IActionResult DoctorList(string query, string[] facultiesSelected, int pageNumber = 1)
         {
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             // Lấy danh sách bác sĩ từ cơ sở dữ liệu
             var doctors = dc.Doctors.Include(d => d.Specialty).Include(d => d.Feedbacks).AsQueryable();
 
@@ -174,6 +176,8 @@ namespace test2.Controllers
 
         public IActionResult DoctorDetail(string id)
         {
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("DoctorList");
@@ -217,17 +221,66 @@ namespace test2.Controllers
             }
             return View();
         }
+        //[HttpPost]
+        //public async Task<IActionResult> Login(string email, string password)
+        //{
+        //    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        //    {
+        //        TempData["ErrorMessage"] = "Please enter both email and password.";
+        //        return RedirectToAction("Login");
+        //    }
+
+        //    var user = dc.Accounts.Where(dc => dc.Email == email).FirstOrDefault();
+        //    if (user != null && user.Password == password)
+        //    {
+        //        var claims = new List<Claim>
+        //{
+        //    new Claim(ClaimTypes.Email, email),
+        //    new Claim(ClaimTypes.Role, user.Role.ToString())
+        //};
+
+        //        var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
+        //        var authProperties = new AuthenticationProperties
+        //        {
+        //            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+        //            IsPersistent = true
+        //        };
+
+        //        await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
+
+        //        TempData["SuccessMessage"] = "Login successful!";
+
+        //        // Điều hướng người dùng dựa trên role
+        //        switch (user.Role)
+        //        {
+        //            case 0: // Admin
+        //                return RedirectToAction("Index", "Admin");
+        //            case 1: // Staff
+        //                return RedirectToAction("AppoitmentList", "Staff");
+        //            case 2: // Doctor
+        //                return RedirectToAction("ViewAppointment", "Doctor");
+        //            case 3: // Patient
+        //                return RedirectToAction("Index", "Home");
+        //            default:
+        //                TempData["ErrorMessage"] = "Role not recognized.";
+        //                return RedirectToAction("Login");
+        //        }
+        //    }
+
+        //    TempData["ErrorMessage"] = "Invalid email or password.";
+        //    return RedirectToAction("Login");
+        //}
+
         [HttpPost]
         public async Task<IActionResult> Login(string email, string password)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                TempData["ErrorMessage"] = "Please enter both email and password.";
-                return RedirectToAction("Login");
+                return Json(new { status = false, mess = "Please enter both email and password." });
             }
 
-            var user = dc.Accounts.Where(dc => dc.Email == email).FirstOrDefault();
-            if (user != null && user.Password == password)
+            var user = dc.Accounts.FirstOrDefault(dc => dc.Email == email);
+            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
                 var claims = new List<Claim>
         {
@@ -244,27 +297,28 @@ namespace test2.Controllers
 
                 await HttpContext.SignInAsync("MyCookieAuth", new ClaimsPrincipal(claimsIdentity), authProperties);
 
-                TempData["SuccessMessage"] = "Login successful!";
-
-                // Điều hướng người dùng dựa trên role
-                switch (user.Role)
+                // Trả về phản hồi thành công và điều hướng dựa trên vai trò
+                string redirectUrl = user.Role switch
                 {
-                    case 0: // Admin
-                        return RedirectToAction("Index", "Admin");
-                    case 1: // Staff
-                        return RedirectToAction("AppoitmentList", "Staff");
-                    case 2: // Doctor
-                        return RedirectToAction("ViewAppointment", "Doctor");
-                    case 3: // Patient
-                        return RedirectToAction("Index", "Home");
-                    default:
-                        TempData["ErrorMessage"] = "Role not recognized.";
-                        return RedirectToAction("Login");
+                    0 => Url.Action("Index", "Admin"), // Admin
+                    1 => Url.Action("AppoitmentList", "Staff"), // Staff
+                    2 => Url.Action("ViewAppointment", "Doctor"), // Doctor
+                    3 => Url.Action("Index", "Home"), // Patient
+                    _ => null // Nếu role không hợp lệ
+                };
+
+                if (redirectUrl != null)
+                {
+                    return Json(new { status = true, mess = "Login successful!", redirectUrl });
+                }
+                else
+                {
+                    return Json(new { status = false, mess = "Role not recognized." });
                 }
             }
 
-            TempData["ErrorMessage"] = "Invalid email or password.";
-            return RedirectToAction("Login");
+            // Trả về thông báo nếu email hoặc mật khẩu không hợp lệ
+            return Json(new { status = false, mess = "Invalid email or password." });
         }
 
 
@@ -346,20 +400,101 @@ namespace test2.Controllers
         }
 
 
+        //public IActionResult SignUp1(RegisterViewModel model)
+        //{
+        //    // Kiểm tra tính hợp lệ của model
+        //    if (!ModelState.IsValid)
+        //    {
+        //        var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+        //        return Json(new { status = false, mess = "Có lỗi trong dữ liệu nhập: " + string.Join(", ", errors) });
+        //    }
+
+        //    // Kiểm tra mật khẩu
+        //    if (model.Password.Length < 8 || !Regex.IsMatch(model.Password, @"[A-Za-z]") || !Regex.IsMatch(model.Password, @"[0-9]"))
+        //    {
+        //        ModelState.AddModelError(nameof(model.Password), "Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.");
+        //        return Json(new { status = false, mess = "Mật khẩu không hợp lệ." });
+        //    }
+
+        //    // Kiểm tra xem tài khoản đã tồn tại chưa
+        //    var existingAccount = dc.Accounts.FirstOrDefault(a => a.Username == model.Username || a.Email == model.Email);
+        //    if (existingAccount != null)
+        //    {
+        //        ModelState.AddModelError("", "Tài khoản hoặc email đã tồn tại.");
+        //        return Json(new { status = false, mess = "Tài khoản hoặc email đã tồn tại." });
+        //    }
+
+        //    try
+        //    {
+        //        // Tạo tài khoản mới
+        //        var newAccount = new Account
+        //        {
+        //            Id = Guid.NewGuid().ToString(),
+        //            Username = model.Username,
+        //            Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+        //            Email = model.Email,
+        //            Role = 3, // Mặc định là Patient
+        //            Status = true
+        //        };
+
+        //        // Thêm tài khoản vào cơ sở dữ liệu
+        //        dc.Accounts.Add(newAccount);
+        //        dc.SaveChanges();
+
+        //        // Tạo bản ghi Patient
+        //        var newPatient = new Patient
+        //        {
+        //            Pid = newAccount.Id,
+        //            Name = model.FullName,
+        //            Phone = model.Phone,
+        //            Gender = model.Gender ? "Nam" : "Nữ",
+        //            Dob = DateOnly.FromDateTime(model.DateOfBirth)
+        //        };
+
+        //        // Thêm patient vào cơ sở dữ liệu
+        //        dc.Patients.Add(newPatient);
+        //        dc.SaveChanges();
+
+        //        return Json(new { status = true, mess = "Đăng ký thành công! Chuyển đến trang đăng nhập." });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Ghi log lỗi ra console hoặc file log (nếu có)
+        //        Console.WriteLine("Có lỗi xảy ra: " + ex.ToString());
+        //        ModelState.AddModelError("", "Có lỗi xảy ra: " + ex.Message);
+        //        return Json(new { status = false, mess = "Có lỗi xảy ra: " + ex.Message });
+        //    }
+
+        //}
+
         public IActionResult SignUp1(RegisterViewModel model)
         {
             // Kiểm tra tính hợp lệ của model
             if (!ModelState.IsValid)
             {
-                // Trả lại view với các lỗi xác thực
-                return View("SignUp", model);
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                return Json(new { status = false, mess = "Có lỗi trong dữ liệu nhập: " + string.Join(", ", errors) });
             }
 
             // Kiểm tra mật khẩu
             if (model.Password.Length < 8 || !Regex.IsMatch(model.Password, @"[A-Za-z]") || !Regex.IsMatch(model.Password, @"[0-9]"))
             {
-                ModelState.AddModelError("", "Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.");
-                return View("SignUp", model);
+                ModelState.AddModelError(nameof(model.Password), "Mật khẩu phải có ít nhất 8 ký tự, bao gồm cả chữ cái và số.");
+                return Json(new { status = false, mess = "Mật khẩu không hợp lệ." });
+            }
+
+            // Kiểm tra xác nhận mật khẩu
+            if (model.Password != model.RePassword)
+            {
+                ModelState.AddModelError(nameof(model.RePassword), "Xác nhận mật khẩu không khớp.");
+                return Json(new { status = false, mess = "Xác nhận mật khẩu không khớp." });
+            }
+
+            // Kiểm tra ngày sinh
+            if (model.DateOfBirth > DateTime.Now)
+            {
+                ModelState.AddModelError(nameof(model.DateOfBirth), "Ngày sinh không được vượt quá hôm nay.");
+                return Json(new { status = false, mess = "Ngày sinh không hợp lệ." });
             }
 
             // Kiểm tra xem tài khoản đã tồn tại chưa
@@ -367,7 +502,7 @@ namespace test2.Controllers
             if (existingAccount != null)
             {
                 ModelState.AddModelError("", "Tài khoản hoặc email đã tồn tại.");
-                return View("SignUp", model);
+                return Json(new { status = false, mess = "Tài khoản hoặc email đã tồn tại." });
             }
 
             try
@@ -375,13 +510,12 @@ namespace test2.Controllers
                 // Tạo tài khoản mới
                 var newAccount = new Account
                 {
-                    Id = Guid.NewGuid().ToString(), // Tạo ID ngẫu nhiên
+                    Id = Guid.NewGuid().ToString(),
                     Username = model.Username,
-                    Password = model.Password,
-                    //Password = BCrypt.Net.BCrypt.HashPassword(model.Password), // Mã hóa mật khẩu
+                    Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
                     Email = model.Email,
                     Role = 3, // Mặc định là Patient
-                    Status = true // Có thể thay đổi tùy theo yêu cầu
+                    Status = true
                 };
 
                 // Thêm tài khoản vào cơ sở dữ liệu
@@ -391,25 +525,24 @@ namespace test2.Controllers
                 // Tạo bản ghi Patient
                 var newPatient = new Patient
                 {
-                    Pid = newAccount.Id, // Sử dụng ID từ Account
-                    Name = model.Name,
+                    Pid = newAccount.Id,
+                    Name = model.FullName,
                     Phone = model.Phone,
-                    Gender = model.Gender,
-                    PatientImg = null // Hoặc đường dẫn đến ảnh người dùng
+                    Gender = model.Gender ? "Nam" : "Nữ",
+                    Dob = DateOnly.FromDateTime(model.DateOfBirth)
                 };
 
                 // Thêm patient vào cơ sở dữ liệu
                 dc.Patients.Add(newPatient);
                 dc.SaveChanges();
 
-                // Ghi nhận thông báo thành công
-                TempData["SuccessMessage"] = "Đăng ký thành công! Chuyển đến trang đăng nhập.";
-                return RedirectToAction("Login", "Home"); // Điều hướng đến trang đăng nhập
+                return Json(new { status = true, mess = "Đăng ký thành công! Chuyển đến trang đăng nhập.", redirectUrl = Url.Action("Login", "Home") });
             }
             catch (Exception ex)
             {
+                // Ghi log lỗi ra console hoặc file log (nếu có)
                 ModelState.AddModelError("", "Có lỗi xảy ra: " + ex.Message);
-                return View("SignUp", model);
+                return Json(new { status = false, mess = "Có lỗi xảy ra: " + ex.Message });
             }
         }
 
@@ -418,18 +551,24 @@ namespace test2.Controllers
 
         public IActionResult Profile()
         {
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             return View();
         }
         //--------------------------------------------------------------------------------------------
 
         public IActionResult ForgotPass()
         {
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             return View();
         }
         //--------------------------------------------------------------------------------------------
 
         public IActionResult ServiceList(int pageNumber = 1, string search = "", string sort = "")
         {
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             int pageSize = 6;
 
             // Lấy danh sách dịch vụ
@@ -475,6 +614,8 @@ namespace test2.Controllers
 
         public IActionResult ServiceDetail(string id)
         {
+            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("ServiceList");

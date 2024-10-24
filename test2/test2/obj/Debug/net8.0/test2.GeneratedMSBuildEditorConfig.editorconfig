@@ -94,6 +94,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdQYXRpZW50RGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Home/aichatbox.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxhaWNoYXRib3guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Home/Contact.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb250YWN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -158,6 +162,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxQYXltZW50RmFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Patient/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Patient/ServiceHistory.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxTZXJ2aWNlSGlzdG9yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -182,12 +190,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExheW91dF9uZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Shared/Layout_staff.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExheW91dF9zdGFmZi5jc2h0bWw=
+[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Shared/Layout_Patient.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExheW91dF9QYXRpZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Shared/Layout_staff.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXExheW91dF9zdGFmZi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Shared/_PartialFooter.cshtml]

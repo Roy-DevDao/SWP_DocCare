@@ -1,14 +1,16 @@
 ﻿@{
     ViewBag.Title = "Đăng nhập";
-    Layout = "~/Views/Shared/Layout_new.cshtml";
+
+    Layout = "~/Views/Shared/Layout_login.cshtml";
+
     var url = ViewBag.ReturnUrl;
 }
 
 @section CSS {
     <link href="~/Content/plugin/notifyjs/lobibox.min.css" rel="stylesheet" />
 }
-<!-- Start main-content -->
 
+<!-- Start main-content -->
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -23,24 +25,19 @@
                                 <h3>Login <span>DocCare</span></h3>
                             </div>
 
-                            @if (TempData["ErrorMessage"] != null)
-                            {
-                                <div class="alert alert-danger" id="alert-error">@TempData["ErrorMessage"]</div>
-                            }
-
-                            <form method="post" asp-controller="Home" asp-action="Login" name="login-form" class="clearfix" id="frmLogin" autocomplete="off">
+                            <form id="frmLogin" autocomplete="off">
                                 <div class="form-group form-focus">
-                                    <input type="text" id="Email" placeholder="Email" name="email" autocomplete="false" class="form-control floating">
+                                    <input type="text" id="Email" placeholder="Email" name="email" autocomplete="false" class="form-control floating" required>
                                     <label class="focus-label">Email <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="form-group form-focus">
-                                    <input type="password" id="Password" name="password" placeholder="Password" autocomplete="false" class="form-control floating">
+                                    <input type="password" id="Password" name="password" placeholder="Password" autocomplete="false" class="form-control floating" required>
                                     <label class="focus-label">Password <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="text-right">
                                     <a class="forgot-link" asp-area="" asp-controller="Home" asp-action="ForgotPass" id="demo-bootbox-bounce">Forgot Password ?</a>
                                 </div>
-                                <button class="btn btn-primary btn-block btn-lg login-btn" id="btnLogin" type="submit">Login</button>
+                                <button class="btn btn-primary btn-block btn-lg login-btn" id="btnLogin" type="button">Login</button>
                                 <div class="login-or">
                                     <span class="or-line"></span>
                                     <span class="span-or">or</span>
@@ -65,22 +62,72 @@
         </div>
     </div>
 </div>
-
 <!-- end main-content -->
 @section Scripts {
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    
+    <script src="~/Content/plugin/notifyjs/lobibox.min.js"></script>
     <script>
-        // Ẩn thông báo sau 2 giây
-        setTimeout(function() {
-            var errorAlert = document.getElementById('alert-error');
-            var successAlert = document.getElementById('alert-success');
-            if (errorAlert) {
-                errorAlert.style.display = 'none';
+        function login() {
+            const email = $('#Email').val();
+            const password = $('#Password').val();
+
+            if (!email || !password) {
+                Lobibox.alert("error", {
+                    msg: "Please enter both email and password."
+                });
+                return;
             }
-            if (successAlert) {
-                successAlert.style.display = 'none';
-            }
-        }, 2000);
+
+            utils.loading();
+
+            $.ajax({
+                type: 'POST',
+                url: '/Home/Login', // Đảm bảo URL này trỏ đúng controller/method
+                dataType: 'json',
+                data: { email: email, password: password }, // Dữ liệu được gửi đến server
+                success: function (response) {
+                    utils.done();
+                    if (response.status) {
+                        Lobibox.alert("success", {
+                            msg: response.mess,
+                            beforeClose: function () {
+                                window.location.href = response.redirectUrl; // Điều hướng người dùng đến trang cần thiết
+                            }
+                        });
+                    } else {
+                        Lobibox.alert("error", {
+                            msg: response.mess // Hiển thị thông báo lỗi từ server
+                        });
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    utils.done();
+                    Lobibox.alert("error", {
+                        msg: "Login failed: " + (jqXHR.responseText || "Unknown error")
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            // Sự kiện nhấn Enter trong input
+            $('input').keypress(function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    login();
+                }
+            });
+
+            // Sự kiện click vào nút đăng nhập
+            $('#btnLogin').click(function (e) {
+                e.preventDefault();
+                login();
+            });
+
+            // Ngăn chặn submit form mặc định
+            $('#frmLogin').submit(function (e) {
+                e.preventDefault();
+            });
+        });
     </script>
 }

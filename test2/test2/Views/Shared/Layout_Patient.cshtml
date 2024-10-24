@@ -1,4 +1,5 @@
-﻿﻿
+﻿@model test2.Models.PatientProfileViewModel
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,6 @@
     <link rel="stylesheet" href="~/DontCare.styles.css" asp-append-version="true" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-
     <link rel="shortcut icon" href="https://shreethemes.in/Doccare/layouts/assets/images/favicon.ico">
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
@@ -76,33 +76,6 @@
                     <li><a href="blogs" class="sub-menu-item">News & Topic</a></li>
                 </ul>
             </div>
-            <ul class="dropdowns list-inline mb-0">
-                <li class="list-inline-item mb-0 ms-1">
-                    <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item mb-0 ms-1">
-                    <div class="dropdown dropdown-primary">
-                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="~/assets/images/avata.png" class="avatar avatar-ex-small rounded-circle" alt="">
-                        </button>
-                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <img src="~/assets/images/avata.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                <div class="flex-1 ms-2">
-                                    <span class="d-block mb-1">ABC</span>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider border-top"></div>
-                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Prifile">My Profile</a>
-                            <a class="dropdown-item" href="user?action=logout">Log out</a>
-                            <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                            <a class="dropdown-item" href="dashboard?action=default">Manage</a>
-                        </div>
-                    </div>
-                </li>
-            </ul>
         </div>
     </header>
 
@@ -110,23 +83,24 @@
     <div class="container ">
 
 
-
+          @if (Model.PId != null) // Using Model instead of patient
+                    {
 
         <aside id="drawer-navigation" class="fixed top-0 left-0 z-50 w-72 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-navigation-label">
 
             <div class="h-full px-3 py-4  overflow-y-auto bg-gray-50 dark:bg-gray-800">
                 <div class="flex justify-center items-center p-6">
                     <!-- Avatar Image -->
-                    <img class="h-32 w-32 rounded-full border-4 border-blue-500 shadow-lg" src="https://i.pinimg.com/736x/e2/aa/86/e2aa867019fb768cd79ba08060f64e24.jpg" alt="Avatar">
+                        <img class="h-32 w-32 rounded-full border-4 border-blue-500 shadow-lg" src=" @(string.IsNullOrEmpty(Model.PatientImg) ? "https://i.pinimg.com/736x/e2/aa/86/e2aa867019fb768cd79ba08060f64e24.jpg" : Model.PatientImg)" alt="Avatar">
                 </div>
                 <ul class="space-y-2 font-medium">
                     <li>
-                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <a asp-area="" asp-controller="Patient" asp-action="Profile" asp-route-id= "@Model.PId" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
                                 <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                                 <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                             </svg>
-                            <span class="ms-3">Dashboard</span>
+                            <span class="ms-3">Profile</span>
                         </a>
                     </li>
 
@@ -167,15 +141,18 @@
             </div>
         </aside>
 
-
-    </div>
     <div class="p-4 mb-5 ">
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
+        }
+        else
 
+        {
+        <p class="pad-ver text-main text-sm text-uppercase text-bold">Chưa có thông tin bệnh nhân</p>
+        }
 
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

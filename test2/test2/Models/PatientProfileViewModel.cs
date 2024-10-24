@@ -2,7 +2,7 @@
 {
     public class PatientProfileViewModel
     {
-        public string Id { get; set; }
+        public string PId { get; set; }
         public string? Username { get; set; }
         public string? Email { get; set; }
         public int? Role { get; set; }
