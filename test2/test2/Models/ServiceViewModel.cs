@@ -4,17 +4,15 @@ namespace test2.Models
 {
     public class ServiceViewModel
     {
-        public string SpecialtyId { get; set; }
-        public string SpecialtyName { get; set; }
-        public string SpecialtyImg { get; set; }
-        public string ShortDescription { get; set; }
-        public string LongDescription { get; set; }
-        public decimal Price { get; set; }
-        public List<DetailSpecialty> DetailSpecialties { get; set; }
-        public List<Doctor> Doctors { get; set; }
-        public List<Feedback> Feedbacks { get; set; }
-        public double AverageRating { get; set; }
-        public int TotalReviews { get; set; }
+        public string SpecialtyId { get; set; } = null!;
+        public string SpecialtyName { get; set; } = null!;
+        public string SpecialtyImg { get; set; } = null!;
+        public string ShortDescription { get; set; } = null!;
+        public List<DetailSpecialty> DetailSpecialties { get; set; } = new List<DetailSpecialty>(); // Danh sách chi tiết specialty
+        public List<Doctor> Doctors { get; set; } = new List<Doctor>(); // Danh sách bác sĩ
+        public List<Feedback> Feedbacks { get; set; } = new List<Feedback>(); // Danh sách phản hồi
+        public double AverageRating { get; set; } // Điểm trung bình đánh giá
+        public int TotalReviews { get; set; } // Tổng số đánh giá
     }
 
 }

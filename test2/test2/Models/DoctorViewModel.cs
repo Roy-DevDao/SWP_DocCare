@@ -11,10 +11,13 @@ namespace test2.Models
         public double Price { get; set; }
         public string? Gender { get; set; }
         public string Position { get; set; }
+        public string? Phone { get; set; }
         public int NumberOfFeedbacks { get; set; }
         public double Rating { get; set; }
         public string Description { get; set; }
-        public List<Feedback> Feedbacks { get; set; }
+        public List<Feedback> Feedbacks { get; set; } // Giả sử Feedback là một lớp mô hình
+        public List<DetailDoctorViewModel> DetailDoctors { get; set; } // Thuộc tính mới cho thông tin chi tiết
     }
+
 
 }

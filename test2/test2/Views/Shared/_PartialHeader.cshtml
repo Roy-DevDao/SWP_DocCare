@@ -30,19 +30,19 @@
                     <a href="/">Home</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="#">Doctor <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Bác Sĩ <i class="fas fa-chevron-down"></i></a>
                     <ul class="submenu">
-                        <li><a asp-area="" asp-controller="Home" asp-action="DoctorList">Search Doctor</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="DoctorList">Tìm Kiếm Bác Sĩ</a></li>
                     </ul>
                 </li>
                 <li class="has-submenu">
-                    <a href="#">Services <i class="fas fa-chevron-down"></i></a>
+                    <a href="#">Chuyên Khoa <i class="fas fa-chevron-down"></i></a>
                     <ul class="submenu">
-                        <li><a asp-area="" asp-controller="Home" asp-action="ServiceList">Services Search</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="ServiceList">Tìm Chuyên Khoa</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="/article">Blog</a>
+                    <a asp-area="" asp-controller="Home" asp-action="aichatbox">Chẩn Đoán</a>
                 </li>
             </ul>
         </div>
@@ -59,7 +59,7 @@
             @if (!User.Identity.IsAuthenticated)
             {
                 <li class="nav-item">
-                    <a class="nav-link header-login" asp-area="" asp-controller="Home" asp-action="Login">Login / Signup</a>
+                    <a class="nav-link header-login" asp-area="" asp-controller="Home" asp-action="Login">Đăng Nhập / Đăng Kí</a>
                 </li>
             }
             else

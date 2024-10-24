@@ -177,22 +177,21 @@ namespace test2.Controllers
         public IActionResult DoctorDetail(string id)
         {
             var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
-            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
-            if (string.IsNullOrEmpty(id))
-            {
-                return RedirectToAction("DoctorList");
-            }
+            ViewBag.User = user;
 
+            // Lấy thông tin bác sĩ cùng với các thông tin chi tiết và phản hồi
             var doctor = dc.Doctors
-                .Include(d => d.Specialty)
-                .Include(d => d.Feedbacks)
-                .FirstOrDefault(d => d.Did == id);
+                .Include(d => d.Specialty)                // Bao gồm thông tin Specialty
+                .Include(d => d.Feedbacks)                // Bao gồm Feedbacks
+                .Include(d => d.DetailDoctors)             // Bao gồm DetailDoctor information
+                .FirstOrDefault(d => d.Did == id);        // Tìm bác sĩ theo ID
 
             if (doctor == null)
             {
                 return NotFound();
             }
 
+            // Chuẩn bị ViewModel
             var viewModel = new DoctorViewModel
             {
                 DoctorId = doctor.Did,
@@ -201,14 +200,23 @@ namespace test2.Controllers
                 Specialty = doctor.Specialty?.SpecialtyName,
                 Price = doctor.Price ?? 0,
                 Position = doctor.Position,
+                Phone = doctor.Phone,
+                Gender = doctor.Gender,
                 NumberOfFeedbacks = doctor.Feedbacks.Count(),
                 Rating = doctor.Feedbacks.Any() ? doctor.Feedbacks.Average(f => f.Star ?? 0) : 0,
                 Description = doctor.Description,
-                Feedbacks = doctor.Feedbacks.ToList()
+                Feedbacks = doctor.Feedbacks.ToList(),
+                DetailDoctors = doctor.DetailDoctors.Select(dd => new DetailDoctorViewModel
+                {
+                    DetailId = dd.DetailId,
+                    Title = dd.Title,
+                    Content = dd.Content
+                }).ToList()
             };
 
             return View(viewModel);
         }
+
 
         //--------------------------------------------------------------------------------------------
 
@@ -599,7 +607,7 @@ namespace test2.Controllers
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
-
+            ViewBag.TotalServices = totalServices;
             ViewBag.TotalPages = (int)Math.Ceiling(totalServices / (double)pageSize);
             ViewBag.PageNumber = pageNumber;
             ViewBag.Search = search;
@@ -616,13 +624,16 @@ namespace test2.Controllers
         {
             var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
             ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
+
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("ServiceList");
             }
 
+            // Lấy specialty kèm theo các doctor và detail specialty
             var service = dc.Specialties
-                .Include(s => s.Doctors)
+                .Include(s => s.Doctors)  // Lấy danh sách bác sĩ liên quan
+                .Include(s => s.DetailSpecialties)  // Lấy các chi tiết specialty
                 .FirstOrDefault(s => s.SpecialtyId == id);
 
             if (service == null)
@@ -631,22 +642,23 @@ namespace test2.Controllers
             }
 
             var feedbacks = dc.Feedbacks
-            .AsEnumerable()
-        .Where(f => service.Doctors.Any(d => d.Did == f.Did))
-        .ToList();
+                .Include(f => f.PidNavigation) // Bao gồm thông tin bệnh nhân
+                .AsEnumerable() // This forces the query to be executed in memory.
+                .Where(f => service.Doctors.Any(d => d.Did == f.Did))
+                .ToList();
 
-
+            // Tính toán đánh giá trung bình và tổng số đánh giá
             double averageRating = feedbacks.Any() ? feedbacks.Average(f => f.Star ?? 0) : 0;
             int totalReviews = feedbacks.Count();
 
+            // Tạo ViewModel cho ServiceDetail
             var viewModel = new ServiceViewModel
             {
                 SpecialtyId = service.SpecialtyId,
                 SpecialtyName = service.SpecialtyName,
                 SpecialtyImg = service.SpecialtyImg,
                 ShortDescription = service.ShortDescription,
-                //LongDescription = service.LongDescription,
-                Price = 500000,
+                DetailSpecialties = service.DetailSpecialties.ToList(), // Lấy chi tiết specialty
                 Doctors = service.Doctors.ToList(),
                 Feedbacks = feedbacks,
                 AverageRating = averageRating,
@@ -655,6 +667,7 @@ namespace test2.Controllers
 
             return View(viewModel);
         }
+
 
         //--------------------------------------------------------------------------------------------
 
