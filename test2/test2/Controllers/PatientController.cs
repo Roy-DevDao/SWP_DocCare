@@ -110,6 +110,57 @@ namespace test2.Controllers
             return View(orderList);  // Pass the filtered list to the view
         }
 
+        public class OrderResponseDto
+{
+    public string Id { get; set; }
+    public string Name { get; set; }
+    public string Image { get; set; }
+    public string Specialty { get; set; }
+    public DateTime Date { get; set; }
+    public string Status { get; set; }
+}
+
+public JsonResult GetAppointmentByQuery(string query)
+{
+    var orders = dc.Orders
+                   .Include(o => o.Option)
+                   .ThenInclude(op => op.DidNavigation)
+                   .ThenInclude(doctor => doctor.Specialty)
+                   .AsQueryable();  // Allows filtering on the query later
+
+    if (!string.IsNullOrEmpty(query))
+    {
+        orders = orders.Where(o => o.Option.DidNavigation.Name.Contains(query) || o.Option.DidNavigation.Specialty.SpecialtyName.Contains(query));  // Filter by status
+    }
+    
+
+    var orderList = orders.ToList();
+    if(orderList.Count > 0)
+    {
+        List<OrderResponseDto> data = new List<OrderResponseDto>();
+        for (int i = 0; i < orderList.Count; i++)
+        {
+            OrderResponseDto ord = new OrderResponseDto
+            {
+                Id = orderList[i].Oid,
+                Name = orderList[i].Option.DidNavigation.Name,
+                Image = orderList[i].Option.DidNavigation.DoctorImg,
+                Specialty = orderList[i].Option.DidNavigation.Specialty.SpecialtyName,
+                Date = (DateTime)orderList[i].DateOrder,
+                Status = orderList[i].Option.Status
+            };
+
+
+
+            data.Add(ord);
+          
+        }
+        return Json(data);
+    }
+    return Json("empty");
+
+}
+
         public IActionResult AppointmentDetail(string oid)
         {
             // Fetch the order details including all necessary related information
