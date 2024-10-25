@@ -199,15 +199,107 @@ public JsonResult GetAppointmentByQuery(string query)
             return View(order);  // Pass the order object to the view
         }
 
-        public IActionResult BookingAppointment()
+        [HttpGet]
+public IActionResult BookingAppointment(string doctorid)
+{
+    if (!string.IsNullOrWhiteSpace(doctorid))
+    {
+        // Fetch the doctor including their specialty
+        Doctor doctor = dc.Doctors.Include(d => d.Specialty).FirstOrDefault(d => d.Did == doctorid);
+
+        if (doctor != null)
         {
-            var isAuthenticated = User.Identity.IsAuthenticated;
-            if (!isAuthenticated)
+            // Define the date range: today and the next 7 days
+            DateTime today = DateTime.Now.Date;  // Current date (no time part)
+            DateTime next7Days = today.AddDays(7);  // Next 7 days (including today)
+
+            // Get the schedule for the doctor in the next 7 days
+            var schedule = dc.Options
+                .Where(o => o.Did == doctor.Did && o.DateWork >= today && o.DateWork <= next7Days)
+                .ToList();
+
+
+            var viewModel = new DoctorScheduleViewModel
             {
-                return RedirectToAction("Login", "Home");
-            }
-            return View();
+                Doctor = doctor,
+                Schedule = schedule,
+                Today = today
+            };
+            // You can pass 'schedule' to the view if needed
+            return View(viewModel);
         }
+    }
+
+
+    return View();
+}
+
+[HttpPost]
+public async Task<JsonResult> ProcessBooking(string doctorid, string desc, string time)
+{
+
+    if (!string.IsNullOrEmpty(doctorid) && !string.IsNullOrEmpty(time) && !string.IsNullOrEmpty(desc))
+    {
+        if (dc.Options.Any(o => o.Did == doctorid && o.DateWork == DateTime.Parse(time)))
+        {
+            return Json(new { err = "Slot was Book by other people" });
+        }
+        else
+        {
+            Random random = new Random();
+            int buff = random.Next(1000000, 9999999);
+            string optid = "opt" + buff;
+            string ordid = "ord" + buff;
+            using (var transaction = dc.Database.BeginTransaction())
+            {
+                try
+                {
+                    // Tạo đối tượng Option
+                    Option op = new Option
+                    {
+                        OptionId = optid,
+                        Status = "Pending",
+                        Did = doctorid,
+                        DateWork = DateTime.Parse(time),
+                    };
+
+                    // Thêm vào bảng Option và lưu
+                    dc.Options.Add(op);
+                    await dc.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
+
+                    // Tạo đối tượng Order
+                    Order order = new Order
+                    {
+                        Oid = ordid,
+                        Pid = User.Identity.Name,
+                        OptionId = op.OptionId,
+                        DateOrder = DateTime.Now,
+                        Symptom = desc,
+                    };
+
+                    // Thêm vào bảng Order và lưu
+                    dc.Orders.Add(order);
+                    await dc.SaveChangesAsync(); // Lưu thay đổi vào cơ sở dữ liệu
+
+                    // Commit transaction
+                    transaction.Commit();
+
+                    return Json(new { success = true });
+                }
+                catch (Exception ex)
+                {
+                    // Rollback transaction
+                    transaction.Rollback();
+                    Debug.WriteLine($"Error saving to database: {ex.Message}");
+                    return Json(new { error = "Error saving to database" });
+                }
+            }
+
+
+        }
+    }
+    else return Json(new { error = "Data is invalid" });
+}
 
         public IActionResult BookingService()
         {
