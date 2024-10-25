@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using test2.DAO;
 using test2.Data;
+using test2.Models.Momo;
 using test2.Services;
 
 namespace test2
@@ -43,6 +44,9 @@ namespace test2
                 googleOptions.CallbackPath = new PathString("/signin-google");
 
             });
+
+            builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
+            builder.Services.AddScoped<IMomoService, MomoService>();
 
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
             // Add services to the container.

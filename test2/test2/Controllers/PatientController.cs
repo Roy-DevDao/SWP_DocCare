@@ -7,6 +7,7 @@ using System.Diagnostics;
 using test2.DAO;
 using test2.Data;
 using test2.Models;
+using test2.Models.Order;
 using test2.Services;
 
 namespace test2.Controllers
@@ -18,16 +19,33 @@ namespace test2.Controllers
         private readonly DocCareContext dc;
         private readonly IVnPayService _vnPayservice;
         private readonly UserDAO _userDAO;
+        private IMomoService _momoService;
 
-        public PatientController(ILogger<PatientController> logger, DocCareContext db, IVnPayService vnPayservice, UserDAO userDAO)
+        public PatientController(ILogger<PatientController> logger, DocCareContext db, IVnPayService vnPayservice, UserDAO userDAO, IMomoService momoService)
         {
             _logger = logger;
             dc = db;
             _vnPayservice = vnPayservice;
             _userDAO = userDAO;
+            _momoService = momoService;
+        }
+        public IActionResult MomoPayment()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreatePaymentUrl(OrderInfoModel model)
+        {
+            var response = await _momoService.CreatePaymentAsync(model);
+            return Redirect(response.PayUrl);
         }
 
-
+        [HttpGet]
+        public IActionResult MomoPaymentCallBack()
+        {
+            var response = _momoService.PaymentExecuteAsync(HttpContext.Request.Query);
+            return View(response);
+        }
 
         public IActionResult Profile(string id)
         {
@@ -201,7 +219,7 @@ public JsonResult GetAppointmentByQuery(string query)
             return View();  // This will render /Views/Staff/ServiceAppointList.cshtml
         }
 
-        public IActionResult Payment()
+        public IActionResult VnPayment()
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
             if (!isAuthenticated)
