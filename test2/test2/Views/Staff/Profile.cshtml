@@ -1,7 +1,7 @@
-﻿@model test2.Models.PatientProfileViewModel
+﻿@model test2.Models.UserProfileViewModel
 @{
     ViewBag.Title = "Sửa trang cá nhân";
-    Layout = "~/Views/Shared/Layout_Patient.cshtml";
+    Layout = "~/Views/Shared/Layout_Staff.cshtml";
 }
 
 <style>
@@ -109,14 +109,14 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_name">Tên</label>
-                                    <input name="FullName" class="form-control" type="text" required value="@Model.Name">
+                                    <input name="FullName" class="form-control" type="text" required value="@Model.StaffName">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_gender">Giới tính</label>
                                     <select name="Gender" class="form-control" required>
                                         <option value="">---- Lựa chọn ----</option>
-                                        <option value="male" selected="@(Model.Gender == "male")">Nam</option>
-                                        <option value="female" selected="@(Model.Gender == "female")">Nữ</option>
+                                        <option value="male" selected="@(Model.SGender == "male")">Nam</option>
+                                        <option value="female" selected="@(Model.SGender == "female")">Nữ</option>
                                     </select>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Điện thoại</label>
-                                    <input name="Phone" class="form-control" type="text" value="@Model.Phone" disabled>
+                                    <input name="Phone" class="form-control" type="text" value="@Model.SPhone" disabled>
                                 </div>
                             </div>
                             <div class="row">
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_date_of_birth">Ngày sinh</label>
-                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.Dob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
+                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.SDob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -188,7 +188,6 @@
     </section>
 </div>
 <!-- end main-content -->
-
 @section Scripts {
 }
 

@@ -1,4 +1,6 @@
-﻿using test2.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using test2.Data;
+using test2.Models.DoctorModel;
 
 namespace test2.DAO
 {
@@ -11,33 +13,43 @@ namespace test2.DAO
             _context = context;
         }
 
-        public List<Order> GetAppointmentsForDoctor(string doctorId)
+        public List<AppointmentViewModel> GetDoctorAppointments(string doctorId)
         {
-            // Lấy các cuộc hẹn cho bác sĩ dựa trên ID
-            var appointments = _context.Orders
-                .Where(o => o.Option.Did == doctorId)
-                .Select(o => new Order
+            // Kiểm tra đầu vào doctorId để ngăn chặn các cuộc gọi cơ sở dữ liệu không cần thiết
+            if (string.IsNullOrEmpty(doctorId))
+            {
+                return new List<AppointmentViewModel>();
+            }
+
+            // Lấy danh sách cuộc hẹn cho bác sĩ
+            return _context.Options
+                .Where(option => option.Did == doctorId)  // Lọc theo bác sĩ
+                .Include(option => option.Orders)           // Bao gồm thông tin đơn hàng
+                    .ThenInclude(order => order.PidNavigation) // Lấy thông tin bệnh nhân
+                .Include(option => option.DidNavigation)    // Lấy thông tin bác sĩ
+                .SelectMany(option => option.Orders, (option, order) => new AppointmentViewModel
                 {
-                    Oid = o.Oid,
-                    Pid = o.Pid,
-                    OptionId = o.OptionId,
-                    Status = o.Status,
-                    DateOrder = o.DateOrder,
-                    Symptom = o.Symptom,
-                    Option = o.Option,
-                    PidNavigation = o.PidNavigation
+                    AppointmentId = order.Oid,
+                    PatientName = order.PidNavigation != null ? order.PidNavigation.Name : null, // Kiểm tra null
+                    PatientImage = order.PidNavigation != null ? order.PidNavigation.PatientImg : null,
+                    DateOrder = order.DateOrder,
+                    Status = order.Status,
+                    DId = option.Did,                // Thêm ID bác sĩ
+                    DoctorName = option.DidNavigation != null ? option.DidNavigation.Name : null, // Kiểm tra null
+                    DoctorImg = option.DidNavigation != null ? option.DidNavigation.DoctorImg : null // Kiểm tra null
                 })
                 .ToList();
-
-            return appointments;
         }
 
 
+
+
+
         // Lấy chi tiết cuộc hẹn theo Order Id (Oid)
-        public Order GetAppointmentDetailById(string oid)
+        public Order GetAppointmentDetailById(string AppointmentId)
         {
             var appointment = _context.Orders
-                .Where(o => o.Oid == oid)
+                .Where(o => o.Oid == AppointmentId)
                 .Select(o => new Order
                 {
                     Oid = o.Oid,

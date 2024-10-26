@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
 using test2.DAO;
 using test2.Data;
-using test2.Models;
+using test2.Models.DoctorModel;
 
 namespace test2.Controllers
 {
-    [Authorize(Roles = "2")]
+    //[Authorize(Roles = "2")]
     public class DoctorController : Controller
     {
         DocCareContext _context;
@@ -28,6 +30,14 @@ namespace test2.Controllers
             _userDAO = _userDAO;
         }
 
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.CurrentUserId = User.FindFirst("Id")?.Value;
+            }
+            base.OnActionExecuting(context);
+        }
         public IActionResult Feedback(string id, string? sortOrder = "asc")
         {
             // Lấy danh sách phản hồi của bác sĩ dựa trên Did
@@ -37,12 +47,22 @@ namespace test2.Controllers
 
         public IActionResult Profile(string id)
         {
-            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id); // Log giá trị oid
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
-            // Kiểm tra xem người dùng đã xác thực chưa
-            if (!User.Identity.IsAuthenticated)
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (userId == null)
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+
+            // Log giá trị oid
+            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id);
+
+            // Kiểm tra xem ID của người dùng có khớp với ID trong URL không
+            if (userId != id)
+            {
+                _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
+                return Forbid(); // Ngăn chặn truy cập nếu ID không khớp
             }
 
             // Lấy thông tin bác sĩ từ cơ sở dữ liệu bằng id
@@ -67,6 +87,7 @@ namespace test2.Controllers
                               Price = d.Price,
                               DoctorImg = d.DoctorImg
                           }).FirstOrDefault();
+
             // Kiểm tra xem bác sĩ có tồn tại không
             if (doctor == null)
             {
@@ -82,9 +103,7 @@ namespace test2.Controllers
         public IActionResult ViewAppointment(string id)
         {
             // Lấy các cuộc hẹn cho bác sĩ có ID được truyền vào
-            var appointment = _context.Orders
-             .Include(o => o.PidNavigation) // Đưa thông tin bệnh nhân
-             .FirstOrDefault(o => o.Oid == id); // Tìm kiếm cuộc hẹn theo Oid
+            var appointment = _appointmentDAO.GetDoctorAppointments(id);
 
             if (appointment == null)
             {

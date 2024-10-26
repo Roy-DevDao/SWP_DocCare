@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using System.Security.Claims;
+using test2.DAO;
 using test2.Data;
 using test2.Models;
 
@@ -11,15 +13,45 @@ namespace test2.Controllers
         private readonly DocCareContext dc;
 
         private readonly ILogger<StaffController> _logger;
+        private readonly UserDAO _userDAO;
 
-        public StaffController(ILogger<StaffController> logger, DocCareContext dc)
+        public StaffController(ILogger<StaffController> logger, DocCareContext dc, UserDAO userDAO)
         {
             _logger = logger;
             this.dc = dc;
-
+            _userDAO = userDAO;
         }
         //-------------------------------------------------------------------------------------------------------------
-        
+
+        public IActionResult Profile(string id)
+        {
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+
+            _logger.LogInformation("OID received in Profile: {Oid}", id); // Log giá trị oid
+
+            if (userId != id)
+            {
+                _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
+            }
+
+            // Fetch patient details from the database using the oid
+            var staff = _userDAO.GetLoggedInUser(User);
+
+            if (staff == null)
+            {
+                _logger.LogWarning("No patient found with OID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Pass the patient data to the view
+            return View(staff);
+        }
 
         public IActionResult AppoitmentList(string search_doctor = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
         {
