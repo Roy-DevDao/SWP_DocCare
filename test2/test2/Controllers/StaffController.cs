@@ -272,12 +272,37 @@ namespace test2.Controllers
 
         //-------------------------------------------------------------------------------------------------------------
 
-        public IActionResult ContactList(string status = "all", int pageNumber = 1)
+        public IActionResult ContactList(string status = "all", int pageNumber = 1, string sortColumn = "ContactId", string sortDirection = "asc")
         {
             int pageSize = 10; // Số lượng liên hệ trên mỗi trang
 
             // Truy vấn danh sách liên hệ
             var contactsQuery = dc.Contacts.AsQueryable();
+
+            // Sắp xếp dựa trên cột được chọn
+            switch (sortColumn)
+            {
+                case "FullName":
+                    contactsQuery = sortDirection == "asc" ?
+                        contactsQuery.OrderBy(o => o.Name) :
+                        contactsQuery.OrderByDescending(o => o.Name);
+                    break;
+                case "Email":
+                    contactsQuery = sortDirection == "asc" ?
+                        contactsQuery.OrderBy(o => o.Email) :
+                        contactsQuery.OrderByDescending(o => o.Email);
+                    break;
+                case "Description":
+                    contactsQuery = sortDirection == "asc" ?
+                        contactsQuery.OrderBy(o => o.Description) :
+                        contactsQuery.OrderByDescending(o => o.Description);
+                    break;
+                default: // Mặc định sắp xếp theo ID
+                    contactsQuery = sortDirection == "asc" ?
+                        contactsQuery.OrderBy(o => o.ContactId) :
+                        contactsQuery.OrderByDescending(o => o.ContactId);
+                    break;
+            }
 
             // Lọc theo trạng thái nếu có
             if (!string.IsNullOrEmpty(status) && status != "all")
@@ -290,8 +315,8 @@ namespace test2.Controllers
 
             // Lấy danh sách liên hệ dựa trên trang hiện tại và kích thước trang
             var contacts = contactsQuery
-                .Skip((pageNumber - 1) * pageSize)  // Bỏ qua các liên hệ của trang trước
-                .Take(pageSize)  // Lấy số liên hệ tương ứng với trang hiện tại
+                .Skip((pageNumber - 1) * pageSize) // Bỏ qua các liên hệ của trang trước
+                .Take(pageSize) // Lấy số liên hệ tương ứng với trang hiện tại
                 .Select(c => new ContactViewModel
                 {
                     ContactId = c.ContactId,
@@ -307,8 +332,12 @@ namespace test2.Controllers
             ViewBag.PageNumber = pageNumber; // Trang hiện tại
             ViewBag.Status = status; // Giữ lại trạng thái lọc để hiển thị
 
+            ViewBag.SortColumn = sortColumn; // Cột hiện tại
+            ViewBag.SortDirection = sortDirection; // Hướng sắp xếp hiện tại
+
             return View(contacts);
         }
+
 
         //-------------------------------------------------------------------------------------------------------------
 

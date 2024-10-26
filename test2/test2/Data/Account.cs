@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace test2.Data;
 
 public partial class Account
+
 {
+
+    [Required(ErrorMessage = "Patient ID is required.")]
+    [RegularExpression(@"^[A-Za-z]\d+$", ErrorMessage = "Account ID must start with a letter followed by digits.")]
     public string Id { get; set; } = null!;
 
     public string? Username { get; set; }

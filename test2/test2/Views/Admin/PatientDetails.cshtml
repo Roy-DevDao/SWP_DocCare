@@ -189,18 +189,17 @@
     Layout = "Layout_Admin";
 }
 @model test2.Data.Patient
-
 <main class="layout-default_body_main">
     <div class="whole-main">
         <div class="profile-header">
             <div class="profile-info">
-                <h4>Id: @Model.Pid</h4>
-                <h4>Patient: @Model.Name</h4>
+                <h4>ID: @Model.Pid</h4>
+                <h4>Bệnh nhân: @Model.Name</h4>
             </div>
             <div class="divider"></div>
             <div class="profile-status">
-                <p>Status:</p>
-                <p>Active</p>
+                <p>Trạng thái:</p>
+                <p>Đang hoạt động</p>
             </div>
         </div>
 
@@ -208,20 +207,25 @@
             <div class="box-left">
                 <div class="basic-info">
                     <div class="basic-info-header">
-                        <h4>Basic Information</h4>
+                        <h4>Thông tin cơ bản</h4>
                     </div>
                     <div class="basic-info-main">
+
                         <div class="info-row">
-                            <div class="label">Gender:</div>
+                            <div class="label">Điện thoại:</div>
+                            <div class="value">@Model.Phone</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">Giới tính:</div>
                             <div class="value">@Model.Gender</div>
                         </div>
                         <div class="info-row">
-                            <div class="label">DOB:</div>
+                            <div class="label">Ngày sinh:</div>
                             <div class="value">@Model.Dob</div>
                         </div>
-                        
+
                         <div class="info-row">
-                            <div class="label">Phone:</div>
+                            <div class="label">Điện thoại:</div>
                             <div class="value">@Model.Phone</div>
                         </div>
                     </div>
@@ -229,58 +233,139 @@
 
                 <div class="intro">
                     <div class="basic-info-header">
-                        <h4>Medical History</h4>
+                        <h4>Chẩn đoán</h4>
                     </div>
                     <div class="intro-main">
-                        No medical history available
+                        @if (Model.HealthRecords.Any())
+                        {
+                            @foreach (var record in Model.HealthRecords)
+                            {
+                                <div class="info-row">
+                                    <div class="label">Thông tin:</div>
+                                    <div class="value">@record.RecordId</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="label">Tình trạng:</div>
+                                    <div class="value">@record.Diagnosis</div>
+                                </div>
+                               
+                                <div class="info-row">
+                                    <div class="label">Ngày:</div>
+                                    <div class="value">@record.DateExam</div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <p>Không có tiền sử bệnh lý</p>
+                        }
                     </div>
                 </div>
+                <div class="intro">
+                    <div class="basic-info-header">
+                        <h4>Ghi chú</h4>
+                    </div>
+                    <div class="intro-main">
+                        @if (Model.HealthRecords.Any())
+                        {
+                            @foreach (var record in Model.HealthRecords)
+                            {
+                                <p>@record.Note</p>
+                            }
+                        }
+                        else
+                        {
+                            <p>Không có tiền sử bệnh lý</p>
+                        }
+                    </div>
+                </div>
+
+                <div class="intro">
+                    <div class="basic-info-header">
+                        <h4>Mô tả</h4>
+                    </div>
+                    <div class="intro-main">
+                        @if (Model.HealthRecords.Any())
+                        {
+                            @foreach (var record in Model.HealthRecords)
+                            {
+                                <p>@record.Description</p>
+                            }
+                        }
+                        else
+                        {
+                            <p>Không có tiền sử bệnh lý</p>
+                        }
+                    </div>
+                </div>
+
             </div>
 
             <div class="box-right">
 
                 <div class="feedback">
                     <div class="basic-info-header">
-                        <h4>Feedback Summary</h4>
+                        <h4>Tóm tắt phản hồi</h4>
                     </div>
                     <div class="feedback-stats">
+                        <!-- Tổng số dịch vụ đã sử dụng -->
                         <div class="feedback-item">
-                            <h4>Total Services Used</h4>
+                            <h4>Tổng số dịch vụ đã sử dụng</h4>
                             <div class="progress-bar">
-                                <div class="progress" style="width: 70%;"></div>
+                                <div class="progress" style="width: @ViewData["ServiceUsagePercentage"]%;"></div>
                             </div>
-                            <p>35 out of 50 services used</p>
+                            <p>@ViewData["TotalServicesUsed"] trong số 28 dịch vụ đã sử dụng</p>
                         </div>
 
                         <!-- Thống kê tổng quan -->
                         <div class="feedback-item">
-                            <h4>Statistics Overview</h4>
+                            <h4>Tổng quan thống kê</h4>
                             <div class="stats-grid">
                                 <div class="stat-box">
-                                    <h4>Average Rating</h4>
-                                    <div class="stat-value">4.5 ★</div>
+                                    <h4>Đánh giá trung bình</h4>
+                                    <div class="stat-value">@ViewData["AverageRating"] ★</div>
                                 </div>
                                 <div class="stat-box">
-                                    <h4>Total Appointments</h4>
-                                    <div class="stat-value">120</div>
-                                </div>
-                                <div class="stat-box">
-                                    <h4>Total Feedback</h4>
-                                    <div class="stat-value">100</div>
+                                    <h4>Tổng số phản hồi</h4>
+                                    <div class="stat-value">@ViewData["TotalFeedback"]</div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Số lượng phản hồi theo sao -->
                         <div class="feedback-item">
-                            <h4>Feedback</h4>
+                            <h4>Số lượng phản hồi theo sao</h4>
+                            <ul>
+                                @foreach (var star in new int[] { 5, 4, 3, 2, 1 })
+                                {
+                                    var count = ViewData["FeedbackStats"] is Dictionary<int?, int> stats && stats.ContainsKey(star)
+                                    ? stats[star]
+                                    : 0;
+                                    <li>@star ★: @count phản hồi</li>
+                                }
+                            </ul>
+                        </div>
+
+                        <!-- Phản hồi -->
+                        <div class="feedback-item">
+                            <h4>Phản hồi</h4>
                             <ul class="patient-feedback">
-                                <li>"Excellent service and very professional."</li>
-                                <li>"Quick and easy booking process."</li>
-                                <li>"Staff could be more friendly."</li>
+                                @if (Model.Feedbacks.Any())
+                                {
+                                    @foreach (var record in Model.Feedbacks)
+                                    {
+                                        <li>@record.Description</li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>Không có phản hồi </li>
+                                }
                             </ul>
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </div>

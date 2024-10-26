@@ -100,14 +100,13 @@
 
     </style>
 }
-
- @model IEnumerable<test2.Data.Patient>
+@model IEnumerable<test2.Data.Patient>
 
 <div class="doctor-dashboard">
     <div class="header1 d-flex justify-content-between align-items-center mb-4">
         <form action="ManagePatient" method="get">
             <div class="search-container d-flex">
-                <input type="text" name="searchId" placeholder="Search here..." class="form-control me-2">
+                <input type="text" name="searchId" placeholder="Tìm kiếm tại đây..." class="form-control me-2">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-search"></i>
                 </button>
@@ -115,7 +114,7 @@
         </form>
         <a asp-controller="Admin" asp-action="AddPatient">
             <button class="btn btn-primary">
-                <i class="fas fa-plus"></i> Add Patient
+                <i class="fas fa-plus"></i> Thêm Bệnh Nhân
             </button>
         </a>
     </div>
@@ -123,140 +122,80 @@
     <form method="get" asp-action="ManagePatient">
         <div class="sort-options d-flex mb-4">
             <select class="form-select me-2" name="sortGender" id="sortGender">
-                <option value="">All Genders</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="">Tất cả giới tính</option>
+                <option value="Male">Nam</option>
+                <option value="Female">Nữ</option>
             </select>
             <select class="form-select me-2" name="sortID" id="sortID">
-                <option value="">All ID</option>
-                <option value="Increase">Increase</option>
-                <option value="Decrease">Decrease</option>
+                <option value="">Tất cả ID</option>
+                <option value="Increase">Tăng dần</option>
+                <option value="Decrease">Giảm dần</option>
             </select>
-            <button type="submit" class="btn btn-primary">Filter</button>
-
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-filter"></i> <!-- Icon Lọc -->
+            </button>
         </div>
-
     </form>
 
     <table class="table table-striped">
-        @* <thead>
-            <tr>
-                <th>
-                    <div class="icon-text">
-                        <i class="fas fa-hashtag"></i>
-                        ID
-                    </div>
-                </th>
-                <th>
-                    <div class="icon-text">
-                        <i class="fas fa-user"></i>
-                        Name
-                    </div>
-                </th>
-                <th>
-                    <div class="icon-text">
-                        <i class="fas fa-venus-mars"></i>
-                        Gender
-                    </div>
-                </th>
-                <th>
-                    <div class="icon-text">
-                        <i class="fas fa-calendar"></i>
-                        DOB
-                    </div>
-                </th>
-                <th>
-                    <div class="icon-text">
-                        <i class="fas fa-phone"></i>
-                        Phone
-                    </div>
-                </th>
-                <th>
-                    <div class="icon-text">
-                        <i class="fas fa-cogs"></i>
-                        Options
-                    </div>
-                </th>
-            </tr>
-        </thead> *@
         <thead>
             <tr>
-                <!-- Sort by ID -->
+                <!-- Sắp xếp theo ID -->
                 <th>
-                    <div class="icon-text">
-                        <a asp-action="ManagePatient"
-                           asp-route-sortID="@(ViewBag.CurrentSortID == "Increase" ? "Decrease" : "Increase")"
-                           asp-route-sortName="@ViewBag.CurrentSortName"
-                           asp-route-sortDOB="@ViewBag.CurrentSortDOB"
-                           asp-route-sortGender="@ViewBag.CurrentSortGender"
-                           asp-route-page="@ViewBag.CurrentPage">
-                            <i class="fas fa-hashtag"></i>
-                            ID
-                            <i class="@(ViewBag.CurrentSortID == "Increase" ? "fas fa-sort-up" : "fas fa-sort-down")"></i>
+                    <div class="icon-text">                      
+                        <i class="fas fa-hashtag"></i>
+                        ID
+                        <a asp-action="ManagePatient" asp-route-sortColumn="Pid" asp-route-sortDirection="@((ViewBag.SortColumn == "Pid" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                            <i class="@(ViewBag.SortColumn == "Pid" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                         </a>
+       
                     </div>
                 </th>
 
-                <!-- Sort by Name -->
+                <!-- Sắp xếp theo Tên -->
                 <th>
                     <div class="icon-text">
-                        <a asp-action="ManagePatient"
-                           asp-route-sortID="@ViewBag.CurrentSortID"
-                           asp-route-sortName="@(ViewBag.CurrentSortName == "Increase" ? "Decrease" : "Increase")"
-                           asp-route-sortDOB="@ViewBag.CurrentSortDOB"
-                           asp-route-sortGender="@ViewBag.CurrentSortGender"
-                           asp-route-page="@ViewBag.CurrentPage">
                             <i class="fas fa-user"></i>
-                            Name
-                            <i class="@(ViewBag.CurrentSortName == "Increase" ? "fas fa-sort-up" : "fas fa-sort-down")"></i>
+                            Tên
+                        <a asp-action="ManagePatient" asp-route-sortColumn="PName" asp-route-sortDirection="@((ViewBag.SortColumn == "PName" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                            <i class="@(ViewBag.SortColumn == "PName" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                         </a>
                     </div>
                 </th>
 
-                <!-- Sort by Gender (unchanged) -->
+                <!-- Sắp xếp theo Giới Tính (không thay đổi) -->
                 <th>
                     <div class="icon-text">
-                        <a asp-action="ManagePatient"
-                           asp-route-sortID="@ViewBag.CurrentSortID"
-                           asp-route-sortName="@ViewBag.CurrentSortName"
-                           asp-route-sortDOB="@ViewBag.CurrentSortDOB"
-                           asp-route-sortGender="@(ViewBag.CurrentSortGender == "Male" ? "Female" : "Male")"
-                           asp-route-page="@ViewBag.CurrentPage">
                             <i class="fas fa-venus-mars"></i>
-                            Gender
-                        </a>
+                            Giới Tính
+                        
                     </div>
                 </th>
 
-                <!-- Sort by DOB -->
+                <!-- Sắp xếp theo Ngày Sinh -->
                 <th>
-                    <div class="icon-text">
-                        <a asp-action="ManagePatient"
-                           asp-route-sortID="@ViewBag.CurrentSortID"
-                           asp-route-sortName="@ViewBag.CurrentSortName"
-                           asp-route-sortDOB="@(ViewBag.CurrentSortDOB == "Increase" ? "Decrease" : "Increase")"
-                           asp-route-sortGender="@ViewBag.CurrentSortGender"
-                           asp-route-page="@ViewBag.CurrentPage">
+                    <div class="icon-text">                     
                             <i class="fas fa-calendar"></i>
-                            DOB
-                            <i class="@(ViewBag.CurrentSortDOB == "Increase" ? "fas fa-sort-up" : "fas fa-sort-down")"></i>
+                            Ngày Sinh
+                        <a asp-action="ManagePatient" asp-route-sortColumn="PDate" asp-route-sortDirection="@((ViewBag.SortColumn == "PDate" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                            <i class="@(ViewBag.SortColumn == "PDate" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                         </a>
                     </div>
                 </th>
 
-                <!-- Phone (no sorting) -->
+                <!-- Số Điện Thoại (không sắp xếp) -->
                 <th>
                     <div class="icon-text">
                         <i class="fas fa-phone"></i>
-                        Phone
+                        Số Điện Thoại
                     </div>
                 </th>
 
-                <!-- Options (no sorting) -->
+                <!-- Tùy Chọn (không sắp xếp) -->
                 <th>
                     <div class="icon-text">
                         <i class="fas fa-cogs"></i>
-                        Options
+                        Tùy Chọn
                     </div>
                 </th>
             </tr>
@@ -264,33 +203,31 @@
 
         <tbody id="patient-list">
             @foreach (var patient in Model)
-            { 
-                    <tr>
-                        <td>@patient.Pid</td>
-                        <td>@patient.Name</td>
-                        <td>@patient.Gender</td>
-                        <td>@patient.Dob?.ToString("dd/MM/yyyy")</td>
-                        <td>@patient.Phone</td>
+            {
+                <tr>
+                    <td>@patient.Pid</td>
+                    <td>@patient.Name</td>
+                    <td>@patient.Gender</td>
+                    <td>@patient.Dob?.ToString("dd/MM/yyyy")</td>
+                    <td>@patient.Phone</td>
                     <td>
                         <a asp-controller="Admin" asp-action="PatientDetails" asp-route-id="@patient.Pid">
                             <button class="btn btn-info">
-                                <i class="fas fa-eye"></i> <!-- Eye icon for details -->
+                                <i class="fas fa-eye"></i> <!-- Icon Mắt cho chi tiết -->
                             </button>
                         </a>
                         <form asp-action="DeletePatient" asp-controller="Admin" method="post" style="display:inline">
                             <input type="hidden" name="id" value="@patient.Pid" />
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this patient?');">
-                                <i class="fas fa-trash-alt"></i> <!-- Trash icon for delete -->
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa bệnh nhân này?');">
+                                <i class="fas fa-trash-alt"></i> <!-- Icon Thùng Rác cho xóa -->
                             </button>
                         </form>
                     </td>
-
-                    </tr>
-                }
-            
+                </tr>
+            }
         </tbody>
-
     </table>
+
 
     <!-- Tailwind CSS Pagination -->
     <div class="tailwindTotal flex items-center justify-between border-t border-gray-200 bg-[#F8F9FA] px-4 py-3 sm:px-6">
@@ -298,7 +235,7 @@
             <div>
                 <div class="text-sm text-gray-700">
 
-                    Showing @ViewBag.StartResult to @ViewBag.EndResult of @ViewBag.TotalDoctors results
+                    Hiển thị @ViewBag.StartResult đến @ViewBag.EndResult của @ViewBag.TotalPatients kết quả
 
                 </div>
             </div>
@@ -307,7 +244,7 @@
                 <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                     <!-- Previous Button -->
                     <a asp-action="ManagePatient" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-sortID="@ViewBag.CurrentSortID" asp-route-sortGender="@ViewBag.CurrentSortGender" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Trước</span>
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
@@ -324,7 +261,7 @@
 
                     <!-- Next Button -->
                     <a asp-action="ManagePatient" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-sortID="@ViewBag.CurrentSortID" asp-route-sortGender="@ViewBag.CurrentSortGender" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">Sau</span>
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>

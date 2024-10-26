@@ -115,11 +115,15 @@
         .cancel-btn {
             background-color: #f0f0f0;
             color: #333;
+            padding: 5px 5px;
+            border: 15px;
         }
 
         .save-btn {
             background-color: #0D6EFD;
             color: #fff;
+            padding: 5px 5px;
+            border: 15px;
         }
 
             .save-btn:hover {
@@ -130,61 +134,69 @@
             background-color: #e0e0e0;
         }
 
+
     </style>
 }
 
-    <main class="layout-default_body_main">
-        <form method="post" asp-action="AddService" enctype="multipart/form-data">
+<main class="layout-default_body_main">
+    <form method="post" asp-action="AddService" enctype="multipart/form-data">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            <!-- Section 1: Service Information -->
-            <div class="section">
-                <div class="border">
-                    <h1 class="first-text">Service Information</h1>
+        <!-- Phần 1: Thông Tin Dịch Vụ -->
+        <div class="section">
+            <div class="">
+                <h1 class="first-text">Thông Tin Dịch Vụ</h1>
 
-                    <div class="grid-container">
+                <div class="grid-container">
                     <div class="grid-item">
-                        <label asp-for="SpecialtyId">Service ID</label>
-                        <input asp-for="SpecialtyId" class="form-control" placeholder="Service ID">
+                        <label asp-for="SpecialtyId">Mã Dịch Vụ</label>
+                        <input asp-for="SpecialtyId" class="form-control" placeholder="Mã Dịch Vụ">
                         @Html.ValidationMessageFor(model => model.SpecialtyId, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="grid-item">
-                        <label asp-for="SpecialtyName">Service Name</label>
-                        <input asp-for="SpecialtyName" class="form-control" placeholder="Service Name">
+                        <label asp-for="SpecialtyName">Tên Dịch Vụ</label>
+                        <input asp-for="SpecialtyName" class="form-control" placeholder="Tên Dịch Vụ">
                         @Html.ValidationMessageFor(model => model.SpecialtyName, "", new { @class = "text-danger" })
                     </div>
 
-                        <!-- Photo -->
-                        @* <div class="grid-item">
-                            <label for="SpecialtyImg">Photo</label>
-                            <div class="flex-container">
-                                <input type="file" id="SpecialtyImg" name="SpecialtyImg" accept="image/*">
-                            </div>
-                        </div> *@
 
-                        <!-- Short Description -->
-                        <div class="grid-item">
-                            <label for="ShortDescription">Short Description</label>
-                            <input id="ShortDescription" name="ShortDescription" type="text" placeholder="Short Description">
-                        </div>
+                    <!-- Mô Tả Ngắn -->
+                    <div class="grid-item">
+                        <label for="ShortDescription">Mô Tả Ngắn</label>
+                        <input id="ShortDescription" name="ShortDescription" class="form-control" placeholder="Mô Tả Ngắn">
+                    </div>
 
-                        <!-- Long Description -->
-                        <div class="grid-item-full">
-                            <label for="LongDescription">Long Description</label>
-                            <textarea id="LongDescription" name="LongDescription" rows="3" placeholder="Detailed description of the service"></textarea>
-                        </div>
+                    <!-- Mô Tả Chi Tiết -->
+                    <div class="grid-item-full">
+                        <label for="LongDescription">Mô Tả Chi Tiết</label>
+                        <textarea id="LongDescription" name="LongDescription" rows="3" class="form-control" placeholder="Mô tả chi tiết về dịch vụ"></textarea>
+                        <span id="charCount">0/100</span> <!-- Hiển thị số ký tự -->
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Submit Button -->
-            <div class="submit-container">
-                <button type="button" class="cancel-btn">Cancel</button>
-                <button type="submit" class="save-btn">Save</button>
-            </div>
-        </form>
-    </main>
+        <!-- Nút Gửi -->
+        <div class="submit-container">
+            <button type="button" class="cancel-btn">Hủy</button>
+            <button type="submit" class="save-btn">Lưu</button>
+        </div>
+    </form>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const longDescriptionInput = document.getElementById('LongDescription');
+        const charCountDisplay = document.getElementById('charCount');
+        const maxChars = 100; // Số ký tự tối đa
+
+        longDescriptionInput.addEventListener('input', function () {
+            const currentLength = longDescriptionInput.value.length;
+            charCountDisplay.textContent = `${currentLength}/${maxChars}`;
+        });
+    });
+</script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -196,9 +208,9 @@
             const regex = /^[A-Za-z]\d*$/;
 
             if (!value) {
-                showError('SpecialtyId', 'Specialty ID is required.');
+                showError('SpecialtyId', 'Mã Dịch Vụ là bắt buộc.');
             } else if (!regex.test(value)) {
-                showError('SpecialtyId', 'Specialty ID must start with a letter followed by digits.');
+                showError('SpecialtyId', 'Mã Dịch Vụ phải bắt đầu bằng chữ cái theo sau là các chữ số.');
             } else {
                 clearError('SpecialtyId');
             }
@@ -207,11 +219,11 @@
         specialtyNameInput.addEventListener('input', function () {
             const value = specialtyNameInput.value;
             if (!value) {
-                showError('SpecialtyName', 'Specialty Name is required.');
+                showError('SpecialtyName', 'Tên Dịch Vụ là bắt buộc.');
             } else if (value.length > 30) {
-                showError('SpecialtyName', 'Specialty Name cannot be longer than 30 characters.');
+                showError('SpecialtyName', 'Tên Dịch Vụ không được dài quá 30 ký tự.');
             } else if (!/^[A-Za-z\s]*$/.test(value)) {
-                showError('SpecialtyName', 'Specialty Name must contain only letters.');
+                showError('SpecialtyName', 'Tên Dịch Vụ chỉ chứa chữ cái.');
             } else {
                 clearError('SpecialtyName');
             }
@@ -232,87 +244,3 @@
         }
     });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*
-<main class="layout-default_body_main">
-    <form>
-        <!-- Section 1: Patient Information -->
-        <div class="section">
-            <div class="borsder">
-                <h1 class="first-text">Patient Information</h1>
-
-                <div class="grid-container">
-                    <!-- ID -->
-                    <div class="grid-item">
-                        <label for="id">Service Name</label>
-                        <input id="id" name="id" type="text" placeholder="Patient ID">
-                    </div>
-
-                    <!-- Photo -->
-                    <div class="grid-item">
-                        <label for="photo">Photo</label>
-                        <div class="flex-container">
-                            <div class="icon photo-icon"></div>
-                            <button type="button" class="change-btn">Change</button>
-                        </div>
-                    </div>
-
-                    <!-- First Name -->
-                    <div class="grid-item">
-                        <label for="first-name">Price</label>
-                        <input id="first-name" name="first-name" type="text">
-                    </div>
-
-                    <!-- Last Name -->
-                    <div class="grid-item">
-                        <label for="last-name">Duration</label>
-                        <input id="last-name" name="last-name" type="text">
-                    </div>
-
-                    <!-- Gender -->
-                    <div class="grid-item">
-                        <label for="gender">Status</label>
-                        <select id="gender" name="gender">
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-
-                    <!-- Date of Birth -->
-                    <div class="grid-item">
-                        <label for="dob">Category</label>
-                        <input id="dob" name="dob" type="date">
-                    </div>
-                    <div class="grid-item-full">
-                        <label for="experience">Description</label>
-                        <textarea id="experience" name="experience" rows="3"></textarea>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Submit Button -->
-        <div class="submit-container">
-            <button type="button" class="cancel-btn">Cancel</button>
-            <button type="submit" class="save-btn">Save</button>
-        </div>
-    </form>
-</main> *@

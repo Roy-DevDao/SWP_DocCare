@@ -131,17 +131,18 @@
     </style>
 }
 @model test2.Data.Specialty
+
 <main class="layout-default_body_main">
     <div class="whole-main">
         <div class="profile-header">
             <div class="profile-info">
-                <h4>Id: @Model.SpecialtyId</h4>
-                <h4>Service: @Model.SpecialtyName</h4>
+                <h4>ID: @Model.SpecialtyId</h4>
+                <h4>Dịch vụ: @Model.SpecialtyName</h4>
             </div>
             <div class="divider"></div>
             <div class="profile-status">
-                <p>Status:</p>
-                <p>Active</p>
+                <p>Trạng thái:</p>
+                <p>Đang hoạt động</p>
             </div>
         </div>
 
@@ -149,32 +150,32 @@
             <div class="box-left">
                 <div class="basic-info">
                     <div class="basic-info-header">
-                        <h5>Basic Information</h5>
+                        <h5>Thông tin cơ bản</h5>
                     </div>
                     <div class="basic-info-main">
                         <div class="info-row">
-                            <div class="label">Intro:</div>
+                            <div class="label">Giới thiệu:</div>
                             <div class="value">@Model.ShortDescription</div>
                         </div>
                         <div class="info-row">
-                            <div class="label">Price:</div>
+                            <div class="label">Giá:</div>
                             <div class="value">@Model.Doctors.FirstOrDefault()?.Price</div>
                         </div>
-                        
+
                         <div class="info-row">
-                            <div class="label">Duration:</div>
-                            <div class="value">1 hour</div>
+                            <div class="label">Thời gian:</div>
+                            <div class="value">1 giờ</div>
                         </div>
                         <div class="info-row">
-                            <div class="label">Rating:</div>
-                            <div class="value">4.5 stars</div>
+                            <div class="label">Đánh giá:</div>
+                            <div class="value">4.5 sao</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="intro">
                     <div class="basic-info-header">
-                        <h5>Description</h5>
+                        <h5>Mô tả</h5>
                     </div>
                     <div class="intro-main">
                         @Model.LongDescription
@@ -185,64 +186,64 @@
             <div class="box-right">
                 <div class="feedback">
                     <div class="basic-info-header">
-                        <h5>Feedback</h5>
+                        <h5>Phản hồi</h5>
                     </div>
                     <div class="feedback-stats">
-                        <h3>Star Ratings</h3>
+                        <h3>Đánh giá sao</h3>
                         <ul>
-                            <li><span class="star-rating">★★★★★</span> 150 reviews</li>
-                            <li><span class="star-rating">★★★★</span> 50 reviews</li>
-                            <li><span class="star-rating">★★★</span> 20 reviews</li>
-                            <li><span class="star-rating">★★</span> 10 reviews</li>
-                            <li><span class="star-rating">★</span> 5 reviews</li>
+                            <li><span class="star-rating">★★★★★</span> 150 đánh giá</li>
+                            <li><span class="star-rating">★★★★</span> 50 đánh giá</li>
+                            <li><span class="star-rating">★★★</span> 20 đánh giá</li>
+                            <li><span class="star-rating">★★</span> 10 đánh giá</li>
+                            <li><span class="star-rating">★</span> 5 đánh giá</li>
                         </ul>
 
-                        <h3>Pros</h3>
+                        <h3>Ưu điểm</h3>
                         <ul>
-                            <li>Thorough examination</li>
-                            <li>Friendly staff</li>
-                            <li>Quick results</li>
+                            <li>Khám xét kỹ lưỡng</li>
+                            <li>Nhân viên thân thiện</li>
+                            <li>Kết quả nhanh chóng</li>
                         </ul>
 
-                        <h3>Cons</h3>
+                        <h3>Nhược điểm</h3>
                         <ul>
-                            <li>Higher cost</li>
-                            <li>Limited availability</li>
+                            <li>Chi phí cao hơn</li>
+                            <li>Khả năng tiếp cận hạn chế</li>
                         </ul>
                     </div>
-                    // xử lí chọn sao hiện ra feedback của từng sao
+                    // xử lý chọn sao hiện ra phản hồi của từng sao
                     @* <div class="feedback-section">
-                        <h5>Doctor Feedback</h5>
+                    <h5>Phản hồi của bác sĩ</h5>
 
-                        @if (Model.Doctors != null && Model.Doctors.Any())
-                        {
-                            foreach (var doctor in Model.Doctors)
-                            {
-                                <h6>Feedback for @doctor.Name</h6>
+                    @if (Model.Doctors != null && Model.Doctors.Any())
+                    {
+                    foreach (var doctor in Model.Doctors)
+                    {
+                    <h6>Phản hồi cho @doctor.Name</h6>
 
-                                @if (doctor.Feedbacks != null && doctor.Feedbacks.Any())
-                                {
-                                    <ul>
-                                        @foreach (var feedback in doctor.Feedbacks)
-                                        {
-                                            <li>
-                                                <strong>@feedback.Name</strong> - @feedback.Star stars
-                                                <p>@feedback.Description</p>
-                                                <small>Commented on: @(feedback.DateCmt.HasValue ? feedback.DateCmt.Value.ToString("yyyy-MM-dd") : "No date available")</small>
-                                            </li>
-                                        }
-                                    </ul>
-                                }
-                                else
-                                {
-                                    <p>No feedback available for @doctor.Name.</p>
-                                }
-                            }
-                        }
-                        else
-                        {
-                            <p>No doctors assigned to this specialty.</p>
-                        }
+                    @if (doctor.Feedbacks != null && doctor.Feedbacks.Any())
+                    {
+                    <ul>
+                    @foreach (var feedback in doctor.Feedbacks)
+                    {
+                    <li>
+                    <strong>@feedback.Name</strong> - @feedback.Star sao
+                    <p>@feedback.Description</p>
+                    <small>Nhận xét vào: @(feedback.DateCmt.HasValue ? feedback.DateCmt.Value.ToString("yyyy-MM-dd") : "Không có ngày nào")</small>
+                    </li>
+                    }
+                    </ul>
+                    }
+                    else
+                    {
+                    <p>Không có phản hồi cho @doctor.Name.</p>
+                    }
+                    }
+                    }
+                    else
+                    {
+                    <p>Không có bác sĩ nào được phân công cho chuyên khoa này.</p>
+                    }
                     </div> *@
                 </div>
             </div>

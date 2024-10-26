@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Light Sidebar with Header</title>
+    <title>DocCare-Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -47,7 +47,7 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 fixed top-0 left-0 h-full transition-all duration-300">
         <div id="logo" class="flex items-center h-16 px-6 bg-white border-b transition-all duration-300">
-            <a href="home">
+            <a asp-controller="Admin" asp-action="Index">
                 <img src="~/assets/images/medical.png" height="80" width="120" class="logo--mode" alt="">
             </a>
         </div>
@@ -74,15 +74,15 @@
                 <button id="serviceToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-cogs text-lg"></i>
-                        <span class="ml-3 sidebar-text">Manage Services</span>
+                        <span class="ml-3 sidebar-text">Quản Lí Dịch Vụ</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="serviceIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div id="serviceSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
-                    <a asp-controller="Admin" asp-action="AddService" class="block py-2 text-gray-700 hover:text-gray-900">+ Add Service</a>
-                    <a asp-controller="Admin" asp-action="ManageService" class="block py-2 text-gray-700 hover:text-gray-900">+Service List</a>
+                    <a asp-controller="Admin" asp-action="AddService" class="block py-2 text-gray-700 hover:text-gray-900">+ Thêm dịch vụ</a>
+                    <a asp-controller="Admin" asp-action="ManageService" class="block py-2 text-gray-700 hover:text-gray-900">+ Danh sách dịch vụ</a>
                 </div>
             </div>
 
@@ -91,15 +91,15 @@
                 <button id="doctorToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-user-md text-lg"></i>
-                        <span class="ml-3 sidebar-text">Manage Doctors</span>
+                        <span class="ml-3 sidebar-text">Quản Lí Bác Sĩ</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="doctorIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div id="doctorSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
-                    <a asp-controller="Admin" asp-action="ManageDoctor" class="block py-2 text-gray-700 hover:text-gray-900">+ Add Doctor</a>
-                    <a asp-controller="Admin" asp-action="AddDoctor" class="block py-2 text-gray-700 hover:text-gray-900">+ Doctor List</a>
+                    <a asp-controller="Admin" asp-action="AddDoctor" class="block py-2 text-gray-700 hover:text-gray-900">+ Thêm bác sĩ</a>
+                    <a asp-controller="Admin" asp-action="ManageDoctor" class="block py-2 text-gray-700 hover:text-gray-900">+ Danh sách bác sĩ</a>
                 </div>
             </div>
 
@@ -108,15 +108,15 @@
                 <button id="patientToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-procedures text-lg"></i>
-                        <span class="ml-3 sidebar-text">Manage Patients</span>
+                        <span class="ml-3 sidebar-text">Quản Lí Bệnh Nhân</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="patientIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div id="patientSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
-                    <a asp-controller="Admin" asp-action="ManagePatient" class="block py-2 text-gray-700 hover:text-gray-900">+ Add Patient</a>
-                    <a asp-controller="Admin" asp-action="AddPatient" class="block py-2 text-gray-700 hover:text-gray-900">+ Patient List</a>
+                    <a asp-controller="Admin" asp-action="AddPatient" class="block py-2 text-gray-700 hover:text-gray-900">+ Thêm bệnh nhân</a>
+                    <a asp-controller="Admin" asp-action="ManagePatient" class="block py-2 text-gray-700 hover:text-gray-900">+ Danh sách bệnh nhân</a>
                 </div>
             </div>
         </nav>
@@ -136,7 +136,7 @@
             </div>
 
             <div class="flex-grow text-center">
-                <h1 class="text-lg font-semibold">Admin Management System</h1>
+                <h1 class="text-lg font-semibold">Hệ thống Quản lý Quản trị</h1>
             </div>
 
             <ul class="dropdowns list-inline mb-0">
@@ -172,22 +172,27 @@
         <!-- Page content -->
         <main class="p-6 mt-16 bg-gray-50 flex-1 overflow-auto">
             @RenderBody()
-            <footer class="bg-white shadow py-3">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <div class="text-sm-start text-center">
-                                <p class="mb-0 text-muted">
-                                    <script>document.write(new Date().getFullYear())</script>
-                                    © DocCare.
-                                </p>
-                            </div>
+            
+
+        </main>
+        <footer class="bg-white shadow py-3">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="text-sm-start text-center">
+                            <p class="mb-0 text-muted">
+                                <script>
+                                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                    const today = new Date().toLocaleDateString('vi-VN', options);
+                                    document.write(today);
+                                </script>
+                                © DocCare.
+                            </p>
                         </div>
                     </div>
                 </div>
-            </footer>
-
-        </main>
+            </div>
+        </footer>
     </div>
 
     @await RenderSectionAsync("Scripts", required: false)

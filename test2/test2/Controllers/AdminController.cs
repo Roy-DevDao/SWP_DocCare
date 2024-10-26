@@ -6,6 +6,7 @@ using System.IO.Pipelines;
 using test2.Data;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace test2.Controllers
@@ -61,7 +62,117 @@ namespace test2.Controllers
             return View();
         }
 
-        public IActionResult ManageDoctor(int page = 1, string sortPrice = "", string sortId = "", string sortName = "", string sortGender = "", string searchId = "")
+        //public IActionResult ManageDoctor(string sortColumn = "Did", string sortDirection = "asc",  int page = 1, string sortPrice = "", string sortId = "", string sortName = "", string sortGender = "", string searchId = "")
+        //{
+        //    int pageSize = 20;
+
+        //    // Lọc danh sách doctors từ cơ sở dữ liệu
+        //    var filterDoctors = _context.Doctors.Where(doctor => doctor.Did != null && doctor.DoctorImg != null && doctor.Name != null && doctor.Gender != null && doctor.Position != null && doctor.Price != null);
+
+
+        //    switch (sortColumn)
+        //    {
+        //        case "Name":
+        //            filterDoctors = (sortDirection == "asc") ? filterDoctors.OrderBy(d => d.Name) : filterDoctors.OrderByDescending(d => d.Name);
+        //            break;
+        //        case "Fee":
+        //            filterDoctors = (sortDirection == "asc") ? filterDoctors.OrderBy(d => d.Price) : filterDoctors.OrderByDescending(d => d.Price);
+        //            break;
+
+        //        default:
+        //            filterDoctors = (sortDirection == "asc") ? filterDoctors.OrderBy(d => SortTid(d.Did)) : filterDoctors.OrderByDescending(d => SortTid(d.Did));
+        //            break;
+        //    }
+        //    // Tìm kiếm theo ID
+        //    if (!string.IsNullOrEmpty(searchId))
+        //    {
+        //        filterDoctors = filterDoctors.Where(d => d.Did.Contains(searchId));
+        //    }
+
+        //    // Lọc theo giới tính
+        //    if (!string.IsNullOrEmpty(sortGender))
+        //    {
+        //        filterDoctors = filterDoctors.Where(d => d.Gender == sortGender);
+        //    }
+
+        //    // Lọc theo giá (Nếu có)
+        //    if (!string.IsNullOrEmpty(sortPrice))
+        //    {
+        //        switch (sortPrice)
+        //        {
+        //            case "100-200":
+        //                filterDoctors = filterDoctors.Where(d => d.Price >= 100 && d.Price <= 200);
+        //                break;
+        //            case "200-400":
+        //                filterDoctors = filterDoctors.Where(d => d.Price > 200 && d.Price <= 400);
+        //                break;
+        //            case "400+":
+        //                filterDoctors = filterDoctors.Where(d => d.Price > 400);
+        //                break;
+        //        }
+        //    }
+
+        //    // Lấy danh sách kết quả đã lọc
+        //    var doctorList = filterDoctors.ToList();
+
+        //    // Sắp xếp theo ID
+        //    if (!string.IsNullOrEmpty(sortId))
+        //    {
+        //        if (sortId == "Increase")
+        //            doctorList = doctorList.OrderBy(d => SortTid(d.Did)).ToList();
+        //        else if (sortId == "Decrease")
+        //            doctorList = doctorList.OrderByDescending(d => SortTid(d.Did)).ToList();
+        //    }
+
+        //    // Sắp xếp theo Name
+        //    if (!string.IsNullOrEmpty(sortName))
+        //    {
+        //        if (sortName == "Inx    crease")
+        //            doctorList = doctorList.OrderBy(d => d.Name).ToList();
+        //        else if (sortName == "Decrease")
+        //            doctorList = doctorList.OrderByDescending(d => d.Name).ToList();
+        //    }
+
+        //    // Sắp xếp theo Price
+        //    if (!string.IsNullOrEmpty(sortPrice))
+        //    {
+        //        if (sortPrice == "Increase")
+        //            doctorList = doctorList.OrderBy(d => d.Price).ToList();
+        //        else if (sortPrice == "Decrease")
+        //            doctorList = doctorList.OrderByDescending(d => d.Price).ToList();
+        //    }
+
+        //    // Tính tổng số lượng doctors sau khi lọc
+        //    var totalDoctors = doctorList.Count();
+
+        //    // Lưu trạng thái sắp xếp hiện tại vào ViewBag để hiển thị trong view
+        //    ViewBag.CurrentSortPrice = sortPrice;
+        //    ViewBag.CurrentSortName = sortName;
+        //    ViewBag.CurrentSortId = sortId;
+        //    ViewBag.CurrentSortGender = sortGender;
+        //    ViewBag.CurrentSearchId = searchId;
+        //    ViewBag.SortColumn = sortColumn;
+        //    ViewBag.SortDirection = sortDirection;
+
+        //    // Phân trang kết quả
+        //    ViewBag.TotalPages = (int)Math.Ceiling(totalDoctors / (double)pageSize);
+        //    ViewBag.CurrentPage = page;
+        //    var doctors = doctorList.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+        //    // Tính toán số lượng kết quả hiển thị
+        //    int startResult = (page - 1) * pageSize + 1;
+        //    int endResult = startResult + doctors.Count - 1;
+
+        //    // Đưa thông tin phân trang vào ViewBag
+        //    ViewBag.StartResult = startResult;
+        //    ViewBag.EndResult = endResult;
+        //    ViewBag.TotalDoctors = totalDoctors;
+
+        //    // Trả về view với danh sách doctors
+        //    return View(doctors);
+        //}
+
+        public IActionResult ManageDoctor(string sortColumn = "Did", string sortDirection = "asc", int page = 1, string sortPrice = "", string sortId = "", string sortName = "", string sortGender = "", string searchId = "")
         {
             int pageSize = 20;
 
@@ -100,6 +211,20 @@ namespace test2.Controllers
             // Lấy danh sách kết quả đã lọc
             var doctorList = filterDoctors.ToList();
 
+            // Sắp xếp theo cột
+            switch (sortColumn)
+            {
+                case "Name":
+                    doctorList = (sortDirection == "asc") ? doctorList.OrderBy(d => d.Name).ToList() : doctorList.OrderByDescending(d => d.Name).ToList();
+                    break;
+                case "Fee":
+                    doctorList = (sortDirection == "asc") ? doctorList.OrderBy(d => d.Price).ToList() : doctorList.OrderByDescending(d => d.Price).ToList();
+                    break;
+                default:
+                    doctorList = (sortDirection == "asc") ? doctorList.OrderBy(d => SortTid(d.Did)).ToList() : doctorList.OrderByDescending(d => SortTid(d.Did)).ToList();
+                    break;
+            }
+
             // Sắp xếp theo ID
             if (!string.IsNullOrEmpty(sortId))
             {
@@ -136,6 +261,8 @@ namespace test2.Controllers
             ViewBag.CurrentSortId = sortId;
             ViewBag.CurrentSortGender = sortGender;
             ViewBag.CurrentSearchId = searchId;
+            ViewBag.SortColumn = sortColumn;
+            ViewBag.SortDirection = sortDirection;
 
             // Phân trang kết quả
             ViewBag.TotalPages = (int)Math.Ceiling(totalDoctors / (double)pageSize);
@@ -159,6 +286,7 @@ namespace test2.Controllers
 
 
 
+
         public IActionResult DoctorDetails(string id)
         {
             var doctorWithId = _context.Doctors.Include(s => s.Feedbacks).FirstOrDefault(d => d.Did.Equals(id));
@@ -172,44 +300,98 @@ namespace test2.Controllers
         }
 
 
+        //// GET: Add Doctor
+        //public IActionResult AddDoctor()
+        //{
+        //    var specialties = _context.Specialties.Select(d => new { d.SpecialtyId, d.SpecialtyName }).ToList();
+
+        //    ViewBag.Specialties = specialties;
+
+        //    return View();
+        //}
+
+        //// POST: Add Doctor
+        //[HttpPost]
+        //public IActionResult AddDoctor(Doctor model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Create a new Account and assign its ID to Doctor's Did (Doctor ID)
+        //        var newAccount = new Account
+        //        {
+        //            Id = model.Did, // Doctor's ID will be linked with Account's ID
+        //            Username = model.Name,
+        //            // Add additional fields if required like Password, Email, etc.
+        //        };
+        //        _context.Accounts.Add(newAccount);
+
+        //        // Add Doctor to database
+        //        _context.Doctors.Add(model);
+        //        _context.SaveChanges();
+
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    // Reload ViewBag data in case of validation errors
+        //    ViewBag.Specialties = _context.Specialties.Select(d => new { d.SpecialtyId, d.SpecialtyName }).ToList();
+
+        //    return View(model);
+        //}
+
         public IActionResult AddDoctor()
         {
-            var position = _context.Doctors.Select(d => d.Position).Distinct().ToList();
-            var specialties = _context.Specialties.Select(d => d.SpecialtyId).ToList();
+            // Fetch the list of specialties from the Specialty table
+            var specialties = _context.Specialties.ToList();
 
-            if (position == null || !position.Any())
-            {
-                _logger.LogError("No positions found in the database.");
-                ViewBag.Position = new List<string>(); // or handle appropriately
-            }
-            else
-            {
-                ViewBag.Position = position;
-            }
-
-            ViewBag.Specialties = specialties;
+            // Pass the specialties to the view using ViewBag
+            ViewBag.Specialties = new SelectList(specialties, "SpecialtyId", "SpecialtyId");
 
             return View();
         }
-        
 
-        // POST: Add Doctor
+
         [HttpPost]
-        public IActionResult AddDoctor(Doctor model)
+        public IActionResult AddDoctor(Doctor newDoctor, string AccountId)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Doctors.Add(model);
-                _context.SaveChanges();
+                // Check if AccountId exists in the Accounts table
+                var account = _context.Accounts.FirstOrDefault(a => a.Id == AccountId);
 
-                return RedirectToAction("Index"); 
+                if (account == null)
+                {
+                    // If account doesn't exist, add an error message and return the view
+                    ModelState.AddModelError("AccountId", "The provided Account ID does not exist.");
+                    return View(newDoctor); // Return view to show error
+                }
+
+                // Set the DidNavigation to the found account
+                newDoctor.DidNavigation = account;  // Ensuring DidNavigation is correctly set
+
+                // Assign the Did (Doctor ID) to match the Account ID
+                newDoctor.Did = account.Id; // Ensure Did matches AccountId
+
+                // Now validate the model after assigning the Account
+                if (ModelState.IsValid)
+                {
+                    _context.Doctors.Add(newDoctor); // Add new doctor to the database
+                    _context.SaveChanges();
+                    return RedirectToAction("ManageDoctor");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Catch any errors and display them, including inner exception details
+                var errorMessage = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                ModelState.AddModelError(string.Empty, $"An error occurred: {errorMessage}");
             }
 
-            ViewBag.Position = _context.Doctors.Select(d => d.Position).Distinct().ToList();
-            ViewBag.Specialties= _context.Specialties.Select(d => new { d.SpecialtyId, d.SpecialtyName }).ToList();
-
-            return View(model); 
+            // If any errors, return the view with the current doctor data and errors
+            return View(newDoctor);
         }
+
+
+
 
         [HttpPost]
         public IActionResult DeleteDoctor(string id)
@@ -243,13 +425,26 @@ namespace test2.Controllers
             return RedirectToAction("ManageDoctor");
         }
 
-        public IActionResult ManagePatient(int page = 1, string sortID = "", string sortName = "", string sortDOB = "", string sortGender = "", string searchId = "")
+        public IActionResult ManagePatient( string sortColumn= "Pid",string sortDirection = "asc", int page = 1, string sortID = "", string sortName = "", string sortDOB = "", string sortGender = "", string searchId = "")
         {
             int pageSize = 20;
 
             // Lọc danh sách bệnh nhân từ cơ sở dữ liệu
             var filterPatients = _context.Patients.Where(patient => patient.Pid != null && patient.Name != null && patient.Gender != null
                 && patient.Dob != null && patient.Phone != null);
+
+            switch (sortColumn)
+            {
+                case "PDate":
+                    filterPatients = (sortDirection == "asc") ? filterPatients.OrderBy(o => o.Dob) : filterPatients.OrderByDescending(o => o.Dob);
+                    break;
+                case "PName":
+                    filterPatients = (sortDirection == "asc") ? filterPatients.OrderBy(o => o.Name) : filterPatients.OrderByDescending(o => o.Name);
+                    break;
+                default: // "Pid" as default
+                    filterPatients = (sortDirection == "asc") ? filterPatients.OrderBy(o => o.Pid) : filterPatients.OrderByDescending(o => o.Pid);
+                    break;
+            }
 
             // Tìm kiếm theo ID
             if (!string.IsNullOrEmpty(searchId))
@@ -302,6 +497,8 @@ namespace test2.Controllers
             ViewBag.CurrentSortDOB = sortDOB;
             ViewBag.CurrentSortGender = sortGender;
             ViewBag.CurrentSearchId = searchId;
+            ViewBag.SortColumn = sortColumn;
+            ViewBag.SortDirection = sortDirection;
 
             // Phân trang kết quả
             ViewBag.TotalPages = (int)Math.Ceiling(totalPatients / (double)pageSize);
@@ -351,16 +548,47 @@ namespace test2.Controllers
 
 
         public IActionResult PatientDetails(string id)
+        {
+            var patientWithId = _context.Patients
+                .Include(p => p.HealthRecords)
+                .Include(p => p.Feedbacks)
+                .FirstOrDefault(d => d.Pid.Equals(id));
+
+            if (patientWithId == null)
             {
-                var patientWithId = _context.Patients.FirstOrDefault(d => d.Pid.Equals(id));
-
-                if (patientWithId == null)
-                {
-                    return NotFound();
-                }
-
-                return View(patientWithId);
+                return NotFound();
             }
+
+            // Tổng số dịch vụ đã sử dụng (số lượng HealthRecord của bệnh nhân)
+            int totalServicesUsed = patientWithId.HealthRecords.Count();
+
+            // Tổng số phản hồi (số lượng Feedback của bệnh nhân)
+            int totalFeedbacks = patientWithId.Feedbacks.Count();
+
+            // Đánh giá trung bình
+            double averageRating = patientWithId.Feedbacks.Any()
+                ? patientWithId.Feedbacks.Average(f => f.Star ?? 0)
+                : 0;
+
+            // Số lượng phản hồi theo từng sao (5, 4, 3, 2, 1)
+            var feedbackStats = patientWithId.Feedbacks
+                .Where(f => f.Star.HasValue)
+                .GroupBy(f => f.Star)
+                .ToDictionary(g => g.Key, g => g.Count());
+            int totalAvailableServices = 28;
+            double serviceUsagePercentage = ((double)totalServicesUsed / totalAvailableServices) * 100;
+
+            ViewData["TotalServicesUsed"] = totalServicesUsed;
+            ViewData["ServiceUsagePercentage"] = serviceUsagePercentage;
+            ViewData["TotalFeedback"] = totalFeedbacks;
+            ViewData["AverageRating"] = averageRating.ToString("0.0"); // Định dạng với 1 chữ số thập phân
+            ViewData["FeedbackStats"] = feedbackStats;
+
+            return View(patientWithId);
+        }
+
+
+
 
 
 
@@ -369,121 +597,54 @@ namespace test2.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public IActionResult AddPatient(Patient newPatient)
+        public IActionResult AddPatient(Patient newPatient, string AccountId)
         {
             try
             {
-                var existingService = _context.Patients.FirstOrDefault(s => s.Pid == newPatient.Pid);
+                // Check if AccountId exists in the Accounts table
+                var account = _context.Accounts.FirstOrDefault(a => a.Id == AccountId);
 
-                if (existingService != null)
+                if (account == null)
                 {
-                    ModelState.AddModelError(string.Empty, "A patient with the same ID already exists.");
+                    // If the account doesn't exist, add an error message and return the view
+                    ModelState.AddModelError("AccountId", "The provided Account ID does not exist.");
+                    return View(newPatient); // Return the view to show the error
                 }
 
+                // Set the PidNavigation to the found account
+                newPatient.PidNavigation = account;
+
+                // Assign the Pid (Patient ID) to match the Account ID
+                newPatient.Pid = account.Id; // This ensures Pid matches AccountId
+
+                // Now validate the model after assigning the Account
                 if (ModelState.IsValid)
                 {
-                    _context.Patients.Add(newPatient);
+                    _context.Patients.Add(newPatient); // Add new patient to the database
                     _context.SaveChanges();
                     return RedirectToAction("ManagePatient");
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception (you can use any logging framework or just debug here)
-                ModelState.AddModelError(string.Empty, "An error occurred while processing your request: " + ex.Message);
+                // Catch any errors and display them
+                ModelState.AddModelError(string.Empty, $"An error occurred: {ex.Message}");
             }
 
+            // If any errors, return the view with the current patient data and errors
             return View(newPatient);
         }
 
 
 
 
-        // sort giá đang có vấn đề chưa fix được
-        //public IActionResult ManageService(int page = 1, string sortPrice = "", string sortID = "", string searchId = "")
-        //{
-        //    int pageSize = 10;
 
-        //    var filterSpecialties = _context.Specialties
-        //                                     .Include(s => s.Doctors) // Bao gồm danh sách Doctors
-        //                                     .Where(s => s.SpecialtyId != null
-        //                                              && s.SpecialtyName != null
-        //                                              && s.LongDescription != null
-        //                                              && s.ShortDescription != null)
-        //                                     .AsQueryable();
 
-        //    if (!string.IsNullOrEmpty(searchId))
-        //    {
-        //        filterSpecialties = filterSpecialties.Where(s => s.SpecialtyId.Contains(searchId));
-        //    }
 
-        //    // Lọc theo giá
-        //    if (!string.IsNullOrEmpty(sortPrice))
-        //    {
-        //        switch (sortPrice)
-        //        {
-        //            case "1-200":
-        //                filterSpecialties = filterSpecialties.Where(s => s.Doctors.Any(d => d.Price >= 1 && d.Price <= 200));
-        //                break;
-        //            case "200-400":
-        //                filterSpecialties = filterSpecialties.Where(s => s.Doctors.Any(d => d.Price > 200 && d.Price <= 400));
-        //                break;
-        //            case "400-500":
-        //                filterSpecialties = filterSpecialties.Where(s => s.Doctors.Any(d => d.Price > 400));
-        //                break;
-        //        }
-        //    }
 
-        //    // Sắp xếp theo giá
-        //    if (!string.IsNullOrEmpty(sortPrice))
-        //    {
-        //        switch (sortPrice)
-        //        {
-        //            case "1-200":
-        //                filterSpecialties = filterSpecialties.OrderBy(s => s.Doctors.Min(d => d.Price));
-        //                break;
-        //            case "200-400":
-        //                filterSpecialties = filterSpecialties.OrderBy(s => s.Doctors.Min(d => d.Price));
-        //                break;
-        //            case "400-500":
-        //                filterSpecialties = filterSpecialties.OrderBy(s => s.Doctors.Min(d => d.Price));
-        //                break;
-        //        }
-        //    }
 
-        //    var serviceList = filterSpecialties.ToList();
-        //    // Sắp xếp theo SpecialtyId
-        //    if (!string.IsNullOrEmpty(sortID))
-        //    {
-        //        if (sortID == "Increase")
-        //            serviceList = serviceList.OrderBy(s => SortTid(s.SpecialtyId)).ToList();
-        //        else if (sortID == "Decrease")
-        //            serviceList = serviceList.OrderByDescending(s => SortTid(s.SpecialtyId)).ToList();
-        //    }
-
-        //    var totalService = serviceList.Count();
-
-        //    ViewBag.TotalPages = (int)Math.Ceiling(totalService / (double)pageSize);
-        //    ViewBag.CurrentPage = page;
-
-        //    var service = serviceList.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-        //    ViewBag.SortPrice = sortPrice;
-        //    ViewBag.SortID = sortID;
-
-        //    int startResult = (page - 1) * pageSize + 1;
-        //    int endResult = startResult + service.Count - 1;
-
-        //    ViewBag.StartResult = startResult;
-        //    ViewBag.EndResult = endResult;
-        //    ViewBag.TotalDoctors = totalService;
-
-        //    return View(service);
-        //}
-
-        public IActionResult ManageService(int page = 1, string sortPrice = "", string sortID = "", string sortName = "", string searchId = "")
+        public IActionResult ManageService(string sortColumn = "ID", string sortDirection = "asc", int page = 1, string sortPrice = "", string sortID = "", string sortName = "", string searchId = "")
         {
             int pageSize = 10;
 
@@ -495,6 +656,19 @@ namespace test2.Controllers
                                                       && s.ShortDescription != null)
                                              .AsQueryable();
 
+
+            switch (sortColumn)
+            {
+                case "Name":
+                    filterSpecialties = (sortDirection == "asc") ? filterSpecialties.OrderBy(s => s.SpecialtyName) : filterSpecialties.OrderByDescending(s => s.SpecialtyName);
+                    break;
+                case "Price":
+                    filterSpecialties = (sortDirection == "asc") ? filterSpecialties.OrderBy(s => s.Doctors.Min(d => d.Price)) : filterSpecialties.OrderByDescending(s => s.Doctors.Max(d => d.Price));
+                    break;
+                default:
+                    filterSpecialties = (sortDirection == "asc") ? filterSpecialties.OrderBy(s => s.SpecialtyId) : filterSpecialties.OrderByDescending(s => s.SpecialtyId);
+                    break;
+            }
             // Tìm kiếm theo ID
             if (!string.IsNullOrEmpty(searchId))
             {
@@ -559,6 +733,8 @@ namespace test2.Controllers
             ViewBag.SortPrice = sortPrice;
             ViewBag.SortID = sortID;
             ViewBag.SortName = sortName;
+            ViewBag.SortColumn = sortColumn;
+            ViewBag.SortDirection = sortDirection;
 
             // Kết quả hiển thị
             int startResult = (page - 1) * pageSize + 1;
@@ -570,6 +746,111 @@ namespace test2.Controllers
 
             return View(service);
         }
+
+        //public IActionResult ManageService(string sortColumn = "ID", string sortDirection = "asc", int page = 1, string sortPrice = "", string searchId = "")
+        //{
+        //    int pageSize = 10;
+
+        //    // Fetch and filter specialties from the database
+        //    var filterSpecialties = _context.Specialties
+        //                                    .Include(s => s.Doctors)
+        //                                    .Where(s => s.SpecialtyId != null
+        //                                             && s.SpecialtyName != null
+        //                                             && s.LongDescription != null
+        //                                             && s.ShortDescription != null)
+        //                                    .AsQueryable();
+
+        //    // Handle Sorting
+        //    switch (sortColumn)
+        //    {
+        //        case "Name":
+        //            filterSpecialties = (sortDirection == "asc") ? filterSpecialties.OrderBy(s => s.SpecialtyName) : filterSpecialties.OrderByDescending(s => s.SpecialtyName);
+        //            break;
+        //        case "Price":
+        //            filterSpecialties = (sortDirection == "asc") ? filterSpecialties.OrderBy(s => s.Doctors.Min(d => d.Price)) : filterSpecialties.OrderByDescending(s => s.Doctors.Max(d => d.Price));
+        //            break;
+        //        default:
+        //            filterSpecialties = (sortDirection == "asc") ? filterSpecialties.OrderBy(s => s.SpecialtyId) : filterSpecialties.OrderByDescending(s => s.SpecialtyId);
+        //            break;
+        //    }
+
+        //    // Search by ID (if applicable)
+        //    if (!string.IsNullOrEmpty(searchId))
+        //    {
+        //        filterSpecialties = filterSpecialties.Where(s => s.SpecialtyId.Contains(searchId));
+        //    }
+
+        //    // Apply sorting by price range (if applicable)
+        //    if (!string.IsNullOrEmpty(sortPrice))
+        //    {
+        //        switch (sortPrice)
+        //        {
+        //            case "1-200":
+        //                filterSpecialties = filterSpecialties.Where(s => s.Doctors.Any(d => d.Price >= 1 && d.Price <= 200));
+        //                break;
+        //            case "200-400":
+        //                filterSpecialties = filterSpecialties.Where(s => s.Doctors.Any(d => d.Price > 200 && d.Price <= 400));
+        //                break;
+        //            case "400-500":
+        //                filterSpecialties = filterSpecialties.Where(s => s.Doctors.Any(d => d.Price > 400));
+        //                break;
+        //        }
+        //    }
+
+        //    // Paginate the results
+        //    var serviceList = filterSpecialties.ToList();
+        //    var totalService = serviceList.Count();
+        //    var service = serviceList.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+        //    // Calculate pagination details
+        //    ViewBag.TotalPages = (int)Math.Ceiling(totalService / (double)pageSize);
+        //    ViewBag.CurrentPage = page;
+
+        //    // Pass sorting details back to the view
+        //    ViewBag.SortColumn = sortColumn;
+        //    ViewBag.SortDirection = sortDirection;
+        //    ViewBag.SortPrice = sortPrice;
+
+        //    // Results range for current page
+        //    int startResult = (page - 1) * pageSize + 1;
+        //    int endResult = startResult + service.Count - 1;
+
+        //    ViewBag.StartResult = startResult;
+        //    ViewBag.EndResult = endResult;
+        //    ViewBag.TotalServices = totalService;
+
+        //    return View(service);
+        //}
+        //public  IActionResult ManageService(string sortColumn = "ID", string sortDirection = "asc", string searchId = "", int page = 1)
+        //{
+        //    // Truy vấn ban đầu
+        //    var specialties = _context.Specialties.Include(s => s.Doctors).AsQueryable();
+
+        //    // Thực hiện lọc theo `searchId` nếu có
+        //    if (!string.IsNullOrEmpty(searchId))
+        //    {
+        //        specialties = specialties.Where(s => s.SpecialtyId.Contains(searchId));
+        //    }
+
+        //    // Thực hiện sắp xếp theo `sortColumn` và `sortDirection`
+        //    specialties = sortColumn switch
+        //    {
+        //        "Name" => sortDirection == "asc" ? specialties.OrderBy(s => s.SpecialtyName) : specialties.OrderByDescending(s => s.SpecialtyName),
+        //        "Price" => sortDirection == "asc" ? specialties.OrderBy(s => s.Doctors.Min(d => d.Price)) : specialties.OrderByDescending(s => s.Doctors.Max(d => d.Price)),
+        //        _ => sortDirection == "asc" ? specialties.OrderBy(s => s.SpecialtyId) : specialties.OrderByDescending(s => s.SpecialtyId)
+        //    };
+
+        //    // Thực hiện phân trang (pagination) và các xử lý khác nếu cần
+
+        //    // Lưu trữ trạng thái sort vào `ViewBag` để sử dụng ở view
+        //    ViewBag.SortColumn = sortColumn;
+        //    ViewBag.SortDirection = sortDirection;
+        //    ViewBag.SearchId = searchId;
+
+        //    // Trả về view với danh sách `specialties` đã được xử lý
+        //    return View( specialties.ToListAsync());
+        //}
+
 
         [HttpPost]
         public IActionResult DeleteService(string id)
