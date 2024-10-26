@@ -11,19 +11,11 @@ namespace test2.DAO
             _context = context;
         }
 
-        public List<Order> GetAppointmentsForFirstDoctor()
+        public List<Order> GetAppointmentsForDoctor(string doctorId)
         {
-            // Fetch the first doctor by their ID and retrieve their appointments
-            var firstDoctorId = _context.Doctors.FirstOrDefault()?.Did;
-
-            if (firstDoctorId == null)
-            {
-                return new List<Order>();
-            }
-
-            // Get appointments by joining related tables
+            // Lấy các cuộc hẹn cho bác sĩ dựa trên ID
             var appointments = _context.Orders
-                .Where(o => o.Option.Did == firstDoctorId)
+                .Where(o => o.Option.Did == doctorId)
                 .Select(o => new Order
                 {
                     Oid = o.Oid,
@@ -38,9 +30,8 @@ namespace test2.DAO
                 .ToList();
 
             return appointments;
-
-
         }
+
 
         // Lấy chi tiết cuộc hẹn theo Order Id (Oid)
         public Order GetAppointmentDetailById(string oid)

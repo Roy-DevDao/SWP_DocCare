@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using test2.DAO;
 using test2.Data;
+using test2.Models;
 
 namespace test2.Controllers
 {
@@ -15,32 +16,84 @@ namespace test2.Controllers
         private readonly AppointmentDAO _appointmentDAO;
         private readonly PatientDao _patientDao;
         private readonly FeedbackDAO _feedbackDao;
-        private const string DefaultDoctorId = "a4";
+        private readonly UserDAO _userDAO;
 
-        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct)
+        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO _userDAO)
         {
             _logger = logger;
             _appointmentDAO = appointmentDAO;
             _patientDao = patientDao;
             _feedbackDao = feedbackDao;
             _context = ct;
+            _userDAO = _userDAO;
         }
 
-        public IActionResult Feedback(string did = DefaultDoctorId, string? sortOrder = "asc")
+        public IActionResult Feedback(string id, string? sortOrder = "asc")
         {
             // Lấy danh sách phản hồi của bác sĩ dựa trên Did
-            var feedbacks = _feedbackDao.GetFeedbacksByDoctorId(did);
+            var feedbacks = _feedbackDao.GetFeedbacksByDoctorId(id);
             return View(feedbacks);// This will render /Views/Staff/AppoitmentList.cshtml
         }
 
-        public IActionResult ViewAppointment()
+        public IActionResult Profile(string id)
         {
-            // Get the appointments for the first doctor
-            var appointments = _appointmentDAO.GetAppointmentsForFirstDoctor();
+            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id); // Log giá trị oid
 
-            // Pass the appointments to the view
-            return View(appointments);
+            // Kiểm tra xem người dùng đã xác thực chưa
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Lấy thông tin bác sĩ từ cơ sở dữ liệu bằng id
+            var doctor = (from d in _context.Doctors
+                          join a in _context.Accounts on d.Did equals a.Id
+                          join s in _context.Specialties on d.SpecialtyId equals s.SpecialtyId // Join với bảng chuyên khoa
+                          where d.Did == id
+                          select new DoctorProfileViewModel
+                          {
+                              DId = d.Did,
+                              Username = a.Username,
+                              Email = a.Email,
+                              Role = a.Role,
+                              Status = a.Status,
+                              Name = d.Name,
+                              Phone = d.Phone,
+                              Gender = d.Gender,
+                              Dob = d.Dob,
+                              Position = d.Position,
+                              Specialty = s.SpecialtyName, // Lấy tên chuyên khoa từ bảng chuyên khoa
+                              Description = d.Description,
+                              Price = d.Price,
+                              DoctorImg = d.DoctorImg
+                          }).FirstOrDefault();
+            // Kiểm tra xem bác sĩ có tồn tại không
+            if (doctor == null)
+            {
+                _logger.LogWarning("No doctor found with ID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
+                return RedirectToAction("Login", "Home"); // Redirect về trang Login
+            }
+
+            // Trả về view cùng với model bác sĩ
+            return View(doctor);
         }
+
+
+        public IActionResult ViewAppointment(string id)
+        {
+            // Lấy các cuộc hẹn cho bác sĩ có ID được truyền vào
+            var appointment = _context.Orders
+             .Include(o => o.PidNavigation) // Đưa thông tin bệnh nhân
+             .FirstOrDefault(o => o.Oid == id); // Tìm kiếm cuộc hẹn theo Oid
+
+            if (appointment == null)
+            {
+                return NotFound(); // Trả về 404 nếu không tìm thấy
+            }
+
+            return View(appointment); // Trả về View với thông tin cuộc hẹn
+        }
+
         public IActionResult ViewAppointmentDetail(string appointmentDetail)
         {
             // Kiểm tra nếu không nhận được appointmentDetail
@@ -61,10 +114,10 @@ namespace test2.Controllers
             return View(appointment);
         }
 
-        public IActionResult ViewPatient(string did = DefaultDoctorId)
+        public IActionResult ViewPatient(string id)
         {
             // Lấy danh sách bệnh nhân của bác sĩ dựa trên Did được truyền vào
-            var patients = _patientDao.GetPatientsByDoctorId(did);
+            var patients = _patientDao.GetPatientsByDoctorId(id);
 
             // Truyền danh sách bệnh nhân xuống view
             return View(patients); // This will render /Views/Staff/ServiceAppointDetail.cshtml
@@ -100,6 +153,8 @@ namespace test2.Controllers
             // Trả về view với mô hình bệnh nhân
             return View(patient);
         }
+
+
 
 
 

@@ -85,15 +85,15 @@ namespace test2
             // Route for StaffController1
             app.MapControllerRoute(
                name: "staff",
-               pattern: "{controller=Staff}/{action=AppoitmentList}/{id?}");
+               pattern: "{controller=Staff}/{action=Profile}/{id?}");
 
             app.MapControllerRoute(
                name: "doctor",
-               pattern: "{controller=Doctor}/{action=VIewAppointment}/{id?}");
+               pattern: "{controller=Doctor}/{action=Profile}/{id?}");
 
             app.MapControllerRoute(
                name: "patient",
-               pattern: "{controller=Patient}/{action=AppointmentHistory}/{id?}");
+               pattern: "{controller=Patient}/{action=Profile}/{id?}");
 
             app.MapControllerRoute(
               name: "admin",

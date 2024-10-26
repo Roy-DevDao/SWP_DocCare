@@ -293,6 +293,7 @@ namespace test2.Controllers
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Email, email),
+            new Claim(ClaimTypes.Name,user.Id),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
 
@@ -310,7 +311,7 @@ namespace test2.Controllers
                 {
                     0 => Url.Action("Index", "Admin"), // Admin
                     1 => Url.Action("AppoitmentList", "Staff"), // Staff
-                    2 => Url.Action("ViewAppointment", "Doctor"), // Doctor
+                    2 => Url.Action("Profile", "Doctor"), // Doctor
                     3 => Url.Action("Index", "Home"), // Patient
                     _ => null // Nếu role không hợp lệ
                 };
@@ -369,8 +370,10 @@ namespace test2.Controllers
 
             var addClaim = new List<Claim>()
     {
+
         new Claim(ClaimTypes.Email, username),
-        new Claim(ClaimTypes.Role, user.Role.ToString()),
+		new Claim(ClaimTypes.Name,user.Id),
+		new Claim(ClaimTypes.Role, user.Role.ToString()),
     };
 
             var identity = new ClaimsIdentity(addClaim, "MyCookieAuth");

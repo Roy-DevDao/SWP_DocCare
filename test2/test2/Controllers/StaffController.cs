@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-using test2.Context;
 using test2.Data;
 using test2.Models;
 
@@ -50,7 +48,7 @@ namespace test2.Controllers
                     appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Option.DidNavigation.Name) : appointmentsQuery.OrderByDescending(o => o.Option.DidNavigation.Name);
                     break;
                 case "AppointmentDate":
-                    appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Option.DateExam) : appointmentsQuery.OrderByDescending(o => o.Option.DateExam);
+                    appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Option.DateWork) : appointmentsQuery.OrderByDescending(o => o.Option.DateWork);
                     break;
                 default:
                     appointmentsQuery = (sortDirection == "asc") ? appointmentsQuery.OrderBy(o => o.Oid) : appointmentsQuery.OrderByDescending(o => o.Oid);
@@ -63,7 +61,7 @@ namespace test2.Controllers
                 AppointmentId = o.Oid,
                 PatientName = o.PidNavigation.Name,
                 DoctorName = o.Option.DidNavigation.Name,
-                AppointmentDate = o.Option.DateExam ?? DateTime.MinValue,
+                //AppointmentDate = o.Option.DateExam ?? DateTime.MinValue,
                 Status = o.Status
             })
             .Skip((pageNumber - 1) * pageSize)
@@ -112,8 +110,8 @@ namespace test2.Controllers
                     DoctorSpecialization = o.Option.DidNavigation.Specialty.SpecialtyName,
                     DoctorImage = o.Option.DidNavigation.DoctorImg,
                     DoctorGender = o.Option.DidNavigation.Gender,
-                    AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
-                    AppointmentTime = o.Option.DateExam.HasValue ? o.Option.DateExam.Value.ToString("hh:mm tt") : "N/A",
+                    AppointmentDate = o.Option.DateWork.HasValue ? o.Option.DateWork.Value : DateTime.MinValue,
+                    AppointmentTime = o.Option.DateWork.HasValue ? o.Option.DateWork.Value.ToString("hh:mm tt") : "N/A",
                     Status = o.Status,
                     Fee = o.Option.DidNavigation.Price ?? 0,
                     SupportingStaff = "Nguyễn Văn C",  // Static for now
@@ -175,8 +173,8 @@ namespace test2.Controllers
                     break;
                 case "AppointmentDate":
                     appointmentsQuery = sortDirection == "asc" ?
-                        appointmentsQuery.OrderBy(o => o.Option.DateExam) :
-                        appointmentsQuery.OrderByDescending(o => o.Option.DateExam);
+                        appointmentsQuery.OrderBy(o => o.Option.DateWork) :
+                        appointmentsQuery.OrderByDescending(o => o.Option.DateWork);
                     break;
                 case "DoctorName":
                     appointmentsQuery = sortDirection == "asc" ?
@@ -197,7 +195,7 @@ namespace test2.Controllers
                 PatientName = o.PidNavigation.Name,
                 DoctorName = o.Option.DidNavigation.Name,
                 SpecialtyName = o.Option.DidNavigation.Specialty.SpecialtyName,
-                AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
+                //AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
                 Status = o.Status
             })
             .Skip((pageNumber - 1) * pageSize)
@@ -239,8 +237,8 @@ namespace test2.Controllers
                     PatientImage = o.PidNavigation.PatientImg,
                     SpecialtyName = o.Option.DidNavigation.Specialty.SpecialtyName, // Tên chuyên khoa
                     SpecialtyImage = o.Option.DidNavigation.Specialty.SpecialtyImg, // Hình ảnh chuyên khoa
-                    AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
-                    AppointmentTime = o.Option.DateExam.HasValue ? o.Option.DateExam.Value.ToString("hh:mm tt") : "N/A",
+                    AppointmentDate = o.Option.DateWork.HasValue ? o.Option.DateWork.Value : DateTime.MinValue,
+                    AppointmentTime = o.Option.DateWork.HasValue ? o.Option.DateWork.Value.ToString("hh:mm tt") : "N/A",
                     Status = o.Status,
                     Fee = o.Option.DidNavigation.Price ?? 0,
                     SupportingStaff = "Nguyễn Văn C", // Tên nhân viên hỗ trợ, có thể thay đổi sau

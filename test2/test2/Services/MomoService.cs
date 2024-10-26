@@ -59,11 +59,13 @@ namespace test2.Services
             var amount = collection.First(s => s.Key == "amount").Value;
             var orderInfo = collection.First(s => s.Key == "orderInfo").Value;
             var orderId = collection.First(s => s.Key == "orderId").Value;
+            var responseCode = collection.FirstOrDefault(s => s.Key == "responseCode").Value; // Thêm dòng này để lấy mã trạng thái
             return new MomoExecuteResponseModel()
             {
                 Amount = amount,
                 OrderId = orderId,
-                OrderInfo = orderInfo
+                OrderInfo = orderInfo,
+                ResponseCode = responseCode
             };
         }
 

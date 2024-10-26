@@ -44,10 +44,10 @@
             transition: opacity 0.3s, width 0.3s;
         }
 
-        .sidebar-text{
-            display:flex;
+        .sidebar-text {
+            display: flex;
             flex-direction: row;
-            flex-wrap:nowrap;
+            flex-wrap: nowrap;
         }
     </style>
 </head>
@@ -56,7 +56,7 @@
     <!-- Sidebar -->
     <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 fixed top-0 left-0 h-full transition-all duration-300">
         <div id="logo" class="flex items-center h-16 px-6 bg-white border-b transition-all duration-300">
-            <a href="AppoitmentList">
+            <a asp-controller="Staff" asp-action="AppoitmentList">
                 <img src="~/assets/images/medical.png" height="80" width="120" class="logo--mode" alt="">
             </a>
         </div>
@@ -76,28 +76,11 @@
                     <a asp-controller="Staff" asp-action="AppoitmentList" class="block py-2 text-gray-700 hover:text-gray-900">
                         + Appointment List
                     </a>
-                    
+
                 </div>
             </div>
 
             <!-- Manage Services -->
-            <div>
-                <button id="serviceToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
-                    <div class="flex items-center">
-                        <i class="fas fa-concierge-bell text-lg"></i>
-                        <span class="ml-3 sidebar-text">Service </span>
-                    </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="serviceIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div id="serviceSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
-                    <a asp-controller="Staff" asp-action="ServiceAppointList" class="block py-2 text-gray-700 hover:text-gray-900">
-                        + Service Appointment List
-                    </a>
-                </div>
-            </div>
-
             <div>
                 <button id="serviceToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
@@ -127,9 +110,26 @@
                     </svg>
                 </button>
                 <div id="doctorSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
-                    <a asp-controller="Staff" asp-action="Schedule" class="block py-2 text-gray-700 hover:text-gray-900">+ Scheduler for doctor</a>
-                    <a asp-controller="Staff" asp-action="Conta11ctList" class="block py-2 text-gray-700 hover:text-gray-900">
+                    <a asp-controller="Staff" asp-action="ContactList" class="block py-2 text-gray-700 hover:text-gray-900">
                         + Contact List
+                    </a>
+                </div>
+            </div>
+
+            <!-- Manage schedule -->
+            <div>
+                <button id="scheduleTongle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                    <div class="flex items-center">
+                        <i class="fas fa-calendar-alt text-lg"></i>
+                        <span class="ml-3 sidebar-text">Schedule</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="scheduleIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="scheduleSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
+                    <a asp-controller="Staff" asp-action="Schedule" class="block py-2 text-gray-700 hover:text-gray-900">
+                        + Set Schedule
                     </a>
                 </div>
             </div>
@@ -189,6 +189,24 @@
             @RenderBody()
 
         </main>
+        <footer class="bg-white shadow py-3">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="text-sm-start text-center">
+                            <p class="mb-0 text-muted">
+                                <script>
+                                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                                    const today = new Date().toLocaleDateString('vi-VN', options);
+                                    document.write(today);
+                                </script>
+                                © DocCare.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
     @await RenderSectionAsync("Scripts", required: false)
@@ -199,7 +217,8 @@
         const toggles = [
             { button: 'dashboardToggle', submenu: 'dashboardSubmenu', icon: 'dashboardIcon' },
             { button: 'serviceToggle', submenu: 'serviceSubmenu', icon: 'serviceIcon' },
-            { button: 'doctorToggle', submenu: 'doctorSubmenu', icon: 'doctorIcon' }
+            { button: 'doctorToggle', submenu: 'doctorSubmenu', icon: 'doctorIcon' },
+            { button: 'scheduleTongle', submenu: 'scheduleSubmenu', icon: 'scheduleIcon' }
         ];
 
         // Lặp qua các nút và submenu
@@ -217,7 +236,7 @@
         });
 
         // Danh sách ID của tất cả các submenu
-        const submenuIds = ['dashboardSubmenu', 'serviceSubmenu', 'doctorSubmenu'];
+        const submenuIds = ['dashboardSubmenu', 'serviceSubmenu', 'doctorSubmenu', 'scheduleSubmenu'];
 
         // Toggle Sidebar
         const sidebarToggle = document.getElementById('sidebarToggle');
@@ -272,5 +291,6 @@
 
 </body>
 </html>
+
 
 

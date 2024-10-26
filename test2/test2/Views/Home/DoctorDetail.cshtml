@@ -102,7 +102,7 @@
                             </a>
                         </div>
                         <div class="clinic-booking">
-                            <a class="apt-btn" href="javascript:void(0)" onclick="bookNow('@Model.DoctorId')">Book Appointment</a>
+                            <a class="apt-btn" asp-controller="Patient" asp-action="BookingAppointment" asp-route-doctorid="@Model.DoctorId">Book Appointment</a>
                         </div>
                     </div>
                 </div>
