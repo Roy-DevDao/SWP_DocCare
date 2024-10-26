@@ -211,6 +211,7 @@ namespace test2.Controllers
         public IActionResult Login()
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
+            
             if (isAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -227,18 +228,20 @@ namespace test2.Controllers
             }
 
             var user = dc.Accounts.Where(dc => dc.Email == email).FirstOrDefault();
+            Debug.WriteLine($"-------------------- {user.Id}");
             if (user != null && user.Password == password)
             {
                 var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Email, email),
+            new Claim(ClaimTypes.Name, user.Id),
             new Claim(ClaimTypes.Role, user.Role.ToString())
         };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "MyCookieAuth");
                 var authProperties = new AuthenticationProperties
                 {
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1440),
                     IsPersistent = true
                 };
 

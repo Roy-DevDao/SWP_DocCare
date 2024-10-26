@@ -20,6 +20,4 @@ public partial class Account
     public virtual Doctor? Doctor { get; set; }
 
     public virtual Patient? Patient { get; set; }
-
-    public virtual Staff? Staff { get; set; }
 }
