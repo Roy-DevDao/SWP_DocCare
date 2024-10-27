@@ -53,6 +53,7 @@ namespace test2
             builder.Services.AddScoped<AppointmentDAO>();
             builder.Services.AddScoped<FeedbackDAO>();
             builder.Services.AddScoped<UserDAO>();
+            builder.Services.AddScoped<StaffDAO>();
 
 
             var app = builder.Build();

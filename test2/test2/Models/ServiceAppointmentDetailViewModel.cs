@@ -1,4 +1,6 @@
-﻿namespace test2.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace test2.Models
 {
     public class ServiceAppointmentDetailViewModel
     {
@@ -16,6 +18,13 @@
         public double Fee { get; set; }
         public string SupportingStaff { get; set; }
         public string ConsultationInfo { get; set; }
+        public List<SelectListItem> StatusList { get; set; } = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "Completed", Text = "Completed" },
+            new SelectListItem { Value = "Assigned", Text = "Assigned" },
+            new SelectListItem { Value = "Pending", Text = "Pending" },
+            new SelectListItem { Value = "Canceled", Text = "Canceled" }
+        };
     }
 }
 

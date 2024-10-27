@@ -117,43 +117,42 @@
             </div>
         </div>
 
+        <!-- Form Cập Nhật Trạng Thái Cuộc Hẹn -->
         <div class="card border-0 shadow overflow-hidden mt-4">
             <div class="p-4 border-bottom">
                 <h5 class="mb-0">Update Information</h5>
             </div>
-            <form action="appointmentmanage?action=update&id=1&staff=nguyenvanc" method="POST">
-                <div class="tab-content p-4" id="pills-tabContent">
-                    <div class="col-lg-12">
-                        <div class="mb-3">
-                            <label class="form-label">Consultation Fee</label>
-                            <input name="fee" id="number" type="number" class="form-control" value="@Model.Fee">
-                        </div>
-                    </div>
-                    <div class="tab-content p-4" id="pills-tabContent">
+            <div class="tab-content p-4" id="pills-tabContent">
+                <!-- Form Update Status -->              
+                <form asp-controller="Staff" asp-action="UpdateAppointmentStatus" method="post">
+                    <input type="hidden" name="appointmentId" value="@Model.AppointmentId" />
+                    <div class="tab-content p-4">
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select name="status" class="form-select" aria-label="Default select example">
-                                    <option value="Complete" selected>Complete</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Cancelled">Cancelled</option>
-                                </select>
+                                <select asp-for="Status" asp-items="Model.StatusList" class="form-control" id="newStatus" name="newStatus"></select>
                             </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label">Notes</label>
-                                <textarea class="form-control" name="note" rows="3">Notes here...</textarea>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <button type="submit" name="action" value="confirm" class="btn btn-primary">Confirm</button>
-                            </div>
+                            <button type="submit" class="btn btn-primary">Update Status</button>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+
+
+                <!-- Hiển thị thông báo từ TempData -->
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-success mt-3">
+                        @TempData["Message"]
+                    </div>
+                }
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger mt-3">
+                        @TempData["Error"]
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>

@@ -1,4 +1,6 @@
-﻿namespace test2.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace test2.Models
 {
     public class AppointmentDetailViewModel
     {
@@ -20,6 +22,14 @@
         public string SupportingStaff { get; set; } // Nhân viên hỗ trợ
         public string ConsultationInfo { get; set; } // Thông tin triệu chứng hoặc vấn đề khám
         public string Notes { get; set; } // Ghi chú bổ sung
+
+        // Danh sách trạng thái cho dropdown
+        public List<SelectListItem> StatusList { get; set; } = new List<SelectListItem>
+        {
+            new SelectListItem { Value = "Completed", Text = "Completed" },
+            new SelectListItem { Value = "Pending", Text = "Pending" },
+            new SelectListItem { Value = "Canceled", Text = "Canceled" }
+        };
     }
 
 
