@@ -361,6 +361,58 @@ namespace test2.Controllers
             else return Json(new { error = "Data is invalid" });
         }
 
+	
+		[HttpPost]
+		public async Task<JsonResult> SendMessage(string message, string doctorid, int star)
+		{
+			Random random = new Random();
+			if (User.Identity.Name != null)
+			{
+				Patient patient = dc.Patients.FirstOrDefault(p => p.Pid == User.Identity.Name);
+				if (patient != null)
+				{
+					for (int i = 0; i < 10; i++)
+					{
+						int buff = random.Next(1000000, 9999999);
+						string fbid = "f" + buff;
+						if (!dc.Feedbacks.Any(f => f.FeedbackId == fbid))
+						{
+							Feedback feedback = new Feedback
+							{
+								FeedbackId = fbid,
+								Did = doctorid,
+								Star = star,
+								Pid = User.Identity.Name,
+								Description = message,
+								DateCmt =  DateTime.Now,
+								Name = patient.Name,
+
+							};
+							try
+							{
+								dc.Feedbacks.Add(feedback);
+								await dc.SaveChangesAsync();
+								return Json(new { success = true , name = feedback.Name, description = feedback.Description, star = feedback.Star, ngay = feedback.DateCmt.ToString(), image = patient.PatientImg});
+							}
+							catch (Exception ex)
+							{
+								return Json(new { error = "save feedback fail" });
+							}
+
+						    
+				        }
+					}
+					
+				}
+
+
+			}
+
+
+
+			return Json(new { error = "user invalid" });  
+		}
+
 
         public IActionResult BookingService()
         {
