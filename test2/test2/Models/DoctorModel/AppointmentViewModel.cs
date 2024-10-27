@@ -9,8 +9,7 @@
         public string? Status { get; set; }
 
         // Thêm thông tin về bác sĩ
-        public string? DId { get; set; } // ID bác sĩ
-        public string? DoctorName { get; set; } // Tên bác sĩ
-        public string? DoctorImg { get; set; } // Hình ảnh bác sĩ
+
+        public BaseViewModel basevm { get; set; } = new BaseViewModel();
     }
 }

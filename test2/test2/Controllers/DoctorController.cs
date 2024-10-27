@@ -70,23 +70,26 @@ namespace test2.Controllers
                           join a in _context.Accounts on d.Did equals a.Id
                           join s in _context.Specialties on d.SpecialtyId equals s.SpecialtyId // Join với bảng chuyên khoa
                           where d.Did == id
-                          select new DoctorProfileViewModel
+                          select new BaseViewModel
                           {
-                              DId = d.Did,
-                              Username = a.Username,
-                              Email = a.Email,
-                              Role = a.Role,
-                              Status = a.Status,
+                              DId = d.Did,                            
                               Name = d.Name,
-                              Phone = d.Phone,
-                              Gender = d.Gender,
-                              Dob = d.Dob,
-                              Position = d.Position,
-                              Specialty = s.SpecialtyName, // Lấy tên chuyên khoa từ bảng chuyên khoa
-                              Description = d.Description,
-                              Price = d.Price,
-                              DoctorImg = d.DoctorImg
-                          }).FirstOrDefault();
+                              DoctorImg = d.DoctorImg,
+                              doctorProfile = new DoctorProfileViewModel
+                              {
+                                  Username = a.Username,
+                                  Email = a.Email,
+                                  Role = a.Role,
+                                  Status = a.Status,
+                                  Phone = d.Phone,
+                                  Gender = d.Gender,
+                                  Dob = d.Dob,
+                                  Position = d.Position,
+                                  Specialty = s.SpecialtyName, // Lấy tên chuyên khoa từ bảng chuyên khoa
+                                  Description = d.Description,
+                                  Price = d.Price,
+                              }
+                          }).ToList();
 
             // Kiểm tra xem bác sĩ có tồn tại không
             if (doctor == null)

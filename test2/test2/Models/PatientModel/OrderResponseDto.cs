@@ -1,4 +1,4 @@
-﻿namespace test2.Models
+﻿namespace test2.Models.PatientModel
 {
     public class OrderResponseDto
     {

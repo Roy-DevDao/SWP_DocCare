@@ -13,12 +13,12 @@ namespace test2.DAO
             _context = context;
         }
 
-        public List<AppointmentViewModel> GetDoctorAppointments(string doctorId)
+        public List<BaseViewModel> GetDoctorAppointments(string doctorId)
         {
             // Kiểm tra đầu vào doctorId để ngăn chặn các cuộc gọi cơ sở dữ liệu không cần thiết
             if (string.IsNullOrEmpty(doctorId))
             {
-                return new List<AppointmentViewModel>();
+                return new List<BaseViewModel>();
             }
 
             // Lấy danh sách cuộc hẹn cho bác sĩ
@@ -27,16 +27,19 @@ namespace test2.DAO
                 .Include(option => option.Orders)           // Bao gồm thông tin đơn hàng
                     .ThenInclude(order => order.PidNavigation) // Lấy thông tin bệnh nhân
                 .Include(option => option.DidNavigation)    // Lấy thông tin bác sĩ
-                .SelectMany(option => option.Orders, (option, order) => new AppointmentViewModel
-                {
-                    AppointmentId = order.Oid,
-                    PatientName = order.PidNavigation != null ? order.PidNavigation.Name : null, // Kiểm tra null
-                    PatientImage = order.PidNavigation != null ? order.PidNavigation.PatientImg : null,
-                    DateOrder = order.DateOrder,
-                    Status = order.Status,
+                .SelectMany(option => option.Orders, (option, order) => new BaseViewModel
+                {                    
                     DId = option.Did,                // Thêm ID bác sĩ
-                    DoctorName = option.DidNavigation != null ? option.DidNavigation.Name : null, // Kiểm tra null
-                    DoctorImg = option.DidNavigation != null ? option.DidNavigation.DoctorImg : null // Kiểm tra null
+                    Name = option.DidNavigation != null ? option.DidNavigation.Name : null, // Kiểm tra null
+                    DoctorImg = option.DidNavigation != null ? option.DidNavigation.DoctorImg : null, // Kiểm tra null
+                    appointmentlist = new AppointmentViewModel
+                    {
+                        AppointmentId = order.Oid,
+                        PatientName = order.PidNavigation != null ? order.PidNavigation.Name : null, // Kiểm tra null
+                        PatientImage = order.PidNavigation != null ? order.PidNavigation.PatientImg : null,
+                        DateOrder = order.DateOrder,
+                        Status = order.Status
+                    }
                 })
                 .ToList();
         }

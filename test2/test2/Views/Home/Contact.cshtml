@@ -1,17 +1,14 @@
-﻿
-
-@{
+﻿@{
     Layout = "Layout_new";
     ViewData["Title"] = "Contact";
 }
 
 <style>
     .mt-100 {
-    margin-top: 50px;
-}
-
-
+        margin-top: 50px;
+    }
 </style>
+
 <div class="breadcrumb-bar">
     <div class="container-fluid">
         <div class="row align-items-center">
@@ -28,7 +25,6 @@
     </div>
 </div>
 
-
 <section class="mt-70 mt-60">
     <div class="container">
         <div class="row">
@@ -42,8 +38,7 @@
                         <a href="tel:0987367341" class="link">0987367341</a>
                     </div>
                 </div>
-            </div><!--end col-->
-
+            </div>
             <div class="col-lg-4 col-md-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <div class="card features feature-primary text-center border-0">
                     <div class="icon text-center rounded-md mx-auto">
@@ -54,8 +49,7 @@
                         <a href="mailto:baook01234@gmail.com" class="link">baook01234@gmail.com</a>
                     </div>
                 </div>
-            </div><!--end col-->
-
+            </div>
             <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
                 <div class="card features feature-primary text-center border-0">
                     <div class="icon text-center rounded-md mx-auto">
@@ -83,49 +77,72 @@
             <div class="col-lg-7 col-md-6 mt-4 pt-2 mt-sm-0 pt-sm-0">
                 <div class="custom-form rounded shadow p-4">
                     <h5 class="mb-4">Give your information</h5>
-                    <form method="post" name="myForm" onsubmit="return validateForm()">
-                        <p id="error-msg"></p>
-                        <div id="simple-msg"></div>
+
+                    <!-- Thông báo thành công hoặc thất bại -->
+                    @if (!string.IsNullOrEmpty(ViewBag.Message))
+                    {
+                        <div id="alert-success"  class="alert alert-success">@ViewBag.Message</div>
+                    }
+                    else if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                    {
+                        <div id="alert-failure" class="alert alert-danger">@ViewBag.ErrorMessage</div>
+                    }
+
+                    <form method="post" asp-action="Contact">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Your Name <span class="text-danger">*</span></label>
-                                    <input name="name" id="name" type="text" class="form-control border rounded">
+                                    <input name="Name" type="text" class="form-control border rounded" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input name="email" id="email" type="email" class="form-control border rounded">
+                                    <input name="Email" type="email" class="form-control border rounded" required>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label">Tittle</label>
-                                    <input name="subject" id="subject" class="form-control border rounded">
+                                    <label class="form-label">Title</label>
+                                    <input name="Title" type="text" class="form-control border rounded" required>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <div class="mb-3">
                                     <label class="form-label">Description <span class="text-danger">*</span></label>
-                                    <textarea name="comments" id="comments" rows="4" class="form-control border rounded"></textarea>
+                                    <textarea name="Description" rows="4" class="form-control border rounded" required></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <button type="submit" id="submit" name="send" class="btn btn-primary">Send</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
-        <!-- Chèn khu vực hiển thị bản đồ tại đây -->
-        
     </div>
 </section>
+<script>
+        window.onload = function() {
+        var successAlert = document.getElementById("alert-success");
+        var failureAlert = document.getElementById("alert-failure");
+
+        if (successAlert) {
+            setTimeout(function() {
+                successAlert.style.display = "none";
+            }, 2000); // 2 giây
+        }
+        if (failureAlert) {
+            setTimeout(function() {
+                failureAlert.style.display = "none";
+            }, 2000); // 2 giây
+        }
+    };
+</script>

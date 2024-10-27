@@ -5,6 +5,7 @@ using System.Security.Claims;
 using test2.DAO;
 using test2.Data;
 using test2.Models;
+using test2.Models.StaffModel;
 
 namespace test2.Controllers
 {
@@ -14,12 +15,14 @@ namespace test2.Controllers
 
         private readonly ILogger<StaffController> _logger;
         private readonly UserDAO _userDAO;
+        private readonly StaffDAO staffDAO;
 
-        public StaffController(ILogger<StaffController> logger, DocCareContext dc, UserDAO userDAO)
+        public StaffController(ILogger<StaffController> logger, DocCareContext dc, UserDAO userDAO, StaffDAO staffDAO)
         {
             _logger = logger;
             this.dc = dc;
             _userDAO = userDAO;
+            this.staffDAO = staffDAO;
         }
         //-------------------------------------------------------------------------------------------------------------
 
@@ -290,13 +293,126 @@ namespace test2.Controllers
 
         //-------------------------------------------------------------------------------------------------------------
 
-        public IActionResult Schedule()
+        public IActionResult Schedule(string doctorId, DateTime? selectedDate)
         {
+            // Nếu không có ngày được chọn, mặc định là tuần từ 07/11/2024 đến 13/11/2024
+            DateTime startDate = selectedDate.HasValue ? selectedDate.Value : new DateTime(2024, 11, 7);
+            DateTime endDate = startDate.AddDays(6); // Lấy tuần từ ngày đã chọn
 
+            // Lấy lịch làm việc của bác sĩ theo khoảng thời gian đã chọn
+            var schedules = dc.Options
+                .Where(opt => opt.Did == doctorId && opt.DateWork >= startDate && opt.DateWork <= endDate)
+                .ToList();
+
+            // Lấy danh sách các bác sĩ để hiển thị trong dropdown
             var doctors = dc.Doctors.ToList();
+
+            // Truyền dữ liệu bác sĩ và lịch làm việc sang view
+            ViewBag.Schedules = schedules;
+            ViewBag.SelectedDoctor = doctorId; // Để biết bác sĩ nào đã được chọn
+            ViewBag.SelectedDate = startDate;  // Để hiển thị lại ngày đã chọn
 
             return View(doctors);
         }
+
+        [HttpPost]
+        public IActionResult UpdateSchedule([FromBody] List<ScheduleUpdateModel> scheduleUpdates)
+        {
+            try
+            {
+                if (scheduleUpdates == null || !scheduleUpdates.Any())
+                {
+                    return Json(new { success = false, message = "No schedule data received" });
+                }
+
+                foreach (var update in scheduleUpdates)
+                {
+                    Console.WriteLine($"DoctorId: {update.DoctorId}, Date: {update.Date}, Time: {update.Time}"); // Log incoming data for validation
+
+                    // Convert time string to TimeSpan
+                    if (!TimeSpan.TryParse(update.Time, out TimeSpan parsedTime))
+                    {
+                        return Json(new { success = false, message = $"Invalid time format: {update.Time}" });
+                    }
+
+                    var updateDateTime = update.Date.Add(parsedTime);
+                    var schedule = dc.Options.FirstOrDefault(opt =>
+                        opt.Did == update.DoctorId &&
+                        opt.DateWork.HasValue &&
+                        opt.DateWork.Value == updateDateTime);
+
+                    if (schedule != null)
+                    {
+                        // Nếu trạng thái là "Busy" chuyển sang "border-gray", thì xóa đối tượng Option khỏi database
+                        if (schedule.Status == "Busy")
+                        {
+                            dc.Options.Remove(schedule);
+                        }
+                        else
+                        {
+                            schedule.Status = "Busy";
+                        }
+                    }
+                    else
+                    {
+                        // If no schedule exists, create a new one with status "Busy"
+                        dc.Options.Add(new Option
+                        {
+                            OptionId = Guid.NewGuid().ToString(),
+                            Did = update.DoctorId,
+                            DateWork = updateDateTime,
+                            Status = "Busy"
+                        });
+                    }
+                }
+
+                dc.SaveChanges();
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex); // Log detailed error for diagnosis
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAppointmentStatus(string appointmentId, string newStatus = "Fail")
+        {
+            _logger.LogInformation($"Attempting to update appointment status. Appointment ID: {appointmentId}, New Status: {newStatus}");
+
+            bool isUpdated = staffDAO.UpdateAppointmentStatus(appointmentId, newStatus);
+            if (isUpdated)
+            {
+                TempData["Message"] = "Appointment status updated successfully.";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to update appointment status.";
+            }
+            return RedirectToAction("AppointmentDetail", new { id = appointmentId });
+        }
+
+
+        // Cập nhật trạng thái từ form ở trang ServiceAppointDetail
+        [HttpPost]
+        public IActionResult ServiceAppointDetailUpdate(string appointmentId, string newStatus)
+        {
+            _logger.LogInformation($"Attempting to update appointment status. Appointment ID: {appointmentId}, New Status: {newStatus}");
+
+            bool isUpdated = staffDAO.UpdateAppointmentStatus(appointmentId, newStatus);
+            if (isUpdated)
+            {
+                TempData["Message"] = "Appointment status updated successfully.";
+            }
+            else
+            {
+                TempData["Error"] = "Failed to update appointment status.";
+            }
+            return RedirectToAction("ServiceAppointDetail", new { id = appointmentId });
+        }
+
+
 
 
 
@@ -338,6 +454,21 @@ namespace test2.Controllers
             ViewBag.Status = status; // Giữ lại trạng thái lọc để hiển thị
 
             return View(contacts);
+        }
+
+        public IActionResult ResolveContact(string id)
+        {
+            // Tìm liên hệ theo ID
+            var contact = dc.Contacts.FirstOrDefault(c => c.ContactId == id);
+            if (contact != null && contact.Status == "Pending")
+            {
+                // Cập nhật trạng thái thành "resolved"
+                contact.Status = "Resolved";
+                dc.SaveChanges(); // Lưu thay đổi vào database
+            }
+
+            // Quay trở lại trang ContactList
+            return RedirectToAction("ContactList");
         }
 
         //-------------------------------------------------------------------------------------------------------------

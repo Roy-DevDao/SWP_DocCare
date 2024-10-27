@@ -3,7 +3,6 @@
     public class DoctorProfileViewModel
     {
         // ID của bác sĩ, không được phép null
-        public string DId { get; set; } = null!;
 
         // Thông tin tài khoản bác sĩ
         public string? Username { get; set; }
@@ -12,7 +11,6 @@
         public bool? Status { get; set; }
 
         // Thông tin cá nhân của bác sĩ
-        public string? Name { get; set; }
         public string? Phone { get; set; }
         public string? Gender { get; set; }
         public DateOnly? Dob { get; set; } // Giữ nguyên kiểu này
@@ -30,7 +28,7 @@
         public double? Price { get; set; } // Sử dụng double? nếu giá có thể null
 
         // Hình ảnh của bác sĩ
-        public string? DoctorImg { get; set; }
+        public BaseViewModel basevm { get; set; } = new BaseViewModel();
     }
 
 }

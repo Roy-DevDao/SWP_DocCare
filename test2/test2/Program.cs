@@ -14,6 +14,12 @@ namespace test2
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddScoped<EmailService>();
+            builder.Services.AddScoped<TokenService>();
             builder.Services.AddDbContext<DocCareContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DocCare"));
@@ -44,6 +50,7 @@ namespace test2
                 googleOptions.CallbackPath = new PathString("/signin-google");
 
             });
+            builder.Services.AddTransient<CloudinaryService>();
 
             builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
             builder.Services.AddScoped<IMomoService, MomoService>();
@@ -57,6 +64,7 @@ namespace test2
             builder.Services.AddScoped<AppointmentDAO>();
             builder.Services.AddScoped<FeedbackDAO>();
             builder.Services.AddScoped<UserDAO>();
+            builder.Services.AddScoped<StaffDAO>();
 
 
             var app = builder.Build();

@@ -2,27 +2,12 @@
 
 @{
     ViewData["Title"] = "Kết Quả Thanh Toán";
+    
 }
 
 <div class="text-center">
     <h1 class="display-4">Kết Quả Thanh Toán</h1>
 
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success">
-            @TempData["SuccessMessage"]
-        </div>
-    }
-    else if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger">
-            @TempData["ErrorMessage"]
-        </div>
-    }
-    else
-    {
-        <h2>Không có thông tin kết quả thanh toán.</h2>
-    }
 
     @if (TempData["SuccessMessage"] != null)
     {
@@ -33,7 +18,11 @@
             <p>Order Info: <strong>@Model.OrderInfo</strong></p>
         </div>
     }
+    else
+    {
+        <h2>Thanh Toán Thất Bại</h2>
     }
+    
 </div>
 
 <script>

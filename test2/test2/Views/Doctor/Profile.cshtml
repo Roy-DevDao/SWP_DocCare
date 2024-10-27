@@ -1,4 +1,5 @@
-﻿@model test2.Models.DoctorModel.DoctorProfileViewModel
+﻿@model List<test2.Models.DoctorModel.BaseViewModel>
+
 
 @{
     ViewBag.Title = "Sửa trang cá nhân bác sĩ";
@@ -118,54 +119,54 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_name">Tên</label>
-                                    <input name="FullName" class="form-control" type="text" required value="@Model.Name">
+                                    <input name="FullName" class="form-control" type="text" required value="@Model.First().Name">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_gender">Giới tính</label>
                                     <select name="Gender" class="form-control" required>
                                         <option value="">---- Lựa chọn ----</option>
-                                        <option value="male" selected="@(Model.Gender == "male")">Nam</option>
-                                        <option value="female" selected="@(Model.Gender == "female")">Nữ</option>
+                                        <option value="male" selected="@(Model.First().doctorProfile.Gender == "male")">Nam</option>
+                                        <option value="female" selected="@(Model.First().doctorProfile.Gender == "female")">Nữ</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_username">Tên đăng nhập</label>
-                                    <input id="form_username" name="Username" class="form-control" type="text" required disabled value="@Model.Username">
+                                    <input id="form_username" name="Username" class="form-control" type="text" required disabled value="@Model.First().doctorProfile.Username">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Điện thoại</label>
-                                    <input name="Phone" class="form-control" type="text" value="@Model.Phone" disabled>
+                                    <input name="Phone" class="form-control" type="text" value="@Model.First().doctorProfile.Phone" disabled>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_email">Email</label>
-                                    <input id="form_email" name="Email" class="form-control" type="email" value="@Model.Email" disabled>
+                                    <input id="form_email" name="Email" class="form-control" type="email" value="@Model.First().doctorProfile.Email" disabled>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_date_of_birth">Ngày sinh</label>
-                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.Dob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
+                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.First().doctorProfile.Dob?.ToDateTime(new TimeOnly()).ToString(" yyyy-MM-dd")">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_position">Chức vụ</label>
-                                    <input name="Position" class="form-control" type="text" value="@Model.Position">
+                                    <input name="Position" class="form-control" type="text" value="@Model.First().doctorProfile.Position">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_price">Giá khám</label>
-                                    <input name="Price" class="form-control" type="number" value="@Model.Price">
+                                    <input name="Price" class="form-control" type="number" value="@Model.First().doctorProfile.Price">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="form_description">Mô tả</label>
-                                <textarea name="Description" class="form-control" rows="4">@Model.Description</textarea>
+                                <textarea name="Description" class="form-control" rows="4">@Model.First().doctorProfile.Description</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="form_specialty">Chuyên khoa</label>
-                                <input name="Specialty" class="form-control" type="text" value="@Model.Specialty" disabled>
+                                <input name="Specialty" class="form-control" type="text" value="@Model.First().doctorProfile.Specialty" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="file">Ảnh đại diện</label>

@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model test2.Models.Order.OrderInfoModel
+@{
     Layout = "Layout_new";
     ViewData["Title"] = "Home Page";
     var postUrl = "tich-hop-thanh-toan-momo-voi-asp-net-core-7d5e4hP";
@@ -108,7 +110,7 @@
                        id="FullName"
                        name="FullName"
                        type="text"
-                       value="ProG Coder">
+                       value="@Model.FullName">
             </div>
             <br />
             <div class="form-group">
@@ -117,7 +119,7 @@
                        id="Amount"
                        name="Amount"
                        type="text"
-                       value="10000">
+                       value="@Model.Amount">
             </div>
             <br />
             <div class="form-group">
@@ -126,7 +128,7 @@
                           cols="20"
                           id="OrderInfo"
                           name="OrderInfo"
-                          rows="2">Thanh toán tại ProG Coder</textarea>
+                          rows="2">@Model.OrderInfo</textarea>
             </div>
             <br />
 

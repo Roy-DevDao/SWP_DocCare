@@ -1,4 +1,4 @@
-﻿namespace test2.Models
+﻿namespace test2.Models.StaffModel
 {
     internal class ContactViewModel
     {

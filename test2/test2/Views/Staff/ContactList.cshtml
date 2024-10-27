@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ContactViewModel>
+﻿@model IEnumerable<test2.Models.StaffModel.ContactViewModel>
 
 @{
     Layout = "Layout_staff";
@@ -64,7 +64,7 @@
                                         <td class="p-3">@contact.Description</td>
                                         <td class="p-3">@contact.Status</td>
                                         <td class="text-end p-3">
-                                            <a href="/Staff/ContactDetail?id=@contact.ContactId" type="button" class="btn btn-info">Resolve</a>
+                                            <a asp-controller="Staff" asp-action="ResolveContact" asp-route-id="@contact.ContactId" type="button" class="btn btn-info">Resolve</a>
                                         </td>
                                     </tr>
                                 }

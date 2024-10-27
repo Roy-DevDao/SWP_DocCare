@@ -13,6 +13,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using test2.DAO;
+using test2.Services;
 
 namespace test2.Controllers
 {
@@ -21,12 +22,16 @@ namespace test2.Controllers
         private readonly DocCareContext dc;
         private readonly ILogger<HomeController> _logger;
         private readonly UserDAO _userDAO;
+        private readonly EmailService _emailService;
+        private readonly TokenService _tokenService;
 
-        public HomeController(ILogger<HomeController> logger, DocCareContext db, UserDAO userDAO)
+        public HomeController(ILogger<HomeController> logger, DocCareContext db, UserDAO userDAO, EmailService emailService, TokenService tokenService)
         {
             _logger = logger;
             dc = db;
             _userDAO = userDAO; // Khởi tạo UserDAO
+            _emailService = emailService;
+            _tokenService = tokenService;
         }
         //--------------------------------------------------------------------------------------------
         public IActionResult Index()
@@ -560,19 +565,123 @@ namespace test2.Controllers
 
         //--------------------------------------------------------------------------------------------
 
-        public IActionResult Profile()
-        {
-            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
-            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
-            return View();
-        }
+
         //--------------------------------------------------------------------------------------------
 
-        public IActionResult ForgotPass()
+        [HttpGet]
+        public IActionResult ForgotPassword()
         {
-            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
-            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
-            return View();
+            // Trả về view ForgotPassword với một model mới
+            return View(new ForgotPasswordViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            // Kiểm tra nếu dữ liệu của model không hợp lệ
+            if (!ModelState.IsValid)
+            {
+                model.Message = "Please fill out the required fields correctly.";
+                // Nếu model không hợp lệ, trả về view với các thông báo lỗi
+                return View(model);
+            }
+
+            // Tìm kiếm account dựa trên email mà người dùng nhập vào
+            var account = await dc.Accounts.FirstOrDefaultAsync(a => a.Email == model.Email);
+
+            // Nếu không tìm thấy account tương ứng với email đã nhập
+            if (account == null)
+            {
+                // Thêm thông báo lỗi vào ModelState để hiển thị cho người dùng
+                ModelState.AddModelError(string.Empty, "The email address you entered is not associated with any account.");
+                // Trả về view cùng với thông báo lỗi
+                return View(model);
+            }
+
+            // Nếu email hợp lệ, tạo token để reset password và lưu vào cache
+            var token = _tokenService.GenerateToken(account.Email);
+
+            // Xây dựng liên kết để người dùng click vào và reset password
+            var resetLink = Url.Action("ResetPassword", "Home", new { token = token }, Request.Scheme);
+
+            // Cấu hình tiêu đề và nội dung email
+            var subject = "Reset your password";
+            var body = $"Please click the link below to reset your password: <a href='{resetLink}'>Reset Password</a>. This link will expired in 15 minutes";
+
+            // Gửi email cho người dùng với liên kết reset password
+            await _emailService.SendEmailAsync(account.Email, subject, body);
+
+            // Gán thông báo thành công vào model để hiển thị trên view
+            model.Message = "A reset link has been sent to your email.";
+            model.IsSuccess = true;
+            TempData["SuccessMessage"] = model.Message;
+
+            // Trả về view với model đã cập nhật thông báo thành công
+            return View(model);
+        }
+
+        //ResetPassword
+
+        [HttpGet]
+        public IActionResult ResetPassword(string token)
+        {
+            // Kiểm tra tính hợp lệ của token và lấy email nếu hợp lệ
+            if (_tokenService.ValidateToken(token, out string email))
+            {
+                // Tạo model cho reset password với token đã xác thực
+                var model = new ResetPasswordViewModel
+                {
+                    Token = token,
+                    Email = email
+                };
+                // Trả về view reset password cùng với model đã khởi tạo
+                return View(model);
+            }
+
+            // Nếu token không hợp lệ hoặc đã hết hạn, hiển thị thông báo lỗi
+            ViewBag.Message = "Invalid or expired token. PLease back to Forgot Password Page and send email again!";
+            return View("Error");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            // Kiểm tra nếu dữ liệu model không hợp lệ
+            if (!ModelState.IsValid)
+            {
+                // Trả về view với các thông báo lỗi nếu có
+                return View(model);
+            }
+
+            //// Kiểm tra token để xác thực và lấy email nếu token hợp lệ
+            //if (!_tokenService.ValidateToken(model.Token, out string email))
+            //{
+            //    // Thêm lỗi vào ModelState khi token không hợp lệ hoặc đã hết hạn
+            //    ModelState.AddModelError("", "Invalid or expired token.");
+            //    return View(model);
+            //}
+
+            // Tìm kiếm account dựa trên email đã xác thực từ token
+            var account = await dc.Accounts.FirstOrDefaultAsync(a => a.Email == model.Email);
+
+            // Nếu không tìm thấy account tương ứng
+            if (account == null)
+            {
+                // Thêm lỗi vào ModelState khi không tìm thấy account
+                ModelState.AddModelError("", "Account not found.");
+                return View(model);
+            }
+
+            // Cập nhật mật khẩu mới cho account (không mã hóa vì bạn đang học)
+            account.Password = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
+
+            // Cập nhật thông tin account vào database
+            dc.Update(account);
+            await dc.SaveChangesAsync();
+
+            // Thêm thông báo thành công vào TempData để hiển thị sau khi chuyển hướng
+            TempData["SuccessMessage"] = "Your password has been reset successfully.";
+            return RedirectToAction("Login");
         }
         //--------------------------------------------------------------------------------------------
 
@@ -676,10 +785,35 @@ namespace test2.Controllers
 
 
 
-        public IActionResult Contact()
+        public IActionResult Contact(ContactModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var contact = new Contact
+                {
+                    ContactId = Guid.NewGuid().ToString(),
+                    Name = model.Name,
+                    Email = model.Email,
+                    Title = model.Title,
+                    Description = model.Description,
+                    Status = "Pending" // Trạng thái mặc định
+                };
+
+                dc.Contacts.Add(contact); // Lưu vào cơ sở dữ liệu
+                dc.SaveChanges(); // Thực hiện lưu thay đổi vào cơ sở dữ liệu
+
+                ViewBag.Message = "Tin nhắn của bạn đã được gửi thành công.";
+                return View();
+            }
+
+            ViewBag.ErrorMessage = "Vui lòng điền đầy đủ thông tin để gửi liên lạc.";
+            return View(model);
         }
+
+        // If validation fails, return to the same view with error messages
+
+    
+
         //--------------------------------------------------------------------------------------------
 
         [HttpPost]
@@ -707,10 +841,7 @@ namespace test2.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public string GetSelected(string currentValue, string compareValue)
-        {
-            return currentValue == compareValue ? "selected" : "";
-        }
+
 
     }
 }
