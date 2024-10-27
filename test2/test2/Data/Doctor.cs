@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 
 namespace test2.Data;
@@ -26,7 +27,7 @@ public partial class Doctor
     public string? SpecialtyId { get; set; }
 
     public virtual ICollection<DetailDoctor> DetailDoctors { get; set; } = new List<DetailDoctor>();
-
+    [ValidateNever]
     public virtual Account DidNavigation { get; set; } = null!;
 
     public virtual ICollection<Feedback> Feedbacks { get; set; } = new List<Feedback>();
