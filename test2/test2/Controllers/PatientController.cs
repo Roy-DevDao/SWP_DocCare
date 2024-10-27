@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mscc.GenerativeAI;
 using System.Diagnostics;
+using System.Security.Claims;
 using test2.DAO;
 using test2.Data;
 using test2.Models;
@@ -27,23 +28,21 @@ namespace test2.Controllers
             _userDAO = userDAO;
         }
 
-
-
+        // GET: Hiển thị trang hồ sơ với các ViewModel để cập nhật thông tin cá nhân và đổi mật khẩu
         public IActionResult Profile(string id)
         {
-            _logger.LogInformation("OID received in Profile: {Oid}", id); // Log giá trị oid
+            _logger.LogInformation("OID received in Profile: {Oid}", id); // Log giá trị id
 
-            var isAuthenticated = User.Identity.IsAuthenticated;
-            if (!isAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Login", "Home");
             }
 
-            // Fetch patient details from the database using the oid
+            // Lấy thông tin bệnh nhân từ database
             var patient = (from p in dc.Patients
                            join a in dc.Accounts on p.Pid equals a.Id
                            where p.Pid == id
-                           select new PatientProfileViewModel
+                           select new UpdateProfileViewModel
                            {
                                PId = p.Pid,
                                Username = a.Username,
@@ -59,14 +58,90 @@ namespace test2.Controllers
 
             if (patient == null)
             {
-                _logger.LogWarning("No patient found with OID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
+                _logger.LogWarning("No patient found with ID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
                 return RedirectToAction("Login", "Home");
             }
 
-            // Pass the patient data to the view
-            return View(patient);
+            // Tạo đối tượng PatientPageViewModel và gán các giá trị cần thiết
+            var model = new PatientProfileViewModel
+            {
+                Patient = patient,
+                ChangePassword = new ChangePasswordViewModel { PId = id }
+            };
+
+            // Truyền PatientPageViewModel vào view
+            return View(model);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(PatientProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Trả về lại view với dữ liệu đã nhập để giữ nguyên thông tin nếu có lỗi
+                return View("Profile", model);
+            }
+
+            // Xử lý cập nhật thông tin cá nhân
+            var patient = await dc.Patients.FirstOrDefaultAsync(p => p.Pid == model.Patient.PId);
+            if (patient != null)
+            {
+                patient.Name = model.Patient.Name;
+                patient.Gender = model.Patient.Gender;
+                patient.Dob = model.Patient.Dob;
+
+                if (model.Patient.AvataUpload != null && model.Patient.AvataUpload.Length > 0)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await model.Patient.AvataUpload.CopyToAsync(memoryStream);
+                        patient.PatientImg = Convert.ToBase64String(memoryStream.ToArray());
+                    }
+                }
+
+                await dc.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Cập nhật thông tin thành công!";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy thông tin bệnh nhân.";
+            }
+
+            return RedirectToAction("Profile", new { id = model.Patient.PId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(PatientProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                // Trả về lại view với dữ liệu đã nhập để giữ nguyên thông tin nếu có lỗi
+                return View("Profile", model);
+            }
+
+            // Xử lý đổi mật khẩu
+            var account = await dc.Accounts.FirstOrDefaultAsync(a => a.Id == model.ChangePassword.PId);
+            if (account != null && account.Password == model.ChangePassword.OldPassword)
+            {
+                if (model.ChangePassword.NewPassword == model.ChangePassword.ConfirmNewPassword)
+                {
+                    account.Password = model.ChangePassword.NewPassword;
+                    await dc.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Mật khẩu xác nhận không khớp.";
+                }
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Mật khẩu cũ không đúng hoặc không tìm thấy tài khoản.";
+            }
+
+            return RedirectToAction("Profile", new { id = model.ChangePassword.PId });
+        }
 
 
 

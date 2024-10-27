@@ -1,6 +1,6 @@
-﻿@model test2.Models.PatientProfileViewModel
+﻿@model PatientProfileViewModel
 @{
-    ViewBag.Title = "Sửa trang cá nhân";
+    ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/Layout_Patient.cshtml";
 }
 
@@ -99,89 +99,129 @@
                 <div class="row">
                     <!-- Form Update Thông Tin -->
                     <div class="col-md-6">
-                        <form name="reg-form" class="register-form" method="post" id="frmEdit">
+                        <form asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+                            <input type="hidden" asp-for="Patient.PId" />
+
                             <div class="icon-box mb-0 p-0">
                                 <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
                                     <i class="pe-7s-users"></i>
                                 </a>
                                 <h4 class="text-gray pt-10 mt-0 mb-30">Sửa trang cá nhân</h4>
                             </div>
+
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_name">Tên</label>
-                                    <input name="FullName" class="form-control" type="text" required value="@Model.Name">
+                                    <input asp-for="Patient.Name" class="form-control" type="text" required />
+                                    <span asp-validation-for="Patient.Name" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_gender">Giới tính</label>
-                                    <select name="Gender" class="form-control" required>
+                                    <select asp-for="Patient.Gender" class="form-control" required>
                                         <option value="">---- Lựa chọn ----</option>
-                                        <option value="male" selected="@(Model.Gender == "male")">Nam</option>
-                                        <option value="female" selected="@(Model.Gender == "female")">Nữ</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female">Nữ</option>
                                     </select>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_choose_username">Tên đăng nhập</label>
-                                    <input id="form_choose_username" name="Username" class="form-control" type="text" required disabled value="@Model.Username">
+                                    <input asp-for="Patient.Username" class="form-control" type="text" required disabled />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Điện thoại</label>
-                                    <input name="Phone" class="form-control" type="text" value="@Model.Phone" disabled>
+                                    <input asp-for="Patient.Phone" class="form-control" type="text" disabled />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_email">Email</label>
-                                    <input id="form_email" name="Email" class="form-control" type="email" value="@Model.Email" disabled>
+                                    <input asp-for="Patient.Email" class="form-control" type="email" disabled />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="form_date_of_birth">Ngày sinh</label>
-                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.Dob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
+                                    <input asp-for="Patient.DobString" class="form-control" type="date" required />
+                                    <span asp-validation-for="Patient.DobString" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="file">Ảnh đại diện</label>
-                                <input type="file" id="file" name="avataUpload" class="form-control">
+
+                            <div class="row">
+                                <label for="form_avatar">Ảnh đại diện</label>
+                                <input asp-for="Patient.AvataUpload" type="file" class="form-control" />
                                 <p class="help-block">Upload ảnh đại diện.</p>
                             </div>
-                            <div class="form-group">
-                                <button class="btn btn-success btn-lg btn-block mt-15" type="submit" id="btnReg">Cập nhật</button>
+                            <div class="form-group text-center">
+                                <button class="btn btn-success btn-lg btn-block mt-15" type="submit">Cập nhật</button>
                             </div>
                         </form>
                     </div>
 
+
                     <!-- Form Đổi Mật Khẩu -->
                     <div class="col-md-6">
-                        <form name="editprofile-form" method="post" id="updatePass">
+                        <form asp-action="ChangePassword" method="post">
+                            <input type="hidden" asp-for="ChangePassword.PId" />
+
                             <div class="icon-box mb-0 p-0">
-                                <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
-                                    <i class="fa fa-key"></i>
-                                </a>
                                 <h4 class="text-gray pt-10 mt-0 mb-30">Đổi mật khẩu</h4>
                             </div>
                             <hr>
                             <p class="text-gray">Mật khẩu cần thay đổi thường xuyên vì lý do bảo mật.</p>
 
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label>Mật khẩu mới</label>
-                                    <input name="NewPassword" class="form-control" type="password">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Nhập lại mật khẩu</label>
-                                    <input name="RePassword" class="form-control" type="password">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group">
                                 <label>Mật khẩu cũ</label>
-                                <input name="OldPassword" class="form-control" type="password">
+                                <input asp-for="ChangePassword.OldPassword" class="form-control" type="password">
+                                <span asp-validation-for="ChangePassword.OldPassword" class="text-danger"></span>
                             </div>
+
+                            <div class="form-group">
+                                <label>Mật khẩu mới</label>
+                                <input asp-for="ChangePassword.NewPassword" class="form-control" type="password" required>
+                                <span asp-validation-for="ChangePassword.NewPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu mới</label>
+                                <input asp-for="ChangePassword.ConfirmNewPassword" class="form-control" type="password" required>
+                                <span asp-validation-for="ChangePassword.ConfirmNewPassword" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group text-center">
+                                <button class="btn btn-success btn-lg mt-15" type="submit">Cập nhật</button>
+                            </div>
+                            
+                            <!--
                             <div class="form-group text-center">
                                 <button class="btn btn-primary btn-sm mt-15" type="submit">Cập nhật</button>
                             </div>
+                            -->
                         </form>
+
+                        <!-- Thông báo thành công hoặc thất bại -->
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="alert alert-danger mt-3">@TempData["ErrorMessage"]</div>
+                        }
+
+                        @if (TempData["SuccessMessage"] != null)
+                        {
+                            <div class="alert alert-success mt-3">@TempData["SuccessMessage"]</div>
+                        }
+
+                        <!-- Hiển thị các lỗi ModelState nếu có -->
+                        @if (ViewData.ModelState.ErrorCount > 0)
+                        {
+                            <div class="alert alert-danger mt-3">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <p>@error.ErrorMessage</p>
+                                }
+                            </div>
+                        }
                     </div>
+
                 </div>
             </div>
         </div>
@@ -190,7 +230,9 @@
 <!-- end main-content -->
 
 @section Scripts {
-    <script src="~/Scripts/js/live/edit.account.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 }
 
 
