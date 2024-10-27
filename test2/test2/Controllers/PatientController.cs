@@ -19,13 +19,15 @@ namespace test2.Controllers
         private readonly DocCareContext dc;
         private readonly IVnPayService _vnPayservice;
         private readonly UserDAO _userDAO;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public PatientController(ILogger<PatientController> logger, DocCareContext db, IVnPayService vnPayservice, UserDAO userDAO)
+        public PatientController(ILogger<PatientController> logger, DocCareContext db, IVnPayService vnPayservice, UserDAO userDAO, CloudinaryService cloudinaryService)
         {
             _logger = logger;
             dc = db;
             _vnPayservice = vnPayservice;
             _userDAO = userDAO;
+            _cloudinaryService = cloudinaryService;
         }
 
         // GET: Hiển thị trang hồ sơ với các ViewModel để cập nhật thông tin cá nhân và đổi mật khẩu
@@ -93,10 +95,11 @@ namespace test2.Controllers
 
                 if (model.Patient.AvataUpload != null && model.Patient.AvataUpload.Length > 0)
                 {
-                    using (var memoryStream = new MemoryStream())
+                    // Upload ảnh lên Cloudinary và lấy link
+                    var imageUrl = await _cloudinaryService.UploadImageAsync(model.Patient.AvataUpload);
+                    if (!string.IsNullOrEmpty(imageUrl))
                     {
-                        await model.Patient.AvataUpload.CopyToAsync(memoryStream);
-                        patient.PatientImg = Convert.ToBase64String(memoryStream.ToArray());
+                        patient.PatientImg = imageUrl; // Lưu link ảnh vào database
                     }
                 }
 

@@ -1030,3 +1030,4 @@ D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\obj\Debug\net8.0\refint\test2.d
 D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\obj\Debug\net8.0\test2.pdb
 D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\obj\Debug\net8.0\test2.genruntimeconfig.cache
 D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\obj\Debug\net8.0\ref\test2.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\CloudinaryDotNet.dll

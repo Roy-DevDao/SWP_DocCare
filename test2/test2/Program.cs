@@ -44,6 +44,7 @@ namespace test2
 
             });
 
+            builder.Services.AddTransient<CloudinaryService>();
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
