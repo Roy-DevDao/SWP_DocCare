@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using test2.DAO;
 using test2.Data;
+using test2.Models;
 using test2.Models.DoctorModel;
 
 namespace test2.Controllers
@@ -16,15 +17,13 @@ namespace test2.Controllers
         DocCareContext _context;
         private readonly ILogger<DoctorController> _logger;
         private readonly AppointmentDAO _appointmentDAO;
-        private readonly PatientDao _patientDao;
         private readonly FeedbackDAO _feedbackDao;
         private readonly UserDAO _userDAO;
 
-        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO _userDAO)
+        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO,  FeedbackDAO feedbackDao, DocCareContext ct, UserDAO _userDAO)
         {
             _logger = logger;
             _appointmentDAO = appointmentDAO;
-            _patientDao = patientDao;
             _feedbackDao = feedbackDao;
             _context = ct;
             _userDAO = _userDAO;
@@ -49,20 +48,15 @@ namespace test2.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 
-            // Kiểm tra xem người dùng đã đăng nhập chưa
-            if (userId == null)
-            {
-                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
-            }
+            _logger.LogInformation("userId: {UserId}, id: {Id}", userId, id);
 
-            // Log giá trị oid
-            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id);
 
-            // Kiểm tra xem ID của người dùng có khớp với ID trong URL không
+             _logger.LogInformation("OID received in DoctorProfile: {Oid}", id);
+
             if (userId != id)
             {
                 _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
-                return Forbid(); // Ngăn chặn truy cập nếu ID không khớp
+                return Forbid(); 
             }
 
             // Lấy thông tin bác sĩ từ cơ sở dữ liệu bằng id
@@ -94,13 +88,17 @@ namespace test2.Controllers
             // Kiểm tra xem bác sĩ có tồn tại không
             if (doctor == null)
             {
-                _logger.LogWarning("No doctor found with ID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
+                _logger.LogWarning("No doctor found with ID: {id}", id); // Log cảnh báo nếu không tìm thấy
                 return RedirectToAction("Login", "Home"); // Redirect về trang Login
             }
 
             // Trả về view cùng với model bác sĩ
             return View(doctor);
         }
+
+        
+
+
 
 
         public IActionResult ViewAppointment(string id)
@@ -136,45 +134,83 @@ namespace test2.Controllers
             return View(appointment);
         }
 
-        public IActionResult ViewPatient(string id)
-        {
-            // Lấy danh sách bệnh nhân của bác sĩ dựa trên Did được truyền vào
-            var patients = _patientDao.GetPatientsByDoctorId(id);
+        
 
-            // Truyền danh sách bệnh nhân xuống view
-            return View(patients); // This will render /Views/Staff/ServiceAppointDetail.cshtml
-        }
 
-        public IActionResult ViewPatientDetail(string pid, string tab = "profile")
-        {
-            // Tìm bệnh nhân theo pid, bao gồm các đơn đặt hàng và tùy chọn liên quan
-            var patient = _context.Patients
-                .Include(p => p.Orders)
-                .ThenInclude(o => o.Option)
-                .FirstOrDefault(p => p.Pid == pid);
+        //public IActionResult HealthRecords(string id)
+        //{
+        //    // Retrieve the ID of the logged-in user
+        //    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // Nếu bệnh nhân không tồn tại, trả về lỗi 404
-            if (patient == null)
-            {
-                return NotFound();
-            }
+        //    // Check if the user is authenticated
+        //    if (userId == null)
+        //    {
+        //        return RedirectToAction("Login", "Home"); // Redirect to login if not authenticated
+        //    }
 
-            // Lấy danh sách cuộc hẹn từ các đơn đặt hàng của bệnh nhân
-            var appointments = patient.Orders?.Select(o => new
-            {
-                // Kiểm tra xem Option và DateExam có null không
-                //Date = o.Option?.DateExam?.ToString("yyyy-MM-dd") ?? "N/A",-----------
-                //Time = o.Option?.DateExam?.ToString("HH:mm") ?? "N/A",------------------
-                Status = o.Status ?? "N/A" // Kiểm tra xem Status có null không
-            }).ToList();
+        //    // Check if the requested doctor ID matches the logged-in user ID
+        //    if (string.IsNullOrEmpty(id) || userId != id)
+        //    {
+        //        _logger.LogWarning("Unauthorized access attempt: User {UserId} tried to access HealthRecord for doctor {TargetId}", userId, id);
+        //        return Forbid(); // Return 403 Forbidden if IDs do not match
+        //    }
 
-            // Đảm bảo appointments không bị null, sử dụng danh sách trống nếu là null
-            //ViewBag.Appointments = appointments ?? new List<object>(); // Chuyển đổi sang List<object> nếu appointments là null
-            ViewBag.ActiveTab = tab;
+        //    // Fetch health records for the doctor with the provided ID
+        //    var healthRecords = _context.HealthRecords
+        //                                .Where(hr => hr.Did == id)
+        //                                .ToList();
 
-            // Trả về view với mô hình bệnh nhân
-            return View(patient);
-        }
+        //    // Pass the health records data to the view
+        //    return View(healthRecords);
+        //}
+
+
+        //public IActionResult ViewHealthRecords(string id)
+        //{
+        //    // Lấy các hồ sơ sức khỏe cho bác sĩ có ID được truyền vào
+        //    var healthRecords = _patientDao.GetHealthRecordsByDoctorId(id);
+
+        //    if (healthRecords == null || !healthRecords.Any())
+        //    {
+        //        return NotFound(); // Trả về 404 nếu không tìm thấy
+        //    }
+
+        //    return View(healthRecords); // Trả về View với thông tin hồ sơ sức khỏe
+        //}
+
+
+        //[HttpGet]
+        //public IActionResult AddHealthRecord()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult AddHealthRecord(HealthRecordViewModel model)
+        //{
+        //    var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+        //    if (userId == null)
+        //    {
+        //        return RedirectToAction("Login", "Home");
+        //    }
+
+        //    // Create and save the new health record
+        //    var newRecord = new HealthRecord
+        //    {
+        //        Pid = model.Pid, // Patient ID (ensure the patient exists)
+        //        Did = userId,    // Doctor ID of the logged-in doctor
+        //        Diagnosis = model.Diagnosis,
+        //        Description = model.Description,
+        //        Note = model.Note,
+        //        DateExam = model.DateExam
+        //    };
+
+        //    _context.HealthRecords.Add(newRecord);
+        //    _context.SaveChanges();
+
+        //    return RedirectToAction("HealthRecord"); // Redirect to the HealthRecord list
+        //}
 
 
 

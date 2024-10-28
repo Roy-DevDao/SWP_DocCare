@@ -59,7 +59,7 @@ namespace test2
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<PatientDao>();
+            //builder.Services.AddScoped<PatientDao>();
             builder.Services.AddScoped<DoctorDAO>();
             builder.Services.AddScoped<AppointmentDAO>();
             builder.Services.AddScoped<FeedbackDAO>();

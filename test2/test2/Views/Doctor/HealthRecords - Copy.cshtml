@@ -1,0 +1,47 @@
+﻿﻿
+
+@{
+    Layout = "~/Views/Shared/Layout_Doctor.cshtml";
+    ViewBag.Title = "Doctor's Health Records";
+
+}
+
+@model IEnumerable<test2.Data.HealthRecord>
+
+
+<h2>Doctor's Health Records</h2>
+
+@if (!Model.Any())
+{
+    <p>No health records found for this doctor.</p>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Record ID</th>
+                <th>Patient ID</th>
+                <th>Order ID</th>
+                <th>Diagnosis</th>
+                <th>Description</th>
+                <th>Note</th>
+                <th>Date of Exam</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var record in Model)
+            {
+                <tr>
+                    <td>@record.RecordId</td>
+                    <td>@record.Pid</td>
+                    <td>@record.Oid</td>
+                    <td>@record.Diagnosis</td>
+                    <td>@record.Description</td>
+                    <td>@record.Note</td>
+                    <td>@record.DateExam?.ToString("yyyy-MM-dd")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

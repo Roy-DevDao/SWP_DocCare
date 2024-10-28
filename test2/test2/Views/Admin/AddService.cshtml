@@ -1,7 +1,12 @@
 ﻿﻿@{
     Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Layout chính mà bạn đã định nghĩa
 }
-@model test2.Data.Specialty
+@* @model test2.Data.Specialty
+ *@
+
+ 
+
+
 @section Scripts {
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
@@ -136,11 +141,11 @@
     </style>
 }
 
+ @model test2.Models.AddSpecialtyViewModel
 <main class="layout-default_body_main">
     <form method="post" asp-action="AddService" enctype="multipart/form-data">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <!-- Phần 1: Thông Tin Dịch Vụ -->
         <div class="section">
             <div class="">
                 <h1 class="first-text">Thông Tin Dịch Vụ</h1>
@@ -158,21 +163,24 @@
                         @Html.ValidationMessageFor(model => model.SpecialtyName, "", new { @class = "text-danger" })
                     </div>
 
-
-                    <!-- Mô Tả Ngắn -->
                     <div class="grid-item">
-                        <label for="ShortDescription">Mô Tả Ngắn</label>
-                        <input id="ShortDescription" name="ShortDescription" class="form-control" placeholder="Mô Tả Ngắn">
+                        <label asp-for="SpecialtyImgUpload">Ảnh Dịch Vụ</label>
+                        <input asp-for="SpecialtyImgUpload" type="file" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.SpecialtyImgUpload, "", new { @class = "text-danger" })
+                        <p class="help-block">Upload ảnh cho dịch vụ.</p>
                     </div>
 
-
+                    <div class="grid-item">
+                        <label asp-for="ShortDescription">Mô Tả Ngắn</label>
+                        <input asp-for="ShortDescription" class="form-control" placeholder="Mô Tả Ngắn">
+                        @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Nút Gửi -->
         <div class="submit-container">
-            <button type="button" class="cancel-btn">Hủy</button>
+            <button type="button" class="cancel-btn" onclick="window.location.href='@Url.Action("ManageService", "Admin")'">Hủy</button>
             <button type="submit" class="save-btn">Lưu</button>
         </div>
     </form>

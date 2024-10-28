@@ -2,6 +2,7 @@
     Layout = "Layout_Admin";
 }
 
+
 @section Styles {
     <style>
 
@@ -97,7 +98,24 @@
         a {
             text-decoration: none;
         }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            width: 30%;
+        }
     </style>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
 }
 @model IEnumerable<test2.Data.Patient>
 

@@ -40,50 +40,6 @@ namespace test2.Controllers
 
 
 
-        //public IActionResult Profile(string id)
-        //{
-        //    var userId = User.FindFirst(ClaimTypes.Name)?.Value;
-
-        //    // Kiểm tra xem người dùng đã đăng nhập chưa
-        //    if (userId == null)
-        //    {
-        //        return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
-        //    }
-
-        //    _logger.LogInformation("OID received in Profile: {Oid}", id); // Log giá trị oid
-
-        //    if (userId != id)
-        //    {
-        //        _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
-        //    }
-
-        //    // Fetch patient details from the database using the oid
-        //    var patient = (from p in dc.Patients
-        //                   join a in dc.Accounts on p.Pid equals a.Id
-        //                   where p.Pid == id
-        //                   select new PatientProfileViewModel
-        //                   {
-        //                       PId = p.Pid,
-        //                       Username = a.Username,
-        //                       Email = a.Email,
-        //                       Role = a.Role,
-        //                       Status = a.Status,
-        //                       Name = p.Name,
-        //                       Phone = p.Phone,
-        //                       Gender = p.Gender,
-        //                       Dob = p.Dob,
-        //                       PatientImg = p.PatientImg
-        //                   }).FirstOrDefault();
-
-        //    if (patient == null)
-        //    {
-        //        _logger.LogWarning("No patient found with OID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
-        //        return RedirectToAction("Login", "Home");
-        //    }
-
-        //    // Pass the patient data to the view
-        //    return View(patient);
-        //}
         public IActionResult Profile(string id)
         {
             _logger.LogInformation("OID received in Profile: {Oid}", id); // Log giá trị id
