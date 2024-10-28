@@ -1,12 +1,12 @@
-﻿﻿
-@model IEnumerable<test2.Data.Patient>
+﻿@model List<test2.Models.DoctorModel.BaseViewModel>
 
 @{
     Layout = "~/Views/Shared/Layout_Doctor.cshtml";
 }
-
 <div class="container mx-auto mt-10 p-5">
-    <h2 class="text-2xl text-blue-500 font-bold mb-4">Patients List for Doctor ID: @ViewData["DoctorId"]</h2>
+    <h2 class="text-2xl text-blue-500 font-bold mb-4">
+        Patients List for Doctor ID: @ViewData["DoctorId"]
+    </h2>
 
     <form class="flex items-center justify-center max-w-sm mx-auto mb-5">
         <button type="button" class="text-white px-4 py-2 flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm text-center me-2 mb-2">
@@ -31,25 +31,43 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var patient in Model)
+                @if (Model != null && Model.Any())
                 {
-                    // Lấy ngày đặt lịch từ đơn hàng đầu tiên của bệnh nhân (nếu có)
-                    var dateOrder = patient.Orders.FirstOrDefault()?.DateOrder;
+                    foreach (var item in Model)
+                    {
+                        var patient = item.patientView;
 
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            @patient.Name
-                        </th>
-                        <td class="px-6 py-4">@patient.Phone</td>
-                        <td class="px-6 py-4">@patient.PidNavigation?.Email</td>
-                        <td class="px-6 py-4">@dateOrder?.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td class="px-6 py-4">@patient.Dob?.ToString("yyyy-MM-dd")</td>
-                        <td class="px-6 py-4">
-                            <a asp-controller="Doctor" asp-action="ViewPatientDetail" asp-route-pid="@patient.Pid" asp-route-tab="profile" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
-                        </td>
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                @patient.Name
+                            </th>
+                            <td class="px-6 py-4">@patient.Phone</td>
+                            <td class="px-6 py-4">@patient.Email</td>
+                            <td class="px-6 py-4">@patient.DateOrder?.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td class="px-6 py-4">@patient.Dob?.ToString("yyyy-MM-dd")</td>
+                            <td class="px-6 py-4">
+                                <a asp-controller="Doctor"
+                                   asp-action="ViewPatientDetail"
+                                   asp-route-pid="@patient.Pid"
+                                   asp-route-tab="profile"
+                                   class="font-medium text-blue-600 hover:underline">
+                                    View
+                                </a>
+
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center py-4">No patients found.</td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+

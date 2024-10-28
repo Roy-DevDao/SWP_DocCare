@@ -9,5 +9,13 @@
         public DoctorProfileViewModel doctorProfile { get; set; }
 
         public AppointmentViewModel appointmentlist { get; set; }
+
+        public AppointmentDetailViewModel appointmentDetail { get; set; }
+
+        public PatientViewModel patientView { get; set; }
+
+        public PatientDetailViewModel patientDetail { get; set; }
+
+        public FeedbackViewModel feedbackView { get; set; }
     }
 }

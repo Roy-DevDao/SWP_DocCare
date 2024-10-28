@@ -1,30 +1,70 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\",
+  "WorkspaceRootPath": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\shared\\layout_patient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_patient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\doctor\\feedback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\feedback.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\models\\patientmodel\\patientbaseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\patientmodel\\patientbaseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\models\\doctormodel\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\doctormodel\\baseviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\patient\\appointmenthistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\appointmenthistory.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\models\\doctormodel\\appointmentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\doctormodel\\appointmentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\patient\\bookingappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\bookingappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\models\\doctormodel\\feedbackviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\doctormodel\\feedbackviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\patient\\appointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\patient\\appointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\models\\doctormodel\\patientdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\doctormodel\\patientdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\doctor\\viewpatientdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewpatientdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\data\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\data\\feedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\dao\\feedbackdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\dao\\feedbackdao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\doctor\\viewpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\models\\doctormodel\\patientviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\doctormodel\\patientviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\models\\doctormodel\\appointmentdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\models\\doctormodel\\appointmentdetailviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\shared\\layout_doctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\doctor\\viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewappointment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\doctor\\viewappointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\viewappointmentdetail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\fpt\\ki5\\swp\\doccarefinal4\\swp_doccare\\test2\\test2\\views\\doctor\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\doctor\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +74,214 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PatientBaseViewModel.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Models\\PatientModel\\PatientBaseViewModel.cs",
-              "RelativeDocumentMoniker": "test2\\Models\\PatientModel\\PatientBaseViewModel.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Models\\PatientModel\\PatientBaseViewModel.cs",
-              "RelativeToolTip": "test2\\Models\\PatientModel\\PatientBaseViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "Feedback.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Data\\Feedback.cs",
+              "RelativeDocumentMoniker": "test2\\Data\\Feedback.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Data\\Feedback.cs",
+              "RelativeToolTip": "test2\\Data\\Feedback.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T18:44:01.066Z",
+              "WhenOpened": "2024-10-28T16:24:47.873Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Layout_Patient.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Shared\\Layout_Patient.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_Patient.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Shared\\Layout_Patient.cshtml",
-              "RelativeToolTip": "test2\\Views\\Shared\\Layout_Patient.cshtml",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAE4AAAA5AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-27T18:38:45.731Z",
+              "DocumentIndex": 8,
+              "Title": "FeedbackDAO.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\DAO\\FeedbackDAO.cs",
+              "RelativeDocumentMoniker": "test2\\DAO\\FeedbackDAO.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\DAO\\FeedbackDAO.cs",
+              "RelativeToolTip": "test2\\DAO\\FeedbackDAO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:24:32.632Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "BookingAppointment.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\BookingAppointment.cshtml",
-              "ViewState": "AgIAABsBAAAAAAAAAAAkwBkBAAAyAAAAAAAAAA==",
+              "Title": "FeedbackViewModel.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\FeedbackViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\DoctorModel\\FeedbackViewModel.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\FeedbackViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\DoctorModel\\FeedbackViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:24:08.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Feedback.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\Feedback.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\Feedback.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\Feedback.cshtml",
+              "RelativeToolTip": "test2\\Views\\Doctor\\Feedback.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACEAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-27T18:32:51.778Z",
+              "WhenOpened": "2024-10-28T16:16:04.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ViewPatientDetail.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
+              "RelativeToolTip": "test2\\Views\\Doctor\\ViewPatientDetail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-28T15:54:43.468Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "AppointmentDetail.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Patient\\AppointmentDetail.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\AppointmentDetail.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Patient\\AppointmentDetail.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\AppointmentDetail.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-27T18:32:33.051Z",
+              "Title": "PatientDetailViewModel.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\PatientDetailViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\DoctorModel\\PatientDetailViewModel.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\PatientDetailViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\DoctorModel\\PatientDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T15:48:28.638Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PatientController.cs",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Controllers\\PatientController.cs",
-              "RelativeDocumentMoniker": "test2\\Controllers\\PatientController.cs",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Controllers\\PatientController.cs",
-              "RelativeToolTip": "test2\\Controllers\\PatientController.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAYwOwAAAAUAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "BaseViewModel.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\BaseViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\DoctorModel\\BaseViewModel.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\BaseViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\DoctorModel\\BaseViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-27T18:19:40.305Z",
+              "WhenOpened": "2024-10-28T12:52:57.221Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "AppointmentHistory.cshtml",
-              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "RelativeDocumentMoniker": "test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "RelativeToolTip": "test2\\Views\\Patient\\AppointmentHistory.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPcAAAAWAAAAAAAAAA==",
+              "Title": "AppointmentViewModel.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\AppointmentViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\DoctorModel\\AppointmentViewModel.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\AppointmentViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\DoctorModel\\AppointmentViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:04:17.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Controllers\\DoctorController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\DoctorController.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Controllers\\DoctorController.cs",
+              "RelativeToolTip": "test2\\Controllers\\DoctorController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwA0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T12:51:54.629Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ViewAppointment.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewAppointment.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewAppointment.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewAppointment.cshtml",
+              "RelativeToolTip": "test2\\Views\\Doctor\\ViewAppointment.cshtml",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-27T18:44:42.304Z",
+              "WhenOpened": "2024-10-28T12:52:44.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PatientViewModel.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\PatientViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\DoctorModel\\PatientViewModel.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\PatientViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\DoctorModel\\PatientViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T16:04:06.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ViewPatient.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewPatient.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewPatient.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewPatient.cshtml",
+              "RelativeToolTip": "test2\\Views\\Doctor\\ViewPatient.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAlwDIAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-28T15:15:00.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "AppointmentDetailViewModel.cs",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\AppointmentDetailViewModel.cs",
+              "RelativeDocumentMoniker": "test2\\Models\\DoctorModel\\AppointmentDetailViewModel.cs",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Models\\DoctorModel\\AppointmentDetailViewModel.cs",
+              "RelativeToolTip": "test2\\Models\\DoctorModel\\AppointmentDetailViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-28T13:18:42.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ViewAppointmentDetail.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
+              "RelativeToolTip": "test2\\Views\\Doctor\\ViewAppointmentDetail.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-28T12:52:45.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\Profile.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Doctor\\Profile.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Doctor\\Profile.cshtml",
+              "RelativeToolTip": "test2\\Views\\Doctor\\Profile.cshtml",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAH8AAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-28T12:55:24.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Layout_Doctor.cshtml",
+              "DocumentMoniker": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "ToolTip": "D:\\FPT\\Ki5\\SWP\\DocCareFinal4\\SWP_DocCare\\test2\\test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "RelativeToolTip": "test2\\Views\\Shared\\Layout_Doctor.cshtml",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAlwIQAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-28T14:50:41.364Z",
               "EditorCaption": ""
             }
           ]

@@ -20,14 +20,14 @@ namespace test2.Controllers
         private readonly FeedbackDAO _feedbackDao;
         private readonly UserDAO _userDAO;
 
-        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO _userDAO)
+        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO ud)
         {
             _logger = logger;
             _appointmentDAO = appointmentDAO;
             _patientDao = patientDao;
             _feedbackDao = feedbackDao;
             _context = ct;
-            _userDAO = _userDAO;
+            _userDAO = ud;
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -42,8 +42,30 @@ namespace test2.Controllers
         {
             // Lấy danh sách phản hồi của bác sĩ dựa trên Did
             var feedbacks = _feedbackDao.GetFeedbacksByDoctorId(id);
-            return View(feedbacks);// This will render /Views/Staff/AppoitmentList.cshtml
+
+            // Chuyển đổi phản hồi thành danh sách BaseViewModel
+            var feedbackViewModels = feedbacks.Select(f => new BaseViewModel
+            {
+                feedbackView = new FeedbackViewModel
+                {
+                    FeedbackId = f.FeedbackId,
+                    PatientName = f.PidNavigation?.Name,
+                    DateCmt = f.DateCmt,
+                    Star = f.Star,
+                    Description = f.Description
+                }
+            }).ToList();
+
+            // Sắp xếp theo thứ tự tăng hoặc giảm sao
+            feedbackViewModels = sortOrder == "desc"
+                ? feedbackViewModels.OrderByDescending(f => f.feedbackView.Star).ToList()
+                : feedbackViewModels.OrderBy(f => f.feedbackView.Star).ToList();
+
+            // Truyền danh sách BaseViewModel vào View
+            return View(feedbackViewModels);
         }
+
+
 
         public IActionResult Profile(string id)
         {
@@ -105,6 +127,24 @@ namespace test2.Controllers
 
         public IActionResult ViewAppointment(string id)
         {
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+
+            // Log giá trị oid
+            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id);
+
+            // Kiểm tra xem ID của người dùng có khớp với ID trong URL không
+            if (userId != id)
+            {
+                _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
+                return Forbid(); // Ngăn chặn truy cập nếu ID không khớp
+            }
+
             // Lấy các cuộc hẹn cho bác sĩ có ID được truyền vào
             var appointment = _appointmentDAO.GetDoctorAppointments(id);
 
@@ -118,36 +158,51 @@ namespace test2.Controllers
 
         public IActionResult ViewAppointmentDetail(string appointmentDetail)
         {
-            // Kiểm tra nếu không nhận được appointmentDetail
             if (string.IsNullOrEmpty(appointmentDetail))
             {
                 return BadRequest("Appointment detail is missing.");
             }
 
-            var appointment = _appointmentDAO.GetAppointmentDetailById(appointmentDetail);
+            var appointmentDetailViewModel = _appointmentDAO.GetAppointmentDetailById(appointmentDetail);
 
-            // Kiểm tra nếu không tìm thấy appointment
-            if (appointment == null)
+            if (appointmentDetailViewModel == null)
             {
                 return NotFound("Appointment not found.");
             }
 
-            // Trả về view với model là appointment
-            return View(appointment);
+            // Tạo danh sách BaseViewModel và gán appointmentDetail vào
+            var baseViewModel = new BaseViewModel
+            {
+                appointmentDetail = appointmentDetailViewModel
+            };
+
+            // Truyền danh sách vào View
+            return View("ViewAppointmentDetail", new List<BaseViewModel> { baseViewModel });
         }
 
         public IActionResult ViewPatient(string id)
         {
-            // Lấy danh sách bệnh nhân của bác sĩ dựa trên Did được truyền vào
+            // Lấy danh sách bệnh nhân dựa trên bác sĩ có Did = id
             var patients = _patientDao.GetPatientsByDoctorId(id);
 
-            // Truyền danh sách bệnh nhân xuống view
-            return View(patients); // This will render /Views/Staff/ServiceAppointDetail.cshtml
+            // Gói dữ liệu bệnh nhân vào BaseViewModel
+            var baseViewModelList = patients.Select(p => new BaseViewModel
+            {
+                patientView = p  // Gán từng PatientViewModel vào BaseViewModel
+            }).ToList();
+
+            // Gán ID của bác sĩ vào ViewData để hiển thị trên giao diện
+            ViewData["DoctorId"] = id;
+
+            // Truyền danh sách BaseViewModel vào View
+            return View(baseViewModelList);
         }
+
+
 
         public IActionResult ViewPatientDetail(string pid, string tab = "profile")
         {
-            // Tìm bệnh nhân theo pid, bao gồm các đơn đặt hàng và tùy chọn liên quan
+            // Tìm bệnh nhân theo pid, bao gồm các đơn hàng và tùy chọn liên quan
             var patient = _context.Patients
                 .Include(p => p.Orders)
                 .ThenInclude(o => o.Option)
@@ -159,25 +214,33 @@ namespace test2.Controllers
                 return NotFound();
             }
 
-            // Lấy danh sách cuộc hẹn từ các đơn đặt hàng của bệnh nhân
-            var appointments = patient.Orders?.Select(o => new
+            // Tạo model chi tiết bệnh nhân
+            var patientDetail = new PatientDetailViewModel
             {
-                // Kiểm tra xem Option và DateExam có null không
-                //Date = o.Option?.DateExam?.ToString("yyyy-MM-dd") ?? "N/A",-----------
-                //Time = o.Option?.DateExam?.ToString("HH:mm") ?? "N/A",------------------
-                Status = o.Status ?? "N/A" // Kiểm tra xem Status có null không
-            }).ToList();
+                Pid = patient.Pid,
+                Name = patient.Name,
+                Phone = patient.Phone,
+                Email = patient.PidNavigation?.Email,
+                Dob = patient.Dob,
+                Appointments = patient.Orders.Select(o => new PatientDetailViewModel.AppointmentViewModel
+                {
+                    Date = o.DateOrder?.ToString("yyyy-MM-dd"),
+                    Time = o.DateOrder?.ToString("HH:mm"),
+                    Status = o.Status ?? "N/A"
+                }).ToList()
+            };
 
-            // Đảm bảo appointments không bị null, sử dụng danh sách trống nếu là null
-            //ViewBag.Appointments = appointments ?? new List<object>(); // Chuyển đổi sang List<object> nếu appointments là null
-            ViewBag.ActiveTab = tab;
+            ViewBag.ActiveTab = tab; // Chuyển tab (profile/appointment)
 
-            // Trả về view với mô hình bệnh nhân
-            return View(patient);
+            // Gói dữ liệu chi tiết bệnh nhân vào BaseViewModel
+            var baseViewModel = new BaseViewModel
+            {
+                patientDetail = patientDetail
+            };
+
+            // Truyền danh sách BaseViewModel vào View
+            return View("ViewPatientDetail", new List<BaseViewModel> { baseViewModel });
         }
-
-
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
