@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using System.Security.Claims;
 using test2.Data;
 using test2.Models;
@@ -29,7 +30,7 @@ namespace test2.DAO
             {
                 return null;
             }
-
+            
             // Tạo đối tượng UserProfileViewModel
             var userProfile = new UserProfileViewModel
             {
@@ -40,9 +41,8 @@ namespace test2.DAO
                 Role = account.Role,
                 Status = account.Status
             };
-
-            // Kiểm tra role của user và gán thông tin tương ứng
-            switch (account.Role)
+			// Kiểm tra role của user và gán thông tin tương ứng
+			switch (account.Role)
             {
                 case 3: // Patient
                     var patient = _context.Patients.FirstOrDefault(p => p.Pid == account.Id);
