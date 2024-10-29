@@ -1,194 +1,118 @@
-﻿
-@model test2.Models.Order.OrderInfoModel
+﻿@model test2.Models.Order.OrderInfoModel
 @{
     Layout = "Layout_new";
-    ViewData["Title"] = "Home Page";
-    var postUrl = "tich-hop-thanh-toan-momo-voi-asp-net-core-7d5e4hP";
+    ViewData["Title"] = "Hóa đơn thanh toán";
 }
 
 <style>
-    /* Đặt nền và căn giữa cho trang */
+    /* Đặt nền trang */
     body {
-        background-color: #f7f9fc;
+        background-color: #f5f5f5;
         font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
     }
 
-    .text-center {
-        margin-top: 30px;
-        color: #333;
+    /* Căn giữa hộp hóa đơn */
+    .invoice-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
     }
 
-        /* Tiêu đề trang */
-        .text-center h1.display-4 {
-            color: #2c3e50;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .text-center p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-    /* Container form */
-    .container {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* Tạo khung hóa đơn */
+    .invoice-box {
+        width: 600px;
+        background-color: #ffffff;
+        padding: 30px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
+        position: relative;
     }
 
-    /* Tiêu đề của từng phần */
-    .form-group label {
-        color: #333;
-        font-weight: bold;
-        font-size: 1rem;
-        margin-bottom: 5px;
-    }
-
-    /* Style cho các input và textarea */
-    .form-control {
-        width: 100%;
-        padding: 10px;
-        font-size: 0.9rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        box-sizing: border-box;
-        transition: all 0.3s;
-    }
-
-        .form-control:focus {
-            border-color: #3498db;
-            box-shadow: 0px 0px 5px rgba(50, 152, 219, 0.5);
+        /* Định dạng tiêu đề hóa đơn */
+        .invoice-box h1 {
+            font-size: 28px;
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-    /* Khoảng cách giữa các field */
+    /* Định dạng các nhóm form */
     .form-group {
         margin-bottom: 20px;
     }
 
-    /* Button Thanh toán */
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+
+    /* Định dạng các trường nhập liệu */
+    .form-control {
+        height: 40px;
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    /* Nút thanh toán */
     .btn-primary {
-        background-color: #3498db;
+        background-color: #4CAF50;
         border: none;
         color: #fff;
+        font-weight: bold;
+        font-size: 18px;
         padding: 12px 20px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
         border-radius: 5px;
+        cursor: pointer;
         width: 100%;
     }
 
-        .btn-primary:hover {
-            background-color: #2980b9;
-        }
-
-    /* Link trong phần hướng dẫn */
-    .text-center a {
-        color: #3498db;
-        text-decoration: none;
+    /* Định dạng logo MoMo */
+    .momo-logo {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 80px;
+        height: auto;
     }
 
-        .text-center a:hover {
-            text-decoration: underline;
-        }
-
+    /* Hiệu ứng khi di chuột vào nút thanh toán */
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
 </style>
-<div class="text-center">
 
-    <div class="container">
+<div class="invoice-container">
+    <div class="invoice-box">
+        <h1>Hóa Đơn Thanh Toán</h1>
+
+        <!-- Logo MoMo -->
+        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square-1024x1024.png" alt="MoMo" class="momo-logo">
+
         <form action="/Patient/CreatePaymentUrl" id="frmCreateOrder" method="POST">
-            <!-- Giữ nguyên các field liên quan đến MoMo -->
             <div class="form-group">
                 <label for="FullName">Tên khách hàng</label>
-                <input class="form-control"
-                       id="FullName"
-                       name="FullName"
-                       type="text"
-                       value="@Model.FullName">
+                <input class="form-control" id="FullName" name="FullName" type="text" value="@Model.FullName" required>
             </div>
-            <br />
+
             <div class="form-group">
                 <label for="Amount">Số tiền</label>
-                <input class="form-control"
-                       id="Amount"
-                       name="Amount"
-                       type="text"
-                       value="@Model.Amount">
+                <input class="form-control" id="Amount" name="Amount" type="number" value="@Model.Amount" required>
             </div>
-            <br />
+
             <div class="form-group">
                 <label for="OrderInfo">Nội dung thanh toán</label>
-                <textarea class="form-control"
-                          cols="20"
-                          id="OrderInfo"
-                          name="OrderInfo"
-                          rows="2">@Model.OrderInfo</textarea>
+                <textarea class="form-control" cols="20" id="OrderInfo" name="OrderInfo" rows="2" required>@Model.OrderInfo</textarea>
             </div>
-            <br />
 
-            <!-- Các field bổ sung cho thông tin đặt lịch khám bệnh -->
             <div class="form-group">
-                <label for="HospitalName">Tên bệnh viện</label>
-                <input class="form-control"
-                       id="HospitalName"
-                       name="HospitalName"
-                       type="text"
-                       value="Bệnh viện ABC">
+                <label for="PaymentDate">Ngày trả</label>
+                <input class="form-control" id="PaymentDate" name="PaymentDate" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly>
             </div>
-            <br />
-            <div class="form-group">
-                <label for="DoctorName">Tên bác sĩ</label>
-                <input class="form-control"
-                       id="DoctorName"
-                       name="DoctorName"
-                       type="text"
-                       value="Dr. Trần Văn B">
-            </div>
-            <br />
-            <div class="form-group">
-                <label for="AppointmentDate">Ngày khám</label>
-                <input class="form-control"
-                       id="AppointmentDate"
-                       name="AppointmentDate"
-                       type="date"
-                       value="2024-10-10">
-            </div>
-            <br />
-            <div class="form-group">
-                <label for="AppointmentTime">Giờ khám</label>
-                <input class="form-control"
-                       id="AppointmentTime"
-                       name="AppointmentTime"
-                       type="time"
-                       value="10:00">
-            </div>
-            <br />
-            <div class="form-group">
-                <label for="ServiceType">Loại dịch vụ khám</label>
-                <input class="form-control"
-                       id="ServiceType"
-                       name="ServiceType"
-                       type="text"
-                       value="Khám Nội khoa">
-            </div>
-            <br />
-            <div class="form-group">
-                <label for="RoomNumber">Phòng khám</label>
-                <input class="form-control"
-                       id="RoomNumber"
-                       name="RoomNumber"
-                       type="text"
-                       value="Phòng 101">
-            </div>
-            <br />
 
-            <!-- Nút Thanh Toán -->
             <button type="submit" class="btn btn-primary">Thanh toán (Checkout)</button>
         </form>
     </div>
@@ -196,6 +120,6 @@
 
 <script>
     $(document).ready(function () {
-
+        // Có thể thêm mã JavaScript nếu cần
     });
 </script>

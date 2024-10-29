@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="clinic-booking">
                                         <a class="view-pro-btn" asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@item.DoctorId">View Profile</a>
-                                        <a class="apt-btn" asp-area="" asp-controller="Patient" asp-action="BookingAppointment" asp-route-id="@item.DoctorId">Book Appointment</a>
+                                        <a class="apt-btn" href="https://localhost:7248/Patient/BookingAppointment?doctorid=@item.DoctorId">Book Appointment</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,4 @@
-﻿﻿
-@model IEnumerable<test2.Data.Feedback>
+﻿@model List<test2.Models.DoctorModel.BaseViewModel>
 
 @{
     Layout = "~/Views/Shared/Layout_Doctor.cshtml";
@@ -9,11 +8,12 @@
 <div class="container mx-auto mt-10 p-5">
     <h2 class="text-2xl text-blue-500 font-bold mb-4">Feedbacks for Doctor</h2>
 
-    <!-- Dropdown để chọn cách sắp xếp -->
     <form method="get" class="flex items-center justify-start mb-5">
         <label for="sortOrder" class="me-2">Sort by Star:</label>
-        <select name="sortOrder" id="sortOrder" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5" onchange="this.form.submit()">
-            <option value="asc">Ascending</option>
+        <select name="sortOrder" id="sortOrder"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                onchange="this.form.submit()">
+            <option value="asc" selected>Ascending</option>
             <option value="desc">Descending</option>
         </select>
     </form>
@@ -29,15 +29,24 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var feedback in Model)
+                @if (Model != null && Model.Any())
                 {
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            @feedback.PidNavigation?.Name
-                        </td>
-                        <td class="px-6 py-4">@feedback.DateCmt?.ToString("yyyy-MM-dd HH:mm")</td>
-                        <td class="px-6 py-4">@feedback.Star</td>
-                        <td class="px-6 py-4">@feedback.Description</td>
+                    foreach (var feedback in Model)
+                    {
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                @feedback.feedbackView.PatientName
+                            </td>
+                            <td class="px-6 py-4">@feedback.feedbackView.DateCmt?.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td class="px-6 py-4">@feedback.feedbackView.Star</td>
+                            <td class="px-6 py-4">@feedback.feedbackView.Description</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4" class="text-center py-4">No feedbacks available.</td>
                     </tr>
                 }
             </tbody>

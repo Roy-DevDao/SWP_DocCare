@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xVhtmIziQapXpI378VppQOomcbzvLgJ09UGHNHKTy7Q=",
+  "Hash": "u4yiLZDZC0UOJ62tywHUP7gaYhf7FGZRlKRiuDmzEoQ=",
   "Source": "test2",
   "BasePath": "_content/test2",
   "Mode": "Default",
@@ -395,6 +395,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\about\\about.jpg"
+    },
+    {
+      "Identity": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\apple.png",
+      "SourceId": "test2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\",
+      "BasePath": "_content/test2",
+      "RelativePath": "assets/images/apple.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\apple.png"
     },
     {
       "Identity": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\avata.png",
@@ -965,6 +984,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\svg\\error.svg"
+    },
+    {
+      "Identity": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\wave-waving.gif",
+      "SourceId": "test2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\",
+      "BasePath": "_content/test2",
+      "RelativePath": "assets/images/wave-waving.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\wave-waving.gif"
     },
     {
       "Identity": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\js\\apexcharts.min.js",

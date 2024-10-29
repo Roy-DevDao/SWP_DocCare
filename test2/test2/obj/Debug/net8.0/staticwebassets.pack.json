@@ -1877,6 +1877,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\about\\about.jpg"
     },
     {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\apple.png",
+      "PackagePath": "staticwebassets\\assets\\images\\apple.png"
+    },
+    {
       "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\avata.png",
       "PackagePath": "staticwebassets\\assets\\images\\avata.png"
     },
@@ -1995,6 +1999,10 @@
     {
       "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\svg\\error.svg",
       "PackagePath": "staticwebassets\\assets\\images\\svg\\error.svg"
+    },
+    {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\images\\wave-waving.gif",
+      "PackagePath": "staticwebassets\\assets\\images\\wave-waving.gif"
     },
     {
       "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\assets\\js\\apexcharts.min.js",

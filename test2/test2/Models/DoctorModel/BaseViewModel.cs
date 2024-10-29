@@ -1,4 +1,6 @@
-﻿namespace test2.Models.DoctorModel
+﻿using test2.Models.StaffModel;
+
+namespace test2.Models.DoctorModel
 {
     public class BaseViewModel
     {
@@ -9,5 +11,13 @@
         public DoctorProfileViewModel doctorProfile { get; set; }
 
         public AppointmentViewModel appointmentlist { get; set; }
+
+        public AppointmentDetailViewModel appointmentDetail { get; set; }
+
+        public PatientViewModel patientView { get; set; }
+
+        public PatientDetailViewModel patientDetail { get; set; }
+
+        public FeedbackViewModel feedbackView { get; set; }
     }
 }

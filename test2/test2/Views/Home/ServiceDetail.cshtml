@@ -185,7 +185,7 @@
                                         <div class="col-md-12">
                                             <div class="clinic-content">
                                                 <h4 class="clinic-name">
-                                                    <a href="#">@doctor.Name</a>
+                                                    <a asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@doctor.Did">@doctor.Name</a>
                                                 </h4>
                                                 <p class="doc-speciality">@doctor.Position</p>
                                                 <p class="doc-description">@doctor.Description</p>

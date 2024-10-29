@@ -1,4 +1,5 @@
 ﻿
+using test2.Models.AdminModel;
 using test2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,6 +9,7 @@ using test2.Data;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using test2.Services;
 
 
 namespace test2.Controllers
@@ -16,6 +18,16 @@ namespace test2.Controllers
     {
         private readonly ILogger<AdminController> _logger;
         private readonly DocCareContext _context;
+
+        private readonly CloudinaryService _cloudinaryService;
+
+        public AdminController(ILogger<AdminController> logger, DocCareContext context, CloudinaryService cloudinaryService)
+        {
+            _logger = logger;
+            _context = context;
+            _cloudinaryService = cloudinaryService;
+
+        }
 
         private static Tuple<string, int> SortTid(string id)
         {
@@ -28,12 +40,9 @@ namespace test2.Controllers
             }
             return Tuple.Create(id, 0);
         }
-        public AdminController(ILogger<AdminController> logger, DocCareContext context)
-        {
-            _logger = logger;
-            _context = context;
-        }
 
+
+       
         public IActionResult Index()
         {
             var patients = _context.Patients.Count();
@@ -46,15 +55,72 @@ namespace test2.Controllers
 
             var feedback = _context.Feedbacks.OrderByDescending(f => f.DateCmt).Take(3).ToList();
 
-            // pass data
+            // pass dataa
             ViewBag.TotalPatients = patients;
             ViewBag.TotalDoctors = doctors;
-            ViewBag.TotalSpecialties = specialties;
             ViewBag.AvgCost = avgCost;
             ViewBag.TotalAppointments = appointments;
             ViewBag.TotalService = service;
             ViewBag.TotalFeedback = feedback2;
+            //
+            // Calculate the total count of each payment method
+            var paymentCounts = _context.Payments
+                .GroupBy(p => p.Method)
+                .Select(g => new { Method = g.Key, Count = g.Count() })
+                .ToList();
+
+            var totalPayments = paymentCounts.Sum(x => x.Count);
+
+            // Calculate the percentage for each payment method
+            var paymentPercentages = paymentCounts.Select(x => new
+            {
+                Method = x.Method,
+                Percentage = (double)x.Count / totalPayments * 100
+            }).ToList();
+
+            // Pass data for payment method chart
+            ViewBag.PaymentMethods = paymentPercentages.Select(x => x.Method).ToList();
+            ViewBag.PaymentPercentages = paymentPercentages.Select(x => x.Percentage).ToList();
+            // 
+            var doctorCountsBySpecialty = _context.Doctors
+            .GroupBy(d => d.Specialty.SpecialtyName)
+            .Select(g => new { Specialty = g.Key, Count = g.Count() })
+            .ToList();
+
+            // Pass data to ViewBag for the chart
+            ViewBag.SpecialtyNames = doctorCountsBySpecialty.Select(x => x.Specialty).ToList();
+            ViewBag.DoctorCounts = doctorCountsBySpecialty.Select(x => x.Count).ToList();
+
+            // Calculate male and female counts
+            var maleCount = _context.Patients.Count(p => p.Gender == "Male");
+            var femaleCount = _context.Patients.Count(p => p.Gender == "Female");
+
+            // Pass gender data to ViewBag
+            ViewBag.MaleCount = maleCount;
+            ViewBag.FemaleCount = femaleCount;
+
+
+            var ordersPerDay = _context.Orders
+            .Where(o => o.DateOrder.HasValue) // Ensure that DateOrder is not null
+            .GroupBy(o => o.DateOrder.Value.Date) // Use Value.Date to access the date part
+            .Select(g => new
+            {
+                Date = g.Key,
+                Count = g.Count()
+            })
+            .OrderBy(o => o.Date)
+            .ToList();
+
+
+            // Pass data for the chart
+            ViewBag.OrderDates = ordersPerDay.Select(o => o.Date.ToString("yyyy-MM-dd")).ToList();
+            ViewBag.OrderCounts = ordersPerDay.Select(o => o.Count).ToList();
+
+
             return View(feedback);
+
+
+
         }
 
         public IActionResult Privacy()
@@ -74,7 +140,7 @@ namespace test2.Controllers
             // Tìm kiếm theo ID
             if (!string.IsNullOrEmpty(searchId))
             {
-                filterDoctors = filterDoctors.Where(d => d.Did.Contains(searchId));
+                filterDoctors = filterDoctors.Where(d => d.Name.Contains(searchId));
             }
 
             // Lọc theo giới tính
@@ -222,19 +288,21 @@ namespace test2.Controllers
 
 
 
+
+
         public IActionResult AddDoctor()
         {
             var specialties = _context.Specialties.ToList();
             ViewBag.Specialties = new SelectList(specialties, "SpecialtyId", "SpecialtyId");
-            return View();
+            return View(new AddDoctorViewModel());
         }
 
         [HttpPost]
-        public IActionResult AddDoctor(Doctor newDoctor, string AccountId)
+        public async Task<IActionResult> AddDoctor(AddDoctorViewModel model, string AccountId)
         {
             if (!ModelState.IsValid)
             {
-                return View(newDoctor);
+                return View(model);
             }
 
             try
@@ -243,18 +311,45 @@ namespace test2.Controllers
                 if (account == null)
                 {
                     ModelState.AddModelError("AccountId", "The provided Account ID does not exist.");
-                    return View(newDoctor);
+                    return View(model);
                 }
 
-                newDoctor.Did = account.Id;
-                newDoctor.DidNavigation = account;
-
-                if (ModelState.IsValid)
+                string imageUrl = null;
+                if (model.DoctorImgUpload != null)
                 {
-                    _context.Doctors.Add(newDoctor);
-                    _context.SaveChanges();
-                    return RedirectToAction("ManageDoctor");
+                    var uploadResult = await _cloudinaryService.UploadImageAsync(model.DoctorImgUpload);
+
+                    if (uploadResult != null)
+                    {
+                        imageUrl = uploadResult; // Directly assign if uploadResult is a string
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Lỗi khi tải ảnh lên. Vui lòng thử lại.");
+                        return View(model);
+                    }
                 }
+
+                var newDoctor = new Doctor
+                {
+                    Did = account.Id,
+                    Name = model.Name,
+                    Position = model.Position,
+                    Phone = model.Phone,
+                    Gender = model.Gender,
+                    Dob = model.Dob,
+                    Description = model.Description,
+                    Price = model.Price,
+                    SpecialtyId = model.SpecialtyId,
+                    DoctorImg = imageUrl,
+                    DidNavigation = account
+                };
+
+                _context.Doctors.Add(newDoctor);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Thêm bác sĩ thành công!";
+                return RedirectToAction("ManageDoctor");
             }
             catch (Exception ex)
             {
@@ -262,9 +357,8 @@ namespace test2.Controllers
                 ModelState.AddModelError(string.Empty, $"An error occurred: {errorMessage}");
             }
 
-            return View(newDoctor);
+            return View(model);
         }
-
 
 
 
@@ -501,6 +595,8 @@ namespace test2.Controllers
                 {
                     _context.Patients.Add(newPatient); // Add new patient to the database
                     _context.SaveChanges();
+                    TempData["SuccessMessage"] = "Thêm bệnh nhân thành công!";
+
                     return RedirectToAction("ManagePatient");
                 }
             }
@@ -720,30 +816,52 @@ namespace test2.Controllers
             return View(model);
         }
 
-        public IActionResult AddService()
+        [HttpPost]
+        public async Task<IActionResult> AddService(AddSpecialtyViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string imageUrl = null;
+            if (model.SpecialtyImgUpload != null)
+            {
+                // Upload image to Cloudinary
+                var uploadResult = await _cloudinaryService.UploadImageAsync(model.SpecialtyImgUpload);
+
+                if (uploadResult != null)
+                {
+                    imageUrl = uploadResult; // Directly assign if uploadResult is a string
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Lỗi khi tải ảnh lên. Vui lòng thử lại.");
+                    return View(model);
+                }
+            }
+
+
+            // Create a new Specialty object and set properties
+            var specialty = new Specialty
+            {
+                SpecialtyId = model.SpecialtyId,
+                SpecialtyName = model.SpecialtyName,
+                SpecialtyImg = imageUrl,
+                ShortDescription = model.ShortDescription
+            };
+
+            // Save to the database
+            _context.Specialties.Add(specialty);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Thêm dịch vụ thành công!";
+            return RedirectToAction("ManageService"); // Adjust the redirect as needed
         }
 
-        [HttpPost]
-        public IActionResult AddService(Specialty newService)
+        public IActionResult AddService()
         {
-            var existingService = _context.Specialties
-                .FirstOrDefault(s => s.SpecialtyId == newService.SpecialtyId || s.SpecialtyName == newService.SpecialtyName);
-
-            if (existingService != null)
-            {
-                ModelState.AddModelError(string.Empty, "A service with the same ID or name already exists.");
-            }
-
-            if (ModelState.IsValid)
-            {
-                _context.Specialties.Add(newService);
-                _context.SaveChanges();
-                return RedirectToAction("ManageService");
-            }
-
-            return View(newService);
+            return View(new AddSpecialtyViewModel());
         }
 
 

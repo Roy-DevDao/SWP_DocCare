@@ -1,4 +1,4 @@
-﻿﻿@{
+﻿﻿﻿@{
     Layout = "Layout_Admin";
 }
 
@@ -99,7 +99,24 @@
         .tailwindTotal {
             background-color: #F8F9FA;
         }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            width: 30%;
+        }
     </style>
+}
+@if (TempData["SuccessMessage"] != null)
+
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
 }
 
 @model IEnumerable<test2.Data.Doctor>
@@ -107,7 +124,7 @@
     <div class="header1 d-flex justify-content-between align-items-center mb-4">
         <form action="ManageDoctor" method="get">
             <div class="search-container d-flex">
-                <input type="text" name="searchId" placeholder="Tìm kiếm theo ID..." class="form-control me-2">
+                <input type="text" name="searchId" placeholder="Tìm kiếm theo tên..." class="form-control me-2">
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-search"></i>
                 </button>
@@ -223,6 +240,8 @@
     <tbody>
         @foreach (var doctor in Model)
 
+
+
         {
             <tr>
                 <td>@doctor.Did</td>
@@ -277,6 +296,8 @@
                 </a>
 
                 @for (int i = 1; i <= ViewBag.TotalPages; i++)
+
+
 
                 {
                     <a asp-action="ManageDoctor"

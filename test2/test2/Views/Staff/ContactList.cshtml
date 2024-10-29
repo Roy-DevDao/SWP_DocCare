@@ -63,9 +63,15 @@
                                         <td class="p-3">@contact.Email</td>
                                         <td class="p-3">@contact.Description</td>
                                         <td class="p-3">@contact.Status</td>
+                                        @if(contact.Status == "resolved" || contact.Status == "Resolved")
+                                        {
+                                            <td class="text-end p-3">
+                                            </td>
+                                        } else {
                                         <td class="text-end p-3">
                                             <a asp-controller="Staff" asp-action="ResolveContact" asp-route-id="@contact.ContactId" type="button" class="btn btn-info">Resolve</a>
                                         </td>
+                                        }
                                     </tr>
                                 }
                             </tbody>

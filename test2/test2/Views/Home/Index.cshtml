@@ -2,6 +2,7 @@
     var doctors = ViewBag.Doctors as IEnumerable<test2.Data.Doctor>;
 
     var specialties = ViewBag.Specialties as IEnumerable<test2.Data.Specialty>;
+
 }
 @{
     Layout = "Layout_new";
@@ -198,7 +199,7 @@
                 <div class="about-content">
                     <p>Doccare gathers a team of experts, doctors, pharmacists, and nurses who are well-trained, </p>
                     <p>from basic to advanced levels, both in Vietnam and in many countries with advanced medical fields such as the USA, UK, France...</p>
-                    <a href="javascript:;">Read More..</a>
+                    <a asp-controller="Patient" asp-action="Invoice" asp-route-orderId="ord4600784">Read More..</a>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -244,7 +245,7 @@
                                         <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@doctor.Did" class="btn view-btn">View Profile</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="javascript:void(0)" onclick="bookNow('@doctor.Did')" class="btn book-btn">Book Now</a>
+                                        <a href="https://localhost:7248/Patient/BookingAppointment?doctorid=@doctor.Did" class="btn book-btn">Book Now</a>
                                     </div>
                                 </div>
                             </div>

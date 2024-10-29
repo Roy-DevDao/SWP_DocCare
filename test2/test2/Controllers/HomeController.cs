@@ -36,15 +36,18 @@ namespace test2.Controllers
         //--------------------------------------------------------------------------------------------
         public IActionResult Index()
         {
-
-            var doctors = dc.Doctors.Take(8).ToList();
-            var specialties = dc.Specialties.Take(8).ToList();
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+                ViewBag.User = user;
+            }
+            var doctors = dc.Doctors.Take(10).ToList();
+            var specialties = dc.Specialties.Take(10).ToList();
 
             //truyen data thong qua view bag
             ViewBag.Doctors = doctors;
             ViewBag.Specialties = specialties;
-            var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
-            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
 
             return View();
 
@@ -401,7 +404,7 @@ namespace test2.Controllers
                 case 2: // Doctor
                     return RedirectToAction("ViewAppointment", "Doctor");
                 case 3: // Patient
-                    return RedirectToAction("AppointmentHistory", "Patient");
+                    return RedirectToAction("Index", "Home");
                 default:
                     TempData["ErrorMessage"] = "Role không được nhận diện.";
                     return RedirectToAction("Login");
@@ -823,19 +826,47 @@ namespace test2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult aichatbox()
-        {
-            return View();
-        }
 
-        [HttpPost]
-        public async Task<JsonResult> getmessage(string message)
-        {   
-             return Json(await AIControl.CreateMessage(message));
-        }
+		public IActionResult aichatbox()
+		{
+			var isAuthenticated = User.Identity.IsAuthenticated;
+			if (isAuthenticated)
+			{
+				var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+				ViewBag.User = user;
+			}
+
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<JsonResult> getmessage(string message)
+		{
+			string result = await AIControl.CreateMessage(message);
+			string pattern = @"\bs\d+\b";
+
+			// Tìm tất cả các chuỗi khớp với biểu thức chính quy
+			MatchCollection matches = Regex.Matches(result, pattern);
+
+			List<Specialty> list = new List<Specialty>();
+			foreach (Match match in matches)
+			{
+				Specialty specialty = dc.Specialties.FirstOrDefault(s => s.SpecialtyId == match.Value);
+				if (specialty != null)
+				{
+					list.Add(specialty);
+				}
+			}
+			result = Regex.Replace(result, pattern, "");
+
+			// Loại bỏ khoảng trắng thừa sau khi xóa
+			result = Regex.Replace(result, @"\s+", " ").Trim();
+			return Json(new { content = result, specialties = list });
+		}
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

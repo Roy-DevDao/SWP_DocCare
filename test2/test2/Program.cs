@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Configuration;
 using test2.DAO;
 using test2.Data;
 using test2.Models.Momo;
@@ -54,7 +55,6 @@ namespace test2
 
             builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
             builder.Services.AddScoped<IMomoService, MomoService>();
-
             builder.Services.AddSingleton<IVnPayService, VnPayService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();

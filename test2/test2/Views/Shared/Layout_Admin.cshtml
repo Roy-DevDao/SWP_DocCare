@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,6 +39,11 @@
             position: relative;
             top: 10px;
         }
+
+        .dropdown-primary {
+            position: relative;
+            top: -10px
+        }
     </style>
 </head>
 <body class="bg-gray-100 h-screen">
@@ -55,7 +61,7 @@
                 <button id="dashboardToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-tachometer-alt text-lg"></i>
-                        <span class="ml-3 sidebar-text">Dashboard</span>
+                        <span class="ml-3 sidebar-text">Thống Kê</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="dashboardIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -63,7 +69,7 @@
                 </button>
                 <div id="dashboardSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
                     <a asp-controller="Admin" asp-action="Index" class="block py-2 text-gray-700 hover:text-gray-900">+ Analytics</a>
-                    <a href="#" class="block py-2 text-gray-700 hover:text-gray-900">+ Settings</a>
+                    <a asp-controller="Admin" asp-action="Index1" class="block py-2 text-gray-700 hover:text-gray-900">+ Analytics</a>
                 </div>
             </div>
 
@@ -123,7 +129,7 @@
     <!-- Main content -->
     <div id="mainContent" class="ml-64 flex-1 flex flex-col h-screen overflow-hidden transition-all duration-300">
         <!-- Header -->
-        <header id="header" class="flex justify-between items-center h-16 px-6 bg-white shadow fixed top-0 left-64 right-0 z-10 transition-all duration-300">
+        <header id="header" class="abc flex justify-between items-center h-16 px-6 bg-white shadow fixed top-0 left-64 right-0 z-10 transition-all duration-300">
             <div class="flex items-center">
                 <!-- Toggle Sidebar Button -->
                 <button id="sidebarToggle" class="p-2 rounded-md focus:outline-none">
@@ -140,28 +146,21 @@
             <ul class="dropdowns list-inline mb-0">
                 <li class="list-inline-item mb-0 ms-1">
                     <div class="dropdown dropdown-primary">
-                        <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="~/assets/images/avata.png" class="avatar avatar-ex-small rounded-circle" alt="">
-                        </button>
-                        <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <img src="assets/images/default-user.png" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                <div class="flex-1 ms-2">
-                                    <span class="d-block mb-1">Nguyễn Văn A</span>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider border-top"></div>
-                            <a class="dropdown-item" href="user?action=profile">My account</a>
-                            <a href="#" class="dropdown-item"
-                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Log out
-                            </a>
 
-                            <!-- Hidden form for logout -->
-                            <form id="logout-form" action="@Url.Action("Logout", "Home")" method="POST" style="display: none;">
-                                @Html.AntiForgeryToken()  <!-- Bảo vệ CSRF -->
-                            </form>
-                        </div>
+
+                        <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3"></path>
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Log out</span>
+                        </a>
+
+                        <!-- Hidden form for logout -->
+                        <form id="logout-form" action="@Url.Action("Logout", "Home")" method="POST" style="display: none;">
+                            @* Add anti-forgery token for security *@
+                            @Html.AntiForgeryToken()
+                        </form>
                     </div>
                 </li>
             </ul>
