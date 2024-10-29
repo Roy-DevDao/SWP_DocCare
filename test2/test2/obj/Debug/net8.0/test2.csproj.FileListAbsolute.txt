@@ -1032,3 +1032,11 @@ D:\BAO\MAJOR\SE5\swp_quang\SWP_DocCare-quang1\SWP_DocCare-quang1\test2\test2\bin
 D:\BAO\MAJOR\SE5\swp_quang\SWP_DocCare-quang1\SWP_DocCare-quang1\test2\test2\bin\Debug\net8.0\MailKit.dll
 D:\BAO\MAJOR\SE5\swp_quang\SWP_DocCare-quang1\SWP_DocCare-quang1\test2\test2\bin\Debug\net8.0\MimeKit.dll
 D:\BAO\MAJOR\SE5\swp_quang\SWP_DocCare-quang1\SWP_DocCare-quang1\test2\test2\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\MailKit.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\MimeKit.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\Mscc.GenerativeAI.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\RestSharp.dll
+D:\Chuyen nganh 5\SWP391\SWP_DocCare\test2\test2\bin\Debug\net8.0\System.Text.Json.dll

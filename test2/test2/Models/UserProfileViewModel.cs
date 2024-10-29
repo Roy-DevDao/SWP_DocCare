@@ -1,4 +1,6 @@
-﻿namespace test2.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace test2.Models
 {
     public class UserProfileViewModel
     {
@@ -55,6 +57,20 @@
 
         public DateOnly? SDob { get; set; }
 
+        // Thuộc tính cho việc đổi mật khẩu
+        [Required(ErrorMessage = "Mật khẩu cũ không được để trống.")]
+        [DataType(DataType.Password)]
+        public string? OldPassword { get; set; }
+
+        [Required(ErrorMessage = "Mật khẩu mới không được để trống.")]
+        [DataType(DataType.Password)]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "Mật khẩu mới phải từ 6 đến 100 ký tự.")]
+        public string? NewPassword { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập lại mật khẩu mới.")]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "Mật khẩu mới và nhập lại không khớp.")]
+        public string? RePassword { get; set; }
     }
 
 }

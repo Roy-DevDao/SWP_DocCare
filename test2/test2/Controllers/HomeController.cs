@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿                        using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
@@ -293,7 +293,8 @@ namespace test2.Controllers
             }
 
             var user = dc.Accounts.FirstOrDefault(dc => dc.Email == email);
-            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            //if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            if (user != null && user.Password == password)
             {
                 var claims = new List<Claim>
         {

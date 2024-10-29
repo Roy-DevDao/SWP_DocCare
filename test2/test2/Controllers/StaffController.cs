@@ -56,6 +56,44 @@ namespace test2.Controllers
             return View(staff);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(string oldPassword, string newPassword, string RePassword)
+        {
+            // Kiểm tra tính hợp lệ của dữ liệu nhập vào
+            if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(RePassword))
+            {
+                TempData["ErrorMessage"] = "Vui lòng nhập đầy đủ thông tin mật khẩu.";
+                return RedirectToAction("Profile"); 
+            }
+
+            // Kiểm tra mật khẩu xác nhận có khớp với mật khẩu mới hay không
+            if (newPassword != RePassword)
+            {
+                TempData["ErrorMessage"] = "Mật khẩu xác nhận không khớp.";
+                return RedirectToAction("Profile");
+            }
+
+            // Lấy thông tin tài khoản của người dùng hiện tại
+            var accountId = User.Identity.Name; // Giả sử đây là ID tài khoản hoặc một định danh duy nhất
+            var account = await dc.Accounts.FirstOrDefaultAsync(a => a.Id == accountId);
+
+            //if (account == null || !BCrypt.Net.BCrypt.Verify(oldPassword, account.Password))
+            if (account != null && account.Password == oldPassword)
+            {
+                // Trường hợp mật khẩu cũ không đúng hoặc tài khoản không tồn tại
+                TempData["ErrorMessage"] = "Mật khẩu cũ không đúng hoặc không tìm thấy tài khoản.";
+                return RedirectToAction("Profile");
+            }
+
+            // Cập nhật mật khẩu mới sau khi đã mã hóa
+            account.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+            await dc.SaveChangesAsync();
+
+            // Thông báo đổi mật khẩu thành công
+            TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
+            return RedirectToAction("Profile");
+        }
+
         public IActionResult AppoitmentList(string search_doctor = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
         {
             int pageSize = 10;

@@ -104,82 +104,63 @@
                                 <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
                                     <i class="pe-7s-users"></i>
                                 </a>
-                                <h4 class="text-gray pt-10 mt-0 mb-30">Sửa trang cá nhân</h4>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="form_name">Tên</label>
-                                    <input name="FullName" class="form-control" type="text" required value="@Model.StaffName">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="form_gender">Giới tính</label>
-                                    <select name="Gender" class="form-control" required>
-                                        <option value="">---- Lựa chọn ----</option>
-                                        <option value="male" selected="@(Model.SGender == "male")">Nam</option>
-                                        <option value="female" selected="@(Model.SGender == "female")">Nữ</option>
-                                    </select>
-                                </div>
-                            </div>
+                                <h4 class="text-gray pt-10 mt-0 mb-30">Thông tin tài khoản</h4>
+                            </div>                            
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="form_choose_username">Tên đăng nhập</label>
                                     <input id="form_choose_username" name="Username" class="form-control" type="text" required disabled value="@Model.Username">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>Điện thoại</label>
-                                    <input name="Phone" class="form-control" type="text" value="@Model.SPhone" disabled>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
                                     <label for="form_email">Email</label>
                                     <input id="form_email" name="Email" class="form-control" type="email" value="@Model.Email" disabled>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="form_date_of_birth">Ngày sinh</label>
-                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.SDob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
-                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="file">Ảnh đại diện</label>
-                                <input type="file" id="file" name="avataUpload" class="form-control">
-                                <p class="help-block">Upload ảnh đại diện.</p>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-success btn-lg btn-block mt-15" type="submit" id="btnReg">Cập nhật</button>
-                            </div>
+                            <div class="row">
+                                
+                            </div>                          
                         </form>
                     </div>
 
                     <!-- Form Đổi Mật Khẩu -->
                     <div class="col-md-6">
-                        <form name="editprofile-form" method="post" id="updatePass">
-                            <div class="icon-box mb-0 p-0">
-                                <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
-                                    <i class="fa fa-key"></i>
-                                </a>
-                                <h4 class="text-gray pt-10 mt-0 mb-30">Đổi mật khẩu</h4>
+                        <form asp-action="ChangePassword" method="post">
+                            <h4>Đổi mật khẩu</h4>
+                            <div class="form-group">
+                                <label for="OldPassword">Mật khẩu cũ</label>
+                                <input name="oldPassword" id="OldPassword" class="form-control" type="password" required minlength="6" maxlength="100" />
+                                <span asp-validation-for="OldPassword" class="text-danger"></span>
                             </div>
-                            <hr>
-                            <p class="text-gray">Mật khẩu cần thay đổi thường xuyên vì lý do bảo mật.</p>
 
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label>Mật khẩu mới</label>
-                                    <input name="NewPassword" class="form-control" type="password">
+                            <div class="form-group">
+                                <label for="NewPassword">Mật khẩu mới</label>
+                                <input name="newPassword" id="NewPassword" class="form-control" type="password" required minlength="6" maxlength="100" />
+                                <span asp-validation-for="NewPassword" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="RePassword">Nhập lại mật khẩu mới</label>
+                                <input name="RePassword" id="RePassword" class="form-control" type="password" required minlength="6" maxlength="100" />
+                                <span asp-validation-for="RePassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Cập nhật</button>
+                            </div>
+
+                            <!-- Hiển thị thông báo lỗi từ server -->
+                            @if (TempData["ErrorMessage"] != null)
+                            {
+                                <div class="alert alert-danger">
+                                    @TempData["ErrorMessage"]
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label>Nhập lại mật khẩu</label>
-                                    <input name="RePassword" class="form-control" type="password">
+                            }
+
+                            @if (TempData["SuccessMessage"] != null)
+                            {
+                                <div class="alert alert-success">
+                                    @TempData["SuccessMessage"]
                                 </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Mật khẩu cũ</label>
-                                <input name="OldPassword" class="form-control" type="password">
-                            </div>
-                            <div class="form-group text-center">
-                                <button class="btn btn-primary btn-sm mt-15" type="submit">Cập nhật</button>
-                            </div>
+                            }
                         </form>
                     </div>
                 </div>
