@@ -1,0 +1,37 @@
+﻿@model test2.Models.DoctorModel.HealthRecordViewModel
+
+
+<div class="container mx-auto mt-10 pt-10">
+    <h2 class="text-2xl font-bold text-blue-500 mb-4">Add Health Record</h2>
+
+    <form asp-action="AddHealthRecord" method="post" class="max-w-lg mx-auto">
+        <input type="hidden" asp-for="Did" />
+        <input type="hidden" asp-for="Pid" />
+        <input type="hidden" asp-for="OrderId" />
+
+        <div class="mb-4">
+            <label asp-for="Diagnosis" class="block text-gray-700 font-bold mb-2">Diagnosis</label>
+            <textarea asp-for="Diagnosis" class="w-full border rounded-lg p-2" rows="3"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Description" class="block text-gray-700 font-bold mb-2">Description</label>
+            <textarea asp-for="Description" class="w-full border rounded-lg p-2" rows="3"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Note" class="block text-gray-700 font-bold mb-2">Note</label>
+            <textarea asp-for="Note" class="w-full border rounded-lg p-2" rows="3"></textarea>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="DateExam" class="block text-gray-700 font-bold mb-2">Date of Exam</label>
+            <input asp-for="DateExam" class="w-full border rounded-lg p-2" type="date" />
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+            Submit
+        </button>
+        <a asp-action="ViewAppointment" asp-route-id="@Model.Did" class="text-blue-500 hover:underline ml-4">Cancel</a>
+    </form>
+</div>

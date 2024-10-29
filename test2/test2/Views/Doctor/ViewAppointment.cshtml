@@ -85,6 +85,13 @@
                                asp-route-appointmentDetail="@appointment.appointmentlist.AppointmentId"
                                class="text-blue-600 hover:underline">View Details</a>
                         </td>
+                        <td class="px-6 py-4">
+                            <a asp-controller="Doctor"
+                               asp-action="AddHealthRecord"
+                               asp-route-appointmentDetail="@appointment.appointmentlist.AppointmentId"
+                               class="text-blue-600 hover:underline">Add Health Record</a>
+                        </td>
+
                     </tr>
                 }
             </tbody>

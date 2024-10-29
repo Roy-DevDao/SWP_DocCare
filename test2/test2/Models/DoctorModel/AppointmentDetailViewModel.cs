@@ -3,6 +3,7 @@
     public class AppointmentDetailViewModel
     {
         public string AppointmentId { get; set; }
+        public string PatientId { get; set; }
         public string? PatientName { get; set; }
         public string? PatientImage { get; set; }
         public string? PatientPhone { get; set; }

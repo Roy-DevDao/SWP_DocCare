@@ -17,5 +17,7 @@
         public PatientDetailViewModel patientDetail { get; set; }
 
         public FeedbackViewModel feedbackView { get; set; }
+
+        public HealthRecordViewModel recordView { get; set; }
     }
 }

@@ -21,14 +21,14 @@ namespace test2.DAO
                 return new List<BaseViewModel>();
             }
 
-            // Lấy danh sách cuộc hẹn cho bác sĩ
+            //Lấy danh sách cuộc hẹn cho bác sĩ
             return _context.Options
                 .Where(option => option.Did == doctorId)  // Lọc theo bác sĩ
                 .Include(option => option.Orders)           // Bao gồm thông tin đơn hàng
                     .ThenInclude(order => order.PidNavigation) // Lấy thông tin bệnh nhân
                 .Include(option => option.DidNavigation)    // Lấy thông tin bác sĩ
                 .SelectMany(option => option.Orders, (option, order) => new BaseViewModel
-                {                    
+                {
                     DId = option.Did,                // Thêm ID bác sĩ
                     Name = option.DidNavigation != null ? option.DidNavigation.Name : null, // Kiểm tra null
                     DoctorImg = option.DidNavigation != null ? option.DidNavigation.DoctorImg : null, // Kiểm tra null
@@ -42,6 +42,7 @@ namespace test2.DAO
                     }
                 })
                 .ToList();
+
         }
 
         public AppointmentDetailViewModel GetAppointmentDetailById(string appointmentId)
@@ -58,6 +59,7 @@ namespace test2.DAO
             return new AppointmentDetailViewModel
             {
                 AppointmentId = appointment.Oid,
+                PatientId = appointment.Pid,
                 PatientName = appointment.PidNavigation?.Name,
                 PatientImage = appointment.PidNavigation?.PatientImg,
                 PatientPhone = appointment.PidNavigation?.Phone,

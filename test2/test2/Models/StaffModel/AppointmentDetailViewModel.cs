@@ -24,9 +24,8 @@ namespace test2.Models.StaffModel
         public string Notes { get; set; } // Ghi chú bổ sung
         public List<SelectListItem> StatusList { get; set; } = new List<SelectListItem>
         {
-            new SelectListItem { Value = "Completed", Text = "Completed" },
-            new SelectListItem { Value = "Pending", Text = "Pending" },
-            new SelectListItem { Value = "Canceled", Text = "Canceled" }
+            new SelectListItem { Value = "Xác nhận", Text = "Xác nhận" },
+            new SelectListItem { Value = "Huỷ", Text = "Huỷ" },
         };
     }
 

@@ -15,7 +15,7 @@ namespace test2.DAO
             dc = context;
         }
 
-        public bool UpdateAppointmentStatus(string appointmentId, string newStatus = "Completed")
+        public bool UpdateAppointmentStatus(string appointmentId, string newStatus)
         {
             using (var transaction = dc.Database.BeginTransaction())
             {
@@ -24,7 +24,7 @@ namespace test2.DAO
                     var order = dc.Orders.FirstOrDefault(o => o.Oid == appointmentId);
                     if (order != null)
                     {
-                        order.Status = newStatus;
+                        order.Option.Status = newStatus;
                         dc.SaveChanges();
                         transaction.Commit();
                         return true;

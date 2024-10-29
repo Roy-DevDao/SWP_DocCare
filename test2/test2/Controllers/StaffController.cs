@@ -384,11 +384,11 @@ namespace test2.Controllers
             bool isUpdated = staffDAO.UpdateAppointmentStatus(appointmentId, newStatus);
             if (isUpdated)
             {
-                TempData["Message"] = "Appointment status updated successfully.";
+                TempData["Message"] = "Chỉnh sửa thành công.";
             }
             else
             {
-                TempData["Error"] = "Failed to update appointment status.";
+                TempData["Error"] = "Chỉnh sửa không thành công, vui lòng thử lại!";
             }
             return RedirectToAction("AppointmentDetail", new { id = appointmentId });
         }
@@ -403,16 +403,14 @@ namespace test2.Controllers
             bool isUpdated = staffDAO.UpdateAppointmentStatus(appointmentId, newStatus);
             if (isUpdated)
             {
-                TempData["Message"] = "Appointment status updated successfully.";
+                TempData["Message"] = "Chỉnh sửa thành công.";
             }
             else
             {
-                TempData["Error"] = "Failed to update appointment status.";
+                TempData["Error"] = "Chỉnh sửa không thành công, vui lòng thử lại!";
             }
             return RedirectToAction("ServiceAppointDetail", new { id = appointmentId });
         }
-
-
 
 
 

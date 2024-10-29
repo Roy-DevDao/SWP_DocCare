@@ -29,7 +29,7 @@ namespace test2.Controllers
             _context = ct;
             _userDAO = ud;
         }
-
+//-------------------------------------------------------------------------------------------------------------
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (User.Identity.IsAuthenticated)
@@ -65,7 +65,7 @@ namespace test2.Controllers
             return View(feedbackViewModels);
         }
 
-
+//-------------------------------------------------------------------------------------------------------------
 
         public IActionResult Profile(string id)
         {
@@ -123,6 +123,7 @@ namespace test2.Controllers
             // Trả về view cùng với model bác sĩ
             return View(doctor);
         }
+//-------------------------------------------------------------------------------------------------------------
 
 
         public IActionResult ViewAppointment(string id)
@@ -150,11 +151,14 @@ namespace test2.Controllers
 
             if (appointment == null)
             {
-                return NotFound(); // Trả về 404 nếu không tìm thấy
+                return View(); // Trả về 404 nếu không tìm thấy
+
             }
 
             return View(appointment); // Trả về View với thông tin cuộc hẹn
         }
+
+//-------------------------------------------------------------------------------------------------------------
 
         public IActionResult ViewAppointmentDetail(string appointmentDetail)
         {
@@ -180,6 +184,7 @@ namespace test2.Controllers
             return View("ViewAppointmentDetail", new List<BaseViewModel> { baseViewModel });
         }
 
+//-------------------------------------------------------------------------------------------------------------
         public IActionResult ViewPatient(string id)
         {
             // Lấy danh sách bệnh nhân dựa trên bác sĩ có Did = id
@@ -198,8 +203,7 @@ namespace test2.Controllers
             return View(baseViewModelList);
         }
 
-
-
+ //-------------------------------------------------------------------------------------------------------------
         public IActionResult ViewPatientDetail(string pid, string tab = "profile")
         {
             // Tìm bệnh nhân theo pid, bao gồm các đơn hàng và tùy chọn liên quan
@@ -229,20 +233,82 @@ namespace test2.Controllers
                     Status = o.Status ?? "N/A"
                 }).ToList()
             };
-
             ViewBag.ActiveTab = tab; // Chuyển tab (profile/appointment)
-
             // Gói dữ liệu chi tiết bệnh nhân vào BaseViewModel
             var baseViewModel = new BaseViewModel
             {
                 patientDetail = patientDetail
             };
-
             // Truyền danh sách BaseViewModel vào View
             return View("ViewPatientDetail", new List<BaseViewModel> { baseViewModel });
         }
 
+        //-------------------------------------------------------------------------------------------------------------
 
+        public IActionResult AddHealthRecord(string appointmentDetail)
+        {      
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            var appointment = _appointmentDAO.GetAppointmentDetailById(appointmentDetail);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            var model = new HealthRecordViewModel
+            {
+                Pid = appointment.PatientId, // Lấy ID bệnh nhân từ cuộc hẹn
+                Did = userId,                // ID bác sĩ là ID người dùng đăng nhập hiện tại
+                OrderId = appointmentDetail,  // ID của cuộc hẹn
+                DateExam = DateTime.Now       // Ngày hiện tại làm ngày khám bệnh
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddHealthRecord(HealthRecordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _logger.LogInformation("Model is valid. Adding new health record with data: Diagnosis={0}, Description={1}, Note={2}, DateExam={3}",
+                    model.Diagnosis, model.Description, model.Note, model.DateExam);
+
+                var healthRecord = new HealthRecord
+                {
+                    RecordId = Guid.NewGuid().ToString(),
+                    Pid = model.Pid,
+                    Did = model.Did,
+                    Oid = model.OrderId,
+                    Diagnosis = model.Diagnosis,
+                    Description = model.Description,
+                    Note = model.Note,
+                    DateExam = model.DateExam
+                };
+
+                _context.HealthRecords.Add(healthRecord);
+                _context.SaveChanges();
+
+                _logger.LogInformation("Health record added successfully with RecordId: {0}", healthRecord.RecordId);
+
+                return RedirectToAction("ViewAppointment", new { id = model.Did });
+            }
+
+            _logger.LogWarning("Model is invalid. Errors: {0}", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+            return View(model);
+        }
+
+
+
+
+
+
+        //-------------------------------------------------------------------------------------------------------------
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
