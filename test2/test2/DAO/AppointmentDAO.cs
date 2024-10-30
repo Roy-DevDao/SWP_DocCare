@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis.Options;
+using Microsoft.EntityFrameworkCore;
+using test2.Controllers;
 using test2.Data;
 using test2.Models.DoctorModel;
 
@@ -7,10 +9,12 @@ namespace test2.DAO
     public class AppointmentDAO
     {
         private readonly DocCareContext _context;
+        private readonly ILogger<AppointmentDAO> _logger;
 
-        public AppointmentDAO(DocCareContext context)
+        public AppointmentDAO(DocCareContext context, ILogger<AppointmentDAO> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public List<BaseViewModel> GetDoctorAppointments(string doctorId)
@@ -32,16 +36,18 @@ namespace test2.DAO
                     DId = option.Did,                // Thêm ID bác sĩ
                     Name = option.DidNavigation != null ? option.DidNavigation.Name : null, // Kiểm tra null
                     DoctorImg = option.DidNavigation != null ? option.DidNavigation.DoctorImg : null, // Kiểm tra null
+                    optionID = option.OptionId,
                     appointmentlist = new AppointmentViewModel
                     {
                         AppointmentId = order.Oid,
                         PatientName = order.PidNavigation != null ? order.PidNavigation.Name : null, // Kiểm tra null
                         PatientImage = order.PidNavigation != null ? order.PidNavigation.PatientImg : null,
                         DateOrder = order.DateOrder,
-                        Status = order.Status
+                        Status = option.Status
                     }
                 })
                 .ToList();
+
         }
 
         public AppointmentDetailViewModel GetAppointmentDetailById(string appointmentId)
@@ -55,6 +61,8 @@ namespace test2.DAO
 
             if (appointment == null) return null;
 
+            _logger.LogInformation(appointment.Option.Status);
+
             return new AppointmentDetailViewModel
             {
                 AppointmentId = appointment.Oid,
@@ -65,7 +73,7 @@ namespace test2.DAO
                 Price = appointment.Option?.DidNavigation?.Price,
                 DateOrder = appointment.DateOrder,
                 Symptom = appointment.Symptom,
-                Status = appointment.Status
+                Status = appointment.Option.Status
             };
         }
 

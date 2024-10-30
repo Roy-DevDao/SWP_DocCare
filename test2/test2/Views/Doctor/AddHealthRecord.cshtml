@@ -1,0 +1,41 @@
+﻿@model List<test2.Models.DoctorModel.BaseViewModel>
+
+@{
+    Layout = "~/Views/Shared/Layout_Doctor.cshtml";
+}
+
+<h2>Hồ Sơ Bệnh Án</h2>
+
+<form asp-action="AddHealthRecord" method="post">
+    <input type="hidden" name="appointmentId" value="@Model[0].appointmentlist.AppointmentId" />
+
+    <div>
+        <label>Tên Bệnh Nhân:</label>
+        <input type="text" name="patientName" value="@Model[0].healthRecord.PatientName" readonly class="form-control" disabled />
+    </div>
+
+    <div>
+        <label>Chẩn Đoán (Diagnosis):</label>
+        <input type="text" name="diagnosis" required class="form-control" />
+    </div>
+
+    <div>
+        <label>Mô Tả (Description):</label>
+        <textarea name="description" required class="form-control"></textarea>
+    </div>
+
+    <div>
+        <label>Ghi Chú (Note):</label>
+        <textarea name="note" class="form-control"></textarea>
+    </div>
+
+    <div>
+        <label>Ngày Khám (DateExam):</label>
+        <input type="date" name="dateExam" value="@Model[0].healthRecord.DateExam.ToString("yyyy-MM-dd")" readonly class="form-control" disabled />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Lưu Hồ Sơ</button>
+</form>
+
+<!-- Nút Quay lại -->
+<button onclick="window.history.back()" class="btn btn-secondary mt-3">Quay lại</button>

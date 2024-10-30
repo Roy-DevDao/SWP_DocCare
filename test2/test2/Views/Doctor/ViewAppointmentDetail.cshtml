@@ -46,8 +46,20 @@
         </div>
     </div>
 
+    @if (Model.First().appointmentDetail.Status == "Confirm")
+    {
+        <div class="mt-6 flex justify-end">
+            <a asp-action="AddHealthRecord"
+               asp-route-appointmentId="@Model.First().appointmentDetail.AppointmentId"
+               class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
+                Add to HealthRecord
+            </a>
+        </div>
+    }
+
     <div class="mt-6 flex justify-end">
         <a asp-action="ViewAppointment"
+           asp-route-id="@Model.First().DId"
            class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
             Back to Appointments
         </a>

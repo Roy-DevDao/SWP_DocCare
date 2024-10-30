@@ -7,6 +7,7 @@ namespace test2.Models.DoctorModel
         public string? DoctorImg { get; set; }
         public string DId { get; set; } = null!;
         public string? Name { get; set; }
+        public string? optionID { get; set; }
 
         public DoctorProfileViewModel doctorProfile { get; set; }
 
@@ -19,5 +20,8 @@ namespace test2.Models.DoctorModel
         public PatientDetailViewModel patientDetail { get; set; }
 
         public FeedbackViewModel feedbackView { get; set; }
+
+        // Thêm thuộc tính HealthRecordViewModel
+        public HealthRecordViewModel healthRecord { get; set; }
     }
 }
