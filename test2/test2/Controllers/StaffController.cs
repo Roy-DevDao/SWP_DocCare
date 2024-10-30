@@ -55,7 +55,7 @@ namespace test2.Controllers
             // Pass the patient data to the view
             return View(staff);
         }
-
+        //-------------------------------------------------------------------------------------------------------------
         public IActionResult AppoitmentList(string search_doctor = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
         {
             int pageSize = 10;
@@ -96,8 +96,8 @@ namespace test2.Controllers
                 AppointmentId = o.Oid,
                 PatientName = o.PidNavigation.Name,
                 DoctorName = o.Option.DidNavigation.Name,
-                //AppointmentDate = o.Option.DateExam ?? DateTime.MinValue,
-                Status = o.Status
+                AppointmentDate = o.Option.DateWork ?? DateTime.MinValue,
+                StatusOption = o.Option.Status
             })
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -117,12 +117,7 @@ namespace test2.Controllers
         }
 
 
-
-
-
-
         //-------------------------------------------------------------------------------------------------------------
-
         public IActionResult AppointmentDetail(string id)
         {
             // Retrieve the appointment details based on the appointment ID (OId)
@@ -147,9 +142,10 @@ namespace test2.Controllers
                     DoctorGender = o.Option.DidNavigation.Gender,
                     AppointmentDate = o.Option.DateWork.HasValue ? o.Option.DateWork.Value : DateTime.MinValue,
                     AppointmentTime = o.Option.DateWork.HasValue ? o.Option.DateWork.Value.ToString("hh:mm tt") : "N/A",
-                    Status = o.Status,
+                    StatusOrder = o.Status,
+                    StatusOption = o.Option.Status,
                     Fee = o.Option.DidNavigation.Price ?? 0,
-                    SupportingStaff = "Nguyễn Văn C",  // Static for now
+                    SupportingStaff = "Trần Việt Thắng",  // Static for now
                     ConsultationInfo = o.Symptom,  // Store examination details
                 })
                 .FirstOrDefault();
@@ -166,7 +162,6 @@ namespace test2.Controllers
 
 
         //-------------------------------------------------------------------------------------------------------------
-
         public IActionResult ServiceAppointList(string search_service = "", string sortColumn = "AppointmentId", string sortDirection = "asc", string status = "all", int pageNumber = 1)
         {
             int pageSize = 10;
@@ -230,8 +225,8 @@ namespace test2.Controllers
                 PatientName = o.PidNavigation.Name,
                 DoctorName = o.Option.DidNavigation.Name,
                 SpecialtyName = o.Option.DidNavigation.Specialty.SpecialtyName,
-                //AppointmentDate = o.Option.DateExam.HasValue ? o.Option.DateExam.Value : DateTime.MinValue,
-                Status = o.Status
+                AppointmentDate = o.Option.DateWork.HasValue ? o.Option.DateWork.Value : DateTime.MinValue,
+                StatusOption = o.Option.Status
             })
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -274,9 +269,9 @@ namespace test2.Controllers
                     SpecialtyImage = o.Option.DidNavigation.Specialty.SpecialtyImg, // Hình ảnh chuyên khoa
                     AppointmentDate = o.Option.DateWork.HasValue ? o.Option.DateWork.Value : DateTime.MinValue,
                     AppointmentTime = o.Option.DateWork.HasValue ? o.Option.DateWork.Value.ToString("hh:mm tt") : "N/A",
-                    Status = o.Status,
+                    StatusOrder = o.Status,
                     Fee = o.Option.DidNavigation.Price ?? 0,
-                    SupportingStaff = "Nguyễn Văn C", // Tên nhân viên hỗ trợ, có thể thay đổi sau
+                    SupportingStaff = "Trần Việt Thắng", // Tên nhân viên hỗ trợ, có thể thay đổi sau
                     ConsultationInfo = o.Symptom // Thông tin tư vấn
                 })
                 .FirstOrDefault();
@@ -292,11 +287,12 @@ namespace test2.Controllers
         }
 
         //-------------------------------------------------------------------------------------------------------------
-
         public IActionResult Schedule(string doctorId, DateTime? selectedDate)
         {
+      
+
             // Nếu không có ngày được chọn, mặc định là tuần từ 07/11/2024 đến 13/11/2024
-            DateTime startDate = selectedDate.HasValue ? selectedDate.Value : new DateTime(2024, 11, 7);
+            DateTime startDate = selectedDate.HasValue ? selectedDate.Value : DateTime.Now;
             DateTime endDate = startDate.AddDays(6); // Lấy tuần từ ngày đã chọn
 
             // Lấy lịch làm việc của bác sĩ theo khoảng thời gian đã chọn
@@ -315,6 +311,7 @@ namespace test2.Controllers
             return View(doctors);
         }
 
+        //-------------------------------------------------------------------------------------------------------------
         [HttpPost]
         public IActionResult UpdateSchedule([FromBody] List<ScheduleUpdateModel> scheduleUpdates)
         {
@@ -376,6 +373,7 @@ namespace test2.Controllers
             }
         }
 
+        //-------------------------------------------------------------------------------------------------------------
         [HttpPost]
         public IActionResult UpdateAppointmentStatus(string appointmentId, string newStatus = "Fail")
         {
@@ -393,8 +391,7 @@ namespace test2.Controllers
             return RedirectToAction("AppointmentDetail", new { id = appointmentId });
         }
 
-
-        // Cập nhật trạng thái từ form ở trang ServiceAppointDetail
+        //-------------------------------------------------------------------------------------------------------------
         [HttpPost]
         public IActionResult ServiceAppointDetailUpdate(string appointmentId, string newStatus)
         {
@@ -415,7 +412,6 @@ namespace test2.Controllers
 
 
         //-------------------------------------------------------------------------------------------------------------
-
         public IActionResult ContactList(string status = "all", int pageNumber = 1)
         {
             int pageSize = 10; // Số lượng liên hệ trên mỗi trang
@@ -453,7 +449,8 @@ namespace test2.Controllers
 
             return View(contacts);
         }
-
+        
+        //-------------------------------------------------------------------------------------------------------------
         public IActionResult ResolveContact(string id)
         {
             // Tìm liên hệ theo ID

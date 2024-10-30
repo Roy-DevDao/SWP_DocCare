@@ -7,6 +7,6 @@
         public string DoctorName { get; set; }
         public string SpecialtyName { get; set; } // Added this property
         public DateTime AppointmentDate { get; set; }
-        public string Status { get; set; }
+        public string StatusOption { get; set; }
     }
 }

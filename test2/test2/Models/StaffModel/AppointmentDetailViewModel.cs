@@ -17,15 +17,17 @@ namespace test2.Models.StaffModel
         public string DoctorGender { get; set; }
         public DateTime AppointmentDate { get; set; } // Ngày hẹn
         public string AppointmentTime { get; set; } // Giờ hẹn
-        public string Status { get; set; } // Trạng thái của cuộc hẹn
+        public string StatusOrder { get; set; } // Trạng thái của Order: Cancelled, Confirm(đã thanh toán), Unpaid
+        public string StatusOption { get; set; }  // Trạng thái của Option (ở dưới Update in4)
         public double Fee { get; set; } // Phí khám
         public string SupportingStaff { get; set; } // Nhân viên hỗ trợ
         public string ConsultationInfo { get; set; } // Thông tin triệu chứng hoặc vấn đề khám
         public string Notes { get; set; } // Ghi chú bổ sung
         public List<SelectListItem> StatusList { get; set; } = new List<SelectListItem>
         {
-            new SelectListItem { Value = "Xác nhận", Text = "Xác nhận" },
-            new SelectListItem { Value = "Huỷ", Text = "Huỷ" },
+            new SelectListItem { Value = "Wait", Text = "Chờ xác nhận" },
+            new SelectListItem { Value = "Confirm", Text = "Xác nhận" },
+            new SelectListItem { Value = "Cancelled", Text = "Huỷ" },
         };
     }
 

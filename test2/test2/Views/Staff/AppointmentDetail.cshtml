@@ -2,7 +2,7 @@
 
 @{
     Layout = "Layout_staff";
-    ViewData["Title"] = "Appointment Detail from Staff";
+    ViewData["Title"] = "Mô tả cuộc hẹn";
 }
 
 <div class="container-fluid">
@@ -11,29 +11,38 @@
             <div class="col-lg-6 col-md-6">
                 <div class="bg-white rounded shadow overflow-hidden">
                     <div class="p-4 border-bottom">
-                        <h5 class="mb-0">Patient Information</h5>
+                        <h5 class="mb-0">Thông tin bệnh nhân</h5>
                     </div>
-                    <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                        <img src="Model.PatientImage" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                        <h5 class="mt-3 mb-1">@Model.PatientName</h5>
+                  
+                    <div class="text-center d-flex align-items-center justify-content-center mt-3 pb-4 border-bottom">
+                        <img src="@Model.PatientImage" class="rounded-circle shadow-md avatar avatar-md-md me-3" alt="" style="width: 80px; height: 80px;">
+                        <h5 class="mb-1">@Model.PatientName</h5>
                     </div>
+
 
                     <div class="list-unstyled p-4">
                         <div class="d-flex align-items-center mt-2">
                             <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
-                            <h6 class="mb-0">Gender</h6>
-                            <p class="text-muted mb-0 ms-2">@Model.PatientGender</p>
+                            <h6 class="mb-0">Giới tính</h6>
+                            @if (Model.PatientGender.Equals("Male"))
+                            {
+                                <p class="text-muted mb-0 ms-2">Nam</p>
+                            }
+                            else
+                            {
+                                <p class="text-muted mb-0 ms-2">Nữ</p>
+                            }                       
                         </div>
 
                         <div class="d-flex align-items-center mt-2">
                             <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
-                            <h6 class="mb-0">Phone Number</h6>
+                            <h6 class="mb-0">Số điện thoại</h6>
                             <p class="text-muted mb-0 ms-2">@Model.PatientPhone</p>
                         </div>
 
                         <div class="d-flex align-items-center mt-2">
                             <i class="uil uil-medical-drip align-text-bottom text-primary h5 mb-0 me-2"></i>
-                            <h6 class="mb-0">Date of Birth</h6>
+                            <h6 class="mb-0">Ngày sinh</h6>
                             <p class="text-muted mb-0 ms-2">@Model.PatientDOB?.ToString("dd/MM/yyyy")</p>
                         </div>
                     </div>
@@ -42,29 +51,37 @@
             <div class="col-lg-6 col-md-6 ">
                 <div class="bg-white rounded shadow overflow-hidden">
                     <div class="p-4 border-bottom">
-                        <h5 class="mb-0">Doctor Information</h5>
+                        <h5 class="mb-0">Thông tin bác sĩ</h5>
                     </div>
-                    <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
-                        <img src="@Model.DoctorImage" class="rounded-circle shadow-md avatar avatar-md-md" alt="">
-                        <h5 class="mt-3 mb-1">@Model.DoctorName</h5>
+
+                    <div class="text-center d-flex align-items-center justify-content-center mt-3 pb-4 border-bottom">
+                        <img src="@Model.DoctorImage" class="rounded-circle shadow-md avatar avatar-md-md me-3" alt="" style="width: 80px; height: 80px;">
+                        <h5 class="mb-1">@Model.DoctorName</h5>
                     </div>
 
                     <div class="list-unstyled p-4">
                         <div class="d-flex align-items-center mt-2">
                             <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
-                            <h6 class="mb-0">Gender</h6>
-                            <p class="text-muted mb-0 ms-2">@Model.DoctorGender</p>
+                            <h6 class="mb-0">Giới tính</h6>
+                            @if (Model.DoctorGender.Equals("Male"))
+                            {
+                                <p class="text-muted mb-0 ms-2">Nam</p>
+                            }
+                            else
+                            {
+                                <p class="text-muted mb-0 ms-2">Nữ</p>
+                            }                        
                         </div>
 
                         <div class="d-flex align-items-center mt-2">
                             <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
-                            <h6 class="mb-0">Phone Number</h6>
+                            <h6 class="mb-0">Số điện thoại</h6>
                             <p class="text-muted mb-0 ms-2">@Model.DoctorPhone</p>
                         </div>
 
                         <div class="d-flex align-items-center mt-2">
                             <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
-                            <h6 class="mb-0">Specialization</h6>
+                            <h6 class="mb-0">Chuyên khoa</h6>
                             <p class="text-muted mb-0 ms-2">@Model.DoctorSpecialization</p>
                         </div>
                     </div>
@@ -73,43 +90,43 @@
         </div>
         <div class="card border-0 shadow overflow-hidden mt-4">
             <div class="p-4 border-bottom">
-                <h5 class="mb-0">Appointment Information</h5>
+                <h5 class="mb-0">Chi tiết về cuộc hẹn</h5>
             </div>
             <div class="tab-content p-4" id="pills-tabContent">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Appointment Date</label>
+                            <label class="form-label">Ngày hẹn khám</label>
                             <p>@Model.AppointmentDate.ToString("dd/MM/yyyy")</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Time</label>
+                            <label class="form-label">Thời gian</label>
                             <p>@Model.AppointmentTime</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Status</label>
-                            <p>@Model.Status</p>
+                            <label class="form-label">Tình trạng thanh toán</label>
+                            <p>@Model.StatusOrder</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Supporting Staff</label>
+                            <label class="form-label">Nhân viên hỗ trợ</label>
                             <p>@Model.SupportingStaff</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Consultation Fee</label>
-                            <p>@Model.Fee.ToString("N0") $</p>
+                            <label class="form-label">Chi phí</label>
+                            <p>@Model.Fee.ToString("N0")$</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="mb-3">
-                            <label class="form-label">Information</label>
+                            <label class="form-label">Triệu chứng của bệnh nhân</label>
                             <p>@Model.ConsultationInfo</p>
                         </div>
                     </div>
@@ -120,7 +137,7 @@
         <!-- Form Cập Nhật Trạng Thái Cuộc Hẹn -->
         <div class="card border-0 shadow overflow-hidden mt-4">
             <div class="p-4 border-bottom">
-                <h5 class="mb-0">Update Information</h5>
+                <h5 class="mb-0">Xác nhận cuộc hẹn</h5>
             </div>
             <div class="tab-content p-4" id="pills-tabContent">
                 <!-- Form Update Status -->
@@ -129,10 +146,10 @@
                     <div class="tab-content p-4">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select asp-for="Status" asp-items="Model.StatusList" class="form-control" id="newStatus" name="newStatus"></select>
+                                <label class="form-label">Trạng thái</label>
+                                <select asp-for="StatusOption" asp-items="Model.StatusList" class="form-control" id="newStatus" name="newStatus"></select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Update Status</button>
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
                         </div>
                     </div>
                 </form>

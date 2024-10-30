@@ -15,21 +15,25 @@ namespace test2.DAO
             dc = context;
         }
 
-        public bool UpdateAppointmentStatus(string appointmentId, string newStatus)
+        public bool UpdateAppointmentStatus(string appointmentId, string newStatus =" ")
         {
             using (var transaction = dc.Database.BeginTransaction())
             {
                 try
                 {
-                    var order = dc.Orders.FirstOrDefault(o => o.Oid == appointmentId);
-                    if (order != null)
+                    var order = dc.Orders.Include(o => o.Option).FirstOrDefault(o => o.Oid == appointmentId); // sử dụng  Eager Loading
+                    //var order = dc.Orders.FirstOrDefault(o => o.Oid == appointmentId);
+                    if (order != null && order.Option != null) // Check null
                     {
                         order.Option.Status = newStatus;
                         dc.SaveChanges();
                         transaction.Commit();
                         return true;
                     }
-                    return false;
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -39,6 +43,7 @@ namespace test2.DAO
                 }
             }
         }
+
 
 
 
