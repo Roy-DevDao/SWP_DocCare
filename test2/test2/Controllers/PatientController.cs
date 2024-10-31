@@ -646,7 +646,20 @@ namespace test2.Controllers
         }
 
 
-       
+         public IActionResult Success()
+  {
+      // Lấy thông báo từ TempData (nếu có)
+      ViewBag.Message = TempData["Message"] ?? "Thanh toán thành công! Cảm ơn bạn đã sử dụng dịch vụ.";
+      return View();
+  }
+
+  public IActionResult PaymentFail()
+  {
+      // Lấy thông báo lỗi từ TempData (nếu có)
+      ViewBag.Message = TempData["Message"] ?? "Thanh toán không thành công. Vui lòng thử lại hoặc liên hệ hỗ trợ.";
+      return View();
+  }
+
 
 
         [HttpPost]
