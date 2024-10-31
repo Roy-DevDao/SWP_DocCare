@@ -1,16 +1,16 @@
-﻿@{
+﻿
 
+﻿@{
     var doctors = ViewBag.Doctors as IEnumerable<test2.Data.Doctor>;
 
     var specialties = ViewBag.Specialties as IEnumerable<test2.Data.Specialty>;
 
     var post = ViewBag.Post as IEnumerable<test2.Data.Blog>;
-
 }
 @{
     Layout = "Layout_new";
 
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Trang Chủ";
 }
 
 <style>
@@ -50,7 +50,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
 </style>
 
 <section class="bg-half-260 d-table w-100" style="background: url('@Url.Content("~/assets/images/bg/banner.jpg")') center;">
@@ -62,9 +61,9 @@
                     <img src="assets/images/icon-logo.png" height="5" width="5" alt="">
                     <h4 class="display-4 fw-bold text-white title- mt-3 mb-4">
                         <br>
-                        Online Healthcare <br> Registration System
+                        Hệ Thống Đăng Ký<br /> Chăm Sóc Trực Tuyến<br />
                     </h4>
-                    <p class="para-desc text-white-50 mb-0">If you or your loved one needs immediate assistance, emergency treatment through a simple consultation.</p>
+                    <p class="para-desc text-white-50 mb-0">Nếu bạn hoặc người thân cần hỗ trợ ngay lập tức, điều trị khẩn cấp qua một cuộc tư vấn đơn giản.</p>
                 </div>
             </div>
         </div>
@@ -72,40 +71,40 @@
 </section>
 
 <section class="section">
-    <div class="container">
+    <div class="container" style="position:relative; top:20px;">
         <div class="row justify-content-center">
             <div class="col-xl-10">
                 <div class="features-absolute bg-white shadow rounded overflow-hidden card-group">
                     <div class="card border-0 bg-light p-4">
                         <i class="ri-heart-pulse-fill text-primary h2 mb-0"></i>
-                        <h5 class="mt-1">Healthcare Services</h5>
-                        <p class="text-muted mt-2">We bring you the highest quality services available on the market.</p>
-                        <a asp-area="" asp-controller="Home" asp-action="ServiceList" class="text-primary">Learn more <i class="ri-arrow-right-line align-middle"></i></a>
+                        <h5 class="mt-1">Dịch Vụ Chăm Sóc Sức Khỏe</h5>
+                        <p class="text-muted mt-2">Chúng tôi mang đến cho bạn những dịch vụ chất lượng cao nhất trên thị trường.</p>
+                        <a asp-area="" asp-controller="Home" asp-action="ServiceList" class="text-primary">Tìm hiểu thêm <i class="ri-arrow-right-line align-middle"></i></a>
                     </div>
 
                     <div class="card border-0 p-4">
                         <i class="ri-dossier-fill text-primary h2 mb-0"></i>
-                        <h5 class="mt-1">Online Booking</h5>
-                        <p class="text-muted mt-2">Our team of doctors is always ready to consult and examine just for you.</p>
+                        <h5 class="mt-1">Đặt Lịch Trực Tuyến</h5>
+                        <p class="text-muted mt-2">Đội ngũ bác sĩ của chúng tôi luôn sẵn sàng tư vấn và thăm khám cho bạn.</p>
                         <br>
-                        <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="text-primary">Learn more <i class="ri-arrow-right-line align-middle"></i></a>
+                        <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="text-primary">Tìm hiểu thêm <i class="ri-arrow-right-line align-middle"></i></a>
                     </div>
 
                     <div class="card border-0 bg-light p-4">
                         <i class="ri-time-fill text-primary h2 mb-0"></i>
-                        <h5 class="mt-1">Operating Hours</h5>
+                        <h5 class="mt-1">Giờ Hoạt Động</h5>
                         <ul class="list-unstyled mt-2">
                             <li class="d-flex justify-content-between">
-                                <p class="text-muted mb-0">Monday - Friday</p>
-                                <p class="text-primary mb-0">8.00 AM - 8.00 PM</p>
+                                <p class="text-muted mb-0">Thứ Hai - Thứ Sáu</p>
+                                <p class="text-primary mb-0">8:00 - 20:00</p>
                             </li>
                             <li class="d-flex justify-content-between">
-                                <p class="text-muted mb-0">Saturday</p>
-                                <p class="text-primary mb-0">8.00 AM - 6.00 PM</p>
+                                <p class="text-muted mb-0">Thứ Bảy</p>
+                                <p class="text-primary mb-0">8:00 - 18:00</p>
                             </li>
                             <li class="d-flex justify-content-between">
-                                <p class="text-muted mb-0">Sunday</p>
-                                <p class="text-primary mb-0">8.00 AM - 2.00 PM</p>
+                                <p class="text-muted mb-0">Chủ Nhật</p>
+                                <p class="text-primary mb-0">8:00 - 14:00</p>
                             </li>
                         </ul>
                     </div>
@@ -114,8 +113,7 @@
         </div>
     </div>
 
-
-    <div class="container mt-100 mt-60">
+    <div class="container mt-20 mt-20">
         <div class="row align-items-center">
             <div class="col-lg-5 col-md-6">
                 <div class="position-relative">
@@ -131,29 +129,27 @@
             <div class="col-lg-7 col-md-6 mt-4 mt-lg-0 pt- pt-lg-0">
                 <div class="ms-lg-4">
                     <div class="section-title">
-                        <h4 class="title mb-4">Why Choose Doccare?</h4>
-                        <p class="text-muted para-desc">We bring together a team of experts, doctors, pharmacists, and nurses with high professional qualifications, excellent skills, dedication, and professionalism.</p>
-                        <p class="text-muted para-desc mb-0">Always putting the patient at the center, Doccare is committed to providing the best healthcare services to our customers.</p>
+                        <h4 class="title mb-4">Tại Sao Chọn Doccare?</h4>
+                        <p class="text-muted para-desc">Chúng tôi tập hợp đội ngũ các chuyên gia, bác sĩ, dược sĩ và y tá có chuyên môn cao, kỹ năng xuất sắc, tận tâm và chuyên nghiệp.</p>
+                        <p class="text-muted para-desc mb-0">Luôn đặt bệnh nhân là trung tâm, Doccare cam kết cung cấp những dịch vụ chăm sóc sức khỏe tốt nhất cho khách hàng.</p>
                     </div>
                 </div>
             </div>
 
-
             <div class="mt-4">
-                <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="btn btn-primary">More.. <i class="ri-arrow-right-line align-middle"></i></a>
+                <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="btn btn-primary">Xem thêm.. <i class="ri-arrow-right-line align-middle"></i></a>
             </div>
         </div>
     </div>
-    </div>
-    </div>
 </section>
+
 
 <section class="section home-tile-section">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9 m-auto">
                 <div class="section-header text-center">
-                    <h2>What are you looking for?</h2>
+                    <h2>Bạn đang tìm kiếm gì?</h2>
                 </div>
                 <div class="row">
                     <div class="col-lg-4 mb-3">
@@ -161,8 +157,8 @@
                             <img src="~/Content/theme/img/doctors/doctor-07.jpg" alt="" class="img-fluid">
                             <div class="doctor-book-card-content tile-card-content-1">
                                 <div>
-                                    <h3 class="card-title mb-0">Visit a Doctor</h3>
-                                    <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Book Now</a>
+                                    <h3 class="card-title mb-0">Gặp Bác sĩ</h3>
+                                    <a asp-area="" asp-controller="Home" asp-action="DoctorList" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Đặt Lịch Ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -172,8 +168,8 @@
                             <img src="~/Content/theme/img/img-pharmacy1.jpg" alt="" class="img-fluid">
                             <div class="doctor-book-card-content tile-card-content-1">
                                 <div>
-                                    <h3 class="card-title mb-0">Find a Service</h3>
-                                    <a asp-area="" asp-controller="Home" asp-action="ServiceList" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Find Now</a>
+                                    <h3 class="card-title mb-0">Tìm Dịch vụ</h3>
+                                    <a asp-area="" asp-controller="Home" asp-action="ServiceList" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Tìm Ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -183,8 +179,8 @@
                             <img src="~/Content/theme/img/lab-image.jpg" alt="" class="img-fluid">
                             <div class="doctor-book-card-content tile-card-content-1">
                                 <div>
-                                    <h3 class="card-title mb-0">Send Contact</h3>
-                                    <a asp-area="" asp-controller="Home" asp-action="Contact" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Contact</a>
+                                    <h3 class="card-title mb-0">Gửi Liên hệ</h3>
+                                    <a asp-area="" asp-controller="Home" asp-action="Contact" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Liên Hệ</a>
                                 </div>
                             </div>
                         </div>
@@ -198,33 +194,35 @@
 <section class="section section-specialities">
     <div class="container-fluid">
         <div class="section-header text-center">
-            <h2>Clinic and Specialities</h2>
-            <p class="sub-title">The Doccare team always brings you the most modern and top-quality healthcare services in the market, with specialized doctors in various fields.</p>
+            <h2>Phòng Khám và Chuyên Khoa</h2>
+            <p class="sub-title">Đội ngũ Doccare luôn mang đến cho bạn các dịch vụ chăm sóc sức khỏe hiện đại và chất lượng nhất, với các bác sĩ chuyên môn trong nhiều lĩnh vực.</p>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-9">
                 <div class="specialities-slider slider">
-                     @if (specialties != null && specialties.Any())
+                    @if (specialties != null && specialties.Any())
 
                     {
                         @foreach (var specialty in specialties)
 
                         {
-                         <a asp-controller="Home" asp-action="ServiceDetail" asp-route-id="@specialty.SpecialtyId">    
-                    <div class="speicality-item text-center">
-                        <div class="speicality-img">
-                                    <img src="@specialty.SpecialtyImg" class="img-fluid" alt="Speciality @specialty.SpecialtyName">
-                            <span><i class="fa fa-circle" aria-hidden="true"></i></span>
-                        </div>
-                                <p>@specialty.SpecialtyName</p>
-                    </div>
+                            <a asp-controller="Home" asp-action="ServiceDetail" asp-route-id="@specialty.SpecialtyId">
+                                <div class="speicality-item text-center">
+                                    <div class="speicality-img">
+                                        <img src="@specialty.SpecialtyImg" class="img-fluid" alt="Chuyên khoa @specialty.SpecialtyName">
+                                        <span><i class="fa fa-circle" aria-hidden="true"></i></span>
+                                    </div>
+                                    <p>@specialty.SpecialtyName</p>
+                                </div>
                             </a>
                         }
                     }
+
                     else
+
                     {
-                        <p>No services available at the moment.</p>
-                    }            
+                        <p>Hiện chưa có dịch vụ nào.</p>
+                    }
                 </div>
             </div>
         </div>
@@ -232,17 +230,17 @@
 </section>
 
 <section class="section section-doctor">
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding:20px; width: 90%; height:80%;">
         <div class="row">
             <div class="col-lg-4">
                 <div class="section-header ">
-                    <h2>Book Our Doctor</h2>
-                    <p>Doctor Services </p>
+                    <h2>Đặt lịch với Bác sĩ của Chúng tôi</h2>
+                    <p>Dịch vụ của bác sĩ</p>
                 </div>
                 <div class="about-content">
-                    <p>Doccare gathers a team of experts, doctors, pharmacists, and nurses who are well-trained, </p>
-                    <p>from basic to advanced levels, both in Vietnam and in many countries with advanced medical fields such as the USA, UK, France...</p>
-                    <a asp-controller="Patient" asp-action="Invoice" asp-route-orderId="ord4600784">Read More..</a>
+                    <p>Doccare tập hợp một đội ngũ chuyên gia, bác sĩ, dược sĩ và y tá được đào tạo bài bản,</p>
+                    <p>từ cơ bản đến nâng cao, cả ở Việt Nam và tại các quốc gia có nền y học tiên tiến như Mỹ, Anh, Pháp...</p>
+                    <a asp-controller="Patient" asp-action="Invoice" asp-route-orderId="ord4600784">Đọc thêm..</a>
                 </div>
             </div>
             <div class="col-lg-8">
@@ -250,16 +248,16 @@
                     @foreach (var doctor in doctors)
 
                     {
-                        <div class="profile-widget" style="min-height: 600px;">
-                            <div class="doc-img" height ="228.4">
+                        <div class="profile-widget" style="min-height: 520px;">
+                            <div class="doc-img" height="228.4">
                                 <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@doctor.Did">
-                                    <img class="img-fluid" alt="User Image" src="@doctor.DoctorImg">
+                                    <img class="img-fluid" alt="Ảnh người dùng" src="@doctor.DoctorImg">
                                 </a>
                                 <a href="javascript:void(0)" class="fav-btn">
                                     <i class="far fa-bookmark"></i>
                                 </a>
                             </div>
-                            <div class="pro-content" style="min-height: 285px;">
+                            <div class="pro-content" style="min-height: 210px;">
                                 <h3 class="title">
                                     <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@doctor.Did">@doctor.Name</a>
                                     <i class="fas fa-check-circle verified"></i>
@@ -275,7 +273,7 @@
                                 </div>
                                 <ul class="available-info">
                                     <li>
-                                        <i class="fas fa-map-marker-alt"></i> DaNang
+                                        <i class="fas fa-map-marker-alt"></i> Đà Nẵng
                                     </li>
                                     <li>
                                         <i class="fa fa-dashboard"></i> @doctor.Dob
@@ -285,10 +283,10 @@
                             <div class="control">
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@doctor.Did" class="btn view-btn">View Profile</a>
+                                        <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@doctor.Did" class="btn view-btn">Xem Hồ Sơ</a>
                                     </div>
                                     <div class="col-6">
-                                        <a href="https://localhost:7248/Patient/BookingAppointment?doctorid=@doctor.Did" class="btn book-btn">Book Now</a>
+                                        <a href="https://localhost:7248/Patient/BookingAppointment?doctorid=@doctor.Did" class="btn book-btn">Đặt Lịch</a>
                                     </div>
                                 </div>
                             </div>
@@ -344,7 +342,7 @@
 <section class="section pt-0">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 text-center">
+            <div class="col-8 text-center">
                 <div class="video-solution-cta position-relative" style="z-index: 1;">
                     <div class="position-relative">
                         <img src="~/assets/images/bg/banner.jpg" class="img-fluid rounded-md shadow-lg" alt="">

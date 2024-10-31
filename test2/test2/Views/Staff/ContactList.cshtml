@@ -19,15 +19,15 @@
         <div class="justify-content-md-end row">
             <div class="col-md-5 row align-items-center">
                 <div class="col-md-4">
-                    <label class="form-label">Status</label>
+                    <label class="form-label">Trạng Thái</label>
                 </div>
                 <div class="col-md-8">
                     <select name="status" class="form-select" aria-label="Default select example">
                         <option value="">------------</option>
-                        <option value="all" >All</option>
-                        <option value="Completed" >Completed</option>
-                        <option value="Pending" >Pending</option>
-                        <option value="Canceled">Canceled</option>
+                        <option value="all" >Tất Cả</option>
+                        <option value="Completed" >Hoàn Thành</option>
+                        <option value="Pending" >Đang Chờ</option>
+                        <option value="Canceled">Đã Huỷ</option>
                     </select>
                 </div>
             </div>
@@ -46,10 +46,10 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom p-3">ID</th>
-                                    <th class="border-bottom p-3">Full Name</th>
+                                    <th class="border-bottom p-3">Họ và Tên</th>
                                     <th class="border-bottom p-3">Email</th>
-                                    <th class="border-bottom p-3">Medical Description</th>
-                                    <th class="border-bottom p-3">Status</th>
+                                    <th class="border-bottom p-3">Mô Tả</th>
+                                    <th class="border-bottom p-3">Trạng Thái</th>
                                     <th class="border-bottom p-3"></th>
                                 </tr>
                             </thead>
@@ -69,7 +69,7 @@
                                             </td>
                                         } else {
                                         <td class="text-end p-3">
-                                            <a asp-controller="Staff" asp-action="ResolveContact" asp-route-id="@contact.ContactId" type="button" class="btn btn-info">Resolve</a>
+                                            <a asp-controller="Staff" asp-action="ResolveContact" asp-route-id="@contact.ContactId" type="button" class="btn btn-info">Đã Liên Lạc</a>
                                         </td>
                                         }
                                     </tr>

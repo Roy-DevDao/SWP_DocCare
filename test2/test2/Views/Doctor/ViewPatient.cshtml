@@ -5,7 +5,7 @@
 }
 <div class="container mx-auto mt-10 p-5">
     <h2 class="text-2xl text-blue-500 font-bold mb-4">
-        Patients List for Doctor ID: @ViewData["DoctorId"]
+        Danh sách bệnh nhân cho Bác sĩ ID: @ViewData["DoctorId"]
     </h2>
 
     <form class="flex items-center justify-center max-w-sm mx-auto mb-5">
@@ -14,7 +14,7 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
             </svg>
             <h1 class="px-1">@Model.Count()</h1>
-            <h1> total</h1>
+            <h1> tổng</h1>
         </button>
     </form>
 
@@ -22,12 +22,12 @@
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th class="px-6 py-3">Name</th>
-                    <th class="px-6 py-3">Phone</th>
+                    <th class="px-6 py-3">Tên</th>
+                    <th class="px-6 py-3">Điện thoại</th>
                     <th class="px-6 py-3">Email</th>
-                    <th class="px-6 py-3">Date Booking</th>
-                    <th class="px-6 py-3">DoB</th>
-                    <th class="px-6 py-3">Action</th>
+                    <th class="px-6 py-3">Ngày đặt</th>
+                    <th class="px-6 py-3">Ngày sinh</th>
+                    <th class="px-6 py-3">Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,19 +51,16 @@
                                    asp-route-pid="@patient.Pid"
                                    asp-route-tab="profile"
                                    class="font-medium text-blue-600 hover:underline">
-                                    View
+                                    Xem
                                 </a>
-
-
                             </td>
-
                         </tr>
                     }
                 }
                 else
                 {
                     <tr>
-                        <td colspan="6" class="text-center py-4">No patients found.</td>
+                        <td colspan="6" class="text-center py-4">Không tìm thấy bệnh nhân nào.</td>
                     </tr>
                 }
             </tbody>

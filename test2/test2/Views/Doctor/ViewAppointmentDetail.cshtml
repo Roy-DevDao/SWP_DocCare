@@ -1,4 +1,4 @@
-﻿@model List<test2.Models.DoctorModel.BaseViewModel>
+﻿﻿@* @model List<test2.Models.DoctorModel.BaseViewModel>
 @{
     Layout = "~/Views/Shared/Layout_Doctor.cshtml";
 }
@@ -46,11 +46,155 @@
         </div>
     </div>
 
+    @if (Model.First().appointmentDetail.Status == "Confirm")
+    {
+        <div class="mt-6 flex justify-end">
+            <a asp-action="AddHealthRecord"
+               asp-route-appointmentId="@Model.First().appointmentDetail.AppointmentId"
+               class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
+                Add to HealthRecord
+            </a>
+        </div>
+    }
+
     <div class="mt-6 flex justify-end">
         <a asp-action="ViewAppointment"
+           asp-route-id="@Model.First().DId"
            class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
             Back to Appointments
         </a>
     </div>
 </div>
-    }
+    } *@
+
+
+               @model List<test2.Models.DoctorModel.BaseViewModel>
+@{
+    Layout = "~/Views/Shared/Layout_Doctor.cshtml";
+}
+
+<div class="container mx-auto mt-10 pt-10 pb-10 px-8 lg:px-16 bg-white rounded-xl shadow-2xl max-w-4xl">
+    <h2 class="text-4xl font-bold text-blue-600 mb-8">Chi tiết cuộc hẹn</h2>
+
+    <!-- Phần Thông tin tổng quan bệnh nhân và cuộc hẹn -->
+    <div class="bg-blue-50 p-8 rounded-xl shadow-sm flex flex-col space-y-6">
+        <!-- Hình ảnh và thông tin bệnh nhân -->
+        <div class="flex items-center space-x-6">
+            <img class="w-28 h-28 rounded-full border-4 border-blue-500 shadow-lg"
+                 src="@(string.IsNullOrEmpty(Model.First().appointmentDetail.PatientImage)
+                    ? "https://img.lovepik.com/free-png/20210918/lovepik-patient-in-hospital-bed-png-image_400275909_wh1200.png"
+                    : Model.First().appointmentDetail.PatientImage)"
+                 alt="Ảnh bệnh nhân" />
+            <div>
+                <h3 class="text-2xl font-semibold text-blue-600 mb-2">Thông tin bệnh nhân</h3>
+                <p class="text-lg text-gray-800 flex items-center">
+                    <i class="fas fa-user mr-2 text-blue-500"></i>
+                    <strong>Tên:</strong> <span class="ml-24">@(Model.First().appointmentDetail.PatientName ?? "Không xác định")</span>
+                </p>
+                <p class="text-lg text-gray-800 flex items-center">
+                    <i class="fas fa-phone mr-2 text-blue-500"></i>
+                    <strong>Số điện thoại:</strong>     <span class="ml-3">@(Model.First().appointmentDetail.PatientPhone ?? "Không xác định")</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Phần thông tin chuyên khoa và chi phí -->
+        <div class="flex justify-between bg-white rounded-lg shadow p-6 space-x-8">
+            <div>
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-stethoscope mr-2"></i>
+                    Chuyên khoa
+                </h3>
+                <p class="text-lg text-gray-800">@(Model.First().appointmentDetail.Specialty ?? "Không có chuyên khoa")</p>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-dollar-sign mr-2"></i>
+                    Giá khám
+                </h3>
+                <p class="text-lg text-gray-800">@(Model.First().appointmentDetail.Price?.ToString("C") ?? "Không có giá khám")</p>
+            </div>
+        </div>
+
+        <!-- Phần thông tin cuộc hẹn -->
+        <div class="flex justify-between bg-white rounded-lg shadow p-6 space-x-8">
+            <div>
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-calendar-alt mr-2"></i>
+                    Ngày hẹn
+                </h3>
+                <p class="text-lg text-gray-800">@Model.First().appointmentDetail.DateOrder?.ToString("MM/dd/yyyy")</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-clock mr-2"></i>
+                    Thời gian
+                </h3>
+                <p class="text-lg text-gray-800">@Model.First().appointmentDetail.DateOrder?.ToString("hh:mm tt")</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-clock mr-2"></i>
+                    Trạng thái
+                </h3>
+                <p class="text-lg text-gray-800">
+                    @{
+                        var status = Model.First().appointmentDetail.Status;
+
+                        if (status == "Confirm")
+
+                        {
+                            @:Xác nhận
+                        }
+
+                        else
+
+                        {
+                            @:Không có thông tin
+                        }
+                    }
+                </p>
+            </div>
+        </div>
+
+        <!-- Phần Triệu chứng -->
+        <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                <i class="fas fa-notes-medical mr-2"></i>
+                Triệu chứng
+            </h3>
+            <p class="text-lg text-gray-800">
+                @(string.IsNullOrEmpty(Model.First().appointmentDetail.Symptom) ? "Không có ghi chú bổ sung." : Model.First().appointmentDetail.Symptom)
+            </p>
+        </div>
+    </div>
+
+    <!-- Các nút hành động -->
+    <div class="mt-10 flex justify-end space-x-4">
+        @if (Model.First().appointmentDetail.Status == "Confirm")
+
+        {
+            <a asp-action="AddHealthRecord"
+               asp-route-appointmentId="@Model.First().appointmentDetail.AppointmentId"
+               class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 font-semibold shadow-md transition duration-300 ease-in-out">
+                Thêm vào Hồ sơ y tế
+            </a>
+        }
+
+        else if (Model.First().appointmentDetail.Status == "Complete")
+
+        {
+            <a asp-action="ViewHealthRecord"
+               asp-route-appointmentId="@Model.First().appointmentDetail.AppointmentId"
+               class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 font-semibold shadow-md transition duration-300 ease-in-out">
+                Xem Hồ sơ y tế
+            </a>
+        }
+        <a asp-controller="Doctor" asp-action="ViewAppointment"
+           asp-route-id="@Model.First().DId"
+           class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 font-semibold shadow-md transition duration-300 ease-in-out">
+            Quay lại cuộc hẹn
+        </a>
+    </div>
+</div>

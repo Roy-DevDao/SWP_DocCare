@@ -1,4 +1,4 @@
-﻿@using System.Globalization
+﻿﻿@using System.Globalization
 @model InvoiceViewModel
 <!DOCTYPE html>
 <html lang="vi">
@@ -177,41 +177,41 @@
         </div>
     </div>
 
-<script>
-    let selectedPayment = null;
+    <script>
+        let selectedPayment = null;
 
-    function selectPayment(element) {
-        // Xóa class 'selected' khỏi các phương thức đã chọn trước đó
-        document.querySelectorAll('.payment-option').forEach(option => {
-            option.classList.remove('selected');
-        });
-        // Thêm class 'selected' vào phương thức thanh toán đã chọn
-        element.classList.add('selected');
-        selectedPayment = element.getAttribute('data-value');
-        console.log('Payment method selected:', selectedPayment); // In ra giá trị của selectedPayment
-    }
-
-    document.getElementById('payButton').addEventListener('click', function () {
-        console.log('Selected Payment:', selectedPayment); // In ra giá trị của phương thức thanh toán
-        const totalAmount = @Model.TotalAmount; // Sử dụng giá trị tổng tiền từ Model
-        const orderId = '@Model.OrderId'; // Sử dụng mã hóa đơn từ Model
-
-        if (selectedPayment) {
-            // Chuyển hướng dựa trên phương thức thanh toán đã chọn
-            if (selectedPayment === 'momo') {
-                const momoUrl = '@Url.Action("MomoPayment", "Patient")?orderId=' + orderId + '&total=' + totalAmount;
-                console.log('MoMo Payment URL:', momoUrl); // In ra URL thanh toán MoMo
-                window.location.href = momoUrl;
-            } else if (selectedPayment === 'vnpay') {
-                const vnPayUrl = '@Url.Action("VnPayment", "Patient")?orderId=' + orderId + '&total=' + totalAmount;
-                console.log('VnPay Payment URL:', vnPayUrl); // In ra URL thanh toán VnPay
-                window.location.href = vnPayUrl;
-            }
-        } else {
-            alert('Vui lòng chọn phương thức thanh toán.');
+        function selectPayment(element) {
+            // Xóa class 'selected' khỏi các phương thức đã chọn trước đó
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // Thêm class 'selected' vào phương thức thanh toán đã chọn
+            element.classList.add('selected');
+            selectedPayment = element.getAttribute('data-value');
+            console.log('Payment method selected:', selectedPayment); // In ra giá trị của selectedPayment
         }
-    });
-</script>
+
+        document.getElementById('payButton').addEventListener('click', function () {
+            console.log('Selected Payment:', selectedPayment); // In ra giá trị của phương thức thanh toán
+            const totalAmount = @Model.TotalAmount; // Sử dụng giá trị tổng tiền từ Model
+            const orderId = '@Model.OrderId'; // Sử dụng mã hóa đơn từ Model
+
+            if (selectedPayment) {
+                // Chuyển hướng dựa trên phương thức thanh toán đã chọn
+                if (selectedPayment === 'momo') {
+                    const momoUrl = '@Url.Action("MomoPayment", "Patient")?orderId=' + orderId + '&total=' + totalAmount;
+                    console.log('MoMo Payment URL:', momoUrl); // In ra URL thanh toán MoMo
+                    window.location.href = momoUrl;
+                } else if (selectedPayment === 'vnpay') {
+                    const vnPayUrl = '@Url.Action("VnPayment", "Patient")?orderId=' + orderId + '&total=' + totalAmount;
+                    console.log('VnPay Payment URL:', vnPayUrl); // In ra URL thanh toán VnPay
+                    window.location.href = vnPayUrl;
+                }
+            } else {
+                alert('Vui lòng chọn phương thức thanh toán.');
+            }
+        });
+    </script>
 
 </body>
 </html>

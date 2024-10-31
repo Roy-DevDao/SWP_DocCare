@@ -61,12 +61,13 @@
             </a>
         </div>
         <nav class="mt-6">
+
             <!-- Dashboard -->
             <div>
                 <button id="dashboardToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-calendar-alt text-lg"></i>
-                        <span class="ml-3 sidebar-text">Quản lí khám bệnh</span>
+                        <span class="ml-3 sidebar-text">Quản Lí Cuộc Hẹn </span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="dashboardIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -74,7 +75,7 @@
                 </button>
                 <div id="dashboardSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
                     <a asp-controller="Staff" asp-action="AppoitmentList" class="block py-2 text-gray-700 hover:text-gray-900">
-                        + Danh sách lịch hẹn
+                        + Danh Sách Cuộc Hẹn
                     </a>
 
                 </div>
@@ -85,7 +86,7 @@
                 <button id="serviceToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-concierge-bell text-lg"></i>
-                        <span class="ml-3 sidebar-text">Quản lí khám dịch vụ</span>
+                        <span class="ml-3 sidebar-text">Quản Lí Dịch Vụ </span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="serviceIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -93,7 +94,7 @@
                 </button>
                 <div id="serviceSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
                     <a asp-controller="Staff" asp-action="ServiceAppointList" class="block py-2 text-gray-700 hover:text-gray-900">
-                        + Danh sách lịch hẹn
+                        + Danh Sách Dịch Vụ
                     </a>
                 </div>
             </div>
@@ -103,7 +104,7 @@
                 <button id="doctorToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-user-md text-lg"></i>
-                        <span class="ml-3 sidebar-text">Chức năng khác</span>
+                        <span class="ml-3 sidebar-text">Tuỳ Chọn</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="doctorIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -111,7 +112,7 @@
                 </button>
                 <div id="doctorSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
                     <a asp-controller="Staff" asp-action="ContactList" class="block py-2 text-gray-700 hover:text-gray-900">
-                        + Danh sách các liên hệ
+                        + Cần Hỗ Trợ
                     </a>
                 </div>
             </div>
@@ -121,7 +122,7 @@
                 <button id="scheduleTongle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-calendar-alt text-lg"></i>
-                        <span class="ml-3 sidebar-text">Quản lí lịch bác sĩ</span>
+                        <span class="ml-3 sidebar-text">Lịch Làm Việc</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="scheduleIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -129,7 +130,7 @@
                 </button>
                 <div id="scheduleSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
                     <a asp-controller="Staff" asp-action="Schedule" class="block py-2 text-gray-700 hover:text-gray-900">
-                        + Danh sách lịch trình
+                        + Điều Chỉnh Lịch
                     </a>
                 </div>
             </div>
@@ -151,7 +152,7 @@
             </div>
 
             <div class="flex-grow text-center">
-                <h1 class="text-lg font-semibold">Hệ thống quản lí của Nhân Viên</h1>
+                <h1 class="text-lg font-semibold">Nhân Viên Bệnh Viện</h1>
             </div>
 
             <ul class="dropdowns list-inline mb-0">

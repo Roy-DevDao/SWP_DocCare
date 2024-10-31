@@ -8,6 +8,7 @@ namespace test2.Models.DoctorModel
         public string? DoctorImg { get; set; }
         public string DId { get; set; } = null!;
         public string? Name { get; set; }
+        public string? optionID { get; set; }
 
         public DoctorProfileViewModel doctorProfile { get; set; }
 
@@ -20,9 +21,10 @@ namespace test2.Models.DoctorModel
         public PatientDetailViewModel patientDetail { get; set; }
 
         public FeedbackViewModel feedbackView { get; set; }
+        public HealthRecordViewModel healthRecord { get; set; }
 
-		// Thuộc tính cho việc đổi mật khẩu
-		[Required(ErrorMessage = "Mật khẩu cũ không được để trống.")]
+        // Thuộc tính cho việc đổi mật khẩu
+        [Required(ErrorMessage = "Mật khẩu cũ không được để trống.")]
 		[DataType(DataType.Password)]
 		public string? OldPassword { get; set; }
 

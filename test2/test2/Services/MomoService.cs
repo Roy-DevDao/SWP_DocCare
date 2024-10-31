@@ -90,14 +90,3 @@ namespace test2.Services
     }
 }
 
-
-//var message = collection.First(s => s.Key == "message").Value;
-//var transId = collection.First(s => s.Key == "transId").Value;
-//var payType = collection.First(s => s.Key == "payType").Value;
-//var responseCode = collection.First(s => s.Key == "resultCode").Value;
-//ResponseCode = responseCode,
-//Message = message,
-//TransId = transId,
-//PayType = payType
-
-//https://test-payment.momo.vn/v2/gateway/redirect?amount=1000000&message=Successful.&orderId=638657659065278189&partnerCode=MOMO&requestType=captureWallet&resultCode=0&sid=8wiZJxyQUu4m0Nijg28lBVPY&subscriptionInfo=&subscriptionName=
