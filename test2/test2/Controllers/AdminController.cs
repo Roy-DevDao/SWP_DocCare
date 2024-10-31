@@ -117,7 +117,73 @@ namespace test2.Controllers
             ViewBag.OrderCounts = ordersPerDay.Select(o => o.Count).ToList();
 
 
+            // tooirng tiền trong ngày 
+            // Lấy số lượng order mỗi ngày và tổng price mỗi ngày
+            var ordersPerDayWithDetails = _context.Orders
+                .Where(o => o.DateOrder.HasValue)
+                .GroupBy(o => o.DateOrder.Value.Date) // Nhóm theo ngày của DateOrder
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    OrderCount = g.Count(),
+                    TotalRevenue = g
+                        .SelectMany(o => o.HealthRecords) // Lấy HealthRecords liên kết với mỗi Order
+                        .Where(hr => hr.DidNavigation != null) // Chỉ lấy HealthRecord có Doctor
+                        .Sum(hr => hr.DidNavigation!.Price ?? 0) // Tổng price của bác sĩ mỗi ngày
+                })
+                .OrderBy(x => x.Date)
+                .ToList();
+
+            // Chuẩn bị dữ liệu cho biểu đồ
+            ViewBag.OrderDates = ordersPerDayWithDetails.Select(x => x.Date.ToString("yyyy-MM-dd")).ToList();
+            ViewBag.OrderCounts = ordersPerDayWithDetails.Select(x => x.OrderCount).ToList();
+            ViewBag.TotalRevenuesPerDay = ordersPerDayWithDetails.Select(x => x.TotalRevenue).ToList();
+
+
+            /////////////////////////////////////////////////////
+            ///// Dữ liệu doanh thu hàng ngày
+            var dailyRevenueData = _context.Orders
+                .Where(o => o.DateOrder.HasValue)
+                .GroupBy(o => o.DateOrder.Value.Date)
+                .Select(g => new
+                {
+                    Date = g.Key,
+                    TotalRevenue = g
+                        .SelectMany(o => o.HealthRecords)
+                        .Where(hr => hr.DidNavigation != null)
+            .Sum(hr => (hr.DidNavigation!.Price ?? 0) * 2000) // Nhân giá trị Price với 2000
+                })
+                .OrderBy(x => x.Date)
+                .ToList();
+
+            ViewBag.DailyRevenueDates = dailyRevenueData.Select(x => x.Date.ToString("yyyy-MM-dd")).ToList();
+            ViewBag.DailyRevenues = dailyRevenueData.Select(x => x.TotalRevenue).ToList();
+                
+            // Dữ liệu doanh thu hàng tháng
+            var monthlyRevenueData = _context.Orders
+                .Where(o => o.DateOrder.HasValue)
+                .AsEnumerable() // Switch to client-side evaluation
+                .GroupBy(o => new { Year = o.DateOrder.Value.Year, Month = o.DateOrder.Value.Month })
+                .Select(g => new
+                {
+                    Month = new DateTime(g.Key.Year, g.Key.Month, 1),
+                    TotalRevenue = g
+                        .SelectMany(o => o.HealthRecords)
+                        .Where(hr => hr.DidNavigation != null)
+                        .Sum(hr => (hr.DidNavigation!.Price ?? 0) * 2000) // Nhân giá trị Price với 2000
+                })
+                .OrderBy(x => x.Month)
+                .ToList();
+
+            ViewBag.MonthlyRevenueDates = monthlyRevenueData.Select(x => x.Month.ToString("yyyy-MM")).ToList();
+            ViewBag.MonthlyRevenues = monthlyRevenueData.Select(x => x.TotalRevenue).ToList();
+
+
+
+
             return View(feedback);
+
+
 
 
 
