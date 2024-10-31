@@ -313,7 +313,7 @@ namespace test2.Controllers
             // Lấy thông tin cuộc hẹn từ database
             var appointment = _context.Orders
                 .Include(o => o.PidNavigation) // Thông tin bệnh nhân
-                .Include(o => o.Option)// Thông tin Option để truy cập bác sĩ
+                .Include(o => o.Option) // Thông tin Option để truy cập bác sĩ
                     .ThenInclude(op => op.DidNavigation)
                 .FirstOrDefault(o => o.Oid == appointmentId);
 
@@ -333,7 +333,6 @@ namespace test2.Controllers
             _logger.LogInformation("Doctor ID (DId): {DoctorId}", appointment?.Option.Did);
             _logger.LogInformation("Doctor Name: {DoctorName}", appointment?.Option?.DidNavigation?.Name);
 
-
             // Tạo bản ghi HealthRecord mới
             var healthRecord = new HealthRecord
             {
@@ -344,7 +343,7 @@ namespace test2.Controllers
                 Diagnosis = diagnosis,
                 Description = description,
                 Note = note,
-                DateExam = dateExam
+                DateExam = DateTime.Now,
             };
 
             // Thêm bản ghi vào database
@@ -365,8 +364,7 @@ namespace test2.Controllers
 
             // Chuyển hướng về trang chi tiết cuộc hẹn sau khi thêm thành công
             return RedirectToAction("ViewAppointment", new { id = appointment.Option.Did });
-        }   
-
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

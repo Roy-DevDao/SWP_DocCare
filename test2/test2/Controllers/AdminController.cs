@@ -1,6 +1,5 @@
 ﻿
 using test2.Models.AdminModel;
-using test2.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
@@ -778,43 +777,6 @@ namespace test2.Controllers
 
 
 
-        //[HttpGet]
-        //public IActionResult EditService(string id)
-        //{
-        //    var service = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == id);
-
-        //    if (service == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(service);
-        //}
-        //[HttpPost]
-        //public IActionResult EditService(Specialty model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var existingService = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == model.SpecialtyId);
-
-        //        if (existingService != null)
-        //        {
-        //            existingService.SpecialtyName = model.SpecialtyName;
-        //            existingService.ShortDescription = model.ShortDescription;
-        //            existingService.SpecialtyImg = model.SpecialtyImg;
-
-        //            _context.SaveChanges();
-
-        //            return RedirectToAction("ManageService");
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError("", "Service not found.");
-        //        }
-        //    }
-
-        //    return View(model);
-        //}
 
         [HttpGet]
         public IActionResult EditService(string id)
@@ -941,6 +903,176 @@ namespace test2.Controllers
         public IActionResult AddService()
         {
             return View(new AddSpecialtyViewModel());
+        }
+
+        ////////////////////////////////////////////////////////////////Blog 
+        public IActionResult ManageBlog(string sortColumn = "BlogId", string sortDirection = "asc", int page = 1, string searchQuery = "")
+        {
+            int pageSize = 10;
+            var filterBlogs = _context.Blogs.AsQueryable();
+
+            // Sắp xếp
+            switch (sortColumn)
+            {
+                case "Title":
+                    filterBlogs = sortDirection == "asc" ? filterBlogs.OrderBy(b => b.Title) : filterBlogs.OrderByDescending(b => b.Title);
+                    break;
+                case "CreateDate":
+                    filterBlogs = sortDirection == "asc" ? filterBlogs.OrderBy(b => b.CreateDate) : filterBlogs.OrderByDescending(b => b.CreateDate);
+                    break;
+                default:
+                    filterBlogs = sortDirection == "asc" ? filterBlogs.OrderBy(b => b.BlogId) : filterBlogs.OrderByDescending(b => b.BlogId);
+                    break;
+            }
+
+            // Tìm kiếm theo tiêu đề
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                filterBlogs = filterBlogs.Where(b => b.Title.Contains(searchQuery));
+            }
+
+            // Phân trang
+            var totalBlogs = filterBlogs.Count();
+            ViewBag.TotalPages = (int)Math.Ceiling(totalBlogs / (double)pageSize);
+            ViewBag.CurrentPage = page;
+
+            var blogList = filterBlogs.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            return View(blogList);
+        }
+
+        // Phương thức chi tiết Blog
+        public IActionResult BlogDetails(string id)
+        {
+            var blog = _context.Blogs.FirstOrDefault(b => b.BlogId == id);
+            if (blog == null)
+            {
+                return NotFound();
+            }
+            return View(blog);
+        }
+
+        // Phương thức để thêm mới Blog
+        [HttpGet]
+        public IActionResult AddBlog()
+        {
+            return View(new AddBlogViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddBlog(AddBlogViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string imageUrl = null;
+            if (model.ImageUpload != null)
+            {
+                // Upload ảnh lên Cloudinary
+                var uploadResult = await _cloudinaryService.UploadImageAsync(model.ImageUpload);
+                imageUrl = uploadResult;
+            }
+
+            var blog = new Blog
+            {
+                BlogId = model.BlogId,
+                Title = model.Title,
+                ShortDescription = model.ShortDescription,
+                Content = model.Content,
+                Image = imageUrl,
+                CreateBy = model.CreateBy,
+                CreateDate = model.CreateDate
+            };
+
+            _context.Blogs.Add(blog);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Thêm Blog thành công!";
+            return RedirectToAction("ManageBlog");
+        }
+
+        // Phương thức để chỉnh sửa Blog
+        [HttpGet]
+        public IActionResult EditBlog(string id)
+        {
+            var blog = _context.Blogs.FirstOrDefault(b => b.BlogId == id);
+            if (blog == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new EditBlogViewModel
+            {
+                BlogId = blog.BlogId,
+                Title = blog.Title,
+                ShortDescription = blog.ShortDescription,
+                Content = blog.Content,
+                Image = blog.Image,
+                CreateDate = blog.CreateDate,
+                CreateBy = blog.CreateBy
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditBlog(EditBlogViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var existingBlog = _context.Blogs.FirstOrDefault(b => b.BlogId == model.BlogId);
+            if (existingBlog == null)
+            {
+                ModelState.AddModelError("", "Blog không tồn tại.");
+                return View(model);
+            }
+
+            // Cập nhật ảnh nếu có ảnh mới
+            string imageUrl = existingBlog.Image;
+            if (model.ImageUpload != null)
+            {
+                var uploadResult = await _cloudinaryService.UploadImageAsync(model.ImageUpload);
+                imageUrl = uploadResult;
+            }
+
+            existingBlog.Title = model.Title;
+            existingBlog.ShortDescription = model.ShortDescription;
+            existingBlog.Content = model.Content;
+            existingBlog.Image = imageUrl;
+
+            try
+            {
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Cập nhật Blog thành công!";
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi lưu dữ liệu.");
+                return View(model);
+            }
+
+            return RedirectToAction("ManageBlog");
+        }
+
+        // Phương thức để xóa Blog
+        [HttpPost]
+        public IActionResult DeleteBlog(string id)
+        {
+            var blog = _context.Blogs.Find(id);
+            if (blog == null)
+            {
+                return NotFound();
+            }
+
+            _context.Blogs.Remove(blog);
+            _context.SaveChanges();
+
+            return RedirectToAction("ManageBlog");
         }
 
 

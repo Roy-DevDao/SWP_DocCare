@@ -84,12 +84,11 @@
                                 : "N/A")
                         </td>
                         <td class="px-6 py-4">@appointment.appointmentlist.Status</td>
-                        <td class="px-6 py-4 action">
+                        <td class="px-6 py-4">
                             <a asp-controller="Doctor"
                                asp-action="ViewAppointmentDetail"
                                asp-route-appointmentDetail="@appointment.appointmentlist.AppointmentId"
                                class="text-blue-600 hover:underline">View Details</a>
-                            
                         </td>
                     </tr>
                 }

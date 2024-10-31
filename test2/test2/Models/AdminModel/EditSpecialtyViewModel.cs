@@ -1,4 +1,4 @@
-﻿namespace test2.Models
+﻿namespace test2.Models.AdminModel
 {
     public class EditSpecialtyViewModel
     {

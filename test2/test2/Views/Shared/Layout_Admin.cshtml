@@ -149,6 +149,24 @@
                     <a asp-controller="Admin" asp-action="ManagePatient" class="block py-2 text-gray-700 hover:text-gray-900">+ Danh sách bệnh nhân</a>
                 </div>
             </div>
+
+            <!-- Manage Patients -->
+            <div>
+                <button id="blogToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                    <div class="flex items-center">
+                        <i class="fas fa-blog text-lg"></i> <!-- Changed icon class to fa-blog -->
+                        <span class="ml-3 sidebar-text">Quản Lí Bài Viết</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="blogIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="blogSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
+                    <a asp-controller="Admin" asp-action="AddBlog" class="block py-2 text-gray-700 hover:text-gray-900">+ Thêm bệnh nhân</a>
+                    <a asp-controller="Admin" asp-action="ManageBlog" class="block py-2 text-gray-700 hover:text-gray-900">+ Danh sách bệnh nhân</a>
+                </div>
+            </div>
+
         </nav>
     </aside>
 
@@ -237,7 +255,8 @@
             { button: 'dashboardToggle', submenu: 'dashboardSubmenu', icon: 'dashboardIcon' },
             { button: 'serviceToggle', submenu: 'serviceSubmenu', icon: 'serviceIcon' },
             { button: 'doctorToggle', submenu: 'doctorSubmenu', icon: 'doctorIcon' },
-            { button: 'patientToggle', submenu: 'patientSubmenu', icon: 'patientIcon' }
+            { button: 'patientToggle', submenu: 'patientSubmenu', icon: 'patientIcon' },
+            { button: 'blogToggle', submenu: 'blogSubmenu', icon: 'blogIcon' }
         ];
 
         // Lặp qua các nút và submenu
@@ -255,7 +274,7 @@
         });
 
         // Danh sách ID của tất cả các submenu
-        const submenuIds = ['dashboardSubmenu', 'serviceSubmenu', 'doctorSubmenu', 'patientSubmenu'];
+        const submenuIds = ['dashboardSubmenu', 'serviceSubmenu', 'doctorSubmenu', 'patientSubmenu', 'blogSubmenu'];
 
         // Toggle Sidebar
         const sidebarToggle = document.getElementById('sidebarToggle');
