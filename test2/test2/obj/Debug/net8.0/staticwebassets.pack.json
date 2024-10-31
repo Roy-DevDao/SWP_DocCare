@@ -2001,6 +2001,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\svg\\error.svg"
     },
     {
+      "Id": "C:\\Users\\1\\Source\\Repos\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\images\\wave-waving.gif",
+      "PackagePath": "staticwebassets\\assets\\images\\wave-waving.gif"
+    },
+    {
       "Id": "C:\\Users\\1\\Source\\Repos\\SWP_DocCare\\test2\\test2\\wwwroot\\assets\\js\\apexcharts.min.js",
       "PackagePath": "staticwebassets\\assets\\js\\apexcharts.min.js"
     },

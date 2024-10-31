@@ -154,6 +154,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxCb29raW5nU2VydmljZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/1/Source/Repos/SWP_DocCare/test2/test2/Views/Patient/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/1/Source/Repos/SWP_DocCare/test2/test2/Views/Patient/MomoPayment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxNb21vUGF5bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

@@ -12,6 +12,7 @@ using test2.Data;
 using test2.Models;
 using test2.Models.Order;
 using test2.Services;
+using System.Linq;
 
 namespace test2.Controllers
 {
@@ -172,7 +173,7 @@ namespace test2.Controllers
 				}
 				if (!cancel)
 				{
-					orders = orders.Where(o => o.Option.Status != "Cancel");
+					orders = orders.Where(o => o.Option.Status != "Cancelled");
 				}
 			}
 			if (listFilter != null && listFilter.Count > 0)
@@ -290,10 +291,14 @@ namespace test2.Controllers
 		[HttpPost]
 		public async Task<JsonResult> ProcessBooking(string doctorid, string desc, string time)
 		{
-
-			if (!string.IsNullOrEmpty(doctorid) && !string.IsNullOrEmpty(time) && !string.IsNullOrEmpty(desc))
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (!isAuthenticated)
+            {
+                return Json(new { error = "User isn't authenticated"});
+            }
+            if (!string.IsNullOrEmpty(doctorid) && !string.IsNullOrEmpty(time) && !string.IsNullOrEmpty(desc))
 			{
-				if (dc.Options.Any(o => o.Did == doctorid && o.DateWork == DateTime.Parse(time) && o.Status != "Canceled"))
+				if (dc.Options.Any(o => o.Did == doctorid && o.DateWork == DateTime.Parse(time) && o.Status != "Cancelled"))
 				{
 					return Json(new { err = "Slot was Book by other people" });
 				}
@@ -368,7 +373,7 @@ namespace test2.Controllers
 					}
 					if (order.Status != "Pending" && order.Status != "Confirm")
 					{
-						return Json(new { error = "Order can not be canceled" });
+						return Json(new { error = "Order can not be cancelled" });
 
 					}
 					DateTime timenow = DateTime.Now.AddHours(5);
@@ -376,12 +381,12 @@ namespace test2.Controllers
 					{
 						return Json(new { error = "Your order exceed allowed time for canceling" });
 					}
-					order.Option.Status = "Canceled";
+					order.Option.Status = "Cancelled";
 					dc.Entry(order.Option).State = EntityState.Modified;
 					await dc.SaveChangesAsync();
 
 					// Update the status of the Order entity
-					order.Status = "Canceled";
+					order.Status = "Cancelled";
 					dc.Entry(order).State = EntityState.Modified;
 
 					// Save the changes to both entities
@@ -465,6 +470,25 @@ namespace test2.Controllers
 				return RedirectToAction("Login", "Home");
 			}
 			return View();  // This will render /Views/Staff/ServiceAppointList.cshtml
+		}
+
+		public IActionResult Dashboard()
+		{
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+                ViewBag.User = user;
+				ViewBag.total = dc.Orders.Where(o => o.Pid == user.Id).Count();
+				ViewBag.pending = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Pending").Count();
+                ViewBag.pending = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Confirm").Count();
+                ViewBag.cancel = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Cancelled").Count();
+				ViewBag.complete = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Completed").Count();
+				ViewBag.upcomingAppointment = dc.Orders.Include(o => o.Option).ThenInclude(op => op.DidNavigation).ThenInclude(d =>d.Specialty).Where(o => o.Pid == user.Id && o.Option.DateWork > DateTime.Now && o.Status != "Cancelled").OrderByDescending(o => o.Option.DateWork);
+
+            }
+			
+            return View();
 		}
 
 
