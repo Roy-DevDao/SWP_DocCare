@@ -44,15 +44,69 @@ namespace test2.Controllers
             }
             var doctors = dc.Doctors.Take(10).ToList();
             var specialties = dc.Specialties.Take(10).ToList();
+            var post = dc.Blogs.OrderByDescending(c => c.CreateDate).Take(4).ToList();
 
             //truyen data thong qua view bag
+            ViewBag.Post = post;
             ViewBag.Doctors = doctors;
             ViewBag.Specialties = specialties;
 
             return View();
 
         }
-        //--------------------------------------------------------------------------------------------
+
+        public IActionResult Blog(string query = "", int page = 1, int pageSize = 4)
+        {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+                ViewBag.User = user;
+            }
+
+            // Tìm kiếm bài viết theo từ khóa (query)
+            var postsQuery = dc.Blogs.AsQueryable();
+            if (!string.IsNullOrEmpty(query))
+            {
+                postsQuery = postsQuery.Where(p => p.Title.Contains(query) || p.ShortDescription.Contains(query));
+            }
+
+            // Đếm tổng số bài viết sau khi tìm kiếm
+            var totalPosts = postsQuery.Count();
+            var post = dc.Blogs.OrderByDescending(c => c.CreateDate).ToList();
+            // Áp dụng phân trang
+            var post2 = postsQuery
+                .OrderByDescending(c => c.CreateDate)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+            ViewBag.Post = post;
+            ViewBag.QueryData = query;
+            ViewBag.Post2 = post2;
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
+            ViewBag.CurrentPage = page;
+            return View();
+        }
+
+
+
+        public IActionResult BlogDetail(string itemid)
+        {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+                ViewBag.User = user;
+            }
+
+            var post = dc.Blogs.OrderByDescending(c => c.CreateDate).Take(4).ToList();
+            var postdetaill = dc.Blogs.Find(itemid);
+            ViewBag.Post = post;
+            return View(postdetaill);
+        }
+
+        //---------------
+        //-----------------------------------------------------------------------------
 
         //public IActionResult DoctorList(string gender = "all", string speciality = "all", string sort = "all", int pageNumber = 1)
         //{
@@ -555,7 +609,18 @@ namespace test2.Controllers
                 dc.Patients.Add(newPatient);
                 dc.SaveChanges();
 
-                return Json(new { status = true, mess = "Đăng ký thành công! Chuyển đến trang đăng nhập.", redirectUrl = Url.Action("Login", "Home") });
+
+				// Gửi email thông báo tạo tài khoản
+                var subject = "Tạo tài khoản thành công";
+				var body = $"Xin chào {model.FullName},<br/><br/>" +
+						   "Tài khoản của bạn đã được tạo thành công tại DocCare.<br/><br/>" +
+						   "Trân trọng,<br/>" +
+						   "Đội ngũ DocCare";
+
+				// Gửi email thông báo tạo tài khoản
+				Task.Run(() => _emailService.SendEmailAsync(model.Email, subject, body));
+
+				return Json(new { status = true, mess = "Đăng ký thành công! Chuyển đến trang đăng nhập.", redirectUrl = Url.Action("Login", "Home") });
             }
             catch (Exception ex)
             {

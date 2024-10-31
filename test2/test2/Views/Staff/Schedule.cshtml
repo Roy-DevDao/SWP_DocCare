@@ -1,26 +1,39 @@
-﻿﻿
+﻿﻿﻿
 @model IEnumerable<test2.Data.Doctor>
 @{
     Layout = "Layout_staff";
-    ViewData["Title"] = "Schedule from Staff";
+
+    ViewData["Title"] = "Quản lí lịch bác sĩ";
+
     var schedules = ViewBag.Schedules as List<test2.Data.Option>; // Lấy danh sách lịch làm việc từ ViewBag
+
     var selectedDoctor = ViewBag.SelectedDoctor as string; // Lấy bác sĩ đã chọn
+
     var selectedDate = ViewBag.SelectedDate as DateTime? ?? DateTime.Now; // Lấy ngày đã chọn
+
+
+
+    // Tính ngày đầu tuần (Thứ Hai) và ngày cuối tuần (Chủ Nhật)
+
+    DateTime startOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek + (int)DayOfWeek.Monday);
+
+    DateTime endOfWeek = startOfWeek.AddDays(6);
 }
 
 <div class="container-fluid">
     <div class="manage-schedule-container">
         <div class="m-s-title">
-            <h3 class="mngSc">Manage Doctor's Schedule</h3>
+            <h3 class="mngSc">Quản lí lịch bác sĩ</h3>
         </div>
         <div class="container">
             <div class="row">
                 <form asp-controller="Staff" asp-action="Schedule" method="get" class="d-flex flex-wrap">
                     <div class="col-6 form-group">
-                        <label for="doctor-select">Choose Doctor</label>
+                        <label for="doctor-select">Chọn bác sĩ</label>
                         <select id="doctor-select" name="doctorId" class="form-select" onchange="this.form.submit()">
-                            <option value="">--Select Doctor--</option>
+                            <option value="">--Chọn bác sĩ--</option>
                             @foreach (var doctor in Model)
+
                             {
                                 <option value="@doctor.Did">@doctor.Name</option>
                             }
@@ -28,55 +41,99 @@
                     </div>
 
                     <div class="col-6 form-group">
-                        <label for="date-picker">Choose Date</label>
+                        <label for="date-picker">Chọn ngày</label>
                         <input type="date" id="date-picker" name="selectedDate" class="form-control" value="@selectedDate.ToString("yyyy-MM-dd")" onchange="this.form.submit()" />
                     </div>
+
                 </form>
 
                 <div class="col-10 pick-hour-container d-flex justify-content-center">
                     <table class="text-center">
-                        @for (DateTime date = selectedDate; date <= selectedDate.AddDays(6); date = date.AddDays(1))
+                        @for (DateTime date = startOfWeek; date <= endOfWeek; date = date.AddDays(1))
+
                         {
-                            <tr>
-                                <td>@date.DayOfWeek</td>
+
+                            // Kiểm tra nếu `date` là `selectedDate`
+
+                            string rowClass = date.Date == selectedDate.Date ? "highlighted-date" : "";
+
+                            <tr class="@rowClass">
+                                <td>@date.ToString("dddd")</td>
 
                                 @foreach (var time in new List<string> { "08:00", "09:00", "10:00", "14:00", "15:00", "16:00" })
+
                                 {
+
                                     var option = schedules.FirstOrDefault(s => s.DateWork.HasValue &&
+
                                     s.DateWork.Value.Date == date.Date &&
+
                                     s.DateWork.Value.ToString("HH:mm") == time);
 
+
+
                                     string buttonClass = "border-gray"; // Mặc định là viền xám
+
                                     string buttonStyle = ""; // Mặc định không có kiểu viền
 
+                                    bool isPastDate = date.Date < DateTime.Now.Date; // Kiểm tra ngày quá khứ
+
+
+
                                     if (option != null)
+
                                     {
+
                                         if (option.Status == "Busy")
+
                                         {
                                             buttonClass = "border-danger"; // Viền đỏ cho Busy
+
                                         }
+
                                         else if (option.Status == "Confirm")
+
                                         {
                                             buttonClass = "border-success"; // Viền xanh lá cho Confirm
+
                                         }
+
                                         else if (option.Status == "Pending")
+
                                         {
                                             buttonClass = "border-primary"; // Viền xanh biển cho Pending
+
                                         }
+
                                     }
 
+
+
                                     // Nếu không phải là viền xám, làm viền đậm
+
                                     if (buttonClass != "border-gray")
+
                                     {
+
                                         buttonStyle = "border-width: 3px;"; // Viền đậm
+
                                     }
 
                                     <td>
-                                        <button class="btn btn-schedule mx-2 my-2 @buttonClass" style="@buttonStyle" data-date="@date.ToString("yyyy-MM-dd")" data-time="@time" onclick="toggleBusy(this)">@time</button>
+                                        <button class="btn btn-schedule mx-2 my-2 @buttonClass"
+                                                style="@buttonStyle"
+                                                data-date="@date.ToString("yyyy-MM-dd")"
+                                                data-time="@time"
+                                                onclick="toggleBusy(this)"
+                                        @(isPastDate ? "disabled" : "")>
+                                            @time
+                                        </button>
                                     </td>
                                 }
                             </tr>
                         }
+
+
                     </table>
                 </div>
                 <div class="col-2 note-hour-container">
@@ -86,7 +143,7 @@
                                 <button class="btn btn-schedule mx-2 my-2 border-gray"></button>
                             </td>
                             <td>
-                                <p class="mx-2 my-2" style="text-align: left;">Empty</p>
+                                <p class="mx-2 my-2" style="text-align: left;">Trống</p>
                             </td>
                         </tr>
 
@@ -95,7 +152,7 @@
                                 <button class="btn btn-schedule mx-2 my-2 border-danger" style="border-width: 3px"></button>
                             </td>
                             <td>
-                                <p class="mx-2 my-2" style="text-align: left;">Busy</p>
+                                <p class="mx-2 my-2" style="text-align: left;">Bận</p>
                             </td>
                         </tr>
 
@@ -104,7 +161,7 @@
                                 <button class="btn btn-schedule mx-2 my-2 border-success" style="border-width: 3px"></button>
                             </td>
                             <td>
-                                <p class="mx-2 my-2" style="text-align: left;">Booked</p>
+                                <p class="mx-2 my-2" style="text-align: left;">Đã đặt</p>
                             </td>
                         </tr>
 
@@ -113,7 +170,7 @@
                                 <button class="btn btn-schedule mx-2 my-2 border-primary" style="border-width: 3px"></button>
                             </td>
                             <td>
-                                <p class="mx-2 my-2" style="text-align: left;">Pending</p>
+                                <p class="mx-2 my-2" style="text-align: left;">Chờ xử lí</p>
                             </td>
                         </tr>
                     </table>
@@ -121,7 +178,7 @@
                 </div>
 
                 <div class="col-12">
-                    <button class="btn btn-primary btn-save-schedule" onclick="saveSchedule()">Save Schedule</button>
+                    <button class="btn btn-primary btn-save-schedule" onclick="saveSchedule()">Lưu</button>
                 </div>
             </div>
         </div>
@@ -156,6 +213,11 @@
         padding-bottom: 20px;
         gap: 20px;
         flex-wrap: wrap;
+    }
+
+    .highlighted-date {
+        border: 2px solid #ffa500; /* Màu cam */
+        box-shadow: 0 0 10px #ffa500; /* Hiệu ứng phát sáng */
     }
 
     .btn-schedule {

@@ -1,12 +1,71 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\admin\\manageblog.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\admin\\manageblog.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|d:\\bao\\major\\se5\\swp_quang\\swp_doccare-quang1\\swp_doccare-quang1\\test2\\test2\\views\\admin\\managedoctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2D0D394-8E05-4FDF-B9CB-701F98980EA7}|test2\\test2.csproj|solutionrelative:test2\\views\\admin\\managedoctor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "test2\\Controllers\\AdminController.cs",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "test2\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAiwKcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T14:51:26.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ManageDoctor.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Admin\\ManageDoctor.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Admin\\ManageDoctor.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Admin\\ManageDoctor.cshtml",
+              "RelativeToolTip": "test2\\Views\\Admin\\ManageDoctor.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-31T14:51:17.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ManageBlog.cshtml",
+              "DocumentMoniker": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Admin\\ManageBlog.cshtml",
+              "RelativeDocumentMoniker": "test2\\Views\\Admin\\ManageBlog.cshtml",
+              "ToolTip": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\Views\\Admin\\ManageBlog.cshtml",
+              "RelativeToolTip": "test2\\Views\\Admin\\ManageBlog.cshtml",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAAAIwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-31T14:51:13.672Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -17,6 +17,8 @@ public partial class DocCareContext : DbContext
 
     public virtual DbSet<Account> Accounts { get; set; }
 
+    public virtual DbSet<Blog> Blogs { get; set; }
+
     public virtual DbSet<Contact> Contacts { get; set; }
 
     public virtual DbSet<DetailDoctor> DetailDoctors { get; set; }
@@ -41,6 +43,7 @@ public partial class DocCareContext : DbContext
 
     public virtual DbSet<Staff> Staff { get; set; }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
@@ -50,6 +53,23 @@ public partial class DocCareContext : DbContext
             entity.ToTable("Account");
 
             entity.Property(e => e.Id).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Blog>(entity =>
+        {
+            entity.HasKey(e => e.BlogId).HasName("PK__Blog__54379E309CC6729C");
+
+            entity.ToTable("Blog");
+
+            entity.Property(e => e.BlogId).HasMaxLength(50);
+            entity.Property(e => e.Content).HasMaxLength(2000);
+            entity.Property(e => e.CreateBy).HasMaxLength(255);
+            entity.Property(e => e.CreateDate).HasColumnType("datetime");
+            entity.Property(e => e.Image)
+                .HasMaxLength(300)
+                .IsUnicode(false);
+            entity.Property(e => e.ShortDescription).HasMaxLength(200);
+            entity.Property(e => e.Title).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Contact>(entity =>

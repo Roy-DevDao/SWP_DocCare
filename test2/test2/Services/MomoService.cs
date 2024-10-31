@@ -20,7 +20,7 @@ namespace test2.Services
 
         public async Task<MomoCreatePaymentResponseModel> CreatePaymentAsync(OrderInfoModel model)
         {
-            model.OrderId = DateTime.UtcNow.Ticks.ToString();
+
             model.OrderInfo = "Khách hàng: " + model.FullName + ". Nội dung: " + model.OrderInfo;
             var rawData =
                 $"partnerCode={_options.Value.PartnerCode}&accessKey={_options.Value.AccessKey}&requestId={model.OrderId}&amount={model.Amount}&orderId={model.OrderId}&orderInfo={model.OrderInfo}&returnUrl={_options.Value.ReturnUrl}&notifyUrl={_options.Value.NotifyUrl}&extraData={model.OrderId}";
@@ -59,12 +59,14 @@ namespace test2.Services
             var amount = collection.First(s => s.Key == "amount").Value;
             var orderInfo = collection.First(s => s.Key == "orderInfo").Value;
             var orderId = collection.First(s => s.Key == "orderId").Value;
+            var success = collection.First(s => s.Key == "message").Value;
 
             return new MomoExecuteResponseModel()
             {
                 Amount = amount,
                 OrderId = orderId,
                 OrderInfo = orderInfo,
+                message = success,
 
             };
         }

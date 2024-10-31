@@ -5,6 +5,7 @@
         public string OrderId { get; set; }
         public string Amount { get; set; }
         public string OrderInfo { get; set; }
+        public string message { get; set; }
         //public int ResultCode { get; set; }
         //public bool Success => ResultCode == 0;
         //public string ResponseCode { get; set; }

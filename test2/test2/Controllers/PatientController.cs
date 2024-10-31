@@ -17,6 +17,7 @@ using test2.Models.PatientModel;
 using test2.Models;
 using Azure;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
+using MailKit.Search;
 
 namespace test2.Controllers
 {
@@ -95,8 +96,15 @@ namespace test2.Controllers
 				return RedirectToAction("Login", "Home");
 			}
 
-			// Lấy thông tin bệnh nhân từ database
-			var patient = (from p in dc.Patients
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+            if (userId != id)
+            {
+                _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
+                return Forbid(); // Ngăn chặn truy cập nếu ID không khớp
+            }
+
+            // Lấy thông tin bệnh nhân từ database
+            var patient = (from p in dc.Patients
 						   join a in dc.Accounts on p.Pid equals a.Id
 						   where p.Pid == id
 						   select new PatientBaseViewModel
@@ -294,8 +302,9 @@ namespace test2.Controllers
 			var list = dc.Orders
 				 .Include(o => o.Option)             // Include the Option navigation property
 				 .ThenInclude(op => op.DidNavigation)
-				 .ThenInclude(doctor => doctor.Specialty).Where(o => o.Pid == id)
-				 .OrderByDescending(o => o.DateOrder)
+				 .ThenInclude(doctor => doctor.Specialty)
+				 .Where(o => o.Pid == id)
+				 .OrderBy(o => o.DateOrder)          // Sắp xếp theo thứ tự ngày xa nhất ở đầu
 				 .ToList();
 			int itemsPerPage = 5;
 
@@ -400,6 +409,9 @@ namespace test2.Controllers
             {
                 var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
                 ViewBag.User = user;
+            } else
+            {
+                return RedirectToAction("Login", "Home");
             }
             // Fetch the order details including all necessary related information
             var order = dc.Orders
@@ -431,6 +443,9 @@ namespace test2.Controllers
             {
                 var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
                 ViewBag.User = user;
+            } else
+            {
+                return RedirectToAction("Login", "Home");
             }
 
             if (!string.IsNullOrWhiteSpace(doctorid))
@@ -583,7 +598,7 @@ namespace test2.Controllers
                             Option op = new Option
                             {
                                 OptionId = optid,
-                                Status = "Pending",
+                                Status = "Unpaid",
                                 Did = doctorid,
                                 DateWork = DateTime.Parse(time),
                             };
@@ -599,7 +614,7 @@ namespace test2.Controllers
                                 Pid = User.Identity.Name,
                                 OptionId = op.OptionId,
                                 DateOrder = DateTime.Now,
-                                Status = "Pending",
+                                Status = "Unpaid",
                                 Symptom = desc,
                             };
 
@@ -642,7 +657,7 @@ namespace test2.Controllers
                     {
                         return Json(new { error = "Order is't found" });
                     }
-                    if (order.Status != "Pending" && order.Status != "Confirm")
+                    if (order.Status != "Confirm" && order.Status != "Unpaid")
                     {
                         return Json(new { error = "Order can not be canceled" });
 
@@ -731,42 +746,70 @@ namespace test2.Controllers
         }
 
 
-        [Authorize]
-        public IActionResult VnPaymentCallBack()
-        {
-            var response = _vnPayservice.PaymentExecute(Request.Query);
+		[Authorize]
+		public IActionResult VnPaymentCallBack()
+		{
+			var response = _vnPayservice.PaymentExecute(Request.Query);
 
-            if (response == null || response.VnPayResponseCode != "00")
-            {
-                DeleteOrderAndRelatedData(response.OrderId);
-                TempData["Message"] = $"Lỗi thanh toán VN Pay: {response.VnPayResponseCode}. Bạn sẽ quay lại trang chủ.";
-                return RedirectToAction("PaymentFail", "Patent");
-            }
+			// Kiểm tra response có hợp lệ không
+			if (response == null || response.VnPayResponseCode != "00")
+			{
+				// Xử lý thanh toán thất bại
+				var order = dc.Orders.Find(response.OrderId);
+				if (order != null)
+				{
+					// Xóa Option liên quan
+					var option = dc.Options.Find(order.OptionId);
+					if (option != null)
+					{
+						dc.Options.Remove(option);
+					}
 
-            var orderToUpdate = dc.Orders.Find(response.OrderId);
-            if (orderToUpdate != null)
-            
-                orderToUpdate.Status = "Paid"; // Cập nhật trạng thái thành "Paid"
-                var payment = new Payment
-                {
-                    PayId = Guid.NewGuid().ToString(), // Tạo ID duy nhất cho Payment
-                    Oid = response.OrderId, // ID đơn hàng
-                    Method = "VnPay", // Hoặc phương thức thanh toán khác nếu cần
-                    PayImg = "null", // Hình ảnh thanh toán nếu có
-                    DatePay = DateTime.Now // Thời gian thanh toán
-                };
+					// Xóa Order
+					dc.Orders.Remove(order);
+				}
 
-                dc.Payments.Add(payment); // Thêm bản ghi vào DbContext
+				dc.SaveChanges();
+				TempData["Message"] = $"Lỗi thanh toán VN Pay: {response.VnPayResponseCode}. Bạn sẽ quay lại trang chủ.";
+				return RedirectToAction("PaymentFail", "Patient");
+			}
 
-                dc.SaveChanges(); // Lưu thay đổi
-            
+			// Tiếp tục xử lý nếu thanh toán thành công
+			var orderToUpdate = dc.Orders.Find(response.OrderId);
+			if (orderToUpdate == null)
+			{
+				// Xử lý trường hợp không tìm thấy đơn hàng
+				TempData["Message"] = "Đơn hàng không tồn tại.";
+				return RedirectToAction("PaymentFail", "Patient"); // Redirect tới trang lỗi
+			}
 
+			var option1 = dc.Options.Find(orderToUpdate.OptionId);
+			orderToUpdate.Status = "Confirm"; // Cập nhật trạng thái thành "Paid"
 
-            TempData["Message"] = $"Thanh toán VNPay thành công! Bạn sẽ được chuyển đến lịch hẹn.";
-            return RedirectToAction("Success", "Patient"); // Chuyển hướng đến trang lịch hẹn
-        }
+			if (option1 != null)
+			{
+				option1.Status = "Confirm";
+			}
 
-        public IActionResult VnPayment( string orderId, double total)
+			Random random = new Random();
+			int buff = random.Next(1000000, 9999999);
+			Payment payment = new Payment
+			{
+				PayId = "pay" + buff,
+				Oid = response.OrderId,
+				Method = "VnPay",
+				PayImg = "null", // Hình ảnh thanh toán nếu có
+				DatePay = DateTime.Now // Thời gian thanh toán
+			};
+
+			dc.Payments.Add(payment); // Thêm bản ghi vào DbContext
+			dc.SaveChanges(); // Lưu thay đổi
+
+			TempData["Message"] = $"Thanh toán VNPay thành công! Bạn sẽ được chuyển đến lịch hẹn.";
+			return RedirectToAction("Success", "Patient"); // Chuyển hướng đến trang lịch hẹn
+		}
+
+		public IActionResult VnPayment( string orderId, double total)
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
             if (!isAuthenticated)
@@ -785,29 +828,13 @@ namespace test2.Controllers
             return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
         }
 
-        //[Authorize]
-        //public IActionResult VnPaymentCallBack()
-        //{
-        //    var response = _vnPayservice.PaymentExecute(Request.Query);
-
-        //    if (response == null || response.VnPayResponseCode != "00")
-        //    {
-        //        TempData["Message"] = $"Lỗi thanh toán VN Pay: {response.VnPayResponseCode}. Bạn sẽ quay lại trang chủ.";
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-
-
-        //    TempData["Message"] = $"Thanh toán VNPay thành công! Bạn sẽ được chuyển đến lịch hẹn.";
-        //    return RedirectToAction("AppointmentHistory", "Home"); // Chuyển hướng đến trang lịch hẹn
-        //}
 
         //-----------------------------------------------------------------------------------------------------------------
         public IActionResult MomoPayment(string orderId, double total)
         {
             var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
             ViewBag.User = user;
-            var order = dc.Orders.Find(orderId);
+       
             var momoModel = new OrderInfoModel
             {
                 FullName = User.Identity.Name,
@@ -815,30 +842,10 @@ namespace test2.Controllers
                 Amount = total,
                 OrderInfo = "Thanh toán hóa đơn",
             };
-            order.Status = "Paid";
-            Random random = new Random();
-            int buff = random.Next(1000000, 9999999);
-            Payment payment = new Payment
-            {
-                PayId = "pay" + buff,
-                Oid = orderId,
-                Method = "MoMo",
-                PayImg = "null", // Hình ảnh thanh toán nếu có
-                DatePay = DateTime.Now // Thời gian thanh toán
-
-            };
-            dc.Payments.Add(payment);
-            dc.SaveChangesAsync();
-
            
             return View(momoModel);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> CreatePaymentUrl(OrderInfoModel model)
-        //{
-        //    var response = await _momoService.CreatePaymentAsync(model);
-        //    return Redirect(response.PayUrl);
-        //}
+
 
 
         //[HttpGet]
@@ -889,77 +896,7 @@ namespace test2.Controllers
         //    return View(response); // Truyền response vào view
         //}
 
-        //            switch (response.ResponseCode)
-        //            {
-        //                case "0":
-        //                    var orderToUpdate = dc.Orders.Find(response.OrderId);
-        //                    if (orderToUpdate != null)
-        //                    {
-        //                        orderToUpdate.Status = "Paid"; // Cập nhật trạng thái thành "Paid"
-        //                        var payment = new Payment
-        //                        {
-        //                            PayId = Guid.NewGuid().ToString(), // Tạo ID duy nhất cho Payment
-        //                            Oid = response.OrderId, // ID đơn hàng
-        //                            Method = "MoMo", // Hoặc phương thức thanh toán khác nếu cần
-        //                            PayImg = "null", // Hình ảnh thanh toán nếu có
-        //                            DatePay = DateTime.Now // Thời gian thanh toán
-        //                        };
-
-        //        dc.Payments.Add(payment); // Thêm bản ghi vào DbContext
-
-        //                        dc.SaveChanges(); // Lưu thay đổi
-
-        //                        return RedirectToAction("PaymentSuccess", new
-        //                        {
-        //                            orderId = response.OrderId,
-        //                            amount = response.Amount,
-        //                            message = "Thanh toán thành công"
-        //                        });
-        //                    }
-        //break;
-
-        //            case "1006": // Giao dịch bị từ chối bởi người dùng
-        //    return RedirectToAction("PaymentCancelled", new
-        //    {
-        //        orderId = response.OrderId,
-        //        message = "Giao dịch đã bị hủy"
-        //    });
-
-        //default: // Các trường hợp lỗi khác
-        //    return RedirectToAction("PaymentError", new
-        //    {
-        //        orderId = response.OrderId,
-        //        errorCode = response.ResponseCode,
-        //        message = response.Message
-        //    });
-        //}
-        private async Task DeleteOrderAndRelatedData(string orderId)
-        {
-            using (var context = new DocCareContext())
-            {
-                // Xóa HealthRecord liên quan đến Order
-                var healthRecords = context.HealthRecords.Where(hr => hr.Oid == orderId);
-                context.HealthRecords.RemoveRange(healthRecords);
-
-                // Tìm Order và lấy OptionId
-                var order = await context.Orders.FindAsync(orderId);
-                if (order != null)
-                {
-                    // Xóa Option liên quan
-                    var option = await context.Options.FindAsync(order.OptionId);
-                    if (option != null)
-                    {
-                        context.Options.Remove(option);
-                    }
-
-                    // Xóa Order
-                    context.Orders.Remove(order);
-                }
-
-                // Lưu thay đổi
-                await context.SaveChangesAsync();
-            }
-        }
+       
 
 
         [HttpPost]
@@ -974,8 +911,49 @@ namespace test2.Controllers
         {
 
             var response = _momoService.PaymentExecuteAsync(HttpContext.Request.Query);
-         
+            var order = dc.Orders.Find(response.OrderId);
+            if (response.message != "Success")
+            {
+                if (order != null)
+                {
+                    // Xóa Option liên quan
+                    var option = dc.Options.Find(order.OptionId);
+                    if (option != null)
+                    {
+                        dc.Options.Remove(option);
+                    }
+
+                    // Xóa Order
+                    dc.Orders.Remove(order);
+                }
+
+                dc.SaveChanges();
                 return RedirectToAction("AppointmentHistory", "Patient");
+            }
+
+            var option1 = dc.Options.Find(order.OptionId);
+            order.Status = "Confirm"; // Cập nhật trạng thái thành "Paid"
+
+            if (option1 != null)
+            {
+                option1.Status = "Confirm";
+            }
+
+            Random random = new Random();
+            int buff = random.Next(1000000, 9999999);
+            Payment payment = new Payment
+            {
+                PayId = "pay" + buff,
+                Oid = response.OrderId,
+                Method = "Momo",
+                PayImg = "null", // Hình ảnh thanh toán nếu có
+                DatePay = DateTime.Now // Thời gian thanh toán
+            };
+
+            dc.Payments.Add(payment); // Thêm bản ghi vào DbContext
+            dc.SaveChanges(); // Lưu thay đổi
+
+            return RedirectToAction("AppointmentHistory", "Patient");
 
 
         } 
@@ -1078,169 +1056,6 @@ namespace test2.Controllers
             return View();  // This will render /Views/Staff/ServiceAppointDetail.cshtml
         }
 
-        //[Authorize]
-        //[HttpPost]
-        //public IActionResult Checkout(CheckoutVM model, string payment = "COD")
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (payment == "Thanh toán VNPay")
-        //        {
-        //            var vnPayModel = new VnPaymentRequestModel
-        //            {
-        //                Amount = Cart.Sum(p => p.ThanhTien),
-        //                CreatedDate = DateTime.Now,
-        //                Description = $"{model.HoTen} {model.DienThoai}",
-        //                FullName = model.HoTen,
-        //                OrderId = new Random().Next(1000, 100000)
-        //            };
-        //            return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
-        //        }
-
-        //        var customerId = HttpContext.User.Claims.SingleOrDefault(p => p.Type == MySetting.CLAIM_CUSTOMERID).Value;
-        //        var khachHang = new KhachHang();
-        //        if (model.GiongKhachHang)
-        //        {
-        //            khachHang = db.KhachHangs.SingleOrDefault(kh => kh.MaKh == customerId);
-        //        }
-
-        //        var hoadon = new HoaDon
-        //        {
-        //            MaKh = customerId,
-        //            HoTen = model.HoTen ?? khachHang.HoTen,
-        //            DiaChi = model.DiaChi ?? khachHang.DiaChi,
-        //            DienThoai = model.DienThoai ?? khachHang.DienThoai,
-        //            NgayDat = DateTime.Now,
-        //            CachThanhToan = "COD",
-        //            CachVanChuyen = "GRAB",
-        //            MaTrangThai = 0,
-        //            GhiChu = model.GhiChu
-        //        };
-
-        //        db.Database.BeginTransaction();
-        //        try
-        //        {
-
-        //            db.Add(hoadon);
-        //            db.SaveChanges();
-
-        //            var cthds = new List<ChiTietHd>();
-        //            foreach (var item in Cart)
-        //            {
-        //                cthds.Add(new ChiTietHd
-        //                {
-        //                    MaHd = hoadon.MaHd,
-        //                    SoLuong = item.SoLuong,
-        //                    DonGia = item.DonGia,
-        //                    MaHh = item.MaHh,
-        //                    GiamGia = 0
-        //                });
-        //            }
-        //            db.AddRange(cthds);
-        //            db.SaveChanges();
-        //            db.Database.CommitTransaction();
-
-        //            HttpContext.Session.Set<List<CartItem>>(MySetting.CART_KEY, new List<CartItem>());
-
-        //            return View("Success");
-        //        }
-        //        catch
-        //        {
-        //            db.Database.RollbackTransaction();
-        //        }
-        //    }
-
-        //    return View(Cart);
-        //}
-
-        [Authorize]
-        //public IActionResult PaymentFail()
-        //{
-        //    // Ghi nhận thông báo lỗi
-        //    TempData["Message"] = "Thanh toán thất bại. Vui lòng thử lại.";
-        //    // Chuyển hướng về trang chủ
-        //    return RedirectToAction("Index", "Home"); // Giả sử 'Index' là phương thức trong 'HomeController'
-        //}
-
-        //[Authorize]
-        //public IActionResult PaymentSuccess()
-        //{
-        //    // Chuyển hướng về trang lịch sử đặt chỗ (appointment history)
-        //    return RedirectToAction("AppointmentHistory", "Appointment"); // Giả sử 'AppointmentHistory' là phương thức trong 'AppointmentController'
-        //}
-
-
-    //    public IActionResult PaymentSuccess(string orderId, string amount, string message)
-    //    {
-    //        var viewModel = new PaymentResultViewModel
-    //        {
-    //            OrderId = orderId,
-    //            Amount = amount,
-    //            Message = message,
-    //            Status = "Success"
-    //        };
-    //        return View(viewModel);
-    //    }
-
-    //    public IActionResult PaymentCancelled(string orderId, string message)
-    //    {
-    //        var viewModel = new PaymentResultViewModel
-    //        {
-    //            OrderId = orderId,
-    //            Message = message,
-    //            Status = "Cancelled"
-    //        };
-    //        return View("PaymentError", viewModel);
-    //    }
-
-    //    public IActionResult PaymentError(string orderId, string errorCode, string message)
-    //    {
-    //        var viewModel = new PaymentResultViewModel
-    //        {
-    //            OrderId = orderId,
-    //            ErrorCode = errorCode,
-    //            Message = message,
-    //            Status = "Error"
-    //        };
-    //        return View(viewModel);
-    //    }
-    //}
-
-    //public class PaymentResultViewModel
-    //{
-    //    public string OrderId { get; set; }
-    //    public string Amount { get; set; }
-    //    public string Message { get; set; }
-    //    public string Status { get; set; }
-    //    public string ErrorCode { get; set; }
-    //}
-
-    //// Model cho giao dịch thanh toán
-    //public class PaymentTransaction
-    //{
-    //    public string OrderId { get; set; }
-    //    public string TransactionId { get; set; }
-    //    public decimal Amount { get; set; }
-    //    public string PaymentMethod { get; set; }
-    //    public string PaymentType { get; set; }
-    //    public PaymentStatus Status { get; set; }
-    //    public DateTime CreatedAt { get; set; }
-    //}
-
-    //public enum PaymentStatus
-    //{
-    //    Success,
-    //    Failed,
-    //    Cancelled
-    //}
-
-    //public enum OrderStatus
-    //{
-    //    Pending,
-    //    Paid,
-    //    Cancelled,
-    //    Failed
-    //}
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

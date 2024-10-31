@@ -1,0 +1,119 @@
+﻿@using test2.Data
+@model test2.Data.Blog
+@{
+    ViewBag.Title = "Tin Tức";
+    Layout = "~/Views/Shared/Layout_new.cshtml";
+
+    var post = (List<Blog>)ViewBag.Post ?? new List<Blog>();
+}
+
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Bài viết</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">Chi tiết</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="blog-view">
+                    <div class="blog blog-single-post">
+                        <div class="blog-image">
+                            <a href="javascript:void(0);"><img alt="" src="@Model.Image" class="img-fluid"></a>
+                        </div>
+                        <h3 class="blog-title">@Model.Title</h3>
+                        <div class="blog-info clearfix">
+                            <div class="post-left">
+                                <ul>
+                                    <li>
+                                        <div class="post-author">
+                                            <a href="#"><img src="https://tse4.mm.bing.net/th?id=OIP.fMZwCAaBPntZ1NmSRhU6MQHaHa&pid=Api&P=0&h=180" alt="Post Author"> <span>@Model.CreateBy</span></a>
+                                        </div>
+                                    </li>
+                                    <li><i class="far fa-calendar"></i>@Model.CreateDate.ToString()</li>
+                                    <li><i class="fa fa-tags"></i>Health Tips</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            @Html.Raw(Model.Content)
+                        </div>
+                    </div>
+                    <div class="card blog-share clearfix">
+                        <div class="card-header">
+                            <h4 class="card-title">Chia Sẻ</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="social-share">
+                                <li><a href="#" title="Facebook"><i class="fab fa-facebook"></i></a></li>
+                                <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
+                                <li><a href="#" title="Google Plus"><i class="fab fa-google-plus"></i></a></li>
+                                <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card author-widget clearfix">
+                        <div class="card-header">
+                            <h4 class="card-title">Chúng Tôi</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="about-author">
+                                <div class="about-author-img">
+                                    <div class="author-img-wrap">
+                                        <a href="#"><img class="img-fluid rounded-circle" alt="" src="~/Content/theme/img/doctors/doctor-thumb-02.jpg"></a>
+                                    </div>
+                                </div>
+                                <div class="author-details">
+                                    <a class="blog-author-name">@Model.CreateBy</a>
+                                    <p class="mb-0">Tại bệnh viện, chúng tôi tự hào có đội ngũ bác sĩ giàu kinh nghiệm và tận tâm với chuyên môn cao trong nhiều lĩnh vực y tế. Các bác sĩ không chỉ có trình độ chuyên môn vững vàng mà còn luôn đặt sự an toàn và sức khỏe của bệnh nhân lên hàng đầu. Đội ngũ của chúng tôi bao gồm những chuyên gia hàng đầu trong các lĩnh vực như nội khoa, ngoại khoa, nhi khoa, sản khoa, và chăm sóc sức khỏe tinh thần, luôn sẵn sàng đáp ứng mọi nhu cầu y tế của bệnh nhân. Sự tận tâm và lòng nhân ái là nền tảng trong mọi dịch vụ chăm sóc sức khỏe mà chúng tôi cung cấp, giúp bệnh nhân yên tâm trong quá trình điều trị và hồi phục.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
+
+
+                <div class="card post-widget">
+                    <div class="card-header">
+                        <h4 class="card-title">Latest Posts</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="latest-posts">
+                            @foreach (var art in post)
+                            {
+                                <li>
+                                    <div class="post-thumb">
+                                        <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId">
+                                            <img class="img-fluid" src="@art.Image" alt="@art.Title">
+                                        </a>
+                                    </div>
+                                    <div class="post-info">
+                                        <h4>
+                                            <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId">@art.Title</a>
+                                        </h4>
+                                        <p>@art.CreateDate.ToString()</p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

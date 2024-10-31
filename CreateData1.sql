@@ -7,6 +7,16 @@ GO
 USE DocCare;
 GO
 
+create table Blog (
+	BlogId NVARCHAR(50) PRIMARY KEY,
+	Title NVARCHAR(100),
+	Image varchar(300),
+	ShortDescription NVARCHAR(200),
+	Content NVARCHAR(2000),
+	CreateDate DATETIME,
+	CreateBy NVARCHAR(255),
+)
+
 CREATE TABLE Contact (
     ContactId NVARCHAR(50) PRIMARY KEY,    -- checked
     Name NVARCHAR(MAX),  -- Changed to MAX

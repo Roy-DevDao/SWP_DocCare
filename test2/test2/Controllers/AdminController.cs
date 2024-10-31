@@ -123,11 +123,48 @@ namespace test2.Controllers
 
         }
 
-        public IActionResult Privacy()
+        public IActionResult ManageBlog(string query, int? page)
         {
-            return View();
-        }
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            if (query == "")
+            {
+                query = null;
+            }
 
+            ViewBag.QueryData = query;
+            var pageNumber = (page ?? 1);
+            const int pageSize = 5;
+
+          
+                var listData = _context.Blogs.OrderByDescending(x => x.CreateDate).ToList();
+
+                double elapsedMs = 0;
+                if (query == null)
+                {
+                    ViewBag.Total = listData.Count();
+                    watch.Stop();
+
+                    elapsedMs = (double)watch.ElapsedMilliseconds / 1000;
+                    ViewBag.RequestTime = elapsedMs;
+                    return View(listData);
+                }
+
+                var q = (from mt in listData
+                         where (!string.IsNullOrEmpty(query) &&
+                                (mt.Title.ToLower().Contains(query.ToLower())
+                                 || !string.IsNullOrEmpty(mt.ShortDescription) && mt.ShortDescription.ToLower().Contains(query.ToLower())
+                                 || !string.IsNullOrEmpty(mt.Content) && mt.Content.ToLower().Contains(query.ToLower())))
+
+                         select mt).AsQueryable();
+
+                ViewBag.Total = q.Count();
+                watch.Stop();
+
+                elapsedMs = (double)watch.ElapsedMilliseconds / 1000;
+                ViewBag.RequestTime = elapsedMs;
+                return View(q);
+            
+        }
 
 
         public IActionResult ManageDoctor(string sortColumn = "Did", string sortDirection = "asc", int page = 1, string sortPrice = "", string sortId = "", string sortName = "", string sortGender = "", string searchId = "")

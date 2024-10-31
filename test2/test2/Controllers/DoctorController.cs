@@ -7,6 +7,7 @@ using System.Security.Claims;
 using test2.DAO;
 using test2.Data;
 using test2.Models.DoctorModel;
+using test2.Services;
 
 namespace test2.Controllers
 {
@@ -19,18 +20,21 @@ namespace test2.Controllers
         private readonly PatientDao _patientDao;
         private readonly FeedbackDAO _feedbackDao;
         private readonly UserDAO _userDAO;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO ud)
-        {
-            _logger = logger;
-            _appointmentDAO = appointmentDAO;
-            _patientDao = patientDao;
-            _feedbackDao = feedbackDao;
-            _context = ct;
-            _userDAO = ud;
-        }
+		public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO ud, CloudinaryService cloudinaryService)
+		{
+			_logger = logger;
+			_appointmentDAO = appointmentDAO;
+			_patientDao = patientDao;
+			_feedbackDao = feedbackDao;
+			_context = ct;
+			_userDAO = ud;
+			_cloudinaryService = cloudinaryService;
+			_cloudinaryService = cloudinaryService;
+		}
 
-        public override void OnActionExecuting(ActionExecutingContext context)
+		public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -124,8 +128,139 @@ namespace test2.Controllers
             return View(doctor);
         }
 
+		[HttpPost]
+		public async Task<IActionResult> UpdateProfile(List<BaseViewModel> model, IFormFile DoctorImageUpload)
+		{
+			if (model == null || model.Count == 0)
+			{
+				_logger.LogWarning("Model is null or empty.");
+				return BadRequest("Model cannot be null or empty.");
+			}
 
-        public IActionResult ViewAppointment(string id)
+			var baseViewModel = model.First();
+			var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+			_logger.LogInformation("Checking authorization with userId: {UserId} and model.DId: {TargetId}", userId, baseViewModel.DId);
+
+			if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(baseViewModel.DId) || userId != baseViewModel.DId)
+			{
+				_logger.LogWarning("Unauthorized access attempt by user {UserId} to update profile of {TargetId}", userId, baseViewModel.DId);
+				return Forbid();
+			}
+
+			var doctorProfile = _context.Doctors.FirstOrDefault(d => d.Did == baseViewModel.DId);
+			if (doctorProfile == null)
+			{
+				_logger.LogWarning("Doctor not found with ID: {DoctorId}", baseViewModel.DId);
+				return NotFound();
+			}
+
+			doctorProfile.Name = baseViewModel.Name;
+			doctorProfile.Gender = baseViewModel.doctorProfile.Gender;
+			doctorProfile.Dob = baseViewModel.doctorProfile.Dob;
+			doctorProfile.Position = baseViewModel.doctorProfile.Position;
+			doctorProfile.Price = baseViewModel.doctorProfile.Price;
+			doctorProfile.Description = baseViewModel.doctorProfile.Description;
+
+			if (DoctorImageUpload != null && DoctorImageUpload.Length > 0)
+			{
+				var imageUrl = await _cloudinaryService.UploadImageAsync(DoctorImageUpload);
+				if (imageUrl != null)
+				{
+					doctorProfile.DoctorImg = imageUrl;
+				}
+				else
+				{
+					ModelState.AddModelError("", "Có lỗi xảy ra khi tải ảnh lên Cloudinary. Vui lòng thử lại.");
+					return View("Profile", model);
+				}
+			}
+
+			try
+			{
+				_context.SaveChanges();
+				_logger.LogInformation("Doctor profile updated successfully for ID: {DoctorId}", baseViewModel.DId);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error updating doctor profile for ID: {DoctorId}", baseViewModel.DId);
+				ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ. Vui lòng thử lại.");
+				return View("Profole", model);
+			}
+
+			TempData["SuccessMessage"] = "Cập nhật hồ sơ thành công.";
+			return RedirectToAction("Profile", new { id = baseViewModel.DId });
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+		{
+			// Lấy ID của người dùng hiện tại từ Claim
+			var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+			// Kiểm tra xem người dùng đã đăng nhập chưa
+			if (userId == null)
+			{
+				return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+			}
+
+			// Log thông tin
+			_logger.LogInformation("User {UserId} requested to change password", userId);
+
+			// Kiểm tra tính hợp lệ của dữ liệu nhập vào
+			if (string.IsNullOrEmpty(currentPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+			{
+				TempData["ErrorMessage"] = "Vui lòng nhập đầy đủ thông tin mật khẩu.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp không
+			if (newPassword != confirmPassword)
+			{
+				TempData["ErrorMessage"] = "Mật khẩu mới và xác nhận mật khẩu không khớp.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Lấy tài khoản của bác sĩ từ cơ sở dữ liệu
+			var doctorAccount = (from d in _context.Doctors
+								 join a in _context.Accounts on d.Did equals a.Id
+								 where d.Did == userId
+								 select a).FirstOrDefault();
+
+			// Kiểm tra xem tài khoản có tồn tại không
+			if (doctorAccount == null)
+			{
+				_logger.LogWarning("No account found for Doctor with ID: {DoctorId}", userId);
+				TempData["ErrorMessage"] = "Không tìm thấy tài khoản của bác sĩ.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Kiểm tra mật khẩu hiện tại có khớp không (giả sử mật khẩu được lưu ở dạng hash)
+			if (!BCrypt.Net.BCrypt.Verify(currentPassword, doctorAccount.Password))
+			{
+				TempData["ErrorMessage"] = "Mật khẩu hiện tại không chính xác.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Cập nhật mật khẩu mới (sau khi đã hash) và lưu vào cơ sở dữ liệu
+			doctorAccount.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+			try
+			{
+				await _context.SaveChangesAsync();
+				_logger.LogInformation("Password changed successfully for Doctor with ID: {DoctorId}", userId);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error changing password for Doctor with ID: {DoctorId}", userId);
+				TempData["ErrorMessage"] = "Có lỗi xảy ra khi thay đổi mật khẩu. Vui lòng thử lại.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công.";
+			return RedirectToAction("Profile", new { id = userId });
+		}
+		public IActionResult ViewAppointment(string id)
         {
             var userId = User.FindFirst(ClaimTypes.Name)?.Value;
 

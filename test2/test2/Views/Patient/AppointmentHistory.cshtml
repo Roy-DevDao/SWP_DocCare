@@ -8,7 +8,7 @@
 
 <div class="container mx-auto p-4">
 	<div class="flex">
-		<h2 class="text-2xl text-blue-500 font-bold mb-4">Appointment History</h2>
+		<h2 class="text-2xl text-blue-500 font-bold mb-4">Lịch Sử Đặt Lịch</h2>
 		<form class="flex items-center max-w-sm ml-24 my-4">
 			<button type="button" class="text-white px-4 py-2 flex items-center bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm  text-center me-2 mb-2">
 				<svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
@@ -19,7 +19,7 @@
 
 			</button>
 
-			<label for="simple-search" class="sr-only">Search</label>
+			<label for="simple-search" class="sr-only">Tìm Kiếm</label>
 			<div class="relative w-full">
 				<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
 					<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
@@ -32,7 +32,7 @@
 				<svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
 				</svg>
-				<span class="sr-only">Search</span>
+				<span class="sr-only">Tìm</span>
 			</button>
 		</form>
 	</div>
@@ -45,23 +45,23 @@
 			<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
 				<tr>
 					<th scope="col" class="px-6 py-3">
-						Name Doctor
+						Tên Bác Sĩ
 					</th>
 					<th scope="col" class="px-6 py-3">
-						Image Doctor
+						Ảnh
 					</th>
 					<th scope="col" class="px-6 py-3">
-						Specialty
+						Chuyên Khoa
 					</th>
 
 					<th scope="col" class="px-6 py-3">
-						Date Booking
+						Ngày Đặt
 					</th>
 					<th scope="col" class="px-6 py-3">
-						Status
+						Trạng Thái
 					</th>
 					<th scope="col" class="px-6 py-3">
-						Action
+						Hành Động
 					</th>
 
 				</tr>
@@ -109,8 +109,8 @@
 		<div class="flex justify-between mb-2 border-b-2 border-gray-200">
 
 			<div>
-				<button class="text-blue-500 hover:underline mr-2" onclick="saveView('',1)">Save view</button>
-				<button class="text-blue-500 hover:underline" onclick="clearFilters()">Clear all</button>
+				<button class="text-blue-500 hover:underline mr-2" onclick="saveView('',1)">Lưu</button>
+				<button class="text-blue-500 hover:underline" onclick="clearFilters()">Xoá</button>
 			</div>
 		</div>
 
@@ -160,7 +160,7 @@
 					<div class="toggle-path bg-gray-300 w-10 h-6 rounded-full relative">
 						<div class="toggle-circle absolute w-4 h-4 bg-white rounded-full left-1 top-1 transition-transform duration-300 ease-in-out"></div>
 					</div>
-					<span>Pending</span>
+					<span>Đã Thanh Toán</span>
 				</label>
 
 				<label class="flex justify-between items-center mb-2">
@@ -168,7 +168,7 @@
 					<div class="toggle-path bg-gray-300 w-10 h-6 rounded-full relative">
 						<div class="toggle-circle absolute w-4 h-4 bg-white rounded-full left-1 top-1 transition-transform duration-300 ease-in-out"></div>
 					</div>
-					<span>Complete</span>
+					<span>Đã Xác Nhận</span>
 				</label>
 
 				<label class="flex justify-between items-center mb-2">
@@ -176,118 +176,135 @@
 					<div class="toggle-path bg-gray-300 w-10 h-6 rounded-full relative">
 						<div class="toggle-circle absolute w-4 h-4 bg-white rounded-full left-1 top-1 transition-transform duration-300 ease-in-out"></div>
 					</div>
-					<span>Cancel</span>
+					<span>Dã Huỷ</span>
 				</label>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script>
-	var sum = 0;
-	var count = 1;
-	function toggleVisibility(id) {
-		const element = document.getElementById(id);
-		if (element.classList.contains('hidden')) {
-			element.classList.remove('hidden');
-		} else {
-			element.classList.add('hidden');
-		}
-	}
-
-	document.querySelectorAll('.toggle-checkbox').forEach((checkbox) => {
-		checkbox.addEventListener('change', (e) => {
-			const togglePath = e.target.nextElementSibling;
-			const toggleCircle = togglePath.querySelector('.toggle-circle');
-
-			if (e.target.checked) {
-				togglePath.classList.remove('bg-gray-300');
-				togglePath.classList.add('bg-blue-500');
-				toggleCircle.classList.add('translate-x-4');
-				toggleCircle.style.left = '5px';
+	<script>
+		var sum = 0;
+		var count = 1;
+		function toggleVisibility(id) {
+			const element = document.getElementById(id);
+			if (element.classList.contains('hidden')) {
+				element.classList.remove('hidden');
 			} else {
-				togglePath.classList.remove('bg-blue-500');
-				togglePath.classList.add('bg-gray-300');
-				toggleCircle.classList.remove('translate-x-4');
-				toggleCircle.style.left = '1px';
+				element.classList.add('hidden');
 			}
-		});
-	});
+		}
 
-	function search(input, pending, complete, cancel, listFilter, start, end, page) {
-		console.log(listFilter);
-		$.ajax({
-			url: '/Patient/GetAppointmentByQuery',  // URL of the action method in the server
-			type: 'GET',
-			data: { query: input, pending: pending, complete: complete, cancel: cancel, listFilter: listFilter, start: start, end: end, page: page },
-			traditional: true,  // Make sure array is serialized correctly it's so important to set true
-			success: function ({ data, total }) {
-				var searchbody = document.getElementById('searchdata');
-				searchbody.innerHTML = "";
-				console.log("data : ", data, "  -- ", total);
-				if (total == -1) {
-					count = 0;
-					document.getElementById('totalpage').innerHTML = 0;
-					document.getElementById('sum').innerHTML = 0;
-					document.getElementById('currentpage').innerHTML = 0;
-					return;
+		document.querySelectorAll('.toggle-checkbox').forEach((checkbox) => {
+			checkbox.addEventListener('change', (e) => {
+				const togglePath = e.target.nextElementSibling;
+				const toggleCircle = togglePath.querySelector('.toggle-circle');
 
+				if (e.target.checked) {
+					togglePath.classList.remove('bg-gray-300');
+					togglePath.classList.add('bg-blue-500');
+					toggleCircle.classList.add('translate-x-4');
+					toggleCircle.style.left = '5px';
+				} else {
+					togglePath.classList.remove('bg-blue-500');
+					togglePath.classList.add('bg-gray-300');
+					toggleCircle.classList.remove('translate-x-4');
+					toggleCircle.style.left = '1px';
 				}
-				if (total && total > 0) {
-					sum = total;
-					document.getElementById('totalpage').innerHTML = Math.ceil(sum / 5);
-					document.getElementById('sum').innerHTML = sum;
-					count = 1;
-					document.getElementById('currentpage').innerHTML = count;
-
-				}
-				for (let i = 0; i < data.length; i++) {
-
-					var row = `
-																<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-																	<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-																		${data[i].name}
-																	</th>
-																	<td class="px-6 py-4">
-																		<img class="w-20 h-20 rounded" src="${data[i].image}" alt="Default avatar">
-																	</td>
-																	<td class="px-6 py-4">
-																			${data[i].specialty}
-																	</td>
-																	<td class="px-6 py-4">
-																			${data[i].date}
-																	</td>
-																	<td class="px-6 py-4">
-																		<span class="text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded
-																				${data[i].status == "Pending" ? "bg-yellow-300 dark:bg-yellow-900 dark:text-yellow-300" : (data[i].status == "Canceled" ? "bg-red-300 dark:bg-red-900 dark:text-red-300" : "bg-blue-300 dark:bg-blue-900 dark:text-blue-300")}">
-
-																				${data[i].status}
-																		</span>
-																	</td>
-																	<td class="px-6 py-4">
-																		 <a href="/Patient/AppointmentDetail?oid=${data[i].id}"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Detail</a>
-																	</td>
-
-																</tr>
-																`
-					searchbody.insertAdjacentHTML('beforeend', row);
-				}
-
-				console.log("this is app world : ", data);
-			},
-			error: function (error) {
-				console.log('Error:', error); // Error handling
-			}
+			});
 		});
-	}
 
-	$(document).ready(function () {
-		$('#searchapp').on('input', function () {
-			var input = $(this).val();
-			saveView(input, 1);
+		function search(input, pending, complete, cancel, listFilter, start, end, page) {
+			console.log(listFilter);
+			$.ajax({
+				url: '/Patient/GetAppointmentByQuery',  // URL of the action method in the server
+				type: 'GET',
+				data: { query: input, pending: pending, complete: complete, cancel: cancel, listFilter: listFilter, start: start, end: end, page: page },
+				traditional: true,  // Make sure array is serialized correctly it's so important to set true
+				success: function ({ data, total }) {
+					var searchbody = document.getElementById('searchdata');
+					searchbody.innerHTML = "";
+					console.log("data : ", data, "  -- ", total);
+					if (total == -1) {
+						count = 0;
+						document.getElementById('totalpage').innerHTML = 0;
+						document.getElementById('sum').innerHTML = 0;
+						document.getElementById('currentpage').innerHTML = 0;
+						return;
 
+					}
+					if (total && total > 0) {
+						sum = total;
+						document.getElementById('totalpage').innerHTML = Math.ceil(sum / 5);
+						document.getElementById('sum').innerHTML = sum;
+						count = 1;
+						document.getElementById('currentpage').innerHTML = count;
+
+					}
+				data.sort((a, b) => new Date(b.date) - new Date(a.date));
+					for (let i = 0; i < data.length; i++) {
+					const dateObj = new Date(data[i].date);
+					const formattedDate = dateObj.toLocaleDateString('vi-VN');  // Định dạng ngày theo chuẩn Việt Nam
+					const formattedTime = dateObj.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+					let displayStatus = '';
+					switch (data[i].status) {
+						case 'Paid':
+							displayStatus = 'Đã Thanh toán';
+							break;
+						case 'Canceled':
+							displayStatus = 'Đã Hủy';
+							break;
+						case 'Confirm':
+							displayStatus = 'Đã Xác nhận';
+							break;
+						default:
+							displayStatus = data[i].status; // Giữ nguyên nếu không có giá trị khớp
+					}
+						var row = `
+																	<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+																		<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+																			${data[i].name}
+																		</th>
+																		<td class="px-6 py-4">
+																			<img class="w-20 h-20 rounded" src="${data[i].image}" alt="Default avatar">
+																		</td>
+																		<td class="px-6 py-4">
+																				${data[i].specialty}
+																		</td>
+																		<td class="px-6 py-4">
+																					 ${formattedDate} ${formattedTime}
+																		</td>
+																		<td class="px-6 py-4">
+																				<span class="text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded
+						${data[i].status == "Paid" ? "bg-yellow-300 dark:bg-yellow-900 dark:text-yellow-300" :
+							(data[i].status == "Canceled" ? "bg-red-300 dark:bg-red-900 dark:text-red-300" : "bg-blue-300 dark:bg-blue-900 dark:text-blue-300")}">
+						${displayStatus} <!-- Hiển thị status bằng tiếng Việt -->
+					</span>
+																		</td>
+																		<td class="px-6 py-4">
+																			 <a href="/Patient/AppointmentDetail?oid=${data[i].id}"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Detail</a>
+																		</td>
+
+																	</tr>
+																	`
+						searchbody.insertAdjacentHTML('beforeend', row);
+					}
+
+					console.log("this is app world : ", data);
+				},
+				error: function (error) {
+					console.log('Error:', error); // Error handling
+				}
+			});
+		}
+
+		$(document).ready(function () {
+			$('#searchapp').on('input', function () {
+				var input = $(this).val();
+				saveView(input, 1);
+
+			});
 		});
-	});
 
 
 

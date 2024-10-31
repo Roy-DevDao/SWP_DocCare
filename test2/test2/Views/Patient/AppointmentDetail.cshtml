@@ -11,7 +11,7 @@
 		<h2 class="text-xl font-semibold">Appointment Detail</h2>
 		<div class="flex items-center space-x-2">
 			<span class="px-2 py-1 text-xs bg-gray-200 rounded">@status</span>
-			@if (status == "Pending" || status == "Confirm")
+			@if (status == "Paid" || status == "Unpaid")
 			{
 				<button onclick="cancelAppointment()" class="px-2 py-1 text-xs bg-red-500 rounded">Cancel</button>
 			}

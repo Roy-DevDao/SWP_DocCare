@@ -2,7 +2,7 @@
 
 @{
     Layout = "Layout_staff";
-    ViewData["Title"] = "Service Appointment List from Staff";
+    ViewData["Title"] = "Quản lí lịch khám dịch vụ";
 }
 
 
@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-5 row">
                 <div class="col-md-4">
-                    <h5 class="mb-0">Reservations</h5>
+                    <h5 class="mb-0">Lịch khám</h5>
                 </div>
             </div>
             <div class="row mt-4">
@@ -20,11 +20,11 @@
                     <form action="serviceappointlist" method="GET">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <label class="form-label"></label>
-                                <input type="text" name="search_service" class="form-control" value="@ViewBag.SearchService" placeholder="Enter service name..." />
+                                <label class="form-label">Tìm dịch vụ</label>
+                                <input type="text" name="search_service" class="form-control" value="@ViewBag.SearchService" placeholder="Nhập tên dịch vụ..." />
                             </div>
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary mt-4">Search</button>
+                                <button type="submit" class="btn btn-primary mt-4">Tìm</button>
                             </div>
                         </div>
                     </form>
@@ -35,17 +35,17 @@
                     <form action="serviceappointlist" method="GET">
                         <div class="row align-items-center">
                             <div class="col-md-8">
-                                <label class="form-label">Filter by Status</label>
+                                <label class="form-label">Lọc theo trạng thái</label>
                                 <select name="status" class="form-select">
-                                    <option value="all" selected>All</option>
-                                    <option value="Complete">Complete</option>
-                                    <option value="Assigned">Assigned</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Cancelled">Cancelled</option>
+                                    <option value="all">Tất cả</option>
+                                    <option value="Wait">Chờ xác nhận</option>
+                                    <option value="Confirm">Đã xác nhận</option>
+                                    <option value="Cancelled">Đã huỷ</option>
+                                    <option value="Complete">Đã khám</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <button type="submit" class="btn btn-primary mt-4">Filter</button>
+                                <button type="submit" class="btn btn-primary mt-4">Lọc</button>
                             </div>
                         </div>
                     </form>
@@ -59,33 +59,38 @@
                     <table class="table mb-0 table-center">
                         <thead>
                             <tr>
-                                <th class="border-bottom p-3">ID
+                                <th class="border-bottom p-3">
+                                    ID
                                     <a asp-action="ServiceAppointList" asp-route-sortColumn="ServiceId" asp-route-sortDirection="@((ViewBag.SortColumn=="ServiceId" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
                                         <i class="@(ViewBag.SortColumn=="ServiceId" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                                     </a>
                                 </th>
-                                <th class="border-bottom p-3">Patient
+                                <th class="border-bottom p-3">
+                                    Tên bệnh nhân
                                     <a asp-action="ServiceAppointList" asp-route-sortColumn="PatientName" asp-route-sortDirection="@((ViewBag.SortColumn=="PatientName" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
                                         <i class="@(ViewBag.SortColumn=="PatientName" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                                     </a>
                                 </th>
-                                <th class="border-bottom p-3">Service
+                                <th class="border-bottom p-3">
+                                    Tên dịch vụ
                                     <a asp-action="ServiceAppointList" asp-route-sortColumn="SpecialtyName" asp-route-sortDirection="@((ViewBag.SortColumn=="SpecialtyName" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
                                         <i class="@(ViewBag.SortColumn=="SpecialtyName" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                                     </a>
                                 </th>
-                                <th class="border-bottom p-3">Date
+                                <th class="border-bottom p-3">
+                                    Ngày hẹn khám
                                     <a asp-action="ServiceAppointList" asp-route-sortColumn="AppointmentDate" asp-route-sortDirection="@((ViewBag.SortColumn=="AppointmentDate" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
                                         <i class="@(ViewBag.SortColumn=="AppointmentDate" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                                     </a>
                                 </th>
-                                <th class="border-bottom p-3">Doctor
+                                <th class="border-bottom p-3">
+                                    Bác sĩ phụ trách
                                     <a asp-action="ServiceAppointList" asp-route-sortColumn="DoctorName" asp-route-sortDirection="@((ViewBag.SortColumn=="DoctorName" && ViewBag.SortDirection=="asc")? "desc" : "asc")">
                                         <i class="@(ViewBag.SortColumn=="DoctorName" ? (ViewBag.SortDirection=="asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
                                     </a>
                                 </th>
-                                <th class="border-bottom p-3">Status</th>
-                                <th class="border-bottom p-3">More details</th>
+                                <th class="border-bottom p-3">Trạng thái</th>
+                                <th class="border-bottom p-3">Mô tả</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,13 +103,13 @@
                                     <td class="p-3">@appointment.SpecialtyName</td>
                                     <td class="p-3">@appointment.AppointmentDate.ToString("dd/MM/yyyy")</td>
                                     <td class="p-3">@appointment.DoctorName</td>
-                                    <td class="p-3">@appointment.Status</td>
-                                    <td class="text-end p-3">
-                                        <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointDetail" asp-route-id="@appointment.AppointmentId" type="button" class="btn btn-info">Details</a>
+                                    <td class="p-3">@appointment.StatusOption</td>
+                                    <td class="p-3">
+                                        <a asp-area="" asp-controller="Staff" asp-action="ServiceAppointDetail" asp-route-id="@appointment.AppointmentId" type="button" class="btn btn-info">Chi tiết</a>
                                     </td>
                                 </tr>
                             }
-                           
+
                         </tbody>
                     </table>
                 </div>
