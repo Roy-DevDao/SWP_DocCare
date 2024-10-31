@@ -480,11 +480,13 @@ namespace test2.Controllers
                 var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
                 ViewBag.User = user;
 				ViewBag.total = dc.Orders.Where(o => o.Pid == user.Id).Count();
-				ViewBag.pending = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Pending").Count();
-                ViewBag.pending = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Confirm").Count();
-                ViewBag.cancel = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Cancelled").Count();
-				ViewBag.complete = dc.Orders.Where(o => o.Pid == user.Id && o.Status == "Completed").Count();
-				ViewBag.upcomingAppointment = dc.Orders.Include(o => o.Option).ThenInclude(op => op.DidNavigation).ThenInclude(d =>d.Specialty).Where(o => o.Pid == user.Id && o.Option.DateWork > DateTime.Now && o.Status != "Cancelled").OrderByDescending(o => o.Option.DateWork);
+                ViewBag.confirm = dc.Orders.Include(o => o.Option).Where(o => o.Pid == user.Id && o.Option.Status == "Confirm").Count();
+                ViewBag.cancel = dc.Orders.Include(o => o.Option).Where(o => o.Pid == user.Id && o.Option.Status == "Cancelled").Count();
+				ViewBag.complete = dc.Orders.Include(o => o.Option).Where(o => o.Pid == user.Id && o.Option.Status == "Complete").Count();
+	            var buff = dc.Orders.Include(o => o.Option).ThenInclude(op => op.DidNavigation).ThenInclude(d => d.Specialty).Where(o => o.Pid == user.Id && o.Option.DateWork > DateTime.Now && o.Status != "Cancelled").OrderByDescending(o => o.Option.DateWork);
+				ViewBag.upcomingAppointment = buff;
+				ViewBag.thenumber = buff.Count();
+
 
             }
 			
