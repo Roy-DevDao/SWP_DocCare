@@ -180,6 +180,10 @@ namespace test2.Controllers
             return View("ViewAppointmentDetail", new List<BaseViewModel> { baseViewModel });
         }
 
+        
+
+
+
         public IActionResult ViewPatient(string id)
         {
             // Lấy danh sách bệnh nhân dựa trên bác sĩ có Did = id
@@ -241,6 +245,128 @@ namespace test2.Controllers
             // Truyền danh sách BaseViewModel vào View
             return View("ViewPatientDetail", new List<BaseViewModel> { baseViewModel });
         }
+
+
+        [HttpGet]
+        public IActionResult AddHealthRecord(string appointmentId)
+        {
+            if (string.IsNullOrEmpty(appointmentId))
+            {
+                return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+            }
+
+            var appointment = _context.Orders
+                .Include(o => o.PidNavigation)
+                .Include(o => o.Option)
+                    .ThenInclude(op => op.DidNavigation)
+                .FirstOrDefault(o => o.Oid == appointmentId);
+
+            _logger.LogInformation(appointment.PidNavigation.Name);
+
+            if (appointment == null)
+            {
+                return NotFound("Không tìm thấy thông tin cuộc hẹn.");
+            }
+
+            var baseViewModel = new BaseViewModel
+            {
+                DId = appointment.Option.Did,
+                Name = appointment.Option.DidNavigation.Name,
+                DoctorImg = appointment.Option.DidNavigation.DoctorImg,
+                appointmentlist = new AppointmentViewModel()
+                {
+                    AppointmentId = appointmentId,
+                },
+                healthRecord = new HealthRecordViewModel
+                {
+                    PatientName = appointment.PidNavigation.Name,
+                    AppointmentId = appointmentId,
+                    DateExam = DateTime.Now // Ngày khám mặc định là hôm nay
+                }
+            };
+            _logger.LogInformation("Thông tin Model trước khi trả về view AddHealthRecord: " +
+                          "DoctorId = {DId}, " +
+                          "PatientName = {PatientName}, " +
+                          "AppointmentId = {AppointmentId}, " +
+                          "DateExam = {DateExam}",
+                          baseViewModel.DId,
+                          baseViewModel.Name,
+                          baseViewModel.appointmentlist.AppointmentId,
+                          baseViewModel.healthRecord.DateExam);
+
+            return View("AddHealthRecord", new List<BaseViewModel> { baseViewModel });
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult AddHealthRecord(string appointmentId, string diagnosis, string description, string note, DateTime dateExam)
+        {
+            // Kiểm tra nếu `appointmentId` rỗng hoặc `ModelState` không hợp lệ
+            if (string.IsNullOrEmpty(appointmentId) || !ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Thông tin cuộc hẹn hoặc thông tin nhập không hợp lệ.");
+                return View("AddHealthRecord"); // Trả về lại view nếu có lỗi
+            }
+
+            // Lấy thông tin cuộc hẹn từ database
+            var appointment = _context.Orders
+                .Include(o => o.PidNavigation) // Thông tin bệnh nhân
+                .Include(o => o.Option)// Thông tin Option để truy cập bác sĩ
+                    .ThenInclude(op => op.DidNavigation)
+                .FirstOrDefault(o => o.Oid == appointmentId);
+
+            // Kiểm tra nếu không tìm thấy cuộc hẹn
+            if (appointment == null)
+            {
+                ModelState.AddModelError("", "Không tìm thấy thông tin cuộc hẹn.");
+                return View("AddHealthRecord"); // Trả về lại view nếu không tìm thấy cuộc hẹn
+            }
+
+            // Log thông tin của các thuộc tính trước khi kiểm tra null
+            _logger.LogInformation("Thông tin cuộc hẹn trước khi kiểm tra null:");
+            _logger.LogInformation("Appointment ID: {AppointmentId}", appointment?.Oid);
+            _logger.LogInformation("Patient ID (PId): {PatientId}", appointment?.PidNavigation?.Pid);
+            _logger.LogInformation("Patient Name: {PatientName}", appointment?.PidNavigation?.Name);
+            _logger.LogInformation("Option ID: {OptionId}", appointment?.Oid);
+            _logger.LogInformation("Doctor ID (DId): {DoctorId}", appointment?.Option.Did);
+            _logger.LogInformation("Doctor Name: {DoctorName}", appointment?.Option?.DidNavigation?.Name);
+
+
+            // Tạo bản ghi HealthRecord mới
+            var healthRecord = new HealthRecord
+            {
+                RecordId = Guid.NewGuid().ToString(), // Tạo ID duy nhất cho HealthRecord
+                Pid = appointment.Pid, // ID bệnh nhân từ thông tin cuộc hẹn
+                Did = appointment.Option.Did, // ID bác sĩ từ Option
+                Oid = appointment.Oid,
+                Diagnosis = diagnosis,
+                Description = description,
+                Note = note,
+                DateExam = dateExam
+            };
+
+            // Thêm bản ghi vào database
+            _context.HealthRecords.Add(healthRecord);
+            _context.SaveChanges();
+
+            appointment.Option.Status = "Complete";
+            // Lưu tất cả thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+
+            // Ghi log thông tin bản ghi HealthRecord vừa được tạo
+            _logger.LogInformation("Đã thêm hồ sơ sức khỏe mới cho cuộc hẹn với ID: {AppointmentId}, " +
+                                   "Bệnh Nhân: {PatientName}, Bác Sĩ: {DoctorId}, Ngày Khám: {DateExam}",
+                                   appointmentId,
+                                   appointment.PidNavigation.Name,
+                                   appointment.Option.Did,
+                                   dateExam);
+
+            // Chuyển hướng về trang chi tiết cuộc hẹn sau khi thêm thành công
+            return RedirectToAction("ViewAppointment", new { id = appointment.Option.Did });
+        }   
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

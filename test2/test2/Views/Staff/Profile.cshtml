@@ -3,207 +3,148 @@
     ViewBag.Title = "Sửa trang cá nhân";
     Layout = "~/Views/Shared/Layout_Staff.cshtml";
 }
+@section Scripts {
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+}
+
 
 <style>
     /* Reset các margin và padding */
-    body, html {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif; /* Font chữ cho toàn bộ trang */
-        height: 100%; /* Chiều cao 100% cho body */
+   
+
+    .main-point{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px 40px;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid #ddd; /* Viền mỏng màu xám nhạt cho các ô */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng mờ xung quanh bảng */
     }
-
-    .main-content {
-        padding: 60px; /* Tăng khoảng cách cho phần chính */
-        display: flex;
-        justify-content: center; /* Căn giữa theo chiều ngang */
-        align-items: center; /* Căn giữa theo chiều dọc */
-        height: calc(100vh - 60px); /* Đảm bảo form căn giữa trên màn hình */
-        width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng màn hình */
-    }
-
-    .section-content {
-        background-color: #ffffff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 40px; /* Tăng khoảng cách bên trong container */
-        display: flex; /* Sử dụng flexbox cho bố cục */
-        justify-content: space-between; /* Tạo khoảng cách giữa các form */
-        width: 100%; /* Giới hạn chiều rộng container */
-        max-width: 1200px; /* Đặt chiều rộng tối đa cho container */
-        margin: auto; /* Căn giữa container trên trang */
-    }
-
-    h4 {
-        margin-bottom: 20px; /* Khoảng cách dưới tiêu đề */
-        font-size: 24px; /* Kích thước tiêu đề */
-        color: #343a40; /* Màu tiêu đề */
-    }
-
-    .icon-box {
-        display: flex; /* Flexbox cho icon và tiêu đề */
-        align-items: center; /* Căn giữa theo chiều dọc */
-    }
-
-    .icon {
-        margin-right: 15px; /* Khoảng cách giữa icon và tiêu đề */
-    }
-
-    .form-group {
-        margin-bottom: 30px; /* Khoảng cách giữa các nhóm form */
-    }
-
-    .form-control {
-        border-radius: 4px; /* Bo góc cho các input */
-        border: 1px solid #ced4da; /* Viền cho input */
-        transition: border-color 0.2s; /* Hiệu ứng chuyển màu cho viền */
-    }
-
-        .form-control:focus {
-            border-color: #007bff; /* Màu viền khi focus */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Hiệu ứng bóng khi focus */
-        }
-
-    .btn {
-        border-radius: 5px; /* Bo góc cho nút */
-        padding: 10px; /* Padding cho nút */
-    }
-
-    .btn-success {
-        background-color: #28a745; /* Màu nền cho nút cập nhật */
-    }
-
-        .btn-success:hover {
-            background-color: #218838; /* Màu nền khi hover */
-        }
-
-    .btn-primary {
-        background-color: #007bff; /* Màu nền cho nút đổi mật khẩu */
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3; /* Màu nền khi hover */
-        }
-
-    .text-center {
-        text-align: center; /* Căn giữa chữ */
+    .mt-2{
+        border: 1px solid #ddd; border-radius: 10px; 
     }
 
 </style>
 
-<!-- Start main-content -->
-<div class="main-content">
-    <section>
-        <div class="container">
-            <div class="section-content">
-                <div class="row">
-                    <!-- Form Update Thông Tin -->
-                    <div class="col-md-6">
-                        <form name="reg-form" class="register-form" method="post" id="frmEdit">
-                            <div class="icon-box mb-0 p-0">
-                                <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
-                                    <i class="pe-7s-users"></i>
-                                </a>
-                                <h4 class="text-gray pt-10 mt-0 mb-30">Sửa trang cá nhân</h4>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="form_name">Tên</label>
-                                    <input name="FullName" class="form-control" type="text" required value="@Model.StaffName">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="form_gender">Giới tính</label>
-                                    <select name="Gender" class="form-control" required>
-                                        <option value="">---- Lựa chọn ----</option>
-                                        <option value="male" selected="@(Model.SGender == "male")">Nam</option>
-                                        <option value="female" selected="@(Model.SGender == "female")">Nữ</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="form_choose_username">Tên đăng nhập</label>
-                                    <input id="form_choose_username" name="Username" class="form-control" type="text" required disabled value="@Model.Username">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Điện thoại</label>
-                                    <input name="Phone" class="form-control" type="text" value="@Model.SPhone" disabled>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="form_email">Email</label>
-                                    <input id="form_email" name="Email" class="form-control" type="email" value="@Model.Email" disabled>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="form_date_of_birth">Ngày sinh</label>
-                                    <input id="form_date_of_birth" name="DateOfBirth" class="form-control" type="date" required value="@Model.SDob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="file">Ảnh đại diện</label>
-                                <input type="file" id="file" name="avataUpload" class="form-control">
-                                <p class="help-block">Upload ảnh đại diện.</p>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-success btn-lg btn-block mt-15" type="submit" id="btnReg">Cập nhật</button>
-                            </div>
-                        </form>
+
+
+<div class="main-point">
+    <!-- Form Update Thông Tin -->
+    <form name="reg-form" method="post" id="frmEdit" enctype="multipart/form-data">
+        <div class="border-b border-gray-900/10 pb-12">
+            <h1 class="text-base font-semibold text-black-900">Thông tin cá nhân</h1>
+            <p class="mt-1 text-sm text-gray-500">Cập nhật thông tin cá nhân của bạn.</p>
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <!-- Tên -->
+                <div class="sm:col-span-3">
+                    <label for="full-name" class="block text-sm font-medium text-gray-900">Tên</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <input type="text" name="FullName" id="full-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" style="padding: 5px 10px;" required value="@Model.StaffName">
                     </div>
+                </div>
 
-                    <!-- Form Đổi Mật Khẩu -->
-                    <div class="col-md-6">
-                        <form name="editprofile-form" method="post" id="updatePass">
-                            <div class="icon-box mb-0 p-0">
-                                <a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
-                                    <i class="fa fa-key"></i>
-                                </a>
-                                <h4 class="text-gray pt-10 mt-0 mb-30">Đổi mật khẩu</h4>
-                            </div>
-                            <hr>
-                            <p class="text-gray">Mật khẩu cần thay đổi thường xuyên vì lý do bảo mật.</p>
+                <!-- Giới tính -->
+                <div class="sm:col-span-3">
+                    <label for="gender" class="block text-sm font-medium text-gray-900">Giới tính</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <select name="Gender" id="gender" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" required>
+                            <option value="">---- Lựa chọn ----</option>
+                            <option value="male" selected="@(Model.SGender == "male")">Nam</option>
+                            <option value="female" selected="@(Model.SGender == "female")">Nữ</option>
+                        </select>
+                    </div>
+                </div>
 
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label>Mật khẩu mới</label>
-                                    <input name="NewPassword" class="form-control" type="password">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Nhập lại mật khẩu</label>
-                                    <input name="RePassword" class="form-control" type="password">
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Mật khẩu cũ</label>
-                                <input name="OldPassword" class="form-control" type="password">
-                            </div>
-                            <div class="form-group text-center">
-                                <button class="btn btn-primary btn-sm mt-15" type="submit">Cập nhật</button>
-                            </div>
-                        </form>
+                <!-- Tên đăng nhập -->
+                <div class="sm:col-span-3">
+                    <label for="username" class="block text-sm font-medium text-gray-900">Tên đăng nhập</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <input style="padding: 5px 10px;" type="text" name="Username" id="username" style="padding: 5px 10px;" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" required disabled value="@Model.Username">
+                    </div>
+                </div>
+
+                <!-- Điện thoại -->
+                <div class="sm:col-span-3">
+                    <label for="phone" class="block text-sm font-medium text-gray-900">Điện thoại</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <input type="text" name="Phone" id="phone" style="padding: 5px 10px;" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" disabled value="@Model.SPhone">
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="sm:col-span-3">
+                    <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <input type="email" style="padding: 5px 10px;" name="Email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" disabled value="@Model.Email">
+                    </div>
+                </div>
+
+                <!-- Ngày sinh -->
+                <div class="sm:col-span-3">
+                    <label for="date-of-birth" class="block text-sm font-medium text-gray-900">Ngày sinh</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <input type="date" name="DateOfBirth" style="padding: 5px 10px;" id="date-of-birth" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm" required value="@Model.SDob?.ToDateTime(new TimeOnly()).ToString("yyyy-MM-dd")">
+                    </div>
+                </div>
+
+                <!-- Ảnh đại diện -->
+                <div class="sm:col-span-6">
+                    <label for="file" class="block text-sm font-medium text-gray-900">Ảnh đại diện</label>
+                    <div class="mt-3">
+                        <input type="file" name="avataUpload" id="file" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                        <p class="text-sm text-gray-600">Upload ảnh đại diện.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="button" class="text-sm font-semibold text-gray-900">Hủy</button>
+            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cập nhật</button>
+        </div>
+    </form>
+
+    <!-- Form Đổi Mật Khẩu -->
+    <form name="editprofile-form" method="post" asp-controller="Staff" asp-action="ChangePassword" id="updatePass" class="mt-10">
+        <div class="border-b border-gray-900/10 pb-12">
+            <h2 class="text-base font-semibold text-gray-900">Đổi mật khẩu</h2>
+            <p class="mt-1 text-sm text-gray-600">Mật khẩu cần thay đổi thường xuyên vì lý do bảo mật.</p>
+
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <!-- Mật khẩu mới -->
+                <div class="sm:col-span-3">
+                    <label for="new-password" class="block text-sm font-medium text-gray-900">Mật khẩu mới</label>
+                    <div class="mt-2" style="border: 1px solid #ddd; border-radius: 10px; ">
+                        <input type="password" name="NewPassword" id="new-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                    </div>
+                </div>
+
+                <!-- Nhập lại mật khẩu -->
+                <div class="sm:col-span-3">
+                    <label for="re-password" class="block text-sm font-medium text-gray-900">Nhập lại mật khẩu</label>
+                    <div class="mt-2">
+                        <input type="password" name="RePassword" id="re-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                    </div>
+                </div>
+
+                <!-- Mật khẩu cũ -->
+                <div class="sm:col-span-6">
+                    <label for="old-password" class="block text-sm font-medium text-gray-900">Mật khẩu cũ</label>
+                    <div class="mt-2">
+                        <input type="password" name="OldPassword" id="old-password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <button type="button" class="text-sm font-semibold text-gray-900">Hủy</button>
+            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Cập nhật</button>
+        </div>
+    </form>
 </div>
-<!-- end main-content -->
-@section Scripts {
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

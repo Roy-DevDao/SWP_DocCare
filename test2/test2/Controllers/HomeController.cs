@@ -54,83 +54,15 @@ namespace test2.Controllers
         }
         //--------------------------------------------------------------------------------------------
 
-        //public IActionResult DoctorList(string gender = "all", string speciality = "all", string sort = "all", int pageNumber = 1)
-        //{
-        //    int pageSize = 9;
-
-        //    var specialties = dc.Specialties.ToList();
-        //    ViewBag.Specialties = specialties;
-
-        //    var doctors = dc.Doctors.Include(d => d.Specialty).Include(d => d.Feedbacks).AsQueryable();
-
-        //    // Lọc theo giới tính
-        //    if (gender != "all")
-        //    {
-        //        bool isMale = gender == "true";
-        //        doctors = doctors.Where(d => d.Gender == (isMale ? "Male" : "Female"));
-        //    }
-
-        //    // Lọc theo chuyên khoa
-        //    if (speciality != "all")
-        //    {
-        //        doctors = doctors.Where(d => d.SpecialtyId == speciality);
-        //    }
-
-        //    // Sắp xếp bác sĩ
-        //    switch (sort)
-        //    {
-        //        case "star":
-        //            doctors = doctors.OrderByDescending(d => d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0);
-        //            break;
-        //        case "fee":
-        //            doctors = doctors.OrderBy(d => d.Price);
-        //            break;
-        //        case "fee-":
-        //            doctors = doctors.OrderByDescending(d => d.Price);
-        //            break;
-        //        default:
-        //            break;
-        //    }
-
-        //    // Phân trang và lấy danh sách bác sĩ
-        //    var doctorList = doctors.Select(d => new DoctorViewModel
-        //    {
-        //        DoctorId = d.Did,
-        //        Name = d.Name,
-        //        DoctorImg = d.DoctorImg,
-        //        Specialty = d.Specialty.SpecialtyName,
-        //        Price = d.Price ?? 0,
-        //        Position = d.Position,
-        //        Gender = d.Gender,
-        //        NumberOfFeedbacks = d.Feedbacks.Count(),
-        //        Rating = d.Feedbacks.Any() ? d.Feedbacks.Average(f => f.Star ?? 0) : 0
-        //    })
-        //    .Skip((pageNumber - 1) * pageSize)
-        //    .Take(pageSize)
-        //    .ToList();
-
-        //    // Tính tổng số bác sĩ
-        //    var totalDoctors = doctors.Count();
-        //    ViewBag.TotalDoctors = totalDoctors;
-        //    ViewBag.TotalPages = (int)Math.Ceiling(totalDoctors / (double)pageSize);
-        //    ViewBag.PageNumber = pageNumber;
-
-        //    // Giữ lại các tham số lọc để truyền vào view
-        //    ViewBag.Gender = gender;
-        //    ViewBag.Speciality = speciality;
-        //    ViewBag.Sort = sort;
-
-        //    return View(doctorList);
-        //}
-
-        public IActionResult DoctorList(string query, string[] facultiesSelected, int pageNumber = 1)
+        public IActionResult DoctorList(string query, string[] facultiesSelected, string gender, int pageNumber = 1)
         {
             var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
-            ViewBag.User = user; // Truyền thông tin người dùng vào ViewBag
+            ViewBag.User = user;
+
             // Lấy danh sách bác sĩ từ cơ sở dữ liệu
             var doctors = dc.Doctors.Include(d => d.Specialty).Include(d => d.Feedbacks).AsQueryable();
 
-            // Thêm logic tìm kiếm
+            // Thêm logic tìm kiếm theo từ khóa
             if (!string.IsNullOrEmpty(query))
             {
                 doctors = doctors.Where(d => d.Name.Contains(query) || d.Position.Contains(query));
@@ -139,9 +71,14 @@ namespace test2.Controllers
             // Thêm logic lọc theo chuyên khoa
             if (facultiesSelected != null && facultiesSelected.Length > 0)
             {
-                // Chuyển facultiesSelected thành List<string>
                 var selectedSpecialties = facultiesSelected.ToList();
                 doctors = doctors.Where(d => selectedSpecialties.Contains(d.SpecialtyId.ToString()));
+            }
+
+            // Thêm logic lọc theo giới tính
+            if (!string.IsNullOrEmpty(gender))
+            {
+                doctors = doctors.Where(d => d.Gender == gender);
             }
 
             // Đếm tổng số bác sĩ
@@ -173,8 +110,10 @@ namespace test2.Controllers
             ViewBag.TotalPages = totalPages;
             ViewBag.PageNumber = pageNumber;
             ViewBag.Query = query;
+            ViewBag.Gender = gender; // Giới tính đã chọn
             ViewBag.Specialties = dc.Specialties.ToList(); // Lấy danh sách chuyên khoa
             ViewBag.SpecialtySelected = facultiesSelected?.ToList() ?? new List<string>(); // Chuyên khoa được chọn
+
             return View(doctorViewModels); // Trả về danh sách DoctorViewModel
         }
 
@@ -292,11 +231,11 @@ namespace test2.Controllers
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                return Json(new { status = false, mess = "Please enter both email and password." });
+                return Json(new { status = false, mess = "Vui lòng nhập cả email và passwork" });
             }
 
             var user = dc.Accounts.FirstOrDefault(dc => dc.Email == email);
-            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            if (user != null && user.Password == password)
             {
                 var claims = new List<Claim>
         {
@@ -326,16 +265,16 @@ namespace test2.Controllers
 
                 if (redirectUrl != null)
                 {
-                    return Json(new { status = true, mess = "Login successful!", redirectUrl });
+                    return Json(new { status = true, mess = "Đăng nhập thành công!", redirectUrl });
                 }
                 else
                 {
-                    return Json(new { status = false, mess = "Role not recognized." });
+                    return Json(new { status = false, mess = "Vai trò không đón nhận" });
                 }
             }
 
             // Trả về thông báo nếu email hoặc mật khẩu không hợp lệ
-            return Json(new { status = false, mess = "Invalid email or password." });
+            return Json(new { status = false, mess = "Sai mật khẩu hoặc email." });
         }
 
 
@@ -688,6 +627,8 @@ namespace test2.Controllers
         }
         //--------------------------------------------------------------------------------------------
 
+       
+
         public IActionResult ServiceList(int pageNumber = 1, string search = "", string sort = "")
         {
             var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
@@ -703,6 +644,7 @@ namespace test2.Controllers
                 services = services.Where(s => s.SpecialtyName.Contains(search));
             }
 
+            // Sắp xếp nếu có
             if (!string.IsNullOrWhiteSpace(sort))
             {
                 switch (sort)
@@ -722,14 +664,17 @@ namespace test2.Controllers
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
+
+            // Truyền các giá trị vào ViewBag để sử dụng trong view
             ViewBag.TotalServices = totalServices;
             ViewBag.TotalPages = (int)Math.Ceiling(totalServices / (double)pageSize);
             ViewBag.PageNumber = pageNumber;
-            ViewBag.Search = search;
-            ViewBag.Sort = sort;
+            ViewBag.Search = search;  // Giữ lại giá trị tìm kiếm
+            ViewBag.Sort = sort;      // Giữ lại giá trị sắp xếp
 
             return View(pagedServices);
         }
+
 
 
 

@@ -778,9 +778,48 @@ namespace test2.Controllers
 
 
 
+        //[HttpGet]
+        //public IActionResult EditService(string id)
+        //{
+        //    var service = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == id);
+
+        //    if (service == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(service);
+        //}
+        //[HttpPost]
+        //public IActionResult EditService(Specialty model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var existingService = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == model.SpecialtyId);
+
+        //        if (existingService != null)
+        //        {
+        //            existingService.SpecialtyName = model.SpecialtyName;
+        //            existingService.ShortDescription = model.ShortDescription;
+        //            existingService.SpecialtyImg = model.SpecialtyImg;
+
+        //            _context.SaveChanges();
+
+        //            return RedirectToAction("ManageService");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "Service not found.");
+        //        }
+        //    }
+
+        //    return View(model);
+        //}
+
         [HttpGet]
         public IActionResult EditService(string id)
         {
+            // Tìm dịch vụ hiện có trong cơ sở dữ liệu
             var service = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == id);
 
             if (service == null)
@@ -788,33 +827,73 @@ namespace test2.Controllers
                 return NotFound();
             }
 
-            return View(service);
-        }
-        [HttpPost]
-        public IActionResult EditService(Specialty model)
-        {
-            if (ModelState.IsValid)
+            // Tạo một ViewModel với thông tin từ dịch vụ hiện có
+            var viewModel = new EditSpecialtyViewModel
             {
-                var existingService = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == model.SpecialtyId);
+                SpecialtyId = service.SpecialtyId,
+                SpecialtyName = service.SpecialtyName,
+                ShortDescription = service.ShortDescription,
+                SpecialtyImg = service.SpecialtyImg // Giữ lại URL ảnh hiện tại
+            };
 
-                if (existingService != null)
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditService(EditSpecialtyViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // Tìm dịch vụ hiện có trong cơ sở dữ liệu
+            var existingService = _context.Specialties.FirstOrDefault(s => s.SpecialtyId == model.SpecialtyId);
+
+            if (existingService == null)
+            {
+                ModelState.AddModelError("", "Dịch vụ không tồn tại.");
+                return View(model);
+            }
+
+            // Xử lý upload ảnh mới nếu có
+            string imageUrl = existingService.SpecialtyImg; // Giữ URL ảnh cũ nếu không tải ảnh mới
+            if (model.SpecialtyImgUpload != null)
+            {
+                // Upload ảnh lên Cloudinary
+                var uploadResult = await _cloudinaryService.UploadImageAsync(model.SpecialtyImgUpload);
+
+                if (!string.IsNullOrEmpty(uploadResult))
                 {
-                    existingService.SpecialtyName = model.SpecialtyName;
-                    existingService.ShortDescription = model.ShortDescription;
-                    existingService.SpecialtyImg = model.SpecialtyImg;
-
-                    _context.SaveChanges();
-
-                    return RedirectToAction("ManageService");
+                    imageUrl = uploadResult;
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Service not found.");
+                    ModelState.AddModelError("", "Lỗi khi tải ảnh lên. Vui lòng thử lại.");
+                    return View(model);
                 }
             }
 
-            return View(model);
+            // Cập nhật các thông tin của dịch vụ
+            existingService.SpecialtyName = model.SpecialtyName;
+            existingService.ShortDescription = model.ShortDescription;
+            existingService.SpecialtyImg = imageUrl;
+
+            try
+            {
+                // Lưu thay đổi vào cơ sở dữ liệu
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Cập nhật dịch vụ thành công!";
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
+                return View(model);
+            }
+
+            return RedirectToAction("ManageService");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddService(AddSpecialtyViewModel model)

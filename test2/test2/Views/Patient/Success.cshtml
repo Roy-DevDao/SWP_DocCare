@@ -1,4 +1,4 @@
-﻿@{
+﻿@* @{
     ViewData["Title"] = "Thanh toán thành công";
     Layout = "Layout_new"; // Đảm bảo sử dụng layout của bạn
 }
@@ -21,6 +21,63 @@
 
     .fa-check-circle {
         color: green;
+    }
+
+    .btn {
+        margin-top: 20px;
+    }
+</style>
+ *@
+
+@{
+    ViewData["Title"] = "Thanh toán thành công";
+    Layout = "Layout_new"; // Đảm bảo sử dụng layout của bạn
+}
+
+<div class="container">
+    <div class="alert alert-success text-center">
+        <h1><i class="fas fa-check-circle fa-5x tick-icon"></i></h1>
+        <h2>Thanh toán thành công!</h2>
+        <p>@TempData["Message"]</p>
+        <a href="@Url.Action("AppointmentHistory", "Patient")" class="btn btn-primary">Xem lịch hẹn</a>
+    </div>
+</div>
+
+<style>
+    .alert {
+        margin-top: 100px;
+        padding: 50px;
+        border-radius: 10px;
+    }
+
+    .fa-check-circle {
+        color: green;
+        position: relative;
+    }
+
+    /* Dấu tick */
+    .tick-icon::before,
+    .tick-icon::after {
+        content: "";
+        position: absolute;
+        background-color: green;
+        border-radius: 2px;
+    }
+
+    .tick-icon::before {
+        width: 8px;
+        height: 3px;
+        left: 18px;
+        top: 50%;
+        transform: rotate(45deg);
+    }
+
+    .tick-icon::after {
+        width: 16px;
+        height: 3px;
+        left: 24px;
+        top: 50%;
+        transform: rotate(-45deg);
     }
 
     .btn {

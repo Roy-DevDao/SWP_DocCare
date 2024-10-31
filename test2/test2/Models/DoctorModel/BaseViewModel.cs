@@ -19,5 +19,7 @@ namespace test2.Models.DoctorModel
         public PatientDetailViewModel patientDetail { get; set; }
 
         public FeedbackViewModel feedbackView { get; set; }
+        public HealthRecordViewModel healthRecord { get; set; }
+
     }
 }

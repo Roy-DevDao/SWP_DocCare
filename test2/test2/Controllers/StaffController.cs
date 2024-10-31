@@ -56,7 +56,7 @@ namespace test2.Controllers
             return View(staff);
         }
 
-        public IActionResult AppoitmentList(string search_doctor = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
+        public IActionResult AppoitmentList( string status="", string search_doctor = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
         {
             int pageSize = 10;
 
@@ -70,6 +70,12 @@ namespace test2.Controllers
             if (!string.IsNullOrEmpty(search_doctor))
             {
                 appointmentsQuery = appointmentsQuery.Where(o => o.Option.DidNavigation.Name.Contains(search_doctor));
+            }
+
+            // filter
+            if(!string.IsNullOrEmpty(status) && status != "")
+            {
+                appointmentsQuery = appointmentsQuery.Where(o => o.Status == status);
             }
 
 
@@ -112,6 +118,7 @@ namespace test2.Controllers
             ViewBag.SortColumn = sortColumn;
             ViewBag.SortDirection = sortDirection;
             ViewBag.SearchDoctor = search_doctor;
+            ViewBag.Status = status;
 
             return View(appointments);
         }
@@ -167,7 +174,7 @@ namespace test2.Controllers
 
         //-------------------------------------------------------------------------------------------------------------
 
-        public IActionResult ServiceAppointList(string search_service = "", string sortColumn = "AppointmentId", string sortDirection = "asc", string status = "all", int pageNumber = 1)
+        public IActionResult ServiceAppointList(string status="", string search_service = "", string sortColumn = "AppointmentId", string sortDirection = "asc", int pageNumber = 1)
         {
             int pageSize = 10;
 
@@ -188,7 +195,7 @@ namespace test2.Controllers
             }
 
             // Filter by status
-            if (!string.IsNullOrEmpty(status) && status != "all")
+            if (!string.IsNullOrEmpty(status) && status != "")
             {
                 appointmentsQuery = appointmentsQuery.Where(o => o.Status == status);
             }
@@ -472,6 +479,10 @@ namespace test2.Controllers
         }
 
         //-------------------------------------------------------------------------------------------------------------
+
+        
+
+                //-------------------------------------------------------------------------------------------------------------
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -11,13 +11,13 @@
         <li class="me-2">
             <a href="@Url.Action("ViewPatientDetail", new { tab = "profile", pid = patientDetail?.Pid })"
                class="inline-flex text-2xl items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == "profile" ? "border-blue-600 text-blue-600" : "border-transparent hover:text-gray-600")">
-                Profile
+                Hồ Sơ
             </a>
         </li>
         <li class="me-2">
             <a href="@Url.Action("ViewPatientDetail", new { tab = "appointment", pid = patientDetail?.Pid })"
                class="inline-flex text-2xl items-center justify-center p-4 border-b-2 rounded-t-lg @(activeTab == "appointment" ? "border-blue-600 text-blue-600" : "border-transparent hover:text-gray-600")">
-                Appointment
+                Lịch Hẹn
             </a>
         </li>
     </ul>
@@ -26,20 +26,20 @@
     {
         <div class="container mx-auto p-4">
             <div class="flex items-center mb-4">
-                <img class="w-24 h-24 rounded" src="https://i.pinimg.com/736x/52/c9/1c/52c91c32ae7ac4b75252fcb9a67d567b.jpg" alt="Default avatar">
+                <img class="w-24 h-24 rounded" src="https://i.pinimg.com/736x/52/c9/1c/52c91c32ae7ac4b75252fcb9a67d567b.jpg" alt="Avatar mặc định">
                 <div class="ml-4">
                     <h2 class="text-2xl font-bold text-gray-800">@patientDetail?.Name</h2>
-                    <p class="text-gray-600">"Your health, our priority."</p>
+                    <p class="text-gray-600">"Sức khỏe của bạn, ưu tiên của chúng tôi."</p>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white p-4 shadow-md rounded-lg">
-                    <h3 class="font-semibold text-lg text-gray-700">Contact Information</h3>
+                    <h3 class="font-semibold text-lg text-gray-700">Thông tin liên hệ</h3>
                     <p class="text-gray-600">Email: @patientDetail?.Email</p>
-                    <p class="text-gray-600">Phone: @patientDetail?.Phone</p>
+                    <p class="text-gray-600">Điện thoại: @patientDetail?.Phone</p>
                 </div>
                 <div class="bg-white p-4 shadow-md rounded-lg">
-                    <h3 class="font-semibold text-lg text-gray-700">Date of Birth</h3>
+                    <h3 class="font-semibold text-lg text-gray-700">Ngày sinh</h3>
                     <p class="text-gray-600">@patientDetail?.Dob?.ToString("yyyy-MM-dd")</p>
                 </div>
             </div>
@@ -51,9 +51,9 @@
             <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-blue-600 text-white">
-                        <th class="py-3 px-4">Date</th>
-                        <th class="py-3 px-4">Time</th>
-                        <th class="py-3 px-4">Status</th>
+                        <th class="py-3 px-4">Ngày</th>
+                        <th class="py-3 px-4">Thời gian</th>
+                        <th class="py-3 px-4">Trạng thái</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,7 +71,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="3" class="text-center py-3">No appointments available.</td>
+                            <td colspan="3" class="text-center py-3">Không có lịch hẹn nào.</td>
                         </tr>
                     }
                 </tbody>

@@ -1,6 +1,6 @@
 ﻿@model test2.Models.DoctorViewModel
 @{
-	ViewBag.Title = "Detail";
+	ViewBag.Title = "Chi Tiết";
 	var doctorid = Model.DoctorId;
 
 	Layout = "~/Views/Shared/Layout_new.cshtml";
@@ -18,11 +18,11 @@
 			<div class="col-md-12 col-12">
 				<nav aria-label="breadcrumb" class="page-breadcrumb">
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Doctor Profile</li>
+						<li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Hồ sơ bác sĩ</li>
 					</ol>
 				</nav>
-				<h2 class="breadcrumb-title">Doctor Profile</h2>
+				<h2 class="breadcrumb-title">Hồ sơ bác sĩ</h2>
 			</div>
 		</div>
 	</div>
@@ -35,15 +35,14 @@
 				<div class="doctor-widget">
 					<div class="doc-info-left">
 						<div class="doctor-img">
-							<img src="@Model.DoctorImg" class="img-fluid" alt="User Image">
+							<img src="@Model.DoctorImg" class="img-fluid" alt="Ảnh bác sĩ">
 						</div>
 						<div class="doc-info-cont">
 							<h4 class="doc-name">@Model.Name</h4>
 							<p class="doc-speciality">@Model.Position</p>
-							<p class="doc-department"> @Model.Specialty</p>
+							<p class="doc-department">@Model.Specialty</p>
 							<div class="rating">
 								@for (int i = 0; i < 5; i++)
-
 								{
 									<i class="fas fa-star @(i < Model.Rating ? "filled" : "")"></i>
 								}
@@ -54,22 +53,22 @@
 								<ul class="clinic-gallery">
 									<li>
 										<a href="~/Content/theme/img/features/feature-01.jpg" data-fancybox="gallery">
-											<img src="~/Content/theme/img/features/feature-01.jpg" alt="Feature">
+											<img src="~/Content/theme/img/features/feature-01.jpg" alt="Ảnh nổi bật">
 										</a>
 									</li>
 									<li>
 										<a href="~/Content/theme/img/features/feature-02.jpg" data-fancybox="gallery">
-											<img src="~/Content/theme/img/features/feature-02.jpg" alt="Feature Image">
+											<img src="~/Content/theme/img/features/feature-02.jpg" alt="Ảnh nổi bật">
 										</a>
 									</li>
 									<li>
 										<a href="~/Content/theme/img/features/feature-03.jpg" data-fancybox="gallery">
-											<img src="~/Content/theme/img/features/feature-03.jpg" alt="Feature">
+											<img src="~/Content/theme/img/features/feature-03.jpg" alt="Ảnh nổi bật">
 										</a>
 									</li>
 									<li>
 										<a href="~/Content/theme/img/features/feature-04.jpg" data-fancybox="gallery">
-											<img src="~/Content/theme/img/features/feature-04.jpg" alt="Feature">
+											<img src="~/Content/theme/img/features/feature-04.jpg" alt="Ảnh nổi bật">
 										</a>
 									</li>
 								</ul>
@@ -83,9 +82,10 @@
 						<div class="clini-infos">
 							<ul>
 								<li><i class="far fa-thumbs-up"></i> @Math.Round(Model.Rating * 20, 2).ToString("F2")%</li>
-								<li><i class="far fa-comment"></i> @Model.NumberOfFeedbacks Feedback</li>
+								<li><i class="far fa-comment"></i> @Model.NumberOfFeedbacks Phản hồi</li>
 								<li><i class="fas fa-map-marker-alt"></i> Đà Nẵng</li>
-								<li><i class="far fa-money-bill-alt"></i> @Model.Phone</li>
+								<li><i class="fas fa-phone"></i> @Model.Phone</li>
+								<li><i class="far fa-money-bill-alt"></i> @(String.Format("{0:N0}", Model.Price * 2000).Replace(",", ".")) VND</li>
 							</ul>
 						</div>
 						<div class="doctor-action">
@@ -103,12 +103,13 @@
 							</a>
 						</div>
 						<div class="clinic-booking">
-							<a class="apt-btn" href="https://localhost:7248/Patient/BookingAppointment?doctorid=@Model.DoctorId">Book Appointment</a>
+							<a class="apt-btn" href="https://localhost:7248/Patient/BookingAppointment?doctorid=@Model.DoctorId">Đặt lịch khám</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 
 		<div class="card">
 			<div class="card-body pt-0">
@@ -116,17 +117,27 @@
 				<nav class="user-tabs mb-4">
 					<ul class="nav nav-tabs nav-tabs-bottom nav-justified">
 						<li class="nav-item">
-							<a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
+							<a class="nav-link active" href="#doc_overview" data-toggle="tab">
+								<i class="fas fa-info-circle"></i> Tổng quan
+							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#doc_locations" data-toggle="tab">Locations</a>
+							<a class="nav-link" href="#doc_locations" data-toggle="tab">
+								<i class="fas fa-map-marker-alt"></i> Địa điểm
+							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
+							<a class="nav-link" href="#doc_reviews" data-toggle="tab">
+								<i class="fas fa-star"></i> Đánh giá
+							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
+							<a class="nav-link" href="#doc_business_hours" data-toggle="tab">
+								<i class="fas fa-clock"></i> Giờ làm việc
+							</a>
 						</li>
+
+
 					</ul>
 				</nav>
 
@@ -146,7 +157,6 @@
 									<div class="experience-box">
 										<ul class="experience-list">
 											@foreach (var detail in Model.DetailDoctors)
-
 											{
 												<li>
 													<div class="experience-user">
@@ -160,7 +170,6 @@
 													</div>
 												</li>
 											}
-
 										</ul>
 									</div>
 								</div>
@@ -175,8 +184,8 @@
 												</div>
 												<div class="experience-content">
 													<div class="timeline-content">
-														<a href="#/" class="name">Glowing Smiles Family Dental Clinic</a>
-														<span class="time">2010 - Present (5 years)</span>
+														<a href="#/" class="name">Phòng khám Nha khoa Gia đình Glowing Smiles</a>
+														<span class="time">2010 - Hiện tại (5 năm)</span>
 													</div>
 												</div>
 											</li>
@@ -186,8 +195,8 @@
 												</div>
 												<div class="experience-content">
 													<div class="timeline-content">
-														<a href="#/" class="name">Comfort Care Dental Clinic</a>
-														<span class="time">2007 - 2010 (3 years)</span>
+														<a href="#/" class="name">Phòng khám Nha khoa Comfort Care</a>
+														<span class="time">2007 - 2010 (3 năm)</span>
 													</div>
 												</div>
 											</li>
@@ -197,8 +206,8 @@
 												</div>
 												<div class="experience-content">
 													<div class="timeline-content">
-														<a href="#/" class="name">Dream Smile Dental Practice</a>
-														<span class="time">2005 - 2007 (2 years)</span>
+														<a href="#/" class="name">Phòng khám Nha khoa Dream Smile</a>
+														<span class="time">2005 - 2007 (2 năm)</span>
 													</div>
 												</div>
 											</li>
@@ -207,7 +216,7 @@
 								</div>
 
 								<div class="widget awards-widget">
-									<h4 class="widget-title">Awards</h4>
+									<h4 class="widget-title">Giải thưởng</h4>
 									<div class="experience-box">
 										<ul class="experience-list">
 											<li>
@@ -216,8 +225,8 @@
 												</div>
 												<div class="experience-content">
 													<div class="timeline-content">
-														<p class="exp-year">July 2019</p>
-														<h4 class="exp-title">Humanitarian Award</h4>
+														<p class="exp-year">Tháng 7, 2019</p>
+														<h4 class="exp-title">Giải thưởng Nhân đạo</h4>
 														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
 													</div>
 												</div>
@@ -228,8 +237,8 @@
 												</div>
 												<div class="experience-content">
 													<div class="timeline-content">
-														<p class="exp-year">March 2011</p>
-														<h4 class="exp-title">Certificate for International Volunteer Service</h4>
+														<p class="exp-year">Tháng 3, 2011</p>
+														<h4 class="exp-title">Chứng nhận Dịch vụ Tình nguyện Quốc tế</h4>
 														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
 													</div>
 												</div>
@@ -240,8 +249,8 @@
 												</div>
 												<div class="experience-content">
 													<div class="timeline-content">
-														<p class="exp-year">May 2008</p>
-														<h4 class="exp-title">The Dental Professional of The Year Award</h4>
+														<p class="exp-year">Tháng 5, 2008</p>
+														<h4 class="exp-title">Giải thưởng Chuyên gia Nha khoa của Năm</h4>
 														<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
 													</div>
 												</div>
@@ -251,37 +260,37 @@
 								</div>
 
 								<div class="service-list">
-									<h4>Services</h4>
+									<h4>Dịch vụ</h4>
 									<ul class="clearfix">
-										<li>Tooth cleaning </li>
-										<li>Root Canal Therapy</li>
-										<li>Implants</li>
-										<li>Composite Bonding</li>
-										<li>Fissure Sealants</li>
-										<li>Surgical Extractions</li>
+										<li>Vệ sinh răng miệng</li>
+										<li>Trị liệu Tủy răng</li>
+										<li>Cấy ghép Implant</li>
+										<li>Kết dính Composite</li>
+										<li>Niêm phong răng</li>
+										<li>Nhổ răng phẫu thuật</li>
 									</ul>
 								</div>
 
 								<div class="service-list">
-									<h4>Specializations</h4>
+									<h4>Chuyên môn</h4>
 									<ul class="clearfix">
-										<li>Children Care</li>
-										<li>Dental Care</li>
-										<li>Oral and Maxillofacial Surgery </li>
-										<li>Orthodontist</li>
-										<li>Periodontist</li>
-										<li>Prosthodontics</li>
+										<li>Chăm sóc trẻ em</li>
+										<li>Chăm sóc răng miệng</li>
+										<li>Phẫu thuật miệng và hàm mặt</li>
+										<li>Nắn chỉnh răng</li>
+										<li>Chuyên gia về nướu</li>
+										<li>Phục hình răng</li>
 									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div role="tabpanel" id="doc_locations" class="tab-pane fade">
 
+					<div role="tabpanel" id="doc_locations" class="tab-pane fade">
 						<div class="location-list">
 							<div class="row">
-
+								<!-- Clinic 1 -->
 								<div class="col-md-6">
 									<div class="clinic-content">
 										<h4 class="clinic-name"><a href="#">Smile Cute Dental Care Center</a></h4>
@@ -295,7 +304,10 @@
 											<span class="d-inline-block average-rating">(4)</span>
 										</div>
 										<div class="clinic-details mb-0">
-											<h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286 Sundown Lane, Austin, Texas 78749, USA <br><a href="javascript:void(0);">Get Directions</a></h5>
+											<h5 class="clinic-direction">
+												<i class="fas fa-map-marker-alt"></i> 2286 Núi Thành, Hải Châu <br>
+												<a href="javascript:void(0);">Get Directions</a>
+											</h5>
 											<ul>
 												<li>
 													<a href="~/Content/theme/img/features/feature-01.jpg" data-fancybox="gallery2">
@@ -325,36 +337,25 @@
 								<div class="col-md-4">
 									<div class="clinic-timing">
 										<div>
-											<p class="timings-days">
-												<span> Mon - Sat </span>
-											</p>
-											<p class="timings-times">
-												<span>10:00 AM - 2:00 PM</span>
-												<span>4:00 PM - 9:00 PM</span>
-											</p>
+											<p class="timings-days"><span> Thứ hai - Thứ bảy </span></p>
+											<p class="timings-times"><span>10:00 AM - 2:00 PM</span><span>4:00 PM - 9:00 PM</span></p>
 										</div>
 										<div>
-											<p class="timings-days">
-												<span>Sun</span>
-											</p>
-											<p class="timings-times">
-												<span>10:00 AM - 2:00 PM</span>
-											</p>
+											<p class="timings-days"><span>Chủ nhật</span></p>
+											<p class="timings-times"><span>10:00 AM - 2:00 PM</span></p>
 										</div>
 									</div>
 								</div>
 
 								<div class="col-md-2">
-									<div class="consult-price">
-										$250
-									</div>
+									<div class="consult-price">250.000 VND</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="location-list">
 							<div class="row">
-
+								<!-- Clinic 2 -->
 								<div class="col-md-6">
 									<div class="clinic-content">
 										<h4 class="clinic-name"><a href="#">The Family Dentistry Clinic</a></h4>
@@ -368,7 +369,10 @@
 											<span class="d-inline-block average-rating">(4)</span>
 										</div>
 										<div class="clinic-details mb-0">
-											<p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883 University Street, Seattle, Texas Washington, 98155 <br><a href="javascript:void(0);">Get Directions</a></p>
+											<p class="clinic-direction">
+												<i class="fas fa-map-marker-alt"></i> 120/5 Trưng Nữ Vương <br>
+												<a href="javascript:void(0);">Get Directions</a>
+											</p>
 											<ul>
 												<li>
 													<a href="~/Content/theme/img/features/feature-01.jpg" data-fancybox="gallery2">
@@ -398,34 +402,23 @@
 								<div class="col-md-4">
 									<div class="clinic-timing">
 										<div>
-											<p class="timings-days">
-												<span> Tue - Fri </span>
-											</p>
-											<p class="timings-times">
-												<span>11:00 AM - 1:00 PM</span>
-												<span>6:00 PM - 11:00 PM</span>
-											</p>
+											<p class="timings-days"><span> Thứ ba - Thứ sáu </span></p>
+											<p class="timings-times"><span>11:00 AM - 1:00 PM</span><span>6:00 PM - 11:00 PM</span></p>
 										</div>
 										<div>
-											<p class="timings-days">
-												<span>Sat - Sun</span>
-											</p>
-											<p class="timings-times">
-												<span>8:00 AM - 10:00 AM</span>
-												<span>3:00 PM - 7:00 PM</span>
-											</p>
+											<p class="timings-days"><span>Thứ bảy - Chủ nhật</span></p>
+											<p class="timings-times"><span>8:00 AM - 10:00 AM</span><span>3:00 PM - 7:00 PM</span></p>
 										</div>
 									</div>
 								</div>
 
 								<div class="col-md-2">
-									<div class="consult-price">
-										$350
-									</div>
+									<div class="consult-price">350.000 VND</div>
 								</div>
 							</div>
 						</div>
 					</div>
+
 					<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
 						<div class="widget review-listing">
 							<ul id="tb-feedback" class="comments-list">
@@ -433,40 +426,37 @@
 								{
 									<li>
 										<div class="comment">
-											<img class="avatar avatar-sm rounded-circle" alt="User Image"
-												 src="@(string.IsNullOrEmpty(feedback.PidNavigation?.PatientImg) ? Url.Content("https://tse1.mm.bing.net/th?id=OIP.zP1mlHnV1bpgODW8gvQSFQHaIP&pid=Api&P=0&h=180") : feedback.PidNavigation.PatientImg)">                        <div class="comment-body">
+											<img class="avatar avatar-sm rounded-circle" alt="Ảnh bệnh nhân"
+												 src="@(string.IsNullOrEmpty(feedback.PidNavigation?.PatientImg) ? Url.Content("https://tse1.mm.bing.net/th?id=OIP.zP1mlHnV1bpgODW8gvQSFQHaIP&pid=Api&P=0&h=180") : feedback.PidNavigation.PatientImg)">
+											<div class="comment-body">
 												<div class="meta-data">
 													<span class="comment-author">@feedback.Name</span>
 													<span class="comment-date">@feedback.DateCmt?.ToString("d")</span>
 													<div class="review-count rating">
 														@for (int i = 0; i < (feedback.Star ?? 0); i++)
-
 														{
 															<i class="fas fa-star filled"></i>
 														}
 														@for (int i = (feedback.Star ?? 0); i < 5; i++)
-
 														{
 															<i class="fas fa-star"></i>
 														}
 													</div>
-
-
 												</div>
 												<p class="comment-content">
 													@feedback.Description
 												</p>
 												<div class="comment-reply">
 													<a class="comment-btn" href="#">
-														<i class="fas fa-reply"></i> Reply
+														<i class="fas fa-reply"></i> Trả lời
 													</a>
 													<p class="recommend-btn">
-														<span>Recommend?</span>
+														<span>Đề xuất?</span>
 														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Yes
+															<i class="far fa-thumbs-up"></i> Có
 														</a>
 														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> No
+															<i class="far fa-thumbs-down"></i> Không
 														</a>
 													</p>
 												</div>
@@ -478,121 +468,98 @@
 
 							<div class="all-feedback text-center">
 								<a href="#" class="btn btn-primary btn-sm">
-									Show all feedback <strong>(@Model.NumberOfFeedbacks)</strong>
+									Xem tất cả phản hồi <strong>(@Model.NumberOfFeedbacks)</strong>
 								</a>
 							</div>
 						</div>
 
 						<div class="write-review">
-							<h4>Write a review for <strong>@Model.Name</strong></h4>
+							<h4>Viết nhận xét cho <strong>@Model.Name</strong></h4>
 
 							<form>
 								<div class="form-group">
-									<label>Review</label>
+									<label>Đánh giá</label>
 									<div class="star-rating">
 										<input class="star_doc" id="star-5" type="radio" name="rating" value="5">
-										<label for="star-5" title="5 stars">
+										<label for="star-5" title="5 sao">
 											<i class="active fa fa-star"></i>
 										</label>
 										<input class="star_doc" id="star-4" type="radio" name="rating" value="4">
-										<label for="star-4" title="4 stars">
+										<label for="star-4" title="4 sao">
 											<i class="active fa fa-star"></i>
 										</label>
 										<input class="star_doc" id="star-3" type="radio" name="rating" value="3">
-										<label for="star-3" title="3 stars">
+										<label for="star-3" title="3 sao">
 											<i class="active fa fa-star"></i>
 										</label>
 										<input class="star_doc" id="star-2" type="radio" name="rating" value="2">
-										<label for="star-2" title="2 stars">
+										<label for="star-2" title="2 sao">
 											<i class="active fa fa-star"></i>
 										</label>
 										<input class="star_doc" id="star-1" type="radio" name="rating" value="1">
-										<label for="star-1" title="1 star">
+										<label for="star-1" title="1 sao">
 											<i class="active fa fa-star"></i>
 										</label>
 									</div>
 								</div>
 								<div class="form-group">
-									<label>Title of your review</label>
-									<input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
+									<label>Tiêu đề đánh giá</label>
+									<input class="form-control" type="text" placeholder="Tóm gọn đánh giá của bạn trong một câu?">
 								</div>
 								<div class="form-group">
-									<label>Your review</label>
+									<label>Nội dung đánh giá</label>
 									<textarea id="review_desc" maxlength="100" class="form-control"></textarea>
-									<div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
+									<div class="d-flex justify-content-between mt-3">
+										<small class="text-muted">
+											<span id="chars">100</span> ký tự còn lại
+										</small>
+									</div>
 								</div>
 								<hr>
 								<div class="form-group">
 									<div class="terms-accept">
 										<div class="custom-checkbox">
 											<input type="checkbox" id="terms_accept">
-											<label for="terms_accept">I have read and accept <a href="#">Terms &amp; Conditions</a></label>
+											<label for="terms_accept">Tôi đã đọc và chấp nhận <a href="#">Điều khoản &amp; Chính sách</a></label>
 										</div>
 									</div>
 								</div>
-								<div class="submit-section">
-								</div>
+								<div class="submit-section"></div>
 								<input id="doctor_id" name="doctor_id" value="@doctorid" class="hidden" />
 							</form>
-							<button onclick="sendReview()" class="btn btn-primary ">Add Review</button>
+							<button onclick="sendReview()" class="btn btn-primary">Thêm đánh giá</button>
 						</div>
 					</div>
-
 
 					<div role="tabpanel" id="doc_business_hours" class="tab-pane fade">
 						<div class="row">
 							<div class="col-md-6 offset-md-3">
-
 								<div class="widget business-widget">
 									<div class="widget-content">
 										<div class="listing-hours">
 											<div class="listing-day current">
-												<div class="day">Today <span>5 Nov 2019</span></div>
+												<div class="day">Hôm nay <span>@DateTime.Now.ToString("dd-MM-yyyy")</span></div>
 												<div class="time-items">
-													<span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
-													<span class="time">07:00 AM - 09:00 PM</span>
+													<span class="open-status">
+														<span class="badge bg-success-light">Đang mở cửa</span>
+													</span>
+													<span class="time">07:00 - 21:00</span>
 												</div>
 											</div>
+											<!-- Các ngày trong tuần -->
 											<div class="listing-day">
-												<div class="day">Monday</div>
+												<div class="day">Thứ Hai-Thứ Bảy</div>
 												<div class="time-items">
-													<span class="time">07:00 AM - 09:00 PM</span>
+													<span class="time">08:00 - 17:00</span>
 												</div>
 											</div>
-											<div class="listing-day">
-												<div class="day">Tuesday</div>
-												<div class="time-items">
-													<span class="time">07:00 AM - 09:00 PM</span>
-												</div>
-											</div>
-											<div class="listing-day">
-												<div class="day">Wednesday</div>
-												<div class="time-items">
-													<span class="time">07:00 AM - 09:00 PM</span>
-												</div>
-											</div>
-											<div class="listing-day">
-												<div class="day">Thursday</div>
-												<div class="time-items">
-													<span class="time">07:00 AM - 09:00 PM</span>
-												</div>
-											</div>
-											<div class="listing-day">
-												<div class="day">Friday</div>
-												<div class="time-items">
-													<span class="time">07:00 AM - 09:00 PM</span>
-												</div>
-											</div>
-											<div class="listing-day">
-												<div class="day">Saturday</div>
-												<div class="time-items">
-													<span class="time">07:00 AM - 09:00 PM</span>
-												</div>
-											</div>
+											<!-- Các ngày khác tương tự như trên -->
 											<div class="listing-day closed">
-												<div class="day">Sunday</div>
+												<div class="day">Chủ Nhật</div>
 												<div class="time-items">
-													<span class="time"><span class="badge bg-danger-light">Closed</span></span>
+													<span class="time">
+														<span class="badge bg-danger-light">Đóng cửa</span>
+													</span>
 												</div>
 											</div>
 										</div>
@@ -621,7 +588,7 @@
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
 				</svg>
 
-				<span class="sr-only">Close modal</span>
+				<span class="sr-only">Đóng</span>
 			</button>
 			<div class="p-4 md:p-5 text-center">
 				<div id="fb-success" class="hidden">
@@ -685,41 +652,41 @@
 				document.getElementById("fb-fail").classList.add("hidden");
 				document.getElementById("error-modal-button").click();
 				const tableBody = document.getElementById("tb-feedback");
-				
+
 				const date = ngay.split(' ')[0];
-				
+
 				// Define the new row HTML as a template string
 				const newRowHTML = `
-				<li>
-					<div class="comment">
-					    <img class="avatar avatar-sm rounded-circle" alt="User Image" src="${image ? image : "https://tse1.mm.bing.net/th?id=OIP.zP1mlHnV1bpgODW8gvQSFQHaIP&pid=Api&P=0&h=180"}">
-						<div class="comment-body">
-							<div class="meta-data">
-								<span class="comment-author">${name}</span>
-									<span class="comment-date">${date}</span> <!-- Format Date -->
-								<div class="review-count rating">
-									${getStars(star)} <!-- Dynamically generate stars -->
+					<li>
+						<div class="comment">
+							<img class="avatar avatar-sm rounded-circle" alt="User Image" src="${image ? image : "https://tse1.mm.bing.net/th?id=OIP.zP1mlHnV1bpgODW8gvQSFQHaIP&pid=Api&P=0&h=180"}">
+							<div class="comment-body">
+								<div class="meta-data">
+									<span class="comment-author">${name}</span>
+										<span class="comment-date">${date}</span> <!-- Format Date -->
+									<div class="review-count rating">
+										${getStars(star)} <!-- Dynamically generate stars -->
+									</div>
+								</div>
+								<p class="comment-content">${description}</p>
+								<div class="comment-reply">
+									<a class="comment-btn" href="#">
+										<i class="fas fa-reply"></i> Reply
+									</a>
+									<p class="recommend-btn">
+										<span>Recommend?</span>
+										<a href="#" class="like-btn">
+											<i class="far fa-thumbs-up"></i> Yes
+										</a>
+										<a href="#" class="dislike-btn">
+											<i class="far fa-thumbs-down"></i> No
+										</a>
+									</p>
 								</div>
 							</div>
-							<p class="comment-content">${description}</p>
-							<div class="comment-reply">
-								<a class="comment-btn" href="#">
-									<i class="fas fa-reply"></i> Reply
-								</a>
-								<p class="recommend-btn">
-									<span>Recommend?</span>
-									<a href="#" class="like-btn">
-										<i class="far fa-thumbs-up"></i> Yes
-									</a>
-									<a href="#" class="dislike-btn">
-										<i class="far fa-thumbs-down"></i> No
-									</a>
-								</p>
-							</div>
 						</div>
-					</div>
-				</li>
-			`;
+					</li>
+				`;
 
 				// Insert the new row HTML at the beginning of the tbody
 				tableBody.insertAdjacentHTML("afterbegin", newRowHTML);
@@ -741,7 +708,7 @@
 
 
 	}
-		function getStars(star) {
+	function getStars(star) {
 		let starsHTML = '';
 		for (let i = 0; i < star; i++) {
 			starsHTML += '<i class="fas fa-star filled"></i>';
