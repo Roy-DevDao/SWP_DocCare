@@ -49,6 +49,8 @@ namespace test2.Controllers
             // Chuyển đổi phản hồi thành danh sách BaseViewModel
             var feedbackViewModels = feedbacks.Select(f => new BaseViewModel
             {
+                DId = f.DidNavigation.Did,
+                DoctorImg = f.DidNavigation?.DoctorImg,
                 feedbackView = new FeedbackViewModel
                 {
                     FeedbackId = f.FeedbackId,
@@ -191,7 +193,43 @@ namespace test2.Controllers
 			return RedirectToAction("Profile", new { id = baseViewModel.DId });
 		}
 
-		[HttpPost]
+        public IActionResult ViewHealthRecord(string appointmentId)
+        {
+            if (string.IsNullOrEmpty(appointmentId))
+            {
+                return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+            }
+
+            var healthRecord = _context.HealthRecords
+            .Include(hr => hr.PidNavigation)
+            .FirstOrDefault(hr => hr.Oid == appointmentId);
+
+            if (healthRecord == null)
+            {
+                return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
+            }
+
+            var healthRecordViewModel = new HealthRecordViewModel
+            {
+                RecordId = healthRecord.RecordId,
+                PatientName = healthRecord.PidNavigation?.Name,
+                AppointmentId = healthRecord.Oid,
+                Diagnosis = healthRecord.Diagnosis,
+                Description = healthRecord.Description,
+                Note = healthRecord.Note,
+                DateExam = healthRecord.DateExam ?? DateTime.Now // Giải quyết lỗi nullable
+            };
+
+            var baseViewModel = new BaseViewModel
+            {
+                healthRecord = healthRecordViewModel
+            };
+
+            return View("ViewHealthRecord", new List<BaseViewModel> { baseViewModel });
+        }
+
+
+        [HttpPost]
 		public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
 		{
 			// Lấy ID của người dùng hiện tại từ Claim
@@ -315,10 +353,12 @@ namespace test2.Controllers
                 return NotFound("Appointment not found.");
             }
 
+            var d = _context.Doctors.Find(User.Identity.Name);
             // Tạo danh sách BaseViewModel và gán appointmentDetail vào
             var baseViewModel = new BaseViewModel
             {
                 DId = User.Identity.Name,
+                DoctorImg = d.DoctorImg,
                 appointmentDetail = appointmentDetailViewModel
             };
 
@@ -487,10 +527,12 @@ namespace test2.Controllers
             }
             // Lấy danh sách bệnh nhân dựa trên bác sĩ có Did = id
             var patients = _patientDao.GetPatientsByDoctorId(id);
-
+            var d = _context.Doctors.Find(User.Identity.Name);
             // Gói dữ liệu bệnh nhân vào BaseViewModel
             var baseViewModelList = patients.Select(p => new BaseViewModel
             {
+                DId = User.Identity.Name,
+                DoctorImg = d.DoctorImg,
                 patientView = p  // Gán từng PatientViewModel vào BaseViewModel
             }).ToList();
 
@@ -516,7 +558,7 @@ namespace test2.Controllers
             {
                 return NotFound();
             }
-
+            var d = _context.Doctors.Find(User.Identity.Name);
             // Tạo model chi tiết bệnh nhân
             var patientDetail = new PatientDetailViewModel
             {
@@ -539,6 +581,7 @@ namespace test2.Controllers
             var baseViewModel = new BaseViewModel
             {
                 DId = User.Identity.Name,
+                DoctorImg = d.DoctorImg,
                 patientDetail = patientDetail
             };
 

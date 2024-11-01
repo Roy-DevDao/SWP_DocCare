@@ -1645,6 +1645,10 @@
       "PackagePath": "staticwebassets\\Content\\theme\\plugins\\theia-sticky-sidebar\\theia-sticky-sidebar.js"
     },
     {
+      "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\DE180439 - Phan Thanh Bảo.png",
+      "PackagePath": "staticwebassets\\DE180439 - Phan Thanh Bảo.png"
+    },
+    {
       "Id": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\Scripts\\alertify.js",
       "PackagePath": "staticwebassets\\Scripts\\alertify.js"
     },

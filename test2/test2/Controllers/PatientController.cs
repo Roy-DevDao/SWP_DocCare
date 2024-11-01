@@ -147,6 +147,28 @@ namespace test2.Controllers
 
             return RedirectToAction("Profile", new { id = model.Patient.PId });
         }
+        public IActionResult Dashboard()
+        {
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            if (isAuthenticated)
+            {
+                var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+                ViewBag.User = user;
+                ViewBag.total = dc.Orders.Where(o => o.Pid == user.Id).Count();
+                ViewBag.confirm = dc.Orders.Include(o => o.Option).Where(o => o.Pid == user.Id && o.Option.Status == "Confirm").Count();
+                ViewBag.cancel = dc.Orders.Include(o => o.Option).Where(o => o.Pid == user.Id && o.Option.Status == "Cancelled").Count();
+                ViewBag.complete = dc.Orders.Include(o => o.Option).Where(o => o.Pid == user.Id && o.Option.Status == "Complete").Count();
+                var buff = dc.Orders.Include(o => o.Option).ThenInclude(op => op.DidNavigation).ThenInclude(d => d.Specialty).Where(o => o.Pid == user.Id && o.Option.DateWork > DateTime.Now && o.Status != "Cancelled").OrderByDescending(o => o.Option.DateWork);
+                ViewBag.upcomingAppointment = buff;
+                ViewBag.thenumber = buff.Count();
+
+
+            }
+
+            return View();
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> ChangePassword(PatientProfileViewModel model)
@@ -293,41 +315,50 @@ namespace test2.Controllers
 
         }
 
-        public IActionResult AppointmentDetail(string oid)
-        {
+		public IActionResult AppointmentDetail(string oid)
+		{
 
-            var isAuthenticated = User.Identity.IsAuthenticated;
-            if (isAuthenticated)
-            {
-                var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
-                ViewBag.User = user;
-            } else
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            // Fetch the order details including all necessary related information
-            var order = dc.Orders
-                          .Include(o => o.Option)
-                          .ThenInclude(op => op.DidNavigation)
-                          .ThenInclude(doctor => doctor.Specialty)
-                          .Include(o => o.PidNavigation)
-                          .Include(o => o.HealthRecords)
-                          .ThenInclude(hr => hr.DidNavigation)
-                          .FirstOrDefault(o => o.Oid == oid);
+			var isAuthenticated = User.Identity.IsAuthenticated;
+			if (isAuthenticated)
+			{
+				var user = _userDAO.GetLoggedInUser(User) ?? new UserProfileViewModel();
+				ViewBag.User = user;
+			}
+			else
+			{
+				return RedirectToAction("Login", "Home");
+			}
+			// Fetch the order details including all necessary related information
+			var order = dc.Orders
+						  .Include(o => o.Option)
+						  .ThenInclude(op => op.DidNavigation)
+						  .ThenInclude(doctor => doctor.Specialty)
+						  .Include(o => o.PidNavigation)
+						  .FirstOrDefault(o => o.Oid == oid);
 
-            if (order == null)
-            {
-                return NotFound(); // Handle the case when the order is not found
-            }
+			var healthRecords = dc.HealthRecords.Where(h => h.Oid == oid).ToList();
+			var count = healthRecords.Count();
+			if (count > 0)
+			{
+				ViewBag.HealthRecord = healthRecords[0];
 
-            return View(order);  // Pass the order object to the view
-        }
-
+			}
 
 
 
 
-        [HttpGet]
+			if (order == null)
+			{
+				return NotFound(); // Handle the case when the order is not found
+			}
+
+			return View(order);  // Pass the order object to the view
+		}
+
+
+
+
+		[HttpGet]
         public IActionResult BookingAppointment(string doctorid)
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
@@ -625,6 +656,20 @@ namespace test2.Controllers
                 OrderId = orderId,
             };
             return Redirect(_vnPayservice.CreatePaymentUrl(HttpContext, vnPayModel));
+        }
+
+        public IActionResult Success()
+        {
+            // Lấy thông báo từ TempData (nếu có)
+            ViewBag.Message = TempData["Message"] ?? "Thanh toán thành công! Cảm ơn bạn đã sử dụng dịch vụ.";
+            return View();
+        }
+
+        public IActionResult PaymentFail()
+        {
+            // Lấy thông báo lỗi từ TempData (nếu có)
+            ViewBag.Message = TempData["Message"] ?? "Thanh toán không thành công. Vui lòng thử lại hoặc liên hệ hỗ trợ.";
+            return View();
         }
 
 

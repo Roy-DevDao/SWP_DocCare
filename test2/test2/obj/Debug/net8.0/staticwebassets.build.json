@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "u4yiLZDZC0UOJ62tywHUP7gaYhf7FGZRlKRiuDmzEoQ=",
+  "Hash": "izMdxuzefTA+Y/WUOZS3FlXrQ5b2VvP9Igz44M1/LrQ=",
   "Source": "test2",
   "BasePath": "_content/test2",
   "Mode": "Default",
@@ -9477,6 +9477,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\StyleSheet1.css"
+    },
+    {
+      "Identity": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\DE180439 - Phan Thanh Bảo.png",
+      "SourceId": "test2",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\",
+      "BasePath": "_content/test2",
+      "RelativePath": "DE180439 - Phan Thanh Bảo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\DE180439 - Phan Thanh Bảo.png"
     },
     {
       "Identity": "D:\\BAO\\MAJOR\\SE5\\swp_quang\\SWP_DocCare-quang1\\SWP_DocCare-quang1\\test2\\test2\\wwwroot\\js\\site.js",

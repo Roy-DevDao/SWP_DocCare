@@ -314,7 +314,7 @@
 
                     <div class="blog grid-blog">
                         <div class="blog-image">
-                            <a asp-controller="Home" asp-action="BlogDetail" asp-route-id="@art.BlogId"><img class="img-fluid" src="@art.Image" alt="@art.Title"></a>
+                            <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId"><img class="img-fluid" src="@art.Image" alt="@art.Title"></a>
                         </div>
                         <div class="blog-content">
                             <ul class="entry-meta meta-item">
@@ -327,7 +327,7 @@
                                 </li>
                                 <li><i class="far fa-clock"></i> @art.CreateDate.ToString()</li>
                             </ul>
-                            <h3 class="blog-title"><a asp-controller="Home" asp-action="BlogDetail" asp-route-id="@art.BlogId">@art.Title</a></h3>
+                            <h3 class="blog-title"><a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId">@art.Title</a></h3>
                         </div>
                     </div>
                 </div>

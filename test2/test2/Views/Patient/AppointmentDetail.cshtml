@@ -3,6 +3,7 @@
 	Layout = "Layout_Patient";
 
 	var status = Model.Option.Status;
+
 }
 
 <div class="max-w-3xl mt-16 mx-auto bg-white p-6 rounded-lg shadow-md space-y-6">
@@ -11,11 +12,10 @@
 		<h2 class="text-xl font-semibold">Appointment Detail</h2>
 		<div class="flex items-center space-x-2">
 			<span class="px-2 py-1 text-xs bg-gray-200 rounded">@status</span>
-			@if (status == "Paid" || status == "Unpaid")
+			@if (status == "Pending" || status == "Confirm")
 			{
 				<button onclick="cancelAppointment()" class="px-2 py-1 text-xs bg-red-500 rounded">Cancel</button>
 			}
-
 		</div>
 	</div>
 	<h3 class="text-lg font-semibold">Doctor Detail</h3>
@@ -75,10 +75,21 @@
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
 						</svg>
-						<p class="font-semibold ml-2">Diagnose</p>
+						<p class="font-semibold ml-2">Chuẩn đoán</p>
 					</div>
+					@if (ViewBag.HealthRecord != null)
+					{
+						<p>
+							@ViewBag.HealthRecord.Diagnosis
+						</p>
+					}
+					else
+					{
+						<p>
+							Chờ chuẩn đoán từ bác sĩ
+						</p>
+					}
 
-					<p>Cavities, Exposed nerves causing pain, Tartar teeth</p>
 				</div>
 
 			}
@@ -87,8 +98,21 @@
 		@if(status == "Complete")
 		{
 			<div class="bg-gray-100 p-2 rounded-md">
-				<p class="text-gray-700">Note</p>
-				<p class="text-sm text-gray-600">@Model.Symptom</p>
+				<p class="text-gray-700">Chú ý</p>
+				@if (ViewBag.HealthRecord != null)
+				{
+				
+					<p class="text-sm text-gray-600">
+						@ViewBag.HealthRecord.Note
+					</p>
+				}
+				else
+				{
+					<p>
+					 Chờ ghi chú từ bác sĩ
+					</p>
+				}
+				
 			</div>
 		}
 		
@@ -250,6 +274,7 @@
 
 <input class="hidden" id="orderid" name="orderid" value="@Model.Oid"/>
 <script>
+	var status = @status;
 
     function closeModal(){
 		console.log("chuyen huong");

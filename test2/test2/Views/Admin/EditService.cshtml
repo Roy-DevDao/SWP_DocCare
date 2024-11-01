@@ -88,7 +88,30 @@
 <main class="layout-default_body_main">
     <h1>Chỉnh sửa thông tin dịch vụ</h1>
 
-    <form asp-action="EditService" method="post">
+    @* <form asp-action="EditService" method="post">
+    <input type="hidden" id="SpecialtyId" name="SpecialtyId" value="@Model.SpecialtyId" />
+
+    <div class="form-group">
+    <label for="SpecialtyName">Tên dịch vụ:</label>
+    <input type="text" id="SpecialtyName" name="SpecialtyName" value="@Model.SpecialtyName" placeholder="Nhập tên dịch vụ" class="form-control" />
+    </div>
+
+    <div class="form-group">
+    <label for="ShortDescription">Mô tả ngắn:</label>
+    <textarea id="ShortDescription" name="ShortDescription" placeholder="Nhập mô tả ngắn" class="form-control">@Model.ShortDescription</textarea>
+    </div>
+
+
+
+    <div class="form-group">
+    <label for="SpecialtyImg">URL hình ảnh:</label>
+    <input type="text" id="SpecialtyImg" name="SpecialtyImg" value="@Model.SpecialtyImg" placeholder="Nhập URL hình ảnh" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    </form> *@
+
+    <form asp-action="EditService" method="post" enctype="multipart/form-data">
         <input type="hidden" id="SpecialtyId" name="SpecialtyId" value="@Model.SpecialtyId" />
 
         <div class="form-group">
@@ -101,13 +124,17 @@
             <textarea id="ShortDescription" name="ShortDescription" placeholder="Nhập mô tả ngắn" class="form-control">@Model.ShortDescription</textarea>
         </div>
 
-
-
         <div class="form-group">
-            <label for="SpecialtyImg">URL hình ảnh:</label>
-            <input type="text" id="SpecialtyImg" name="SpecialtyImg" value="@Model.SpecialtyImg" placeholder="Nhập URL hình ảnh" class="form-control" />
+            <label for="SpecialtyImg">URL hình ảnh hiện tại:</label>
+            <input type="text" id="SpecialtyImg" name="SpecialtyImg" value="@Model.SpecialtyImg" placeholder="URL hình ảnh hiện tại" class="form-control" readonly />
         </div>
 
-        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <div class="form-group">
+            <label for="SpecialtyImgUpload">Tải ảnh mới lên:</label>
+            <input type="file" id="SpecialtyImgUpload" name="SpecialtyImgUpload" class="form-control" />
+        </div>
+
+        <button type="submit" class="save-button">Lưu thay đổi</button>
     </form>
+
 </main>

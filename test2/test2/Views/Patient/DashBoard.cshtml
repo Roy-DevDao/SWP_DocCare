@@ -1,0 +1,176 @@
+﻿@{
+    Layout = "Layout_Patient";
+    var name = ViewBag.user.Username;
+    var total = ViewBag.total;
+    var cancel = ViewBag.cancel;
+    var confirm = ViewBag.confirm;
+    var complete = ViewBag.complete;
+    var upcomingAppointments = ViewBag.upcomingAppointment;
+    var count = ViewBag.thenumber;
+}
+<div class="bg-[#F9F9F9] min-h-screen container-md rounded-md p-8 font-sans">
+    <!-- Top Search and User Section -->
+    <div class="flex justify-between items-center mb-6">
+        <div class="relative w-1/3">
+            <input type="text" placeholder="Search Appointment" class="w-full py-2 pl-4 pr-10 rounded-full shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <span class="absolute right-3 top-2.5 text-gray-400">
+                <i class="fas fa-search"></i>
+            </span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button class="relative">
+                <i class="fas fa-bell text-xl text-gray-500"></i>
+                <span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+            </button>
+            <img src="https://i.pinimg.com/564x/ab/7e/90/ab7e90d547a6019bfe4efbfacad6326c.jpg" alt="Profile" class="w-10 h-10 rounded-full">
+        </div>
+    </div>
+
+    <!-- Greeting and Stats Section -->
+    <div class="grid grid-cols-2 gap-6 mb-8">
+
+        <a href="#" class="flex w-full flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="https://i.pinimg.com/564x/ab/7e/90/ab7e90d547a6019bfe4efbfacad6326c.jpg" alt="">
+            <div class="flex flex-col justify-between p-4 leading-normal">
+                <p class="text-lg font-medium">Hello, <span class="text-red-500 font-semibold">@name</span></p>
+                <p class="text-gray-500 text-sm">Dù bạn làm gì, hãy làm với sự quyết tâm. Bạn chỉ có một cuộc đời để sống; hãy làm việc với đam mê và cống hiến hết mình.</p>
+            </div>
+        </a>
+        <div class="flex space-x-4">
+            <div class="bg-[#605BFF] p-6 rounded-lg shadow-md flex-1">
+                <p class="text-white font-semibold">Tổng cuộc hẹn</p>
+                <p class="text-3xl font-semibold text-white">@total</p>
+
+                <svg width="250" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 10 80 C 70 70, 130 70, 190 80 S 250 90, 300 80"
+                          stroke="rgba(0, 0, 0, 0.2)" fill="transparent" stroke-width="4" transform="translate(0, 5)" />
+                    <path class="bg-white" d="M 10 80 C 70 70, 130 70, 190 80 S 250 90, 300 80" stroke="white" stroke-width="2" fill="transparent" />
+                </svg>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md flex-1">
+                <p class="text-black font-semibold">Cuộc hẹn đã hủy</p>
+                <p class="text-3xl font-semibold text-[#EC447D]">@cancel</p>
+                <svg width="250" height="160" xmlns="http://www.w3.org/2000/svg">
+                    <path class="bg-white" d="M 10 80 C 70 70, 130 70, 190 80 S 250 90, 300 80" stroke="#EC447D" stroke-width="3" fill="transparent" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Appointments and Chart Section -->
+    <div class="grid grid-cols-3 gap-6">
+        <!-- Appointments Table -->
+        <div class="col-span-2 bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Upcoming Appointments</h2>
+                <a href="/Patient/AppointmentHistory" class="text-blue-500">See More</a>
+            </div>
+            <table class="w-full text-left">
+                <thead>
+                    <tr>
+                        <th class="py-2 text-gray-500">Tên</th>
+                        <th class="py-2 text-gray-500">Chuyên Khoa</th>
+                        <th class="py-2 text-gray-500">Thời gian</th>
+                        <th class="py-2 text-gray-500">Trạng thái</th>
+                        <th class="py-2 text-gray-500"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (count > 0)
+                    {
+                        foreach (var appointment in upcomingAppointments)
+                        {
+                            <tr class="hover:bg-blue-50 rounded-full">
+
+                                <td class="py-2 flex items-center space-x-2">
+                                    <img src="@appointment.Option.DidNavigation.DoctorImg" alt="User 1" class="w-8 h-8 rounded-full">
+                                    <span>@appointment.Option.DidNavigation.Name</span>
+                                </td>
+                                <td class="py-2">@appointment.Option.DidNavigation.Specialty.SpecialtyName</td>
+                                <td class="py-2">@appointment.Option.DateWork</td>
+                                @if (appointment.Status == "Confirm")
+                                {
+                                    <td class="py-2 text-blue-500"><i class="fas fa-check-circle"></i></td>
+                                }
+                                else
+                                {
+                                    <td class="py-2 text-gray-500"><i class="fas fa-clock"></i></td>
+                                }
+                                <td class="py-2"><a class="text-blue-400" href="/Patient/AppointmentDetail?oid=@appointment.Oid">xem</a></td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr class="hover:bg-blue-50">
+                            <td class="py-2 flex items-center space-x-2">
+                                Hiên tại bạn không có cuộc hẹn nào.
+                            </td>
+
+
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- Last Day Patients Result Chart -->
+        <div class="bg-white rounded-lg shadow-md p-6 text-center">
+            <div class="text-center">
+                <h2 class="text-lg font-semibold mb-2">Thống kê Cuộc hẹn</h2>
+                <div class="relative flex justify-center items-center">
+                    <canvas id="patientChart" width="150" height="150"></canvas>
+                    <div class="absolute text-2xl font-semibold" id="totalPatients"></div>
+                </div>
+                <div class="flex justify-around mt-4 text-sm font-medium">
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-blue-500 rounded-full mr-1"></span> other
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-red-500 rounded-full mr-1"></span> Đã hủy
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1"></span> Xác Nhận
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-2 h-2 bg-purple-500 rounded-full mr-1"></span> Hoàn thành
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const total = @ViewBag.total;
+
+    const cancel = @ViewBag.cancel;
+    const confirm = @ViewBag.confirm;
+    const complete = @ViewBag.complete;
+    const other = total - cancel - confirm - complete;
+    // Set total number in the center
+    document.getElementById('totalPatients').textContent = total;
+
+    const ctx = document.getElementById('patientChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Other','Cancel', 'Confirm', 'Complete'],
+            datasets: [{
+                data: [other, cancel, confirm, complete],
+                backgroundColor: ['#3B82F6', '#EF4444', '#10B981', '#A855F7'],
+                hoverOffset: 5,
+            }],
+        },
+        options: {
+            cutout: '75%',
+            plugins: {
+                legend: { display: false },
+            },
+        },
+    });
+</script>

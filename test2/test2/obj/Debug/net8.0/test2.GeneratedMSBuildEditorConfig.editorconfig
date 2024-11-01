@@ -98,6 +98,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdBcHBvaW50bWVudERldGFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Doctor/ViewHealthRecord.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdIZWFsdGhSZWNvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Doctor/ViewPatient.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXFZpZXdQYXRpZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -168,6 +172,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Patient/BookingAppointment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxCb29raW5nQXBwb2ludG1lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Patient/DashBoard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxEYXNoQm9hcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BAO/MAJOR/SE5/swp_quang/SWP_DocCare-quang1/SWP_DocCare-quang1/test2/test2/Views/Patient/Invoice.cshtml]
