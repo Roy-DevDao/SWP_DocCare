@@ -66,8 +66,8 @@
             <div>
                 <button id="dashboardToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-lg"></i>
-                        <span class="ml-3 sidebar-text">Quản Lí Cuộc Hẹn </span>
+                        <i class="fas fa-calendar-check text-lg"></i> <!-- Changed to calendar-check for appointments -->
+                        <span class="ml-3 sidebar-text">Quản Lí Cuộc Hẹn</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="dashboardIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -77,7 +77,6 @@
                     <a asp-controller="Staff" asp-action="AppoitmentList" class="block py-2 text-gray-700 hover:text-gray-900">
                         + Danh Sách Cuộc Hẹn
                     </a>
-
                 </div>
             </div>
 
@@ -86,7 +85,7 @@
                 <button id="serviceToggle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
                         <i class="fas fa-concierge-bell text-lg"></i>
-                        <span class="ml-3 sidebar-text">Quản Lí Dịch Vụ </span>
+                        <span class="ml-3 sidebar-text">Quản Lí Dịch Vụ</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="serviceIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -117,11 +116,11 @@
                 </div>
             </div>
 
-            <!-- Manage schedule -->
+            <!-- Manage Schedule -->
             <div>
                 <button id="scheduleTongle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
                     <div class="flex items-center">
-                        <i class="fas fa-calendar-alt text-lg"></i>
+                        <i class="fas fa-calendar-day text-lg"></i> <!-- Changed to calendar-day for schedule -->
                         <span class="ml-3 sidebar-text">Lịch Làm Việc</span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="scheduleIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,7 +134,25 @@
                 </div>
             </div>
 
+            <!-- Manage Profile -->
+            <div>
+                <button id="profileTongle" class="flex items-center justify-between px-6 py-2.5 w-full text-gray-700 hover:bg-gray-50 hover:text-gray-900">
+                    <div class="flex items-center">
+                        <i class="fas fa-user text-lg"></i> <!-- Changed to user icon for profile -->
+                        <span class="ml-3 sidebar-text">Profile</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform" id="profileIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="profileSubmenu" class="ml-12 max-h-0 overflow-hidden transition-all duration-300">
+                    <a asp-controller="Staff" asp-action="Profile" class="block py-2 text-gray-700 hover:text-gray-900">
+                        + Thông tin cá nhân 
+                    </a>
+                </div>
+            </div>
         </nav>
+
     </aside>
 
     <!-- Main content -->
@@ -219,7 +236,8 @@
             { button: 'dashboardToggle', submenu: 'dashboardSubmenu', icon: 'dashboardIcon' },
             { button: 'serviceToggle', submenu: 'serviceSubmenu', icon: 'serviceIcon' },
             { button: 'doctorToggle', submenu: 'doctorSubmenu', icon: 'doctorIcon' },
-            { button: 'scheduleTongle', submenu: 'scheduleSubmenu', icon: 'scheduleIcon' }
+            { button: 'scheduleTongle', submenu: 'scheduleSubmenu', icon: 'scheduleIcon' },
+            { button: 'profileTongle', submenu: 'profileSubmenu', icon: 'profileIcon' }
         ];
 
         // Lặp qua các nút và submenu
@@ -237,7 +255,7 @@
         });
 
         // Danh sách ID của tất cả các submenu
-        const submenuIds = ['dashboardSubmenu', 'serviceSubmenu', 'doctorSubmenu', 'scheduleSubmenu'];
+        const submenuIds = ['dashboardSubmenu', 'serviceSubmenu', 'doctorSubmenu', 'scheduleSubmenu', 'profileSubmenu'];
 
         // Toggle Sidebar
         const sidebarToggle = document.getElementById('sidebarToggle');
