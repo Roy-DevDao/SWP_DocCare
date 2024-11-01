@@ -445,35 +445,41 @@ namespace test2.Controllers
             return RedirectToAction("ViewAppointment", new { id = appointment.Option.Did });
         }
 
-        //public IActionResult ViewHealthRecord(string appointmentId)
-        //{
-        //    if (string.IsNullOrEmpty(appointmentId))
-        //    {
-        //        return BadRequest("Thiếu thông tin mã cuộc hẹn.");
-        //    }
 
-        //    var healthRecord = _context.HealthRecords
-        //        .Include(hr => hr.PidNavigation)
-        //        .FirstOrDefault(hr => hr.Oid == appointmentId);
-
-        //    if (healthRecord == null)
-        //    {
-        //        return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
-        //    }
-
-        //    var healthRecordViewModel = new HealthRecordViewModel
-        //    {
-        //        RecordId = healthRecord.RecordId,
-        //        PatientName = healthRecord.PidNavigation.Name,
-        //        AppointmentId = healthRecord.Oid,
-        //        Diagnosis = healthRecord.Diagnosis,
-        //        Description = healthRecord.Description,
-        //        Note = healthRecord.Note,
-        //        DateExam = healthRecord.DateExam ?? DateTime.Now // Giải quyết lỗi nullable
-        //    };
-
-        //    return View("ViewHealthRecord", healthRecordViewModel);
-        //}
+        public IActionResult ViewHealthRecord(string appointmentId)
+	{
+	    if (string.IsNullOrEmpty(appointmentId))
+	    {
+		return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+	    }
+	
+	    var healthRecord = _context.HealthRecords
+		.Include(hr => hr.PidNavigation)
+		.FirstOrDefault(hr => hr.Oid == appointmentId);
+	
+	    if (healthRecord == null)
+	    {
+		return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
+	    }
+	
+	    var healthRecordViewModel = new HealthRecordViewModel
+	    {
+		RecordId = healthRecord.RecordId,
+		PatientName = healthRecord.PidNavigation?.Name,
+		AppointmentId = healthRecord.Oid,
+		Diagnosis = healthRecord.Diagnosis,
+		Description = healthRecord.Description,
+		Note = healthRecord.Note,
+		DateExam = healthRecord.DateExam ?? DateTime.Now // Giải quyết lỗi nullable
+	    };
+	
+	    var baseViewModel = new BaseViewModel
+	    {
+		healthRecord = healthRecordViewModel
+	    };
+	
+	    return View("ViewHealthRecord", new List<BaseViewModel> { baseViewModel });
+	}
 
 
         public IActionResult ViewPatient(string id)
