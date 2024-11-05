@@ -4,8 +4,10 @@
 }
 
 <div class="container mx-auto mt-10 pt-10 pb-10 px-8 lg:px-16 bg-white rounded-xl shadow-2xl max-w-4xl">
-    <h2 class="text-4xl font-bold text-blue-600 mb-8">Chi tiết Hồ sơ y tế</h2>
-
+    <h3 class="text-4xl font-bold text-blue-600 mb-8" style="display:flex; flex-direction:row; align-items: center;">
+        Chi tiết cuộc hẹn
+        <img src="~/assets/images/medical.png" height="80" width="120" class="logo--mode" alt="" style="margin-left: 350px;">
+    </h3>
     @foreach (var baseViewModel in Model)
     {
         var healthRecord = baseViewModel.healthRecord;
@@ -71,11 +73,13 @@
 
         <!-- Nút Quay lại -->
         <div class="mt-10 flex justify-end space-x-4">
-            <a asp-action="ViewAppointment"
-               asp-route-id="@healthRecord.AppointmentId"
+            <a asp-controller="Doctor" asp-action="ViewAppointmentDetail"
+               asp-route-appointmentDetail="@healthRecord.AppointmentId"
                class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 font-semibold shadow-md transition duration-300 ease-in-out">
                 Quay lại cuộc hẹn
             </a>
+
+
         </div>
     }
 </div>

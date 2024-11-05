@@ -26,10 +26,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\aser\Desktop\Final_is_real\test2\test2
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/aser/Desktop/Final_is_real/test2/test2/Views/Admin/AddBlog.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkQmxvZy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/aser/Desktop/Final_is_real/test2/test2/Views/Admin/AddDoctor.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkRG9jdG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,16 +38,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkU2VydmljZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/aser/Desktop/Final_is_real/test2/test2/Views/Admin/BlogDetails.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQmxvZ0RldGFpbHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/aser/Desktop/Final_is_real/test2/test2/Views/Admin/DoctorDetails.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRG9jdG9yRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/aser/Desktop/Final_is_real/test2/test2/Views/Admin/EditBlog.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEJsb2cuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/aser/Desktop/Final_is_real/test2/test2/Views/Admin/EditService.cshtml]

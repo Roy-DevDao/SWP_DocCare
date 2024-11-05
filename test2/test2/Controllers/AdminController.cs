@@ -48,7 +48,7 @@ namespace test2.Controllers
             var patients = _context.Patients.Count();
             var doctors = _context.Doctors.Count();
             var specialties = _context.Specialties.Count();
-            var avgCost = _context.Doctors.Average(d => d.Price)*2000;
+            var avgCost = _context.Doctors.Average(d => d.Price);
             var appointments = _context.Orders.Count();
             var service = _context.Specialties.Count();
             var feedback2 = _context.Feedbacks.Count();
@@ -170,7 +170,7 @@ namespace test2.Controllers
                     TotalRevenue = g
                         .SelectMany(o => o.HealthRecords)
                         .Where(hr => hr.DidNavigation != null)
-                        .Sum(hr => (hr.DidNavigation!.Price ?? 0) * 2000) // Nhân giá trị Price với 2000
+                        .Sum(hr => (hr.DidNavigation!.Price ?? 0) ) // Nhân giá trị Price với 2000
                 })
                 .OrderBy(x => x.Month)
                 .ToList();
@@ -190,48 +190,210 @@ namespace test2.Controllers
         }
 
 
-        public IActionResult ManageBlog(string query, int? page)
+        public IActionResult ManageBlog(string sortColumn = "ID", string sortDirection = "asc", int page = 1, string sortID = "", string sortName = "", string searchQuery = "")
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            if (query == "")
+            int pageSize = 10;
+
+            // Filter blog posts
+            var filterBlogs = _context.Blogs.AsQueryable();
+
+            // Sorting logic based on column
+            switch (sortColumn)
             {
-                query = null;
+                case "Name":
+                    filterBlogs = (sortDirection == "asc") ? filterBlogs.OrderBy(b => b.Title) : filterBlogs.OrderByDescending(b => b.Title);
+                    break;
+                default:
+                    filterBlogs = (sortDirection == "asc") ? filterBlogs.OrderBy(b => b.BlogId) : filterBlogs.OrderByDescending(b => b.BlogId);
+                    break;
             }
 
-            ViewBag.QueryData = query;
-            var pageNumber = (page ?? 1);
-            const int pageSize = 5;
+            // Search functionality
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                filterBlogs = filterBlogs.Where(b => b.Title.Contains(searchQuery) || b.BlogId.ToString().Contains(searchQuery));
+            }
 
-          
-                var listData = _context.Blogs.OrderByDescending(x => x.CreateDate).ToList();
+            // Sorting by ID
+            if (!string.IsNullOrEmpty(sortID))
+            {
+                filterBlogs = (sortID == "Increase") ? filterBlogs.OrderBy(b => b.BlogId) : filterBlogs.OrderByDescending(b => b.BlogId);
+            }
 
-                double elapsedMs = 0;
-                if (query == null)
-                {
-                    ViewBag.Total = listData.Count();
-                    watch.Stop();
+            // Sorting by Name
+            if (!string.IsNullOrEmpty(sortName))
+            {
+                filterBlogs = (sortName == "Increase") ? filterBlogs.OrderBy(b => b.Title) : filterBlogs.OrderByDescending(b => b.Title);
+            }
 
-                    elapsedMs = (double)watch.ElapsedMilliseconds / 1000;
-                    ViewBag.RequestTime = elapsedMs;
-                    return View(listData);
-                }
+            var blogList = filterBlogs.ToList();
 
-                var q = (from mt in listData
-                         where (!string.IsNullOrEmpty(query) &&
-                                (mt.Title.ToLower().Contains(query.ToLower())
-                                 || !string.IsNullOrEmpty(mt.ShortDescription) && mt.ShortDescription.ToLower().Contains(query.ToLower())
-                                 || !string.IsNullOrEmpty(mt.Content) && mt.Content.ToLower().Contains(query.ToLower())))
+            // Total count of blogs
+            var totalBlogs = blogList.Count();
 
-                         select mt).AsQueryable();
+            // Pagination calculation
+            ViewBag.TotalPages = (int)Math.Ceiling(totalBlogs / (double)pageSize);
+            ViewBag.CurrentPage = page;
+            var blogs = blogList.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
-                ViewBag.Total = q.Count();
-                watch.Stop();
+            // ViewBag properties for sorting
+            ViewBag.SortID = sortID;
+            ViewBag.SortName = sortName;
+            ViewBag.SortColumn = sortColumn;
+            ViewBag.SortDirection = sortDirection;
 
-                elapsedMs = (double)watch.ElapsedMilliseconds / 1000;
-                ViewBag.RequestTime = elapsedMs;
-                return View(q);
-            
+            // Results range for pagination display
+            int startResult = (page - 1) * pageSize + 1;
+            int endResult = startResult + blogs.Count - 1;
+
+            ViewBag.StartResult = startResult;
+            ViewBag.EndResult = endResult;
+            ViewBag.TotalBlogs = totalBlogs;
+
+            return View(blogs);
         }
+
+        public async Task<IActionResult> AddBlog(AddBlogViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            string imageUrl = null;
+            if (model.ImageUpload != null)
+            {
+                // Upload image to Cloudinary
+                var uploadResult = await _cloudinaryService.UploadImageAsync(model.ImageUpload);
+
+                if (uploadResult != null)
+                {
+                    imageUrl = uploadResult; // Gán link ảnh sau khi tải lên thành công
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Lỗi khi tải ảnh lên. Vui lòng thử lại.");
+                    return View(model);
+                }
+            }
+
+            // Tạo một đối tượng Blog mới và gán các thuộc tính
+            var blog = new Blog
+            {
+                BlogId = model.BlogId,
+                Title = model.Title,
+                Image = imageUrl,
+                ShortDescription = model.ShortDescription,
+                Content = model.Content,
+                CreateDate = model.CreateDate ?? DateTime.Now, // Gán ngày tạo hiện tại nếu chưa có
+                CreateBy = model.CreateBy
+            };
+
+            // Thêm vào cơ sở dữ liệu
+            _context.Blogs.Add(blog);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Thêm bài viết thành công!";
+            return RedirectToAction("ManageBlog"); // Điều hướng đến trang quản lý blog
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBlog(string id)
+        {
+            var blog = _context.Blogs.Find(id);
+            if (blog == null)
+            {
+                return NotFound(); // Nếu không tìm thấy, trả về NotFound
+            }
+
+            // Xóa blog
+            _context.Blogs.Remove(blog);
+            _context.SaveChanges();
+
+            return RedirectToAction("ManageBlog"); // Điều hướng về trang quản lý blog
+        }
+
+
+        [HttpGet]
+        public IActionResult EditBlog(string id)
+        {
+            // Tìm blog hiện có trong cơ sở dữ liệu
+            var blog = _context.Blogs.FirstOrDefault(b => b.BlogId == id);
+
+            if (blog == null)
+            {
+                return NotFound(); // Trả về NotFound nếu không tìm thấy blog
+            }
+
+            // Tạo một ViewModel với thông tin từ blog hiện có
+            var viewModel = new EditBlogViewModel
+            {
+                BlogId = blog.BlogId,
+                Title = blog.Title,
+                ShortDescription = blog.ShortDescription,
+                Content = blog.Content,
+                Image = blog.Image // Giữ lại URL ảnh hiện tại
+            };
+
+            return View(viewModel); // Trả về View với ViewModel
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditBlog(EditBlogViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model); // Trả về View nếu có lỗi trong model
+            }
+
+            // Tìm blog hiện có trong cơ sở dữ liệu
+            var existingBlog = _context.Blogs.FirstOrDefault(b => b.BlogId == model.BlogId);
+
+            if (existingBlog == null)
+            {
+                ModelState.AddModelError("", "Blog không tồn tại.");
+                return View(model); // Trả về View nếu blog không tồn tại
+            }
+
+            // Xử lý upload ảnh mới nếu có
+            string imageUrl = existingBlog.Image; // Giữ URL ảnh cũ nếu không tải ảnh mới
+            if (model.ImageUpload != null)
+            {
+                // Upload ảnh lên Cloudinary
+                var uploadResult = await _cloudinaryService.UploadImageAsync(model.ImageUpload);
+
+                if (!string.IsNullOrEmpty(uploadResult))
+                {
+                    imageUrl = uploadResult; // Cập nhật URL ảnh nếu upload thành công
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Lỗi khi tải ảnh lên. Vui lòng thử lại.");
+                    return View(model); // Trả về View nếu upload ảnh thất bại
+                }
+            }
+
+            // Cập nhật các thông tin của blog
+            existingBlog.Title = model.Title;
+            existingBlog.ShortDescription = model.ShortDescription;
+            existingBlog.Content = model.Content;
+            existingBlog.Image = imageUrl;
+
+            try
+            {
+                // Lưu thay đổi vào cơ sở dữ liệu
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Cập nhật blog thành công!";
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Có lỗi xảy ra khi lưu dữ liệu. Vui lòng thử lại.");
+                return View(model); // Trả về View nếu có lỗi khi lưu dữ liệu
+            }
+
+            return RedirectToAction("ManageBlog"); // Điều hướng về trang quản lý blog
+        }
+
+
 
 
         public IActionResult ManageDoctor(string sortColumn = "Did", string sortDirection = "asc", int page = 1, string sortPrice = "", string sortId = "", string sortName = "", string sortGender = "", string searchId = "")

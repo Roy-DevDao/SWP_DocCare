@@ -1,222 +1,290 @@
-﻿﻿﻿
-@model List<test2.Data.Blog>
-@{
+﻿﻿﻿@{
     Layout = "Layout_Admin";
-    var query = ViewBag.QueryData ?? "";
 }
-
-@section CSS {
+@section Styles {
     <style>
-
-        .autocomplete-suggestions {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-            border: 1px solid #999;
-            background: #FFF;
-            cursor: default;
-            overflow: auto;
-            -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
-            -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
-            box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+        .sort-options {
+            width: 30%;
         }
 
-        .autocomplete-suggestion {
-            padding: 2px 5px;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        .autocomplete-no-suggestion {
-            padding: 2px 5px;
-        }
-
-        .autocomplete-selected {
-            background: #F0F0F0;
-        }
-
-        .autocomplete-suggestions strong {
-            font-weight: bold;
-            color: #000;
-        }
-
-        .autocomplete-group {
-            padding: 2px 5px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #000;
-            display: block;
-            border-bottom: 1px solid #000;
-        }
-
-        .regimen-header {
+        .doctor-dashboard {
             display: flex;
-            -o-justify-content: space-between;
-            -webkit-justify-content: space-between;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .header1 {
+            display: flex;
             justify-content: space-between;
-            -ms-align-items: center;
-            -o-align-items: center;
-            -webkit-align-items: center;
-            align-items: center
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        .regimen-description {
-            padding-left: 30px;
-        }
-
-            .regimen-description h3 {
-                margin: 0;
-                padding: 0;
-                border: 0;
-                font-size: 15px;
-                font: inherit;
-                vertical-align: baseline;
+            .header1 .search-container {
+                display: flex;
             }
+
+            .header1 input {
+                width: 200px;
+            }
+
+        .doctor-table img {
+            border-radius: 50%;
+        }
+
+        .edit-btn, .btn-info {
+            background-color: #0D6EFD;
+            color: white;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .btn-primary {
+            position: relative;
+            right: 8px;
+        }
+
+        .table th {
+            text-align: justify; /* Center the text and icons */
+            vertical-align: middle;
+            padding: 10px;
+        }
+
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .icon-text i {
+                font-size: 16px;
+                margin-right: 5px;
+            }
+
+        .table td img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+        }
+
+        .table td, .table th {
+            padding: 10px;
+        }
+
+        button.btn {
+            margin-right: 5px; /* Khoảng cách giữa các nút */
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            width: 30%;
+        }
     </style>
 }
+@if (TempData["SuccessMessage"] != null)
 
-<div id="page-head">
-
-    <div id="page-title">
-        <h1 class="page-header text-overflow">Trang tìm kiếm</h1>
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
     </div>
-    <hr class="bord-no">
-    <div class="row pad-ver">
-        <form action="/admin/article/search" method="get" class="col-xs-12 col-sm-10 col-sm-offset-1 pad-hor">
-            <div class="input-group mar-btm">
+}
+@model IEnumerable<test2.Data.Blog>
 
-                <input type="text" name="query" class="form-control input-lg" value="@query" id="autocomplete-ajax" style="position: absolute; z-index: 2;" />
-                <input type="text" class="form-control input-lg" id="autocomplete-ajax-x" disabled="disabled" style="color: #CCC; position: absolute; background: transparent; z-index: 1;" />
-                <span class="input-group-btn">
-                    <button class="btn btn-primary btn-lg" type="submit">Tìm kiếm</button>
-                </span>
+<div class="doctor-dashboard">
+    <div class="header1 d-flex justify-content-between align-items-center mb-4">
+        <form method="get" action="@Url.Action("ManageBlog", "Admin")">
+            <div class="search-container d-flex">
+                <input name="searchQuery" type="text" placeholder="Tìm kiếm ở đây..." class="form-control me-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
         </form>
+        <a asp-controller="Admin" asp-action="AddBlog">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus"></i> Thêm Bài Viết
+            </button>
+        </a>
     </div>
-</div>
 
-<div id="page-content">
+    <form asp-action="ManageBlog" method="get">
+        <div class="sort-options d-flex mb-4">
+            <select class="form-select me-2" id="sortID" name="sortID">
+                <option value="">Sắp xếp theo ID</option>
+                <option value="Increase">Tăng dần</option>
+                <option value="Decrease">Giảm dần</option>
+            </select>
+            <select class="form-select me-2" id="sortName" name="sortName">
+                <option value="">Sắp xếp theo tên</option>
+                <option value="Increase">A-Z</option>
+                <option value="Decrease">Z-A</option>
+            </select>
 
-    <div class="panel">
-        <div class="panel-body">
-            <div class="pad-hor mar-top">
-                <h2 class="text-thin mar-no">
-                    @(ViewBag.Total ?? 0)  kết quả
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-filter"></i> <!-- Biểu tượng bộ lọc -->
+            </button>
+        </div>
+    </form>
 
-                    @if (!string.IsNullOrEmpty(query))
-                    {
-                        <span>tìm thấy cho:</span> <i class="text-info text-normal">"@query"</i>
-                    }
-                </h2>
-                <small>Thời gian:  ( @(ViewBag.RequestTime ?? 0) Giây)</small>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <!-- Sắp xếp theo ID -->
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-hashtag"></i> ID
+                        <a asp-action="ManageBlog" asp-route-sortColumn="ID" asp-route-sortDirection="@((ViewBag.SortColumn == "ID" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                            <i class="@(ViewBag.SortColumn == "ID" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                        </a>
+                    </div>
+                </th>
+
+                <!-- Hình ảnh (không sắp xếp) -->
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-image"></i> Hình ảnh
+                    </div>
+                </th>
+
+                <!-- Sắp xếp theo Tên -->
+                <th>
+                    <div class="icon-text">
+
+                        <i class="fas fa-user"></i> Tiêu đề
+                        <a asp-action="ManageBlog" asp-route-sortColumn="Name" asp-route-sortDirection="@((ViewBag.SortColumn == "Name" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
+                            <i class="@(ViewBag.SortColumn == "Name" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
+                        </a>
+                    </div>
+                </th>
+
+          
+
+                <!-- Mô tả (không sắp xếp) -->
+                @* <th>
+                    <div class="icon-text">
+                        <i class="fas fa-info"></i> Ngày tạo
+                    </div>
+                </th> *@
+
+                <!-- Tùy chọn (không sắp xếp) -->
+                <th>
+                    <div class="icon-text">
+                        <i class="fas fa-cogs"></i> Tùy chọn
+                    </div>
+                </th>
+            </tr>
+        </thead>
+
+
+        <tbody id="service-list">
+            @foreach (var service in Model)
+            {
+                <tr>
+                    <td>@service.BlogId</td>
+                    <td>
+                        <img src="@service.Image" alt="Hình ảnh Dịch vụ" class="service-img" style="width: 60px; height: 60px;" />
+                    </td>
+                    <td>@service.Title</td>
+                    @* <td>@service.CreateDate</td> *@
+                    <td>
+                        <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@service.BlogId">
+                            <button class="btn btn-info">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </a>
+
+                        <form asp-action="DeleteBlog" asp-controller="Admin" style="display:inline">
+                            <input name="id" value="@service.BlogId" type="hidden" />
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa dịch vụ này không?');">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
+
+                        <a asp-controller="Admin" asp-action="EditBlog" asp-route-id="@service.BlogId">
+                            <button class="btn edit-btn">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <!-- Tailwind CSS Pagination -->
+    <!-- Tailwind CSS Pagination -->
+    <div class="tailwindTotal flex items-center justify-between border-t border-gray-200 bg-[#F8F9FA] px-4 py-3 sm:px-6">
+        <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+            <div>
+                <div class="text-sm text-gray-700">
+                    Hiển thị @ViewBag.StartResult đến @ViewBag.EndResult của @ViewBag.TotalServices kết quả
+                </div>
             </div>
+            <div>
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                    <!-- Previous Button -->
+                    <a asp-action="ManageBlog" asp-route-page="@(ViewBag.CurrentPage - 1)"
+                       asp-route-searchId="@ViewBag.SortID"
+                       asp-route-sortPrice="@ViewBag.SortPrice"
+                       asp-route-sortID="@ViewBag.SortID"
+                       class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                        <span class="sr-only">Trước</span>
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </a>
 
-            <hr>
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
 
-            <ul class="list-group bord-no">
 
-                @foreach (var item in Model)
-                {
-                    <li class="list-group-item list-item-lg bord-btm" style="border-bottom: 1px solid rgba(0,0,0,0.07);">
-                        <div class="media-heading mar-no regimen-header">
-                            <a class="btn-link text-lg text-semibold" onclick="openRecord('@item.BlogId')" href="javascript:void(0)">@item.Title</a>
-                            <div class="control-regimen">
-                                <button class="btn btn-info btn-sm btn-icon  add-tooltip" data-original-title="Xem chi tiết" data-container="body" onclick="openRecord('@item.BlogId')">
-                                    <i class="fa fa-calendar  icon-lg"></i>
-                                </button>
 
-                                <button class="btn btn-info btn-sm btn-icon add-tooltip" data-original-title="Chỉnh sửa" data-container="body" title="Sửa bệnh án" onclick="openEditing('@item.BlogId')">
-                                        <i class="demo-psi-pen-5 icon-lg"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-sm btn-icon add-tooltip" data-original-title="Xóa" data-container="body"
-                                        onclick="deleteElement('@item.BlogId','@item.Title')">
-                                        <i class="demo-psi-recycling icon-lg"></i>
-                                    </button>
-                                
-                            </div>
-                        </div>
+                    {
+                        <a asp-action="ManageBlog" asp-route-page="@i"
+                           asp-route-searchId="@ViewBag.SortID"
+                           asp-route-sortPrice="@ViewBag.SortPrice"
+                           asp-route-sortID="@ViewBag.SortID"
+                           class="relative inline-flex items-center px-3 py-1 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == i ? "z-10 text-white" : "")"
+                           style="@(ViewBag.CurrentPage == i ? "background-color:#0D6EFD;" : "")">
+                            @i
+                        </a>
+                    }
 
-                        <div class="regimen-description" style="padding-top: 10px">
-                            <p class="text-sm ">
-                                @item.ShortDescription
-                            </p>
-                        </div>
-                    </li>
-                }
-            </ul>
-            <!--Pagination-->
-
+                    <!-- Next Button -->
+                    <a asp-action="ManageBlog" asp-route-page="@(ViewBag.CurrentPage + 1)"
+                       asp-route-searchId="@ViewBag.SortID"
+                       asp-route-sortPrice="@ViewBag.SortPrice"
+                       asp-route-sortID="@ViewBag.SortID"
+                       class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                        <span class="sr-only">Sau</span>
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
-
-@section Scripts {
-
-    <script src="~/Areas/Admin/Content/plugins/autocomplete/jquery.autocomplete.js"></script>
-
-    <script>
-
-        $(document).ready(function () {
-            notify.done();
-            $('#autocomplete-ajax').autocomplete({
-                serviceUrl: '/admin/article/GetJson',
-
-                lookupFilter: function (suggestion, originalQuery, queryLowerCase) {
-                    var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
-                    return re.test(suggestion.value);
-                },
-                onSelect: function (suggestion) {
-                    openRecord(suggestion.data);
-                },
-                onHint: function (hint) {
-                    $('#autocomplete-ajax-x').val(hint);
-                },
-                onInvalidateSelection: function () {
-                    $('#selction-ajax').html('You selected: none');
-                }
-            });
-
-        });
-
-        const baseUrl = "/admin/article";
-
-        //Edit
-        function openEditing(id) {
-            notify.loading();
-            window.location.href = `${baseUrl}/update?id=${id}`;
-            notify.done();
-        }
-        //Edit
-        function openRecord(id) {
-            notify.loading();
-            window.location.href = `${baseUrl}/detail?id=${id}`;
-            notify.done();
-        }
-
-        //Del
-        function deleteElement(_id, name) {
-            var mess = 'Xác nhận <b>xóa</b> bản ghi <b>' + name + '</b>';
-            bootbox.confirm(mess, function (result) {
-                if (result) {
-                    ajax.del(`${baseUrl}/del`,
-                        { id: _id },
-                        (response) => {
-                            if (response.status) {
-                                notify.push(response.mess, notify.EType.SUCCESS);
-                                $(`#row_${_id}`).remove();
-                            } else {
-                                notify.push(mess, notify.EType.DANGER);
-                            }
-                        },
-                        (jqXHR, textStatus) => {
-                            const mess = `Request failed: ${textStatus}`;
-                            notify.push(mess, notify.EType.DANGER);
-
-                        }
-                    );
-                }
-            });
-        }
-    </script>
-
-}

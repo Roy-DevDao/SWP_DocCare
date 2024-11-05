@@ -1,5 +1,5 @@
-﻿﻿﻿@{
-    Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Layout chính mà bạn đã định nghĩa
+﻿@{
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Main layout
 }
 
 @section Styles {
@@ -10,8 +10,8 @@
             background-color: #f9f9f9;
         }
 
-        /* Container chỉnh sửa dịch vụ */
-        .edit-service-container {
+        /* Container for editing blog */
+        .edit-blog-container {
             max-width: 600px;
             margin: 40px auto;
             padding: 30px;
@@ -20,7 +20,7 @@
             border-radius: 12px;
         }
 
-        /* Tiêu đề */
+        /* Header */
         h1 {
             text-align: center;
             margin-bottom: 25px;
@@ -29,7 +29,7 @@
             font-weight: bold;
         }
 
-        /* Nhóm biểu mẫu */
+        /* Form group */
         .form-group {
             margin-bottom: 20px;
         }
@@ -42,7 +42,7 @@
             color: #555;
         }
 
-        /* Trường nhập liệu */
+        /* Input fields */
         input, textarea {
             width: 100%;
             padding: 12px;
@@ -59,13 +59,13 @@
                 background-color: #fff;
             }
 
-        /* Textarea cho trường mô tả */
+        /* Textarea for content */
         textarea {
             resize: vertical;
-            height: 100px;
+            height: 150px;
         }
 
-        /* Nút Lưu */
+        /* Save button */
         .save-button {
             padding: 12px;
             background-color: #0D6EFD;
@@ -86,16 +86,14 @@
 }
 
 <main class="layout-default_body_main">
-    <h1>Chỉnh sửa thông tin dịch vụ</h1>
+    <h1>Chỉnh sửa thông tin blog</h1>
 
-
-
-    <form asp-action="EditService" method="post" enctype="multipart/form-data">
-        <input type="hidden" id="SpecialtyId" name="SpecialtyId" value="@Model.SpecialtyId" />
+    <form asp-action="EditBlog" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="BlogId" name="BlogId" value="@Model.BlogId" />
 
         <div class="form-group">
-            <label for="SpecialtyName">Tên dịch vụ:</label>
-            <input type="text" id="SpecialtyName" name="SpecialtyName" value="@Model.SpecialtyName" placeholder="Nhập tên dịch vụ" class="form-control" />
+            <label for="Title">Tiêu đề:</label>
+            <input type="text" id="Title" name="Title" value="@Model.Title" placeholder="Nhập tiêu đề" class="form-control" />
         </div>
 
         <div class="form-group">
@@ -104,16 +102,25 @@
         </div>
 
         <div class="form-group">
-            <label for="SpecialtyImg">URL hình ảnh hiện tại:</label>
-            <input type="text" id="SpecialtyImg" name="SpecialtyImg" value="@Model.SpecialtyImg" placeholder="URL hình ảnh hiện tại" class="form-control" readonly />
+            <label for="Content">Nội dung:</label>
+            <textarea id="Content" name="Content" placeholder="Nhập nội dung" class="form-control">@Model.Content</textarea>
         </div>
 
         <div class="form-group">
-            <label for="SpecialtyImgUpload">Tải ảnh mới lên:</label>
-            <input type="file" id="SpecialtyImgUpload" name="SpecialtyImgUpload" class="form-control" />
+            <label for="Image">URL hình ảnh hiện tại:</label>
+            <input type="text" id="Image" name="Image" value="@Model.Image" placeholder="URL hình ảnh hiện tại" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="CreateDate">Ngày tạo:</label>
+            <input type="datetime-local" id="CreateDate" name="CreateDate" value="@Model.CreateDate?.ToString("yyyy-MM-ddTHH:mm")" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="ImageUpload">Tải ảnh mới lên:</label>
+            <input type="file" id="ImageUpload" name="ImageUpload" class="form-control" />
         </div>
 
         <button type="submit" class="save-button">Lưu thay đổi</button>
     </form>
-
 </main>

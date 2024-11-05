@@ -1,80 +1,14 @@
-﻿﻿@* @model List<test2.Models.DoctorModel.BaseViewModel>
-@{
-    Layout = "~/Views/Shared/Layout_Doctor.cshtml";
-}
-
-<!-- Render dữ liệu cuộc hẹn -->
-<div class="container mx-auto mt-10 pt-10 bg-white rounded-lg shadow-lg">
-    <h2 class="text-2xl font-bold text-blue-500 mb-4">Appointment Details</h2>
-    <div class="flex items-center mb-2">
-        <img class="w-24 h-24 rounded mb-3"
-             src="@(!string.IsNullOrEmpty(Model.First().appointmentDetail.PatientImage)
-                ? Model.First().appointmentDetail.PatientImage
-                : "https://cellphones.com.vn/sforum/wp-content/uploads/2023/10/avatar-trang-4.jpg")"
-             alt="Patient avatar" />
-
-        <div class="bg-gray-100 p-4 ml-3 rounded-lg">
-            <h3 class="font-semibold text-gray-700">Patient Information</h3>
-            <p><strong>Name:</strong> @(Model.First().appointmentDetail.PatientName ?? "Unknown")</p>
-            <p><strong>Phone:</strong> @(Model.First().appointmentDetail.PatientPhone ?? "Unknown")</p>
-        </div>
-    </div>
-
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- Patient Information -->
-        <div class="bg-gray-100 p-4 rounded-lg">
-            <h3 class="font-semibold text-gray-700">Specialty : </h3>
-            <p><strong>@(Model.First().appointmentDetail.Specialty ?? "Specialty not available")</strong></p>
-
-            <h3 class="font-semibold text-gray-700 mt-2">Price : </h3>
-            <p><strong>@(Model.First().appointmentDetail.Price?.ToString("C") ?? "Price not available")</strong></p>
-        </div>
-
-        <!-- Appointment Information -->
-        <div class="bg-gray-100 p-4 rounded-lg">
-            <h3 class="font-semibold text-gray-700">Appointment Information</h3>
-            <p><strong>Date:</strong> @Model.First().appointmentDetail.DateOrder?.ToString("MM/dd/yyyy")</p>
-            <p><strong>Time:</strong> @Model.First().appointmentDetail.DateOrder?.ToString("hh:mm tt")</p>
-        </div>
-
-
-        <!-- Notes -->
-        <div class="bg-gray-100 p-4 rounded-lg col-span-1 md:col-span-2">
-            <h3 class="font-semibold text-gray-700">Symptom</h3>
-            <p>@(string.IsNullOrEmpty(Model.First().appointmentDetail.Symptom) ? "No additional notes." : Model.First().appointmentDetail.Symptom)</p>
-        </div>
-    </div>
-
-    @if (Model.First().appointmentDetail.Status == "Confirm")
-    {
-        <div class="mt-6 flex justify-end">
-            <a asp-action="AddHealthRecord"
-               asp-route-appointmentId="@Model.First().appointmentDetail.AppointmentId"
-               class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
-                Add to HealthRecord
-            </a>
-        </div>
-    }
-
-    <div class="mt-6 flex justify-end">
-        <a asp-action="ViewAppointment"
-           asp-route-id="@Model.First().DId"
-           class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 font-semibold shadow">
-            Back to Appointments
-        </a>
-    </div>
-</div>
-    } *@
-
-
-               @model List<test2.Models.DoctorModel.BaseViewModel>
+﻿
+ @model List<test2.Models.DoctorModel.BaseViewModel>
 @{
     Layout = "~/Views/Shared/Layout_Doctor.cshtml";
 }
 
 <div class="container mx-auto mt-10 pt-10 pb-10 px-8 lg:px-16 bg-white rounded-xl shadow-2xl max-w-4xl">
-    <h2 class="text-4xl font-bold text-blue-600 mb-8">Chi tiết cuộc hẹn</h2>
+    <h3 class="text-4xl font-bold text-blue-600 mb-8" style="display:flex; flex-direction:row; align-items: center;">
+        Chi tiết cuộc hẹn
+        <img src="~/assets/images/medical.png" height="80" width="120" class="logo--mode" alt="" style="margin-left: 350px;">
+    </h3>
 
     <!-- Phần Thông tin tổng quan bệnh nhân và cuộc hẹn -->
     <div class="bg-blue-50 p-8 rounded-xl shadow-sm flex flex-col space-y-6">
@@ -110,10 +44,14 @@
 
             <div>
                 <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
-                    <i class="fas fa-dollar-sign mr-2"></i>
+                    <i class="fas fa-money-bill-wave mr-2"></i>
                     Giá khám
                 </h3>
-                <p class="text-lg text-gray-800">@(Model.First().appointmentDetail.Price?.ToString("C") ?? "Không có giá khám")</p>
+                <p class="text-lg text-gray-800">
+                    @(Model.First().appointmentDetail.Price.HasValue
+                        ? (Model.First().appointmentDetail.Price.Value * 2000).ToString("#,0") + " VND"
+                        : "Không có giá khám")
+                </p>
             </div>
         </div>
 

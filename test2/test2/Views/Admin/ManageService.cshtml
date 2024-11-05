@@ -182,17 +182,6 @@
                     </div>
                 </th>
 
-                <!-- Sắp xếp theo Giá -->
-                @* <th>
-                <div class="icon-text">
-
-                <i class="fas fa-tag"></i> Giá
-                <a asp-action="ManageService" asp-route-sortColumn="Price" asp-route-sortDirection="@((ViewBag.SortColumn == "Price" && ViewBag.SortDirection == "asc") ? "desc" : "asc")">
-                <i class="@(ViewBag.SortColumn == "Price" ? (ViewBag.SortDirection == "asc" ? "fa fa-sort-up" : "fa fa-sort-down") : "fa fa-sort")"></i>
-                </a>
-                </div>
-                </th> *@
-
                 <!-- Mô tả (không sắp xếp) -->
                 <th>
                     <div class="icon-text">
@@ -220,14 +209,7 @@
                     </td>
                     <td>@service.SpecialtyName</td>
 
-                    @*                     <td>
-                @{
-                // Lấy giá của bác sĩ đầu tiên có liên kết với Specialty (nếu có)
-                var doctor = service.Doctors.FirstOrDefault();
-                var price = doctor?.Price ?? 0;  // Nếu doctor hoặc Price bị null, trả về 0
-                }
-                @price
-                </td> *@
+ 
                     <td>@service.ShortDescription</td>
                     <td>
                         <a asp-controller="Admin" asp-action="ServiceDetails" asp-route-id="@service.SpecialtyId">
