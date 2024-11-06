@@ -80,11 +80,15 @@
         .cancel-btn {
             background-color: #f0f0f0;
             color: #333;
+            padding: 12px 12px;
+            border-radius: 10px;
         }
 
         .save-btn {
             background-color: #0D6EFD;
             color: #fff;
+            padding: 12px 12px;
+            border-radius: 10px;
         }
 
             .save-btn:hover {
@@ -98,7 +102,7 @@
 }
 
 <main class="layout-default_body_main">
-    <form method="post" asp-action="AddBlog" enctype="multipart/form-data">
+    <form method="post" asp-action="AddBlog" enctype="multipart/form-data" novalidate>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="section">
@@ -128,12 +132,12 @@
                     <textarea asp-for="Content" class="form-control" rows="5" placeholder="Nội Dung"></textarea>
                     @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                 </div>
-
+@* 
                 <div class="grid-item">
                     <label asp-for="CreateDate">Ngày Tạo</label>
                     <input asp-for="CreateDate" type="date" class="form-control">
                     @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
-                </div>
+                </div> *@
 
                 <div class="grid-item">
                     <label asp-for="CreateBy">Người Tạo</label>
@@ -160,7 +164,34 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const titleInput = document.getElementById('Title');
+        const blogIdInput = document.getElementById('BlogId');
         const shortDescriptionInput = document.getElementById('ShortDescription');
+
+        // Function to show an error message
+        function showError(elementId, message) {
+            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        // Function to clear an error message
+        function clearError(elementId) {
+            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        }
+
+        // Add event listeners for input fields for real-time validation
+        blogIdInput.addEventListener('input', function () {
+            const value = blogIdInput.value;
+            if (!value) {
+                showError('BlogId', 'Mã Blog là bắt buộc.');
+            } else {
+                clearError('BlogId');
+            }
+        });
 
         titleInput.addEventListener('input', function () {
             const value = titleInput.value;
@@ -183,19 +214,5 @@
                 clearError('ShortDescription');
             }
         });
-
-        function showError(elementId, message) {
-            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
-            if (errorElement) {
-                errorElement.textContent = message;
-            }
-        }
-
-        function clearError(elementId) {
-            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
-            if (errorElement) {
-                errorElement.textContent = '';
-            }
-        }
     });
 </script>

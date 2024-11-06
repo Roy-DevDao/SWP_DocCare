@@ -249,7 +249,7 @@
                 <td>@doctor.Name</td>
                 <td>@doctor.Gender</td>
                 <td>@doctor.Position</td>
-                <td>@doctor.Price</td>
+                <td>@(doctor.Price*2000)</td>
 
                 <td>
                     <a asp-controller="Admin" asp-action="DoctorDetails" asp-route-id="@doctor.Did">

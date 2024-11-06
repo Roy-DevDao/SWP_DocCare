@@ -260,6 +260,13 @@ namespace test2.Controllers
                 return View(model);
             }
 
+            // Check if the BlogId already exists in the database
+            if (await _context.Blogs.AnyAsync(b => b.BlogId == model.BlogId))
+            {
+                ModelState.AddModelError(string.Empty, "Blog ID đã có, vui lòng nhập một ID khác");
+                return View(model);
+            }
+
             string imageUrl = null;
             if (model.ImageUpload != null)
             {
@@ -268,16 +275,16 @@ namespace test2.Controllers
 
                 if (uploadResult != null)
                 {
-                    imageUrl = uploadResult; // Gán link ảnh sau khi tải lên thành công
+                    imageUrl = uploadResult; // Assign the image URL after a successful upload
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Lỗi khi tải ảnh lên. Vui lòng thử lại.");
+                    ModelState.AddModelError(string.Empty, "Up ảnh lỗi, hãy thử lại");
                     return View(model);
                 }
             }
 
-            // Tạo một đối tượng Blog mới và gán các thuộc tính
+            // Create a new Blog object and assign properties
             var blog = new Blog
             {
                 BlogId = model.BlogId,
@@ -285,17 +292,18 @@ namespace test2.Controllers
                 Image = imageUrl,
                 ShortDescription = model.ShortDescription,
                 Content = model.Content,
-                CreateDate = model.CreateDate ?? DateTime.Now, // Gán ngày tạo hiện tại nếu chưa có
+                CreateDate = DateTime.Now, // Assign the current date if not provided model.CreateDate ??
                 CreateBy = model.CreateBy
             };
 
-            // Thêm vào cơ sở dữ liệu
+            // Add to the database
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
 
             TempData["SuccessMessage"] = "Thêm bài viết thành công!";
-            return RedirectToAction("ManageBlog"); // Điều hướng đến trang quản lý blog
+            return RedirectToAction("ManageBlog"); // Redirect to the manage blog page
         }
+
 
         [HttpPost]
         public IActionResult DeleteBlog(string id)
@@ -309,6 +317,7 @@ namespace test2.Controllers
             // Xóa blog
             _context.Blogs.Remove(blog);
             _context.SaveChanges();
+            TempData["SuccessMessage"] = "Xóa bài viết thành công!";
 
             return RedirectToAction("ManageBlog"); // Điều hướng về trang quản lý blog
         }
@@ -655,6 +664,8 @@ namespace test2.Controllers
             _context.Doctors.Remove(doctor);
 
             _context.SaveChanges();
+            TempData["SuccessMessage"] = "Xóa bác sĩ thành công!";
+
 
             return RedirectToAction("ManageDoctor");
         }
@@ -776,6 +787,7 @@ namespace test2.Controllers
             }
             _context.Patients.Remove(patient);
             _context.SaveChanges();
+            TempData["SuccessMessage"] = "Xóa bệnh nhân thành công!";
 
             return RedirectToAction("ManagePatient");
         }
@@ -1011,6 +1023,7 @@ namespace test2.Controllers
             }
             _context.Specialties.Remove(service);
             _context.SaveChanges();
+            TempData["SuccessMessage"] = "Xóa bệnh nhân thành công!";
 
             return RedirectToAction("ManageService");
 
@@ -1130,6 +1143,16 @@ namespace test2.Controllers
                 return View(model);
             }
 
+            // Check if SpecialtyId already exists
+            var existingSpecialty = await _context.Specialties
+                .FirstOrDefaultAsync(s => s.SpecialtyId == model.SpecialtyId);
+
+            if (existingSpecialty != null)
+            {
+                ModelState.AddModelError("SpecialtyId", "Mã Dịch Vụ đã tồn tại. Vui lòng chọn mã khác.");
+                return View(model);
+            }
+
             string imageUrl = null;
             if (model.SpecialtyImgUpload != null)
             {
@@ -1147,7 +1170,6 @@ namespace test2.Controllers
                 }
             }
 
-
             // Create a new Specialty object and set properties
             var specialty = new Specialty
             {
@@ -1164,6 +1186,7 @@ namespace test2.Controllers
             TempData["SuccessMessage"] = "Thêm dịch vụ thành công!";
             return RedirectToAction("ManageService"); // Adjust the redirect as needed
         }
+
 
         public IActionResult AddService()
         {

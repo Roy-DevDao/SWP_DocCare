@@ -66,22 +66,42 @@
         }
 
         /* Save button */
-        .save-button {
-            padding: 12px;
-            background-color: #0D6EFD;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s ease;
+        .submit-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 20px;
         }
 
-            .save-button:hover {
-                background-color: #45a049;
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancel-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 10px 10px;
+            border-radius: 10px;
+        }
+
+        .save-btn {
+            background-color: #0D6EFD;
+            color: #fff;
+            padding: 10px 10px;
+            border-radius: 10px;
+        }
+
+            .save-btn:hover {
+                background-color: #357ABD;
             }
+
+        .cancel-btn:hover {
+            background-color: #e0e0e0;
+        }
     </style>
 }
 
@@ -121,6 +141,43 @@
             <input type="file" id="ImageUpload" name="ImageUpload" class="form-control" />
         </div>
 
-        <button type="submit" class="save-button">Lưu thay đổi</button>
+        <div class="submit-container">
+            <button type="button" class="cancel-btn" onclick="window.location.href='@Url.Action("ManageBlog", "Admin")'">Hủy</button>
+            <button type="submit" class="save-btn">Lưu</button>
+        </div>
+
     </form>
 </main>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const inputs = form.querySelectorAll("input[type='text'], textarea");
+
+            inputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    if (this.value.trim() === "") {
+                        this.classList.add("error");
+                    } else {
+                        this.classList.remove("error");
+                    }
+                });
+            });
+
+            form.addEventListener("submit", function (event) {
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (input.value.trim() === "") {
+                        input.classList.add("error");
+                        isValid = false;
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
+                    alert("Please fill out all required fields.");
+                }
+            });
+        });
+    </script>
+}
