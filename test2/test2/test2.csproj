@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Content Remove="Models\AdminModel\EditSpecialtyViewModel.cshtml" />
+    <Content Remove="Views\Doctor\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,14 @@
     <PackageReference Include="Mscc.GenerativeAI" Version="1.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="RestSharp" Version="112.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Doctor\EditHealthRecord.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Doctor\EditHealthRecord.cshtml" />
   </ItemGroup>
 
 </Project>

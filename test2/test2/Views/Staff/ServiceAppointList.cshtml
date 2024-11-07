@@ -30,18 +30,20 @@
                     </form>
                 </div>
 
-                <div class="col-md-6">
+                @* <div class="col-md-6">
                     <!-- Form lọc theo trạng thái -->
                     <form action="serviceappointlist" method="GET">
                         <div class="row align-items-center">
                             <div class="col-md-8">
                                 <label class="form-label">Lọc theo trạng thái</label>
                                 <select name="status" class="form-select">
-                                    <option value="all">Tất cả</option>
-                                    <option value="Wait">Chờ xác nhận</option>
-                                    <option value="Confirm">Đã xác nhận</option>
-                                    <option value="Cancelled">Đã huỷ</option>
-                                    <option value="Complete">Đã khám</option>
+                                    <option value="all" selected="@(ViewBag.Status == null || ViewBag.Status == "all" ? "selected" : null)">Tất cả</option>
+                                    <option value="Available" selected="@(ViewBag.Status as string == "Available" ? "selected" : null)">Đang trống</option>
+
+                                    <option value="Pending" selected="@(ViewBag.Status as string == "Pending" ? "selected" : null)">Chờ xác nhận</option>
+                                    <option value="Confirm" selected="@(ViewBag.Status as string == "Confirm" ? "selected" : null)">Đã xác nhận</option>
+                                    <option value="Cancelled" selected="@(ViewBag.Status as string == "Cancelled" ? "selected" : null)">Đã huỷ</option>
+                                    <option value="Complete" selected="@(ViewBag.Status as string == "Complete" ? "selected" : null)">Đã khám</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -49,7 +51,9 @@
                             </div>
                         </div>
                     </form>
-                </div>
+
+
+                </div> *@
             </div>
         </div>
 

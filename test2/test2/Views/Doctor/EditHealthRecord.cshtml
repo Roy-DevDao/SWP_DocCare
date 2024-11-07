@@ -1,17 +1,13 @@
-﻿
-
-@model List<test2.Models.DoctorModel.BaseViewModel>
-
+﻿@model List<test2.Models.DoctorModel.BaseViewModel>
 @{
     Layout = "~/Views/Shared/Layout_Doctor.cshtml";
 }
-
-<!-- Hồ Sơ Bệnh Án -->
+<!-- Chỉnh Sửa Hồ Sơ Bệnh Án -->
 <div class="max-w-2xl mx-auto bg-white shadow-md rounded-lg p-6 mt-6">
-    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Hồ Sơ Bệnh Án</h2>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-6">Chỉnh Sửa Hồ Sơ Bệnh Án</h2>
 
-    <form asp-action="AddHealthRecord" method="post" class="space-y-4">
-        <input type="hidden" name="appointmentId" value="@Model[0].appointmentlist.AppointmentId" />
+    <form asp-action="EditHealthRecord" method="post" class="space-y-4">
+        <input type="hidden" name="appointmentId" value="@Model[0].healthRecord.AppointmentId" />
 
         <div>
             <label class="block text-sm font-medium text-gray-700">Tên Bệnh Nhân:</label>
@@ -21,31 +17,31 @@
 
         <div>
             <label class="block text-sm font-medium text-gray-700">Chẩn Đoán (Diagnosis):</label>
-            <input type="text" name="diagnosis" required
+            <input type="text" name="diagnosis" value="@Model[0].healthRecord.Diagnosis" required
                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2" />
         </div>
 
         <div>
             <label class="block text-sm font-medium text-gray-700">Mô Tả (Description):</label>
             <textarea name="description" required
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">@Model[0].healthRecord.Description</textarea>
         </div>
 
         <div>
             <label class="block text-sm font-medium text-gray-700">Ghi Chú (Note):</label>
             <textarea name="note"
-                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2"></textarea>
+                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">@Model[0].healthRecord.Note</textarea>
         </div>
 
         <div>
             <label class="block text-sm font-medium text-gray-700">Ngày Khám (DateExam):</label>
-            <input type="date" name="dateExam" value="@Model[0].healthRecord.DateExam.ToString("yyyy-MM-dd")" readonly disabled
-                   class="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none p-2" />
+            <input type="date" name="dateExam" value="@Model[0].healthRecord.DateExam.ToString("yyyy-MM-dd")"
+                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2" />
         </div>
 
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                Lưu Hồ Sơ
+                Lưu Thay Đổi
             </button>
             <button type="button" onclick="window.history.back()"
                     class="bg-gray-300 text-gray-800 py-2 px-4 rounded-lg shadow-md hover:bg-gray-400 focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
@@ -54,3 +50,5 @@
         </div>
     </form>
 </div>
+
+

@@ -228,6 +228,74 @@ namespace test2.Controllers
             return View("ViewHealthRecord", new List<BaseViewModel> { baseViewModel });
         }
 
+        [HttpGet]
+        public IActionResult EditHealthRecord(string appointmentId)
+        {
+            if (string.IsNullOrEmpty(appointmentId))
+            {
+                return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+            }
+
+            var healthRecord = _context.HealthRecords
+                .Include(hr => hr.PidNavigation)
+                .FirstOrDefault(hr => hr.Oid == appointmentId);
+
+            if (healthRecord == null)
+            {
+                return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
+            }
+
+            var healthRecordViewModel = new HealthRecordViewModel
+            {
+                RecordId = healthRecord.RecordId,
+                PatientName = healthRecord.PidNavigation?.Name,
+                AppointmentId = healthRecord.Oid,
+                Diagnosis = healthRecord.Diagnosis,
+                Description = healthRecord.Description,
+                Note = healthRecord.Note,
+                DateExam = healthRecord.DateExam ?? DateTime.Now
+            };
+
+            var baseViewModel = new BaseViewModel
+            {
+                healthRecord = healthRecordViewModel
+            };
+
+            return View("EditHealthRecord", new List<BaseViewModel> { baseViewModel });
+        }
+
+        [HttpPost]
+        public IActionResult EditHealthRecord(string appointmentId, string diagnosis, string description, string note, DateTime dateExam)
+        {
+            if (string.IsNullOrEmpty(appointmentId) || !ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Thông tin không hợp lệ.");
+                return View("EditHealthRecord");
+            }
+
+            var healthRecord = _context.HealthRecords
+                .FirstOrDefault(hr => hr.Oid == appointmentId);
+
+            if (healthRecord == null)
+            {
+                ModelState.AddModelError("", "Không tìm thấy hồ sơ y tế.");
+                return View("EditHealthRecord");
+            }
+
+            // Cập nhật thông tin
+            healthRecord.Diagnosis = diagnosis;
+            healthRecord.Description = description;
+            healthRecord.Note = note;
+            healthRecord.DateExam = dateExam;
+
+            _context.SaveChanges();
+
+            _logger.LogInformation("Đã chỉnh sửa hồ sơ sức khỏe với ID: {AppointmentId}", appointmentId);
+
+            return RedirectToAction("ViewHealthRecord", new { appointmentId });
+        }
+
+
 
         [HttpPost]
 		public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
@@ -484,36 +552,6 @@ namespace test2.Controllers
             // Chuyển hướng về trang chi tiết cuộc hẹn sau khi thêm thành công
             return RedirectToAction("ViewAppointment", new { id = appointment.Option.Did });
         }
-
-        //public IActionResult ViewHealthRecord(string appointmentId)
-        //{
-        //    if (string.IsNullOrEmpty(appointmentId))
-        //    {
-        //        return BadRequest("Thiếu thông tin mã cuộc hẹn.");
-        //    }
-
-        //    var healthRecord = _context.HealthRecords
-        //        .Include(hr => hr.PidNavigation)
-        //        .FirstOrDefault(hr => hr.Oid == appointmentId);
-
-        //    if (healthRecord == null)
-        //    {
-        //        return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
-        //    }
-
-        //    var healthRecordViewModel = new HealthRecordViewModel
-        //    {
-        //        RecordId = healthRecord.RecordId,
-        //        PatientName = healthRecord.PidNavigation.Name,
-        //        AppointmentId = healthRecord.Oid,
-        //        Diagnosis = healthRecord.Diagnosis,
-        //        Description = healthRecord.Description,
-        //        Note = healthRecord.Note,
-        //        DateExam = healthRecord.DateExam ?? DateTime.Now // Giải quyết lỗi nullable
-        //    };
-
-        //    return View("ViewHealthRecord", healthRecordViewModel);
-        //}
 
 
         public IActionResult ViewPatient(string id)
