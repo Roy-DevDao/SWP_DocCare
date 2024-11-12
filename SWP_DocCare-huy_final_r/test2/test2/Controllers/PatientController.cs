@@ -15,6 +15,7 @@ using test2.Services;
 using System.Security.Claims;
 using test2.Models.PatientModel;
 using test2.Models;
+using System.Security.Cryptography;
 using Azure;
 using static Org.BouncyCastle.Asn1.Cmp.Challenge;
 using MailKit.Search;
@@ -418,8 +419,8 @@ namespace test2.Controllers
                 {
                     Random random = new Random();
                     int buff = random.Next(100, 999);
-                    string optid = "opt" + buff;
-                    string ordid = "ord" + buff;
+                    string optid = GenerateSecureRandomString(15);
+                    string ordid = GenerateSecureRandomString(15);
                     using (var transaction = dc.Database.BeginTransaction())
                     {
                         try
@@ -525,19 +526,31 @@ namespace test2.Controllers
             return Json(new { error = "fsdf" });
         }
 
+
+        public string GenerateSecureRandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var data = new byte[length];
+            using (var crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetBytes(data);
+            }
+            return new string(data.Select(b => chars[b % chars.Length]).ToArray());
+        }
+
         [HttpPost]
         public async Task<JsonResult> SendMessage(string message, string doctorid, int star)
         {
             Random random = new Random();
             if (User.Identity.Name != null)
             {
+                Debug.WriteLine($"--------------------------------------{User.Identity.Name}");
                 Patient patient = dc.Patients.FirstOrDefault(p => p.Pid == User.Identity.Name);
                 if (patient != null)
                 {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        int buff = random.Next(1000000, 9999999);
-                        string fbid = "f" + buff;
+               
+                        
+                        string fbid = GenerateSecureRandomString(15);
                         if (!dc.Feedbacks.Any(f => f.FeedbackId == fbid))
                         {
                             Feedback feedback = new Feedback
@@ -564,7 +577,8 @@ namespace test2.Controllers
 
 
                         }
-                    }
+                    return Json(new { error = "save feedback fail" });
+
 
                 }
 
@@ -573,7 +587,7 @@ namespace test2.Controllers
 
 
 
-            return Json(new { error = "user invalid" });
+            return Json(new { error = "unauthenticated" });
         }
 
 

@@ -195,7 +195,7 @@ namespace test2.Controllers
                 NumberOfFeedbacks = doctor.Feedbacks.Count(),
                 Rating = doctor.Feedbacks.Any() ? doctor.Feedbacks.Average(f => f.Star ?? 0) : 0,
                 Description = doctor.Description,
-                Feedbacks = doctor.Feedbacks.ToList(),
+                Feedbacks = doctor.Feedbacks.OrderByDescending(f => f.DateCmt).ToList(),
                 DetailDoctors = doctor.DetailDoctors.Select(dd => new DetailDoctorViewModel
                 {
                     DetailId = dd.DetailId,
@@ -229,7 +229,7 @@ namespace test2.Controllers
             }
 
             var user = dc.Accounts.FirstOrDefault(dc => dc.Email == email);
-            if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
+            if (user != null)
             {
                 var claims = new List<Claim>
         {

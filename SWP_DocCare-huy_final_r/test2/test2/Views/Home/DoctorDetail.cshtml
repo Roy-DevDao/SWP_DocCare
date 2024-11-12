@@ -422,51 +422,57 @@
 					<div role="tabpanel" id="doc_reviews" class="tab-pane fade">
 						<div class="widget review-listing">
 							<ul id="tb-feedback" class="comments-list">
-								@foreach (var feedback in Model.Feedbacks)
-								{
-									<li>
-										<div class="comment">
-											<img class="avatar avatar-sm rounded-circle" alt="Ảnh bệnh nhân"
-												 src="@(string.IsNullOrEmpty(feedback.PidNavigation?.PatientImg) ? Url.Content("https://tse1.mm.bing.net/th?id=OIP.zP1mlHnV1bpgODW8gvQSFQHaIP&pid=Api&P=0&h=180") : feedback.PidNavigation.PatientImg)">
-											<div class="comment-body">
-												<div class="meta-data">
-													<span class="comment-author">@feedback.Name</span>
-													<span class="comment-date">@feedback.DateCmt?.ToString("d")</span>
-													<div class="review-count rating">
-														@for (int i = 0; i < (feedback.Star ?? 0); i++)
-														{
-															<i class="fas fa-star filled"></i>
-														}
-														@for (int i = (feedback.Star ?? 0); i < 5; i++)
-														{
-															<i class="fas fa-star"></i>
-														}
+								@{
+									// Hiển thị ban đầu 5 feedback và thêm class "hidden" cho các feedback còn lại
+									int count = 0;
+									foreach (var feedback in Model.Feedbacks)
+									{
+										bool isHidden = count >= 5;
+										<li class="feedback-item @(isHidden ? "hidden" : "")">
+											<div class="comment">
+												<img class="avatar avatar-sm rounded-circle" alt="Ảnh bệnh nhân"
+													 src="@(string.IsNullOrEmpty(feedback.PidNavigation?.PatientImg) ? Url.Content("https://tse1.mm.bing.net/th?id=OIP.zP1mlHnV1bpgODW8gvQSFQHaIP&pid=Api&P=0&h=180") : feedback.PidNavigation.PatientImg)">
+												<div class="comment-body">
+													<div class="meta-data">
+														<span class="comment-author">@feedback.Name</span>
+														<span class="comment-date">@feedback.DateCmt?.ToString("d")</span>
+														<div class="review-count rating">
+															@for (int i = 0; i < (feedback.Star ?? 0); i++)
+															{
+																<i class="fas fa-star filled"></i>
+															}
+															@for (int i = (feedback.Star ?? 0); i < 5; i++)
+															{
+																<i class="fas fa-star"></i>
+															}
+														</div>
+													</div>
+													<p class="comment-content">
+														@feedback.Description
+													</p>
+													<div class="comment-reply">
+														<p class="recommend-btn">
+															<span>Đề xuất?</span>
+															<a href="#" class="like-btn">
+																<i class="far fa-thumbs-up"></i> Có
+															</a>
+															<a href="#" class="dislike-btn">
+																<i class="far fa-thumbs-down"></i> Không
+															</a>
+														</p>
 													</div>
 												</div>
-												<p class="comment-content">
-													@feedback.Description
-												</p>
-												<div class="comment-reply">
-													<p class="recommend-btn">
-														<span>Đề xuất?</span>
-														<a href="#" class="like-btn">
-															<i class="far fa-thumbs-up"></i> Có
-														</a>
-														<a href="#" class="dislike-btn">
-															<i class="far fa-thumbs-down"></i> Không
-														</a>
-													</p>
-												</div>
 											</div>
-										</div>
-									</li>
+										</li>
+										count++;
+									}
 								}
 							</ul>
 
 							<div class="all-feedback text-center">
-								<a href="#" class="btn btn-primary btn-sm">
-									Xem tất cả phản hồi <strong>(@Model.NumberOfFeedbacks)</strong>
-								</a>
+								<button id="toggle-feedback" class="btn btn-primary btn-sm">
+									Xem tất cả phản hồi <strong>(@Model.Feedbacks.Count)</strong>
+								</button>
 							</div>
 						</div>
 
@@ -608,6 +614,25 @@
 
 
 <script>
+
+	document.getElementById("toggle-feedback").addEventListener("click", function () {
+		const hiddenFeedbacks = document.querySelectorAll("#tb-feedback .feedback-item.hidden");
+		const allFeedbacks = document.querySelectorAll("#tb-feedback .feedback-item");
+		const isExpanded = hiddenFeedbacks.length === 0;
+
+		if (isExpanded) {
+			// Thu gọn lại (ẩn các feedback sau 5 feedback đầu tiên)
+			allFeedbacks.forEach((feedback, index) => {
+				if (index >= 5) feedback.classList.add("hidden");
+			});
+			this.textContent = "Xem tất cả phản hồi (" + allFeedbacks.length + ")";
+		} else {
+			// Hiển thị tất cả feedback
+			hiddenFeedbacks.forEach(feedback => feedback.classList.remove("hidden"));
+			this.textContent = "Thu gọn";
+		}
+	});
+
 	const doctorid = document.getElementById("doctor_id").value;
 	function sendReview() {
 
@@ -643,7 +668,23 @@
 			url: '/Patient/SendMessage',  // URL of the action method in the server
 			type: 'POST',
 			data: formData,
-			success: function ({ success, name, description, star, ngay, image }) {
+			success: function ({ success, name, description, star, ngay, image, error }) {
+				console.log("success ", success);
+				if(!success && error == "unauthenticated"){
+					
+					document.getElementById("context-notify").innerHTML = "You have to login to feedback";
+					document.getElementById("fb-success").classList.add("hidden");
+					document.getElementById("fb-fail").classList.remove("hidden");
+					document.getElementById("error-modal-button").click();
+					return;
+				}
+				if(!success){
+					document.getElementById("context-notify").innerHTML = "Feedback fail";
+					document.getElementById("fb-success").classList.add("hidden");
+					document.getElementById("fb-fail").classList.remove("hidden");
+					document.getElementById("error-modal-button").click();
+					return;
+				}
 				document.getElementById("context-notify").innerHTML = "Send review successfully";
 				document.getElementById("fb-success").classList.remove("hidden");
 				document.getElementById("fb-fail").classList.add("hidden");
