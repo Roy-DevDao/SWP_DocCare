@@ -1,0 +1,389 @@
+﻿@model IEnumerable<test2.Data.Specialty>
+
+    <style>
+    .service-img {
+        width: 100%;
+        transition: 0.3s ease;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+</style>
+    @{
+        Layout = "Layout_new";
+        ViewData["Title"] = "Danh Sách Dịch Vụ";
+
+        var total = ViewBag.TotalServices;
+    }
+    <div class="breadcrumb-bar">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 col-12">
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh Sách Dịch Vụ</li>
+                        </ol>
+                    </nav>
+                    <h2 class="breadcrumb-title">@total dịch vụ được tìm thấy: </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px;margin-left: 50px;">
+        <div class="col-md-4">
+            <div class="search-bar p-0 d-lg-block">
+                <form action="@Url.Action("ServiceList")" method="GET" id="searchform" class="searchform">
+                    <div class="input-group">
+                        <input type="text" class="form-control border rounded-pill" name="search" id="s" placeholder="Tìm kiếm tên dịch vụ..." value="@Context.Request.Query["search"]">
+                        <input type="hidden" name="sort" value="@Context.Request.Query["sort"]" /> <!-- Giữ giá trị sort -->
+                        <button class="btn btn-primary" type="submit" id="searchsubmit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <form action="@Url.Action("ServiceList")" method="GET">
+                <!-- Chuyển sang phương thức GET -->
+                <div class="row justify-content-end">
+                    <div class="col-md-5 row align-items-center">
+                        <div class="col-md-8 sort-dv">
+                            <select name="sort" class="form-select" onchange="this.form.submit()">
+                                <!-- Tự động gửi form khi chọn -->
+                                <option value="">Sắp xếp theo</option>
+                                <option value="1">A - Z</option>
+                                <option value="2">Z - A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit" class="btn btn-primary">Lọc</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="container">
+        <div class="row g-3">
+                @foreach(var item in Model)
+                {
+                    <div class="card col-md-4 mt-4 pt-2">
+                        <div class="card">
+                            <div class="image-box">
+                                <img src="@item.SpecialtyImg" alt="Image" class="service-img" />
+                                <div class="content-overlay">
+                                <p class="bold-text">Khoa: @item.SpecialtyId</p>
+                                <p>@item.ShortDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="part2">
+                            <div class="logo-container">
+                                <img src="/assets/images/icon-logo.png" width="10%" height="10%" />
+                            <span class="logo-text bold-text" style="font-bo">@item.SpecialtyName</span>
+                            </div>
+                            <a asp-area="" asp-controller="Home" asp-action="ServiceDetail" asp-route-id="@item.SpecialtyId" class="details-button">Thông tin</a>
+                        </div>
+                    </div>
+
+                }
+             </div>
+         </div>
+        <div class=" row text-center">
+            <div class="col-12 mt-4">
+                <div class="d-md-flex align-items-center text-center justify-content-between">
+                <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                    <!-- Nút trang trước -->
+                    @if (ViewBag.PageNumber > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="ServiceList"
+                               asp-route-pageNumber="@(ViewBag.PageNumber - 1)"
+                               asp-route-search="@ViewBag.Search"
+                               asp-route-sort="@ViewBag.Sort"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    }
+
+                    <!-- Hiển thị các trang đầu tiên -->
+                    @for (int i = 1; i <= Math.Min(2, ViewBag.TotalPages); i++)
+                    {
+                        <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                            <a class="page-link @(ViewBag.PageNumber == i ? "current-page" : "")"
+                               asp-action="ServiceList"
+                               asp-route-pageNumber="@i"
+                               asp-route-search="@ViewBag.Search"
+                               asp-route-sort="@ViewBag.Sort">
+                                @i
+                            </a>
+                        </li>
+                    }
+
+                    <!-- Hiển thị ... nếu cách xa các trang đầu tiên -->
+                    @if (ViewBag.PageNumber > 4)
+                    {
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    }
+
+                    <!-- Hiển thị trang hiện tại và lân cận -->
+                    @for (int i = Math.Max(4, ViewBag.PageNumber - 1); i <= Math.Min(ViewBag.TotalPages - 3, ViewBag.PageNumber + 1); i++)
+                    {
+                        <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                            <a class="page-link @(ViewBag.PageNumber == i ? "current-page" : "")"
+                               asp-action="ServiceList"
+                               asp-route-pageNumber="@i"
+                               asp-route-search="@ViewBag.Search"
+                               asp-route-sort="@ViewBag.Sort">
+                                @i
+                            </a>
+                        </li>
+                    }
+
+                    <!-- Hiển thị ... nếu cách xa các trang cuối -->
+                    @if (ViewBag.PageNumber < ViewBag.TotalPages - 3)
+                    {
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    }
+
+                    <!-- Hiển thị các trang cuối -->
+                    @for (int i = Math.Max(ViewBag.TotalPages - 2, 4); i <= ViewBag.TotalPages; i++)
+                    {
+                        <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                            <a class="page-link @(ViewBag.PageNumber == i ? "current-page" : "")"
+                               asp-action="ServiceList"
+                               asp-route-pageNumber="@i"
+                               asp-route-search="@ViewBag.Search"
+                               asp-route-sort="@ViewBag.Sort">
+                                @i
+                            </a>
+                        </li>
+                    }
+
+                    <!-- Nút trang tiếp theo -->
+                    @if (ViewBag.PageNumber < ViewBag.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="ServiceList"
+                               asp-route-pageNumber="@(ViewBag.PageNumber + 1)"
+                               asp-route-search="@ViewBag.Search"
+                               asp-route-sort="@ViewBag.Sort"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+    
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+
+
+<style>
+    .pagination{
+        position: relative;
+        left: 2%;
+    }
+
+    .short-description {
+        height: 48px; /* Chiều cao cố định */
+        overflow: hidden; /* Ẩn phần nội dung thừa nếu mô tả dài hơn 48px */
+        text-overflow: ellipsis; /* Hiệu ứng dấu ba chấm nếu nội dung quá dài */
+        display: -webkit-box; /* Sử dụng flexbox cho mô tả */
+        -webkit-line-clamp: 2; /* Giới hạn số dòng hiển thị (tùy chỉnh theo nhu cầu) */
+        -webkit-box-orient: vertical; /* Thiết lập chiều dọc cho flexbox */
+    }
+
+    .services-desc {
+        height: 350px; /* Đặt chiều cao cố định cho tất cả các thẻ */
+        display: flex;
+        flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
+        justify-content: space-between; /* Đảm bảo khoảng cách giữa các phần tử */
+        border-radius: 10px; /* Bo góc cho thẻ */
+        overflow: hidden; /* Ẩn phần nội dung thừa */
+        transition: transform 0.2s; /* Hiệu ứng chuyển động khi hover */
+    }
+
+        .services-desc:hover {
+            transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+        }
+
+    .card {
+        display: flex; /* Sử dụng flexbox cho card */
+        flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
+        height: 100%; /* Chiều cao thẻ đầy đủ */
+    }
+
+    .card-body {
+        display: flex; /* Sử dụng flexbox cho .card-body */
+        flex-direction: column; /* Sắp xếp nội dung theo chiều dọc */
+        flex-grow: 1; /* Cho phép .card-body chiếm không gian còn lại */
+        justify-content: space-between; /* Đảm bảo khoảng cách giữa các phần tử */
+    }
+
+    .details-button {
+        background-color: #007bff; /* Thay đổi màu nền của nút */
+        color: white; /* Màu chữ */
+        padding: 10px 20px; /* Padding cho nút */
+        border: none; /* Bỏ viền */
+        border-radius: 5px; /* Bo góc */
+        text-align: center; /* Canh giữa chữ */
+        text-decoration: none; /* Bỏ gạch chân */
+        transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền khi hover */
+    }
+
+        .details-button:hover {
+            background-color: #ffd700; /* Màu nền khi hover */
+            color: #fff; /* Màu chữ khi hover */
+        }
+
+    .current-page {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+    .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+        margin-left: -95px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    
+    .text-light {
+        --bs-text-opacity: 1;
+        color: rgb(28 29 30) !important;
+    }
+
+    #searchsubmit{
+        position:relative;
+        left: 125%;
+        top: -43px;
+        border-radius:20px;
+    }
+
+    .form-select{
+        width: 120%;
+        
+    }
+
+    .sort-dv{
+        position: relative;
+        left: 32%;
+    }
+
+    .content h2, .content p{
+        opacity:0;
+        transition: 1s 0.2s ease;
+    }
+    .content h2{
+        margin-bottom: 12px;
+        scale: 0.7;
+        
+    }
+    .content p{
+        font-size: 14px; 
+        line-height: 1.5;
+        color: #d1d1d1;
+         transform: translateY(100%);
+
+    }
+    . card:hover .content h2{
+        scale:1;
+        opacity: 1;
+    }
+    .card:hover .content p{
+		transform: translateY(0);
+		opacity: 1;
+	}
+
+    /* Định dạng hình ảnh */
+    .image-box {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-img {
+        width: 100%;
+        transition: 0.3s ease; 
+    }
+
+    .content-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: 0.3s ease;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .content-overlay p {
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        transform: translateY(20%);
+        transition: 0.4s ease;
+        padding: 0px 60px;
+    }
+
+    .image-box:hover .service-img {
+        transform: scale(1.1); 
+    }
+
+    .image-box:hover .content-overlay {
+        opacity: 1; 
+    }
+
+    .image-box:hover .content-overlay p {
+        transform: translateY(0); 
+        opacity: 1;
+    }
+
+    .details-button {
+        background-color: #007bff; 
+        color: white; 
+        padding: 10px 20px; 
+        border: none;
+        border-radius: 10px; 
+        text-align: center; 
+        text-decoration: none; /* Bỏ gạch chân */
+        transition: background-color 0.3s; 
+        position: relative; 
+        left: 75%;
+        top: -30px;
+    }
+
+        .details-button:hover {
+            background-color: #ffd700; /* Màu nền khi hover */
+            color: #fff; /* Màu chữ khi hover */
+        }
+
+    .logo-container{
+        display: flex;
+        align-items: center;
+        justify-content:flex-start;
+
+        }
+
+
+
+        
+
+</style>

@@ -1,0 +1,90 @@
+﻿@model List<test2.Models.DoctorModel.BaseViewModel>
+@{
+    Layout = "~/Views/Shared/Layout_Doctor.cshtml";
+}
+
+<div class="container mx-auto mt-10 pt-10 pb-10 px-8 lg:px-16 bg-white rounded-xl shadow-2xl max-w-4xl">
+    <h3 class="text-4xl font-bold text-blue-600 mb-8" style="display:flex; flex-direction:row; align-items: center;">
+        Chi tiết cuộc hẹn
+        <img src="~/assets/images/medical.png" height="80" width="120" class="logo--mode" alt="" style="margin-left: 350px;">
+    </h3>
+    @foreach (var baseViewModel in Model)
+    {
+        var healthRecord = baseViewModel.healthRecord;
+
+        <!-- Phần thông tin bệnh nhân -->
+        <div class="bg-blue-50 p-8 rounded-xl shadow-sm flex flex-col space-y-6">
+            <!-- Hình ảnh và thông tin bệnh nhân -->
+            <div class="flex items-center space-x-6">
+                <img class="w-28 h-28 rounded-full border-4 border-blue-500 shadow-lg"
+                     src="https://img.lovepik.com/free-png/20210918/lovepik-patient-in-hospital-bed-png-image_400275909_wh1200.png"
+                     alt="Ảnh bệnh nhân" />
+                <div>
+                    <h3 class="text-2xl font-semibold text-blue-600 mb-2">Thông tin bệnh nhân</h3>
+                    <p class="text-lg text-gray-800 flex items-center">
+                        <i class="fas fa-user mr-2 text-blue-500"></i>
+                        <strong>Tên:</strong> <span class="ml-24">@healthRecord.PatientName</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Phần thông tin chẩn đoán và ghi chú -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-notes-medical mr-2"></i>
+                    Chẩn đoán
+                </h3>
+                <p class="text-lg text-gray-800">
+                    @healthRecord.Diagnosis
+                </p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    Mô tả
+                </h3>
+                <p class="text-lg text-gray-800">
+                    @healthRecord.Description
+                </p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                    <i class="fas fa-sticky-note mr-2"></i>
+                    Ghi chú
+                </h3>
+                <p class="text-lg text-gray-800">
+                    @(string.IsNullOrEmpty(healthRecord.Note) ? "Không có ghi chú bổ sung." : healthRecord.Note)
+                </p>
+            </div>
+
+            <!-- Phần ngày khám -->
+            <div class="flex justify-between bg-white rounded-lg shadow p-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-blue-600 mb-2 flex items-center">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Ngày khám
+                    </h3>
+                    <p class="text-lg text-gray-800">@healthRecord.DateExam.ToString("MM/dd/yyyy")</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút Quay lại -->
+        <div class="mt-10 flex justify-end space-x-4">
+            <a asp-controller="Doctor" asp-action="EditHealthRecord"
+               asp-route-appointmentId="@healthRecord.AppointmentId"
+               class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 font-semibold shadow-md transition duration-300 ease-in-out">
+                Chỉnh sửa Hồ sơ y tế
+            </a>
+            <a asp-controller="Doctor" asp-action="ViewAppointmentDetail"
+               asp-route-appointmentDetail="@healthRecord.AppointmentId"
+               class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 font-semibold shadow-md transition duration-300 ease-in-out">
+                Quay lại cuộc hẹn
+            </a>
+
+
+        </div>
+    }
+</div>

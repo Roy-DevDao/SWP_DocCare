@@ -1,0 +1,336 @@
+﻿@model IEnumerable<DoctorViewModel>
+@{
+    ViewBag.Title = "Danh Sách Bác Sĩ";
+
+    Layout = "~/Views/Shared/Layout_new.cshtml";
+
+    var total = ViewBag.TotalDoctors;
+
+    var query = ViewBag.Query; // Biến tìm kiếm
+    var specialtySelected = ViewBag.SpecialtySelected as List<string>; // Biến cho các chuyên khoa được chọn
+}
+
+@* <div class="breadcrumb-bar"  >
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-8 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Danh Sách Bác Sĩ</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title"> @total kết quả tìm thấy: </h2>
+            </div>
+        </div>
+    </div>
+</div>
+ *@
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-8 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Trang Chủ</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Danh Sách Bác Sĩ</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">
+                    <span class="total-results">@total</span> kết quả tìm thấy
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content" style="margin-left: auto; margin-top: auto;" >
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar" style="width: 20%;">
+                <div class="card search-filter">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Bộ Lọc Tìm Kiếm</h4>
+                    </div>
+                    <div class="card-body">
+                        
+                        <form action="/Home/DoctorList" method="post">
+                            <div class="filter-widget">
+                                <input type="text" class="form-control" placeholder="Nhập từ khóa" name="query" value="@ViewBag.Query">
+                            </div>
+                            <h4>Giới Tính</h4>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="radio" name="gender" value="Male" @(ViewBag.Gender == "Male" ? "checked" : "")>
+                                    <span class="checkmark"></span> Nam
+                                </label>
+                            </div>
+                            <div>
+                                <label class="custom_check">
+                                    <input type="radio" name="gender" value="Female" @(ViewBag.Gender == "Female" ? "checked" : "")>
+                                    <span class="checkmark"></span> Nữ
+                                </label>
+                            </div>
+                            <div class="filter-widget" style="height: 200px; overflow-y: scroll;">
+                                <h4>Chọn Chuyên Khoa</h4>
+                                @foreach (var specialty in ViewBag.Specialties)
+                                {
+                                    <div>
+                                        <label class="custom_check">
+                                            <input type="checkbox" name="facultiesSelected" value="@specialty.SpecialtyId" @(ViewBag.SpecialtySelected.Contains(specialty.SpecialtyId.ToString()) ? "checked" : "")>
+                                            <span class="checkmark"></span> @specialty.SpecialtyName
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="btn-search">
+                                <button type="submit" class="btn btn-block">Tìm Kiếm</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-8 col-xl-9" >
+                @foreach (var item in Model)
+
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="doctor-widget">
+                                <div class="doc-info-left">
+                                    <div class="doctor-img">
+                                        <a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@item.DoctorId">
+                                            <img src="@item.DoctorImg" class="img-fluid" alt="Hình Ảnh Bác Sĩ">
+                                        </a>
+                                    </div>
+                                    <div class="doc-info-cont">
+                                        <h4 class="doc-name"><a asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@item.DoctorId">@item.Name</a></h4>
+                                        <p class="doc-speciality"> @item.Position</p>
+                                        <h5 class="doc-department"> @item.Specialty</h5>
+                                        <div class="rating">
+                                            @for (int i = 0; i < 5; i++)
+
+                                            {
+                                                <i class="fas fa-star @(i < Math.Ceiling(item.Rating) ? "filled" : "")"></i>
+                                            }
+                                            <span class="d-inline-block average-rating">@item.NumberOfFeedbacks</span>
+                                        </div>
+                                        <div class="clinic-details">
+                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Đà Nẵng</p>
+                                        </div>
+                                        <div class="clinic-services">
+                                            <span>Điều Trị Răng</span>
+                                            <span>Trắng Răng</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doc-info-right">
+                                    <div class="clini-infos">
+                                        <ul>
+                                            <li><i class="far fa-thumbs-up"></i> @(item.Rating * 20)%</li>
+                                            <li><i class="far fa-comment"></i> @item.NumberOfFeedbacks Nhận Xét</li>
+                                            <li><i class="fas fa-map-marker-alt"></i> Đà Nẵng</li>
+                                            <li>
+                                                <i class="fas fa-@(item.Gender == "Male" ? "mars" : "venus")"></i> @(item.Gender == "Male" ? "Nam" : "Nữ")
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="clinic-booking">
+                                        <a class="view-pro-btn" asp-area="" asp-controller="Home" asp-action="DoctorDetail" asp-route-id="@item.DoctorId">Xem Hồ Sơ</a>
+                                        <a class="apt-btn" href="https://localhost:7248/Patient/BookingAppointment?doctorid=@item.DoctorId">Đặt Lịch Hẹn</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="row text-center" style="padding-bottom: 20px">
+                    <div class="col-12 mt-4">
+                        <div class="d-md-flex align-items-center text-center justify-content-between">
+                           
+                            <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                                <!-- Nút lùi về trước -->
+                                @if (ViewBag.PageNumber > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-action="DoctorList"
+                                           asp-route-query="@ViewBag.Query"
+                                           asp-route-gender="@ViewBag.Gender"
+                                           asp-route-facultiesSelected="@string.Join(",", ViewBag.SpecialtySelected)"
+                                           asp-route-pageNumber="@(ViewBag.PageNumber - 1)"
+                                           aria-label="Trước">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                }
+
+                                <!-- Hiển thị 5 trang đầu tiên -->
+                                @for (int i = 1; i <= 5 && i <= ViewBag.TotalPages; i++)
+                                {
+                                    <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                                        <a class="page-link" asp-action="DoctorList"
+                                           asp-route-query="@ViewBag.Query"
+                                           asp-route-gender="@ViewBag.Gender"
+                                           asp-route-facultiesSelected="@string.Join(",", ViewBag.SpecialtySelected)"
+                                           asp-route-pageNumber="@i">
+                                            @i
+                                        </a>
+                                    </li>
+                                }
+
+                                <!-- Dấu ba chấm nếu có các trang ở giữa -->
+                                @if (ViewBag.PageNumber > 6 && ViewBag.TotalPages > 10)
+                                {
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                }
+
+                                <!-- Hiển thị trang hiện tại và các trang kế cận (nếu cần) -->
+                                @for (int i = ViewBag.PageNumber - 1; i <= ViewBag.PageNumber + 1; i++)
+                                {
+                                    if (i > 5 && i < ViewBag.TotalPages - 2)
+                                    {
+                                        <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                                            <a class="page-link" asp-action="DoctorList"
+                                               asp-route-query="@ViewBag.Query"
+                                               asp-route-gender="@ViewBag.Gender"
+                                               asp-route-facultiesSelected="@string.Join(",", ViewBag.SpecialtySelected)"
+                                               asp-route-pageNumber="@i">
+                                                @i
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+                                <!-- Dấu ba chấm nếu có các trang ở cuối -->
+                                @if (ViewBag.PageNumber < ViewBag.TotalPages - 5 && ViewBag.TotalPages > 10)
+                                {
+                                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                                }
+
+                                <!-- Hiển thị 3 trang cuối -->
+                                @for (int i = ViewBag.TotalPages - 2; i <= ViewBag.TotalPages; i++)
+                                {
+                                    if (i > 5)
+                                    {
+                                        <li class="page-item @(ViewBag.PageNumber == i ? "active" : "")">
+                                            <a class="page-link" asp-action="DoctorList"
+                                               asp-route-query="@ViewBag.Query"
+                                               asp-route-gender="@ViewBag.Gender"
+                                               asp-route-facultiesSelected="@string.Join(",", ViewBag.SpecialtySelected)"
+                                               asp-route-pageNumber="@i">
+                                                @i
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+                                <!-- Nút tiến tới sau -->
+                                @if (ViewBag.PageNumber < ViewBag.TotalPages)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" asp-action="DoctorList"
+                                           asp-route-query="@ViewBag.Query"
+                                           asp-route-gender="@ViewBag.Gender"
+                                           asp-route-facultiesSelected="@string.Join(",", ViewBag.SpecialtySelected)"
+                                           asp-route-pageNumber="@(ViewBag.PageNumber + 1)"
+                                           aria-label="Tiếp Theo">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .current-page {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .widget-title {
+        font-weight: bold;
+        color: #007bff;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+
+    .filter-label {
+        font-weight: bold;
+        color: #007bff;
+        font-size: 1.1em;
+        margin-bottom: 5px;
+        display: inline-block;
+        background-color: #f7f7f7;
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+
+    /* bread crumb */
+    /* Styling cho thanh breadcrumb */
+    .breadcrumb-bar {
+        background-color: #002D5F;
+        padding: 15px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+        padding: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+    .breadcrumb-item a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .breadcrumb-item.active {
+        color: #4a5568;
+        font-weight: 600;
+    }
+
+    .breadcrumb-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2d3748;
+        margin: 0;
+    }
+
+        .breadcrumb-title .total-results {
+            color: #3182ce;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+    .breadcrumb-item a:hover {
+        text-decoration: underline;
+    }
+
+
+    
+</style>
+<script>
+    $(document).ready(function () {
+        $('.theiaStickySidebar').theiaStickySidebar({
+            additionalMarginTop: 20  // Khoảng cách từ trên cùng khi sidebar cố định
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/theia-sticky-sidebar@1.7.0/dist/theia-sticky-sidebar.min.js"></script>

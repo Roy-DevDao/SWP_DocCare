@@ -1,0 +1,640 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
+using System.Security.Claims;
+using test2.DAO;
+using test2.Data;
+using test2.Models.DoctorModel;
+using test2.Services;
+
+namespace test2.Controllers
+{
+    //[Authorize(Roles = "2")]
+    public class DoctorController : Controller
+    {
+        DocCareContext _context;
+        private readonly ILogger<DoctorController> _logger;
+        private readonly AppointmentDAO _appointmentDAO;
+        private readonly PatientDao _patientDao;
+        private readonly FeedbackDAO _feedbackDao;
+        private readonly UserDAO _userDAO;
+        private readonly CloudinaryService _cloudinaryService;
+
+		public DoctorController(ILogger<DoctorController> logger, AppointmentDAO appointmentDAO, PatientDao patientDao, FeedbackDAO feedbackDao, DocCareContext ct, UserDAO ud, CloudinaryService cloudinaryService)
+		{
+			_logger = logger;
+			_appointmentDAO = appointmentDAO;
+			_patientDao = patientDao;
+			_feedbackDao = feedbackDao;
+			_context = ct;
+			_userDAO = ud;
+			_cloudinaryService = cloudinaryService;
+		}
+
+		public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.CurrentUserId = User.FindFirst("Id")?.Value;
+            }
+            base.OnActionExecuting(context);
+        }
+        public IActionResult Feedback(string id, string? sortOrder = "asc")
+        {
+            // Lấy danh sách phản hồi của bác sĩ dựa trên Did
+            var feedbacks = _feedbackDao.GetFeedbacksByDoctorId(id);
+
+            // Chuyển đổi phản hồi thành danh sách BaseViewModel
+            var feedbackViewModels = feedbacks.Select(f => new BaseViewModel
+            {
+                DId = f.DidNavigation.Did,
+                DoctorImg = f.DidNavigation?.DoctorImg,
+                feedbackView = new FeedbackViewModel
+                {
+                    FeedbackId = f.FeedbackId,
+                    PatientName = f.PidNavigation?.Name,
+                    DateCmt = f.DateCmt,
+                    Star = f.Star,
+                    Description = f.Description
+                }
+            }).ToList();
+
+            // Sắp xếp theo thứ tự tăng hoặc giảm sao
+            feedbackViewModels = sortOrder == "desc"
+                ? feedbackViewModels.OrderByDescending(f => f.feedbackView.Star).ToList()
+                : feedbackViewModels.OrderBy(f => f.feedbackView.Star).ToList();
+
+            // Truyền danh sách BaseViewModel vào View
+            return View(feedbackViewModels);
+        }
+
+
+
+        public IActionResult Profile(string id)
+        {
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+
+            // Log giá trị oid
+            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id);
+
+            // Kiểm tra xem ID của người dùng có khớp với ID trong URL không
+            if (userId != id)
+            {
+                _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
+                return Forbid(); // Ngăn chặn truy cập nếu ID không khớp
+            }
+
+            // Lấy thông tin bác sĩ từ cơ sở dữ liệu bằng id
+            var doctor = (from d in _context.Doctors
+                          join a in _context.Accounts on d.Did equals a.Id
+                          join s in _context.Specialties on d.SpecialtyId equals s.SpecialtyId // Join với bảng chuyên khoa
+                          where d.Did == id
+                          select new BaseViewModel
+                          {
+                              DId = d.Did,
+                              Name = d.Name,
+                              DoctorImg = d.DoctorImg,
+                              doctorProfile = new DoctorProfileViewModel
+                              {
+                                  Username = a.Username,
+                                  Email = a.Email,
+                                  Role = a.Role,
+                                  Status = a.Status,
+                                  Phone = d.Phone,
+                                  Gender = d.Gender,
+                                  Dob = d.Dob,
+                                  Position = d.Position,
+                                  Specialty = s.SpecialtyName, // Lấy tên chuyên khoa từ bảng chuyên khoa
+                                  Description = d.Description,
+                                  Price = d.Price,
+                              }
+                          }).ToList();
+
+            // Kiểm tra xem bác sĩ có tồn tại không
+            if (doctor == null)
+            {
+                _logger.LogWarning("No doctor found with ID: {Oid}", id); // Log cảnh báo nếu không tìm thấy
+                return RedirectToAction("Login", "Home"); // Redirect về trang Login
+            }
+
+            // Trả về view cùng với model bác sĩ
+            return View(doctor);
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> UpdateProfile(List<BaseViewModel> model, IFormFile DoctorImageUpload)
+		{
+			if (model == null || model.Count == 0)
+			{
+				_logger.LogWarning("Model is null or empty.");
+				return BadRequest("Model cannot be null or empty.");
+			}
+
+			var baseViewModel = model.First();
+			var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+			_logger.LogInformation("Checking authorization with userId: {UserId} and model.DId: {TargetId}", userId, baseViewModel.DId);
+
+			if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(baseViewModel.DId) || userId != baseViewModel.DId)
+			{
+				_logger.LogWarning("Unauthorized access attempt by user {UserId} to update profile of {TargetId}", userId, baseViewModel.DId);
+				return Forbid();
+			}
+
+			var doctorProfile = _context.Doctors.FirstOrDefault(d => d.Did == baseViewModel.DId);
+			if (doctorProfile == null)
+			{
+				_logger.LogWarning("Doctor not found with ID: {DoctorId}", baseViewModel.DId);
+				return NotFound();
+			}
+
+			doctorProfile.Name = baseViewModel.Name;
+			doctorProfile.Gender = baseViewModel.doctorProfile.Gender;
+			doctorProfile.Dob = baseViewModel.doctorProfile.Dob;
+			doctorProfile.Position = baseViewModel.doctorProfile.Position;
+			doctorProfile.Price = baseViewModel.doctorProfile.Price;
+			doctorProfile.Description = baseViewModel.doctorProfile.Description;
+
+			if (DoctorImageUpload != null && DoctorImageUpload.Length > 0)
+			{
+				var imageUrl = await _cloudinaryService.UploadImageAsync(DoctorImageUpload);
+				if (imageUrl != null)
+				{
+					doctorProfile.DoctorImg = imageUrl;
+				}
+				else
+				{
+					ModelState.AddModelError("", "Có lỗi xảy ra khi tải ảnh lên Cloudinary. Vui lòng thử lại.");
+					return View("Profile", model);
+				}
+			}
+
+			try
+			{
+				_context.SaveChanges();
+				_logger.LogInformation("Doctor profile updated successfully for ID: {DoctorId}", baseViewModel.DId);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error updating doctor profile for ID: {DoctorId}", baseViewModel.DId);
+				ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật hồ sơ. Vui lòng thử lại.");
+				return View("Profole", model);
+			}
+
+			TempData["SuccessMessage"] = "Cập nhật hồ sơ thành công.";
+			return RedirectToAction("Profile", new { id = baseViewModel.DId });
+		}
+
+        public IActionResult ViewHealthRecord(string appointmentId)
+        {
+            if (string.IsNullOrEmpty(appointmentId))
+            {
+                return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+            }
+
+            var healthRecord = _context.HealthRecords
+            .Include(hr => hr.PidNavigation)
+            .FirstOrDefault(hr => hr.Oid == appointmentId);
+
+            if (healthRecord == null)
+            {
+                return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
+            }
+
+            var healthRecordViewModel = new HealthRecordViewModel
+            {
+                RecordId = healthRecord.RecordId,
+                PatientName = healthRecord.PidNavigation?.Name,
+                AppointmentId = healthRecord.Oid,
+                Diagnosis = healthRecord.Diagnosis,
+                Description = healthRecord.Description,
+                Note = healthRecord.Note,
+                DateExam = healthRecord.DateExam ?? DateTime.Now // Giải quyết lỗi nullable
+            };
+
+            var baseViewModel = new BaseViewModel
+            {
+                healthRecord = healthRecordViewModel
+            };
+
+            return View("ViewHealthRecord", new List<BaseViewModel> { baseViewModel });
+        }
+
+        [HttpGet]
+        public IActionResult EditHealthRecord(string appointmentId)
+        {
+            if (string.IsNullOrEmpty(appointmentId))
+            {
+                return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+            }
+
+            var healthRecord = _context.HealthRecords
+                .Include(hr => hr.PidNavigation)
+                .FirstOrDefault(hr => hr.Oid == appointmentId);
+
+            if (healthRecord == null)
+            {
+                return NotFound("Không tìm thấy hồ sơ y tế cho cuộc hẹn này.");
+            }
+
+            var healthRecordViewModel = new HealthRecordViewModel
+            {
+                RecordId = healthRecord.RecordId,
+                PatientName = healthRecord.PidNavigation?.Name,
+                AppointmentId = healthRecord.Oid,
+                Diagnosis = healthRecord.Diagnosis,
+                Description = healthRecord.Description,
+                Note = healthRecord.Note,
+                DateExam = healthRecord.DateExam ?? DateTime.Now
+            };
+
+            var baseViewModel = new BaseViewModel
+            {
+                healthRecord = healthRecordViewModel
+            };
+
+            return View("EditHealthRecord", new List<BaseViewModel> { baseViewModel });
+        }
+
+        [HttpPost]
+        public IActionResult EditHealthRecord(string appointmentId, string diagnosis, string description, string note, DateTime dateExam)
+        {
+            if (string.IsNullOrEmpty(appointmentId) || !ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Thông tin không hợp lệ.");
+                return View("EditHealthRecord");
+            }
+
+            var healthRecord = _context.HealthRecords
+                .FirstOrDefault(hr => hr.Oid == appointmentId);
+
+            if (healthRecord == null)
+            {
+                ModelState.AddModelError("", "Không tìm thấy hồ sơ y tế.");
+                return View("EditHealthRecord");
+            }
+
+            // Cập nhật thông tin
+            healthRecord.Diagnosis = diagnosis;
+            healthRecord.Description = description;
+            healthRecord.Note = note;
+            healthRecord.DateExam = dateExam;
+
+            _context.SaveChanges();
+
+            _logger.LogInformation("Đã chỉnh sửa hồ sơ sức khỏe với ID: {AppointmentId}", appointmentId);
+
+            return RedirectToAction("ViewHealthRecord", new { appointmentId });
+        }
+
+
+
+        [HttpPost]
+		public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword, string confirmPassword)
+		{
+			// Lấy ID của người dùng hiện tại từ Claim
+			var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+			// Kiểm tra xem người dùng đã đăng nhập chưa
+			if (userId == null)
+			{
+				return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+			}
+
+			// Log thông tin
+			_logger.LogInformation("User {UserId} requested to change password", userId);
+
+			// Kiểm tra tính hợp lệ của dữ liệu nhập vào
+			if (string.IsNullOrEmpty(currentPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+			{
+				TempData["ErrorMessage"] = "Vui lòng nhập đầy đủ thông tin mật khẩu.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Kiểm tra mật khẩu mới và xác nhận mật khẩu có khớp không
+			if (newPassword != confirmPassword)
+			{
+				TempData["ErrorMessage"] = "Mật khẩu mới và xác nhận mật khẩu không khớp.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Lấy tài khoản của bác sĩ từ cơ sở dữ liệu
+			var doctorAccount = (from d in _context.Doctors
+								 join a in _context.Accounts on d.Did equals a.Id
+								 where d.Did == userId
+								 select a).FirstOrDefault();
+
+			// Kiểm tra xem tài khoản có tồn tại không
+			if (doctorAccount == null)
+			{
+				_logger.LogWarning("No account found for Doctor with ID: {DoctorId}", userId);
+				TempData["ErrorMessage"] = "Không tìm thấy tài khoản của bác sĩ.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Kiểm tra mật khẩu hiện tại có khớp không (giả sử mật khẩu được lưu ở dạng hash)
+			if (!BCrypt.Net.BCrypt.Verify(currentPassword, doctorAccount.Password))
+			{
+				TempData["ErrorMessage"] = "Mật khẩu hiện tại không chính xác.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			// Cập nhật mật khẩu mới (sau khi đã hash) và lưu vào cơ sở dữ liệu
+			doctorAccount.Password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+			try
+			{
+				await _context.SaveChangesAsync();
+				_logger.LogInformation("Password changed successfully for Doctor with ID: {DoctorId}", userId);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error changing password for Doctor with ID: {DoctorId}", userId);
+				TempData["ErrorMessage"] = "Có lỗi xảy ra khi thay đổi mật khẩu. Vui lòng thử lại.";
+				return RedirectToAction("Profile", new { id = userId });
+			}
+
+			TempData["SuccessMessage"] = "Mật khẩu đã được thay đổi thành công.";
+			return RedirectToAction("Profile", new { id = userId });
+		}
+
+
+		public IActionResult ViewAppointment(string id)
+        {
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+
+            // Log giá trị oid
+            _logger.LogInformation("OID received in DoctorProfile: {Oid}", id);
+
+            // Kiểm tra xem ID của người dùng có khớp với ID trong URL không
+            if (userId != id)
+            {
+                _logger.LogWarning("User attempted to access a profile that does not belong to them: {UserId} tried to access {TargetId}", userId, id);
+                return Forbid(); // Ngăn chặn truy cập nếu ID không khớp
+            }
+
+            // Lấy các cuộc hẹn cho bác sĩ có ID được truyền vào
+            var appointments = _appointmentDAO.GetDoctorAppointments(id)
+               .Where(a => a.appointmentlist.Status == "Complete" || a.appointmentlist.Status == "Confirm")
+               .ToList();
+
+            // Kiểm tra nếu danh sách appointments rỗng
+            if (appointments == null || !appointments.Any())
+            {
+                return NotFound("Không tìm thấy cuộc hẹn nào."); // Trả về 404 nếu không tìm thấy
+            }
+
+            foreach (var appointment in appointments)
+            {
+                _logger.LogInformation("Status of appointment {DoctorID} {AppointmentId}: {Status}", appointment.DId, appointment.appointmentlist.AppointmentId, appointment.appointmentlist.Status);
+            }
+
+            // Trả về View với danh sách các cuộc hẹn
+            return View("ViewAppointment", appointments); // Sử dụng View tương ứng với danh sách cuộc hẹn
+        }
+
+        public IActionResult ViewAppointmentDetail(string appointmentDetail)
+        {
+            if (string.IsNullOrEmpty(appointmentDetail))
+            {
+                return BadRequest("Appointment detail is missing.");
+            }
+
+            var appointmentDetailViewModel = _appointmentDAO.GetAppointmentDetailById(appointmentDetail);
+
+            if (appointmentDetailViewModel == null)
+            {
+                return NotFound("Appointment not found.");
+            }
+
+            var d = _context.Doctors.Find(User.Identity.Name);
+            // Tạo danh sách BaseViewModel và gán appointmentDetail vào
+            var baseViewModel = new BaseViewModel
+            {
+                DId = User.Identity.Name,
+                DoctorImg = d.DoctorImg,
+                appointmentDetail = appointmentDetailViewModel
+            };
+
+            // Truyền danh sách vào View
+            return View("ViewAppointmentDetail", new List<BaseViewModel> { baseViewModel });
+        }
+
+        [HttpGet]
+        public IActionResult AddHealthRecord(string appointmentId)
+        {
+            if (string.IsNullOrEmpty(appointmentId))
+            {
+                return BadRequest("Thiếu thông tin mã cuộc hẹn.");
+            }
+
+            var appointment = _context.Orders
+                .Include(o => o.PidNavigation)
+                .Include(o => o.Option)
+                    .ThenInclude(op => op.DidNavigation)
+                .FirstOrDefault(o => o.Oid == appointmentId);
+
+            _logger.LogInformation(appointment.PidNavigation.Name);
+
+            if (appointment == null)
+            {
+                return NotFound("Không tìm thấy thông tin cuộc hẹn.");
+            }
+
+            var baseViewModel = new BaseViewModel
+            {
+                DId = appointment.Option.Did,
+                Name = appointment.Option.DidNavigation.Name,
+                DoctorImg = appointment.Option.DidNavigation.DoctorImg,
+                appointmentlist = new AppointmentViewModel()
+                {
+                    AppointmentId = appointmentId,
+                },
+                healthRecord = new HealthRecordViewModel
+                {
+                    PatientName = appointment.PidNavigation.Name,
+                    AppointmentId = appointmentId,
+                    DateExam = DateTime.Now // Ngày khám mặc định là hôm nay
+                }
+            };
+            _logger.LogInformation("Thông tin Model trước khi trả về view AddHealthRecord: " +
+                          "DoctorId = {DId}, " +
+                          "PatientName = {PatientName}, " +
+                          "AppointmentId = {AppointmentId}, " +
+                          "DateExam = {DateExam}",
+                          baseViewModel.DId,
+                          baseViewModel.Name,
+                          baseViewModel.appointmentlist.AppointmentId,
+                          baseViewModel.healthRecord.DateExam);
+
+            return View("AddHealthRecord", new List<BaseViewModel> { baseViewModel });
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult AddHealthRecord(string appointmentId, string diagnosis, string description, string note, DateTime dateExam)
+        {
+            // Kiểm tra nếu `appointmentId` rỗng hoặc `ModelState` không hợp lệ
+            if (string.IsNullOrEmpty(appointmentId) || !ModelState.IsValid)
+            {
+                ModelState.AddModelError("", "Thông tin cuộc hẹn hoặc thông tin nhập không hợp lệ.");
+                return View("AddHealthRecord"); // Trả về lại view nếu có lỗi
+            }
+
+            // Lấy thông tin cuộc hẹn từ database
+            var appointment = _context.Orders
+                .Include(o => o.PidNavigation) // Thông tin bệnh nhân
+                .Include(o => o.Option) // Thông tin Option để truy cập bác sĩ
+                    .ThenInclude(op => op.DidNavigation)
+                .FirstOrDefault(o => o.Oid == appointmentId);
+
+            // Kiểm tra nếu không tìm thấy cuộc hẹn
+            if (appointment == null)
+            {
+                ModelState.AddModelError("", "Không tìm thấy thông tin cuộc hẹn.");
+                return View("AddHealthRecord"); // Trả về lại view nếu không tìm thấy cuộc hẹn
+            }
+
+            // Log thông tin của các thuộc tính trước khi kiểm tra null
+            _logger.LogInformation("Thông tin cuộc hẹn trước khi kiểm tra null:");
+            _logger.LogInformation("Appointment ID: {AppointmentId}", appointment?.Oid);
+            _logger.LogInformation("Patient ID (PId): {PatientId}", appointment?.PidNavigation?.Pid);
+            _logger.LogInformation("Patient Name: {PatientName}", appointment?.PidNavigation?.Name);
+            _logger.LogInformation("Option ID: {OptionId}", appointment?.Oid);
+            _logger.LogInformation("Doctor ID (DId): {DoctorId}", appointment?.Option.Did);
+            _logger.LogInformation("Doctor Name: {DoctorName}", appointment?.Option?.DidNavigation?.Name);
+
+            // Tạo bản ghi HealthRecord mới
+            Random ran = new Random();
+            int buf = ran.Next(10, 99);
+            // Tạo bản ghi HealthRecord mới
+            var healthRecord = new HealthRecord
+            {
+                RecordId = "record" + buf, // Tạo ID duy nhất cho HealthRecord
+                Pid = appointment.Pid, // ID bệnh nhân từ thông tin cuộc hẹn
+                Did = appointment.Option.Did, // ID bác sĩ từ Option
+                Oid = appointment.Oid,
+                Diagnosis = diagnosis,
+                Description = description,
+                Note = note,
+                DateExam = DateTime.Now,
+            };
+
+            // Thêm bản ghi vào database
+            _context.HealthRecords.Add(healthRecord);
+            _context.SaveChanges();
+
+            appointment.Option.Status = "Complete";
+            // Lưu tất cả thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+
+            // Ghi log thông tin bản ghi HealthRecord vừa được tạo
+            _logger.LogInformation("Đã thêm hồ sơ sức khỏe mới cho cuộc hẹn với ID: {AppointmentId}, " +
+                                   "Bệnh Nhân: {PatientName}, Bác Sĩ: {DoctorId}, Ngày Khám: {DateExam}",
+                                   appointmentId,
+                                   appointment.PidNavigation.Name,
+                                   appointment.Option.Did,
+                                   dateExam);
+
+            // Chuyển hướng về trang chi tiết cuộc hẹn sau khi thêm thành công
+            return RedirectToAction("ViewAppointment", new { id = appointment.Option.Did });
+        }
+
+
+        public IActionResult ViewPatient(string id)
+        {
+            var userId = User.FindFirst(ClaimTypes.Name)?.Value;
+
+            // Kiểm tra xem người dùng đã đăng nhập chưa
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Home"); // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+            // Lấy danh sách bệnh nhân dựa trên bác sĩ có Did = id
+            var patients = _patientDao.GetPatientsByDoctorId(id);
+            var d = _context.Doctors.Find(User.Identity.Name);
+            // Gói dữ liệu bệnh nhân vào BaseViewModel
+            var baseViewModelList = patients.Select(p => new BaseViewModel
+            {
+                DId = User.Identity.Name,
+                DoctorImg = d.DoctorImg,
+                patientView = p  // Gán từng PatientViewModel vào BaseViewModel
+            }).ToList();
+
+            // Gán ID của bác sĩ vào ViewData để hiển thị trên giao diện
+            ViewData["DoctorId"] = id;
+
+            // Truyền danh sách BaseViewModel vào View
+            return View(baseViewModelList);
+        }
+
+
+
+        public IActionResult ViewPatientDetail(string pid, string tab = "profile")
+        {
+            // Tìm bệnh nhân theo pid, bao gồm các đơn hàng và tùy chọn liên quan
+            var patient = _context.Patients
+                .Include(p => p.Orders)
+                .ThenInclude(o => o.Option)
+                .FirstOrDefault(p => p.Pid == pid);
+
+            // Nếu bệnh nhân không tồn tại, trả về lỗi 404
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            var d = _context.Doctors.Find(User.Identity.Name);
+            // Tạo model chi tiết bệnh nhân
+            var patientDetail = new PatientDetailViewModel
+            {
+                Pid = patient.Pid,
+                Name = patient.Name,
+                Phone = patient.Phone,
+                Email = patient.PidNavigation?.Email,
+                Dob = patient.Dob,
+                Appointments = patient.Orders.Select(o => new PatientDetailViewModel.AppointmentViewModel
+                {
+                    Date = o.DateOrder?.ToString("yyyy-MM-dd"),
+                    Time = o.DateOrder?.ToString("HH:mm"),
+                    Status = o.Status ?? "N/A"
+                }).ToList()
+            };
+
+            ViewBag.ActiveTab = tab; // Chuyển tab (profile/appointment)
+
+            // Gói dữ liệu chi tiết bệnh nhân vào BaseViewModel
+            var baseViewModel = new BaseViewModel
+            {
+                DId = User.Identity.Name,
+                DoctorImg = d.DoctorImg,
+                patientDetail = patientDetail
+            };
+
+            // Truyền danh sách BaseViewModel vào View
+            return View("ViewPatientDetail", new List<BaseViewModel> { baseViewModel });
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}

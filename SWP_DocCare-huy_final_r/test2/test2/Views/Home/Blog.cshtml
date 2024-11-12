@@ -1,0 +1,133 @@
+﻿@using test2.Data
+
+@{
+    ViewBag.Title = "Trang Tin Tức";
+    Layout = "~/Views/Shared/Layout_new.cshtml";
+
+    var query = ViewBag.QueryData ?? "";
+    var post = (List<Blog>)ViewBag.Post ?? new List<Blog>();
+    var post2 = (List<Blog>)ViewBag.Post2 ?? new List<Blog>();
+
+}
+
+<style>
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    padding: 20px;
+}
+</style>
+<div class="breadcrumb-bar">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-12">
+                <nav aria-label="breadcrumb" class="page-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Bài viết</li>
+                    </ol>
+                </nav>
+                <h2 class="breadcrumb-title">Bài viết</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+
+                @foreach (var art in post2)
+                {
+                    <div class="blog">
+                        <div class="blog-image">
+                            <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId"><img class="img-fluid" src="@art.Image" alt="@art.Title"></a>
+                        </div>
+                        <h3 class="blog-title"><a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId">@art.Title</a></h3>
+                        <div class="blog-info clearfix">
+                            <div class="post-left">
+                                <ul>
+                                    <li>
+                                        <div class="post-author">
+                                            <a href="#">
+                                                <img src="https://tse4.mm.bing.net/th?id=OIP.fMZwCAaBPntZ1NmSRhU6MQHaHa&pid=Api&P=0&h=180" alt="Post Author"> <span>@art.CreateBy</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li><i class="far fa-clock"></i>@art.CreateDate.ToString()</li>
+                                    <li><i class="fa fa-tags"></i>Health Tips</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <p>@art.ShortDescription</p>
+                            <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId" class="read-more">Xem thêm</a>
+                        </div>
+                    </div>
+                }
+                <div class="pagination">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="?query=@ViewBag.QueryData&page=@i">@i</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-4 col-md-12 sidebar-right theiaStickySidebar">
+
+                <div class="card search-widget">
+                    <div class="card-body">
+                        <form class="search-form" action="/Home/Blog">
+                            <div class="input-group">
+                                <input type="text" placeholder="Search..." name="query" value="@ViewBag.QueryData" class="form-control">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card post-widget">
+                    <div class="card-header">
+                        <h4 class="card-title">Latest Posts</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="latest-posts">
+
+                            @foreach (var art in post)
+                            {
+                                <li>
+                                    <div class="post-thumb">
+                                        <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId">
+                                            <img class="img-fluid" src="@art.Image" alt="@art.Title">
+                                        </a>
+                                    </div>
+                                    <div class="post-info">
+                                        <h4>
+                                            <a asp-controller="Home" asp-action="BlogDetail" asp-route-itemid="@art.BlogId">@art.Title</a>
+                                        </h4>
+                                        <p>@art.CreateDate.ToString()</p>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+               
+
+
+            </div>
+        </div>
+    </div>
+</div>

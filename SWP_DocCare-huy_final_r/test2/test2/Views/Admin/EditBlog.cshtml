@@ -1,0 +1,183 @@
+﻿@{
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Main layout
+}
+
+@section Styles {
+    <style>
+        .layout-default_body_main {
+            width: 100%;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        /* Container for editing blog */
+        .edit-blog-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        /* Header */
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Form group */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Input fields */
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f8f8f8;
+            transition: border-color 0.3s ease;
+        }
+
+            input:focus, textarea:focus {
+                border-color: #0D6EFD;
+                outline: none;
+                background-color: #fff;
+            }
+
+        /* Textarea for content */
+        textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        /* Save button */
+        .submit-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancel-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 10px 10px;
+            border-radius: 10px;
+        }
+
+        .save-btn {
+            background-color: #0D6EFD;
+            color: #fff;
+            padding: 10px 10px;
+            border-radius: 10px;
+        }
+
+            .save-btn:hover {
+                background-color: #357ABD;
+            }
+
+        .cancel-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+}
+
+<main class="layout-default_body_main">
+    <h1>Chỉnh sửa thông tin blog</h1>
+
+    <form asp-action="EditBlog" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="BlogId" name="BlogId" value="@Model.BlogId" />
+
+        <div class="form-group">
+            <label for="Title">Tiêu đề:</label>
+            <input type="text" id="Title" name="Title" value="@Model.Title" placeholder="Nhập tiêu đề" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="ShortDescription">Mô tả ngắn:</label>
+            <textarea id="ShortDescription" name="ShortDescription" placeholder="Nhập mô tả ngắn" class="form-control">@Model.ShortDescription</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="Content">Nội dung:</label>
+            <textarea id="Content" name="Content" placeholder="Nhập nội dung" class="form-control">@Model.Content</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="Image">URL hình ảnh hiện tại:</label>
+            <input type="text" id="Image" name="Image" value="@Model.Image" placeholder="URL hình ảnh hiện tại" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label for="CreateDate">Ngày tạo:</label>
+            <input type="datetime-local" id="CreateDate" name="CreateDate" value="@Model.CreateDate?.ToString("yyyy-MM-ddTHH:mm")" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="ImageUpload">Tải ảnh mới lên:</label>
+            <input type="file" id="ImageUpload" name="ImageUpload" class="form-control" />
+        </div>
+
+        <div class="submit-container">
+            <button type="button" class="cancel-btn" onclick="window.location.href='@Url.Action("ManageBlog", "Admin")'">Hủy</button>
+            <button type="submit" class="save-btn">Lưu</button>
+        </div>
+
+    </form>
+</main>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const inputs = form.querySelectorAll("input[type='text'], textarea");
+
+            inputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    if (this.value.trim() === "") {
+                        this.classList.add("error");
+                    } else {
+                        this.classList.remove("error");
+                    }
+                });
+            });
+
+            form.addEventListener("submit", function (event) {
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (input.value.trim() === "") {
+                        input.classList.add("error");
+                        isValid = false;
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
+                    alert("Please fill out all required fields.");
+                }
+            });
+        });
+    </script>
+}

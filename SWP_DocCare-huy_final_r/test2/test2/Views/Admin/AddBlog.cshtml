@@ -1,0 +1,218 @@
+﻿@{
+    Layout = "~/Views/Shared/Layout_Admin.cshtml";  // Main layout
+}
+@model test2.Models.AdminModel.AddBlogViewModel
+
+@section Scripts {
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@section Styles {
+    <style>
+        .layout-default_body_main {
+            width: 100%;
+        }
+
+        form {
+            margin: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .first-text {
+            font-size: xx-large;
+            color: #4A5568;
+            margin-bottom: 20px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .grid-item-full {
+            grid-column: span 2;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea,
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .submit-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cancel-btn {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 12px 12px;
+            border-radius: 10px;
+        }
+
+        .save-btn {
+            background-color: #0D6EFD;
+            color: #fff;
+            padding: 12px 12px;
+            border-radius: 10px;
+        }
+
+            .save-btn:hover {
+                background-color: #357ABD;
+            }
+
+        .cancel-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+}
+
+<main class="layout-default_body_main">
+    <form method="post" asp-action="AddBlog" enctype="multipart/form-data" novalidate>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="section">
+            <h1 class="first-text">Thông Tin Blog</h1>
+
+            <div class="grid-container">
+                <div class="grid-item">
+                    <label asp-for="BlogId">Mã Blog</label>
+                    <input asp-for="BlogId" class="form-control" placeholder="Mã Blog">
+                    @Html.ValidationMessageFor(model => model.BlogId, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="grid-item">
+                    <label asp-for="Title">Tiêu Đề</label>
+                    <input asp-for="Title" class="form-control" placeholder="Tiêu Đề">
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="grid-item">
+                    <label asp-for="ShortDescription">Mô Tả Ngắn</label>
+                    <textarea asp-for="ShortDescription" class="form-control" placeholder="Mô Tả Ngắn"></textarea>
+                    @Html.ValidationMessageFor(model => model.ShortDescription, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="grid-item-full">
+                    <label asp-for="Content">Nội Dung</label>
+                    <textarea asp-for="Content" class="form-control" rows="5" placeholder="Nội Dung"></textarea>
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                </div>
+@* 
+                <div class="grid-item">
+                    <label asp-for="CreateDate">Ngày Tạo</label>
+                    <input asp-for="CreateDate" type="date" class="form-control">
+                    @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "text-danger" })
+                </div> *@
+
+                <div class="grid-item">
+                    <label asp-for="CreateBy">Người Tạo</label>
+                    <input asp-for="CreateBy" class="form-control" placeholder="Người Tạo">
+                    @Html.ValidationMessageFor(model => model.CreateBy, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="grid-item-full">
+                    <label asp-for="ImageUpload">Ảnh Blog</label>
+                    <input asp-for="ImageUpload" type="file" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.ImageUpload, "", new { @class = "text-danger" })
+                    <p class="help-block">Upload ảnh cho blog.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-container">
+            <button type="button" class="cancel-btn" onclick="window.location.href='@Url.Action("ManageBlog", "Admin")'">Hủy</button>
+            <button type="submit" class="save-btn">Lưu</button>
+        </div>
+    </form>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const titleInput = document.getElementById('Title');
+        const blogIdInput = document.getElementById('BlogId');
+        const shortDescriptionInput = document.getElementById('ShortDescription');
+
+        // Function to show an error message
+        function showError(elementId, message) {
+            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        // Function to clear an error message
+        function clearError(elementId) {
+            const errorElement = document.querySelector(`#${elementId} + .text-danger`);
+            if (errorElement) {
+                errorElement.textContent = '';
+            }
+        }
+
+        // Add event listeners for input fields for real-time validation
+        blogIdInput.addEventListener('input', function () {
+            const value = blogIdInput.value;
+            if (!value) {
+                showError('BlogId', 'Mã Blog là bắt buộc.');
+            } else {
+                clearError('BlogId');
+            }
+        });
+
+        titleInput.addEventListener('input', function () {
+            const value = titleInput.value;
+            if (!value) {
+                showError('Title', 'Tiêu Đề là bắt buộc.');
+            } else if (value.length > 50) {
+                showError('Title', 'Tiêu Đề không được dài quá 50 ký tự.');
+            } else {
+                clearError('Title');
+            }
+        });
+
+        shortDescriptionInput.addEventListener('input', function () {
+            const value = shortDescriptionInput.value;
+            if (!value) {
+                showError('ShortDescription', 'Mô Tả Ngắn là bắt buộc.');
+            } else if (value.length > 100) {
+                showError('ShortDescription', 'Mô Tả Ngắn không được dài quá 100 ký tự.');
+            } else {
+                clearError('ShortDescription');
+            }
+        });
+    });
+</script>

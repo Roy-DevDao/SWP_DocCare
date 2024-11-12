@@ -1,0 +1,11 @@
+Luồng demo : 
+
+guest - xem thông tin bệnh viện - xem tin tức - tìm bác sĩ - tìm dịch vụ - gửi liên hệ -Staff giải quyết -- đăng kí
+patient - quên mk --- đổi profile --- tìm bác sĩ -- đặt lịch -- check validate lịch -- thanh toán thành công --- cancel
+	tìm bác sĩ  -- đặt lịch , huỷ thanh toán
+	tìm bác sĩ   -- dặt lịch  -- thanh toán thành công -- 
+Staff --- check xác nhận --- xem ở patient
+Doctor --- xem lịch ---- add record --- xem bệnh nhân
+Patient -- xem lại lịch cũ --- give feedback
+Doctor -- view feedback  -- Nếu có lịch bận thì sẽ báo staff --- staff set lịch --- thử vào 1 bệnh nhân để check
+Admin -- crud

@@ -1,0 +1,285 @@
+﻿﻿<style>
+     /* Footer Styling */
+     .footer {
+         background-color: #002d5f; /* Dark blue background for a professional look */
+         color: #ffffff; /* White text color for contrast */
+         padding: 30px 0;
+         font-family: Arial, sans-serif;
+     }
+
+
+     .footer-about-content p {
+         font-size: 14px;
+         line-height: 1.6;
+         color: #d3d3d3; /* Softer text color for readability */
+         margin-bottom: 15px;
+     }
+
+     .footer-title {
+         font-size: 18px;
+         font-weight: 600;
+         color: #ffffff;
+         margin-bottom: 15px;
+         text-transform: uppercase;
+     }
+
+     .footer-menu ul,
+     .footer-contact-info ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+     }
+
+         .footer-menu ul li,
+         .footer-contact-info ul li {
+             margin-bottom: 10px;
+         }
+
+             .footer-menu ul li a,
+             .footer-contact-info ul li a {
+                 color: #b3c7e6; /* Light blue links */
+                 text-decoration: none;
+                 font-size: 14px;
+                 transition: color 0.3s ease;
+             }
+
+                 .footer-menu ul li a:hover,
+                 .footer-contact-info ul li a:hover {
+                     color: #ffffff; /* Hover effect for better interactivity */
+                 }
+
+     .social-icon ul {
+         list-style: none;
+         padding: 0;
+         display: flex;
+         gap: 15px;
+         margin-top: 10px;
+     }
+
+         .social-icon ul li a {
+             color: #b3c7e6;
+             font-size: 18px;
+             transition: color 0.3s ease;
+         }
+
+             .social-icon ul li a:hover {
+                 color: #ffffff;
+             }
+
+
+     .policy-menu {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+         display: flex;
+         justify-content: center;
+         gap: 15px;
+     }
+
+         .policy-menu li a {
+             color: #b3c7e6;
+             text-decoration: none;
+             transition: color 0.3s ease;
+         }
+
+             .policy-menu li a:hover {
+                 color: #ffffff;
+             }
+
+     .maintain{
+         justify-content: center;
+         align-content: center;
+         align-items: center;
+     }
+
+     /* them  */
+
+     .footer {
+         background-color: #002d5f;
+         color: #ffffff;
+         padding: 40px 0;
+         font-family: Arial, sans-serif;
+     }
+
+     .footer-top {
+         display: flex;
+         justify-content: space-between; /* Even spacing for footer-top sections */
+         align-items: center;
+     }
+
+     .footer-logo {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+     }
+
+         .footer-logo img {
+             width: 80px;
+         }
+
+     .footer-about-content p {
+         font-size: 14px;
+         line-height: 1.6;
+         color: #d3d3d3;
+         margin-bottom: 15px;
+         text-align: center; /* Center the text */
+     }
+
+     .footer-title {
+         font-size: 18px;
+         font-weight: 600;
+         color: #ffffff;
+         margin-bottom: 15px;
+         text-transform: uppercase;
+     }
+
+     .footer-menu ul,
+     .footer-contact-info ul {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+     }
+
+     .social-icon ul {
+         list-style: none;
+         padding: 0;
+         display: flex;
+         gap: 15px;
+         justify-content: center;
+         margin-top: 10px;
+     }
+
+     .footer-bottom {
+         text-align: center;
+         display: flex;
+         font-size: 15px;
+         justify-content: center; /* Center Footer Bottom */
+         border-top: none; /* Remove top border */
+     }
+
+     .maintain {
+         display: flex;
+         justify-content: space-evenly;
+         align-items: center;
+         width: 100%;
+     }
+
+     .copyright p{
+         white-space: nowrap;
+         color: whitesmoke;
+     }
+
+     .copyright{
+         color: white;
+         position: relative;
+         left: 40%;
+     }
+
+     .footer .footer-widget .footer-logo{
+         margin-bottom: 15px;
+     }
+
+
+</style>
+
+
+
+<footer class="footer">
+
+    <div class="footer-top">
+        <div class="container-fluid">
+            <div class="row maintain">
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget footer-menu">
+                        <h2 class="footer-title">Dành cho Bệnh nhân</h2>
+                        <ul>
+                            <li><a asp-area="" asp-controller="Home" asp-action="DoctorList"><i class="fas fa-user-md"></i> Tìm kiếm Bác sĩ</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="ServiceList"><i class="fas fa-concierge-bell"></i> Dịch vụ</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Contact"><i class="fas fa-envelope"></i> Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget footer-menu">
+                        <h2 class="footer-title">Dành cho Bác sĩ</h2>
+                        <ul>
+                            <li><a asp-area="" asp-controller="Doctor" asp-action="ViewAppointment"><i class="fas fa-calendar-check"></i> Cuộc hẹn</a></li>
+                            <li><a asp-area="" asp-controller="Doctor" asp-action="ViewPatient"><i class="fas fa-users"></i> Bệnh nhân</a></li>
+                            <li><a asp-area="" asp-controller="Doctor" asp-action="ViewAppointment"><i class="fas fa-file-medical"></i> Hồ sơ</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="footer-widget footer-contact">
+                        <h2 class="footer-title">Liên hệ với chúng tôi</h2>
+                        <div class="footer-contact-info">
+                            <ul>
+                                <li><a href="mailto:baook01234@gmail.com" class="text-foot ms-2">baook01234@gmail.com</a></li>
+                                <li><a href="tel:+152534-468-854" class="text-foot ms-2">+84 987367341</a></li>
+                                <li><a target="_blank" href="https://maps.app.goo.gl/WgP9jNevAG1NsmzFA" class="video-play-icon text-foot ms-2">Tìm địa chỉ của chúng tôi ở đây</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+
+                    <div class="footer-widget footer-contact">
+                        <h4 class="footer-title">
+                            <div class="footer-contact-info">
+                                <img src="https://www.vinmec.com/static//uploads/logosalenoti_d40a0c287e.svg" style="width: 70%; height: 70%;" />
+                            </div>
+                        </h4>
+
+                        <div class="footer-contact-info">
+                            <img src="https://upload.wikimedia.org/wikipedia/vi/2/2d/Logo_Tr%C6%B0%E1%BB%9Dng_%C4%90%E1%BA%A1i_h%E1%BB%8Dc_FPT.svg" style="width: 40%; height: 40%;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-widget footer-about">
+            <div class="footer-logo">
+                <img src="~/assets/images/icon-logo.png" height="128" alt="logo">
+            </div>
+            <div class="footer-about-content">
+                <p>Cung cấp dịch vụ chăm sóc sức khỏe  tốt nhất cho bạn với một cú nhấp chuột</p>
+                <div class="social-icon">
+                    <ul>
+                        <li>
+                            <a href="https://www.facebook.com/bao2k4" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/bao2k4" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/bao2k4" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.facebook.com/bao2k4" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class="fab fa-dribbble"></i></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="copyright">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="copyright-text">
+                    <p class="mb-0">&copy; @DateTime.Now.Year DocCare. Bảo lưu mọi quyền.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
