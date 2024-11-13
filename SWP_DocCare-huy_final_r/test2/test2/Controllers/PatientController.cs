@@ -111,43 +111,41 @@ namespace test2.Controllers
 			return View(model);
 		}
 
-		[HttpPost]
-        public async Task<IActionResult> UpdateProfile(PatientProfileViewModel model)
+	[HttpPost]
+public async Task<IActionResult> UpdateProfile(PatientBaseViewModel m)
+{
+    PatientProfileViewModel model = m.PatientProfile;
+
+    // Xử lý cập nhật thông tin cá nhân
+    var patient = await dc.Patients.FirstOrDefaultAsync(p => p.Pid == model.Patient.PId);
+    if (patient != null)
+    {
+        patient.Name = model.Patient.Name;
+        patient.Gender = model.Patient.Gender;
+        patient.Dob = model.Patient.Dob;
+
+        if (model.Patient.AvataUpload != null && model.Patient.AvataUpload.Length > 0)
         {
-            if (!ModelState.IsValid)
+            // Upload ảnh lên Cloudinary và lấy link
+            var imageUrl = await _cloudinaryService.UploadImageAsync(model.Patient.AvataUpload);
+            if (!string.IsNullOrEmpty(imageUrl))
             {
-                // Trả về lại view với dữ liệu đã nhập để giữ nguyên thông tin nếu có lỗi
-                return View("Profile", model);
+                patient.PatientImg = imageUrl; // Lưu link ảnh vào database
             }
-
-            // Xử lý cập nhật thông tin cá nhân
-            var patient = await dc.Patients.FirstOrDefaultAsync(p => p.Pid == model.Patient.PId);
-            if (patient != null)
-            {
-                patient.Name = model.Patient.Name;
-                patient.Gender = model.Patient.Gender;
-                patient.Dob = model.Patient.Dob;
-
-                if (model.Patient.AvataUpload != null && model.Patient.AvataUpload.Length > 0)
-                {
-                    // Upload ảnh lên Cloudinary và lấy link
-                    var imageUrl = await _cloudinaryService.UploadImageAsync(model.Patient.AvataUpload);
-                    if (!string.IsNullOrEmpty(imageUrl))
-                    {
-                        patient.PatientImg = imageUrl; // Lưu link ảnh vào database
-                    }
-                }
-
-                await dc.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Cập nhật thông tin thành công!";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Không tìm thấy thông tin bệnh nhân.";
-            }
-
-            return RedirectToAction("Profile", new { id = model.Patient.PId });
         }
+
+        await dc.SaveChangesAsync();
+        TempData["SuccessMessage"] = "Cập nhật thông tin thành công!";
+    }
+    else
+    {
+        TempData["ErrorMessage"] = "Không tìm thấy thông tin bệnh nhân.";
+    }
+
+    return RedirectToAction("Profile", new { id = model.Patient.PId });
+}
+
+
         public IActionResult Dashboard()
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
@@ -172,36 +170,33 @@ namespace test2.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(PatientProfileViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                // Trả về lại view với dữ liệu đã nhập để giữ nguyên thông tin nếu có lỗi
-                return View("Profile", model);
-            }
+ public async Task<IActionResult> ChangePassword(PatientBaseViewModel m)
+ {
+     PatientProfileViewModel model = m.PatientProfile;
 
-            // Xử lý đổi mật khẩu
-            var account = await dc.Accounts.FirstOrDefaultAsync(a => a.Id == model.ChangePassword.PId);
-            if (account != null && BCrypt.Net.BCrypt.Verify(model.ChangePassword.OldPassword, account.Password))
-            {
-                if (model.ChangePassword.NewPassword == model.ChangePassword.ConfirmNewPassword)
-                {
-                    account.Password = BCrypt.Net.BCrypt.HashPassword(model.ChangePassword.NewPassword);
-                    await dc.SaveChangesAsync();
-                    TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Mật khẩu xác nhận không khớp.";
-                }
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Mật khẩu cũ không đúng hoặc không tìm thấy tài khoản.";
-            }
+     // Xử lý đổi mật khẩu
+     var account = await dc.Accounts.FirstOrDefaultAsync(a => a.Id == model.ChangePassword.PId);
 
-            return RedirectToAction("Profile", new { id = model.ChangePassword.PId });
-        }
+     if (account != null && BCrypt.Net.BCrypt.Verify(model.ChangePassword.OldPassword, account.Password))
+     {
+         if (model.ChangePassword.NewPassword == model.ChangePassword.ConfirmNewPassword)
+         {
+             account.Password = BCrypt.Net.BCrypt.HashPassword(model.ChangePassword.NewPassword);
+             await dc.SaveChangesAsync();
+             TempData["SuccessMessage"] = "Đổi mật khẩu thành công!";
+         }
+         else
+         {
+             TempData["ErrorMessage"] = "Mật khẩu xác nhận không khớp.";
+         }
+     }
+     else
+     {
+         TempData["ErrorMessage"] = "Mật khẩu cũ không đúng hoặc không tìm thấy tài khoản.";
+     }
+
+     return RedirectToAction("Profile", new { id = model.ChangePassword.PId });
+ }
 
 		public IActionResult AppointmentHistory()
 		{
